@@ -15,9 +15,8 @@
 	"license": "CC0-1.0",
 	"environment": "*",
 	"entrypoints": {
-		"main": [
-			"ivangeevo.btx.BTXMod"
-		]
+		"main": ["ivangeevo.btx.BTXMod"],
+		"client": ["ivangeevo.btx.BTXModClient"]
 	},
 	"mixins": [
 		"btx.mixins.json"
