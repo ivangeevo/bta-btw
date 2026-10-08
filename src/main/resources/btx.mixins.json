@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "turniplabs.examplemod.mixin",
+  "package": "ivangeevo.btx.mixin",
   "compatibilityLevel": "JAVA_${java}",
   "injectors": {
     "defaultRequire": 1

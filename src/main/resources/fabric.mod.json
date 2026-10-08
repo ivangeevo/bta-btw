@@ -1,11 +1,11 @@
 {
 	"schemaVersion": 1,
-	"id": "examplemod",
+	"id": "btx",
 	"version": "${version}",
-	"name": "Example Mod",
-	"description": "This mod aims to help new BTA modders.",
+	"name": "Better Than X",
+	"description": "Better Than Wolves 2.94 addon for Better Than Adventure",
 	"authors": [
-		"Turnip Labs"
+		"ivangeevo"
 	],
 	"contact": {
 		"homepage": "",
@@ -16,11 +16,11 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"turniplabs.examplemod.ExampleMod"
+			"ivangeevo.btx.BTXMod"
 		]
 	},
 	"mixins": [
-		"examplemod.mixins.json"
+		"btx.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=${fabricloader}",
