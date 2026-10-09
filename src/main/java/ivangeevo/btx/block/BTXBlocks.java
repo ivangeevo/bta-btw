@@ -25,7 +25,7 @@ public final class BTXBlocks {
 
 	public static void afterBlockInit() {
 		HEMP = registerBlock("hemp",
-			s -> new BlockLogicCropsHemp(s))
+			b -> new BlockLogicCropsHemp(b))
 			.withHardness(0.0f)
 			.setStatParent(() -> BTXItems.HEMP_SEEDS)
 			.withTags(BlockTags.BROKEN_BY_FLUIDS, BlockTags.NOT_IN_CREATIVE_MENU)

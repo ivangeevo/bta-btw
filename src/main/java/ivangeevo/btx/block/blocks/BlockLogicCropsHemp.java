@@ -69,12 +69,18 @@ public class BlockLogicCropsHemp extends BlockLogicFlower {
 	public void onDestroyedByPlayer(@NotNull World world, @NotNull TilePosc tilePos, @NotNull Side side, int data, @NotNull Player player, @Nullable Item item) {
 		if (world.isClientSide) return;
 
-		TilePos below = tilePos.down(new TilePos());
-		if (world.getBlockType(below) != Blocks.FARMLAND_DIRT) return;   // top half: skip
+		// Breaking the top or bottom part de-fertilizes the farmland
+		TilePos pos = tilePos.down(new TilePos());
 
-		int farmlandData = world.getBlockData(below);
+		while (world.getBlockType(pos) == this.block) {
+			pos = pos.down(new TilePos());
+		}
+
+		if (world.getBlockType(pos) != Blocks.FARMLAND_DIRT) return;
+
+		int farmlandData = world.getBlockData(pos);
 		if (BlockLogicFarmland.isFertilized(farmlandData) && world.rand.nextInt(3) == 2) {
-			world.setBlockData(below, BlockLogicFarmland.setFertilized(farmlandData, false));
+			world.setBlockData(pos, BlockLogicFarmland.setFertilized(farmlandData, false));
 		}
 	}
 
