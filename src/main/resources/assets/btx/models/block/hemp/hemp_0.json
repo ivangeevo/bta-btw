@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "btx:block/hemp/hemp_0"
+  }
+}
