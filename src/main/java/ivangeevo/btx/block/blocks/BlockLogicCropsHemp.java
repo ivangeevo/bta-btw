@@ -80,7 +80,7 @@ public class BlockLogicCropsHemp extends BlockLogicFlower {
 
 		int farmlandData = world.getBlockData(pos);
 		if (BlockLogicFarmland.isFertilized(farmlandData) && world.rand.nextInt(3) == 2) {
-			world.setBlockData(pos, BlockLogicFarmland.setFertilized(farmlandData, false));
+			world.setBlockDataNotify(pos, BlockLogicFarmland.setFertilized(farmlandData, false));
 		}
 	}
 
