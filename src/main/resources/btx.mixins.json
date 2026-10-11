@@ -13,7 +13,6 @@
     "world.WorldMixin"
   ],
   "client": [
-    "MixinWorldClientMP",
     "gui.screens.PlayerLocalMixinBTXScreens",
     "net.PacketHandlerClientMixin",
     "net.PacketHandlerClientMixinBTXMachines"

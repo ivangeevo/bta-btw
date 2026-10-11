@@ -19,6 +19,7 @@ import java.util.*;
 
 @Mixin(World.class)
 public abstract class WorldMixin implements TickPersistence {
+
 	@Shadow private long runtime;
 	@Shadow @Final private TreeSet<NextTickListEntry> tickNextTickList;
 	@Shadow public boolean isClientSide;
@@ -35,11 +36,14 @@ public abstract class WorldMixin implements TickPersistence {
 
 	@Override
 	public List<NextTickListEntry> btx$pendingInChunk(int chunkX, int chunkZ) {
-		List<NextTickListEntry> out = new ArrayList<>();
+		List<NextTickListEntry> pendingTicksList = new ArrayList<>();
 		for (NextTickListEntry entryList : this.tickNextTickList) {
-			if ((entryList.tilePos.x() >> 4) == chunkX && (entryList.tilePos.z() >> 4) == chunkZ) out.add(entryList);
+			if ((entryList.tilePos.x() >> 4) == chunkX && (entryList.tilePos.z() >> 4) == chunkZ) {
+				pendingTicksList.add(entryList);
+			}
 		}
-		return out;
+
+		return pendingTicksList;
 	}
 
 	@Override
@@ -52,9 +56,9 @@ public abstract class WorldMixin implements TickPersistence {
 	@Inject(method = "tickPendingTicks", at = @At("HEAD"))
 	private void btx$drainRestored(boolean all, CallbackInfoReturnable<Boolean> cir) {
 		if (this.isClientSide || this.btx$restored.isEmpty()) return;
-		this.btx$restored.values().removeIf(e -> {
-			if (!this.areBlocksLoaded(e.tilePos, 8)) return false; // wait until neighbors are loaded
-			this.scheduleBlockUpdate(e.tilePos, e.block, Math.max(1, e.delay));
+		this.btx$restored.values().removeIf(entry -> {
+			if (!this.areBlocksLoaded(entry.tilePos, 8)) return false; // wait until neighbors are loaded
+			this.scheduleBlockUpdate(entry.tilePos, entry.block, Math.max(1, entry.delay));
 			return true;
 		});
 	}

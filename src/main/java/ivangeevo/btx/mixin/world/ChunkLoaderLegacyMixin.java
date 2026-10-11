@@ -24,15 +24,17 @@ public abstract class ChunkLoaderLegacyMixin {
 		TickPersistence tp = (TickPersistence) world;
 		long now = tp.btx$runtime();
 		ListTag list = new ListTag();
-		for (NextTickListEntry e : tp.btx$pendingInChunk(chunk.pos.x, chunk.pos.z)) {
+
+		for (NextTickListEntry entry : tp.btx$pendingInChunk(chunk.pos.x, chunk.pos.z)) {
 			CompoundTag tempTag = new CompoundTag();
-			tempTag.putInt("X", e.tilePos.x());
-			tempTag.putInt("Y", e.tilePos.y());
-			tempTag.putInt("Z", e.tilePos.z());
-			tempTag.putInt("Id", e.block.id());
-			tempTag.putInt("Rel", (int) Math.max(1, e.delay - now));
+			tempTag.putInt("X", entry.tilePos.x());
+			tempTag.putInt("Y", entry.tilePos.y());
+			tempTag.putInt("Z", entry.tilePos.z());
+			tempTag.putInt("Id", entry.block.id());
+			tempTag.putInt("Rel", (int) Math.max(1, entry.delay - now));
 			list.addTag(tempTag);
 		}
+
 		tag.putList("TicksList", list);
 	}
 

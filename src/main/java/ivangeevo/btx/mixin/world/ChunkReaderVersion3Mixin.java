@@ -26,18 +26,26 @@ public abstract class ChunkReaderVersion3Mixin extends ChunkReader {
 	@Inject(method = "getTickList", at = @At("HEAD"), cancellable = true)
 	private void btx$getTickList(CallbackInfoReturnable<Int2ObjectMap<NextTickListEntry>> cir) {
 		if (!this.tag.containsKey("TicksList")) return;
-		ListTag ticksTag = this.tag.getList("TicksList");
 
+		ListTag ticksTag = this.tag.getList("TicksList");
 		Int2ObjectMap<NextTickListEntry> map = new Int2ObjectArrayMap<>();
+
 		for (int i = 0; i < ticksTag.tagCount(); i++) {
-			CompoundTag t = (CompoundTag) ticksTag.tagAt(i);
-			Block<?> block = Blocks.getBlock(t.getInteger("Id"));
+			CompoundTag tempTag = (CompoundTag) ticksTag.tagAt(i);
+			Block<?> block = Blocks.getBlock(tempTag.getInteger("Id"));
+
 			if (block == null) continue;
 
-			NextTickListEntry e = new NextTickListEntry(
-				new TilePos(t.getInteger("X"), t.getInteger("Y"), t.getInteger("Z")), block);
-			e.setDelay(t.getLong("Delay"));
-			map.put(map.size(), e);
+			NextTickListEntry entry = new NextTickListEntry(new TilePos(
+				tempTag.getInteger("X"),
+				tempTag.getInteger("Y"),
+				tempTag.getInteger("Z")
+			), block);
+
+			entry.setDelay(tempTag.getLong("Delay"));
+			map.put(map.size(), entry);
 		}
 		cir.setReturnValue(map);
-	}}
+	}
+
+}
