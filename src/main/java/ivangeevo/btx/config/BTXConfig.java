@@ -11,6 +11,8 @@ public class BTXConfig {
 
 	public static final String CATEGORY = "General";
 
+	public static final int MILLSTONE_SCREEN_ID = 44;
+
 	private static int BLOCK_ID_STARTING_FROM = 12500;
 	private static int ITEM_ID_STARTING_FROM = 28500;
 
@@ -19,8 +21,10 @@ public class BTXConfig {
 
 	public static void init() {
 		Toml properties = new Toml("Better Than [X] Configurations.toml");
+
 		properties.addCategory(CATEGORY)
 			.addEntry("cfgVersion", 1)
+			.addEntry("MILLSTONE_SCREEN_ID", MILLSTONE_SCREEN_ID)
 			.addEntry("BLOCK_ID_STARTING_FROM", BLOCK_ID_STARTING_FROM)
 			.addEntry("ITEM_ID_STARTING_FROM", ITEM_ID_STARTING_FROM);
 

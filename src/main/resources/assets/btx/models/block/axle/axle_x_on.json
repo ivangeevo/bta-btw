@@ -1,0 +1,24 @@
+{
+	"format_version": "1.9.0",
+	"credit": "Made with Blockbench",
+  "parent": "block/block",
+  "textures": {
+		"particle": "btx:block/axle/axle",
+		"side_on": "btx:block/axle/axle_powered",
+		"end": "btx:block/axle/axle_end"
+	},
+	"elements": [
+		{
+			"from": [0, 6, 6],
+			"to": [16, 10, 10],
+			"faces": {
+				"north": {"uv": [0, 4, 16, 0], "rotation": 180, "texture": "#side_on"},
+				"east": {"uv": [6, 6, 10, 10], "texture": "#end"},
+				"south": {"uv": [16, 0, 0, 4], "rotation": 180, "texture": "#side_on"},
+				"west": {"uv": [6, 6, 10, 10], "texture": "#end"},
+				"up": {"uv": [0, 0, 16, 4], "rotation": 180, "texture": "#side_on"},
+				"down": {"uv": [0, 0, 16, 4], "rotation": 180, "texture": "#side_on"}
+			}
+		}
+	]
+}

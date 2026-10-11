@@ -1,1 +1,6 @@
-tile.hemp.name=Hemp
+tile.btx.hemp.name=Hemp
+tile.btx.millstone.name=Millstone
+tile.btx.hand.crank.name=Hand Crank
+tile.btx.axle.name=Axle
+tile.btx.axle.power.source.name=Powered Axle
+tile.btx.gearbox.name=Gearbox

@@ -17,7 +17,7 @@ public final class BTXItems {
 	public static Item HEMP;
 	public static Item HEMP_FIBERS;
 	public static Item HEMP_SEEDS;
-
+	public static Item GEAR;
 
 	private BTXItems() {}
 
@@ -28,6 +28,7 @@ public final class BTXItems {
 		HEMP_SEEDS = registerItem("hemp_seeds", (key, namespaceId, id) ->
 			new ItemSeeds(key, namespaceId, itemID(), BTXBlocks.HEMP).withTags(new Tag[]{ItemTags.CHICKENS_FAVOURITE_ITEM})
 		);
+		GEAR = registerItem("gear", Item::new);
 	}
 
 	// No extra settings builder

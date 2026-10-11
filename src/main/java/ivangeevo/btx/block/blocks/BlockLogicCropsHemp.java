@@ -2,15 +2,14 @@ package ivangeevo.btx.block.blocks;
 
 import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.item.BTXItems;
-import net.minecraft.core.block.Block;
-import net.minecraft.core.block.BlockLogicFarmland;
-import net.minecraft.core.block.BlockLogicFlower;
-import net.minecraft.core.block.Blocks;
+import net.minecraft.core.block.*;
 import net.minecraft.core.block.entity.TileEntity;
+import net.minecraft.core.block.tag.BlockTags;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.enums.EnumDropCause;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.sound.BlockSounds;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.pos.TilePos;
@@ -25,9 +24,19 @@ public class BlockLogicCropsHemp extends BlockLogicFlower {
 
 	public BlockLogicCropsHemp(@NotNull Block<?> block) {
 		super(block);
-		block.setTicking(true);
 		float f = 0.2f;
 		this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, 1.0F, 0.5F + f);
+	}
+
+	public static BlockLogicSupplier<BlockLogicCropsHemp> properties() {
+		return block -> new BlockLogicCropsHemp(
+			block
+				.setTicking(true)
+				.withSound(BlockSounds.GRASS)
+				.withHardness(0.0f)
+				.setStatParent(() -> BTXItems.HEMP_SEEDS)
+				.withTags(BlockTags.BROKEN_BY_FLUIDS, BlockTags.NOT_IN_CREATIVE_MENU)
+		);
 	}
 
 	// Can be placed on a farmland or on top of itself (2 tall plant)

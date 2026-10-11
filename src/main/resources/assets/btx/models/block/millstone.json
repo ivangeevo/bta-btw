@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "up": "btx:block/millstone/millstone_top",
+    "down": "btx:block/millstone/millstone_bottom",
+    "south": "btx:block/millstone/millstone_side",
+    "north": "btx:block/millstone/millstone_side",
+    "west": "btx:block/millstone/millstone_side",
+    "east": "btx:block/millstone/millstone_side"
+  }
+}

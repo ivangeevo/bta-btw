@@ -5,6 +5,16 @@
   "injectors": {
     "defaultRequire": 1
   },
-  "mixins": [],
-  "client": []
+  "mixins": [
+    "gui.screens.PlayerMixinBTXScreens"
+  ],
+  "client": [
+    "MixinWorldClientMP",
+    "gui.screens.PlayerLocalMixinBTXScreens",
+    "net.PacketHandlerClientMixin",
+    "net.PacketHandlerClientMixinBTXMachines"
+  ],
+  "server": [
+    "gui.screens.PlayerServerMixinBTXScreens"
+  ]
 }

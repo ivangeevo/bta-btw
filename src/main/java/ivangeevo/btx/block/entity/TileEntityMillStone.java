@@ -1,0 +1,294 @@
+package ivangeevo.btx.block.entity;
+
+import com.mojang.nbt.tags.CompoundTag;
+import com.mojang.nbt.tags.ListTag;
+import ivangeevo.btx.block.BTXBlocks;
+import ivangeevo.btx.block.blocks.BlockLogicMillStone;
+import ivangeevo.btx.recipe.BTXRecipes;
+import ivangeevo.btx.util.InventoryUtils;
+import net.minecraft.core.block.Block;
+import net.minecraft.core.block.entity.TileEntity;
+import net.minecraft.core.entity.EntityItem;
+import net.minecraft.core.entity.player.Player;
+import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.player.inventory.container.Container;
+import net.minecraft.core.util.helper.Direction;
+import net.minecraft.core.world.World;
+import net.minecraft.core.world.pos.TilePos;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Random;
+
+public class TileEntityMillStone extends TileEntity implements Container {
+	private static final int CONTAINER_SIZE = 3;
+	private static final int STACK_SIZE_LIMIT = 64;
+	private static final double MAX_PLAYER_INTERACTION_DIST = 64.0;
+	private static final int TIME_TO_GRIND = 200;
+
+	/** Progress added per hand-crank use. 20 -> 10 cranks per item. */
+	public static final int CRANK_PROGRESS = 20;
+
+	private final Random random = new Random();
+
+	private ItemStack[] contents = new ItemStack[3];
+	private int grindProgress = 0;
+
+	@Override
+	public @NotNull String getNameTranslationKey() {
+		return "container.millstone.name";
+	}
+
+	@Override
+	public int getContainerSize() {
+		return CONTAINER_SIZE;
+	}
+
+	@Override
+	public @Nullable ItemStack getItem(int slot) {
+		return this.contents[slot];
+	}
+
+	@Override
+	public @Nullable ItemStack removeItem(int slot, int amount) {
+		return InventoryUtils.decrementStackSize(this, slot, amount);
+	}
+
+	@Override
+	public void setItem(int slot, @Nullable ItemStack itemStack) {
+		this.contents[slot] = itemStack;
+		if (itemStack != null && itemStack.stackSize > this.getMaxStackSize()) {
+			itemStack.stackSize = this.getMaxStackSize();
+		}
+		this.setChanged();
+	}
+
+	@Override
+	public int getMaxStackSize() {
+		return 64;
+	}
+
+	@Override
+	public void readAdditionalData(@NotNull CompoundTag compoundTag) {
+		ListTag nbtTagList = compoundTag.getList("Items");
+		this.contents = new ItemStack[this.getContainerSize()];
+
+		for (int i = 0; i < nbtTagList.getValue().size(); i++) {
+			CompoundTag compoundTag1 = (CompoundTag) nbtTagList.tagAt(i);
+			byte byte0 = compoundTag1.getByte("Slot");
+			if (byte0 >= 0 && byte0 < this.contents.length) {
+				this.contents[byte0] = ItemStack.readItemStackFromNbt(compoundTag1);
+			}
+		}
+
+		if (compoundTag.containsKey("GrindProgress")) {
+			this.grindProgress = compoundTag.getInteger("GrindProgress");
+		}
+	}
+
+	@Override
+	public void writeAdditionalData(@NotNull CompoundTag compoundTag) {
+		ListTag nbtTagList = new ListTag();
+
+		for (int i = 0; i < this.contents.length; i++) {
+			if (this.contents[i] != null) {
+				CompoundTag compoundTag1 = new CompoundTag();
+				compoundTag1.putByte("Slot", (byte) i);
+				this.contents[i].writeToNBT(compoundTag1);
+				nbtTagList.addTag(compoundTag1);
+			}
+		}
+
+		compoundTag.put("Items", nbtTagList);
+		compoundTag.putInt("GrindProgress", this.grindProgress);
+	}
+
+	public boolean stillValid(@NotNull Player player) {
+		if (this.worldObj != null && this.worldObj.getTileEntity(this.tilePos.x, this.tilePos.y, this.tilePos.z) == this) {
+			return player.distanceToSqr((double)this.tilePos.x + (double)0.5F, (double)this.tilePos.y + (double)0.5F, (double)this.tilePos.z + (double)0.5F) <= MAX_PLAYER_INTERACTION_DIST;
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public void sort() {}
+
+	protected boolean isPowered() {
+		if (worldObj == null) return false;
+		Block<?> block = this.worldObj.getBlockType(tilePos);
+		return block == BTXBlocks.MILLSTONE
+			&& block.getLogic() instanceof BlockLogicMillStone logic
+			&& logic.isActive(worldObj, tilePos);
+	}
+
+	@Override
+	public void tick() {
+		if (this.worldObj == null || this.worldObj.isClientSide) {
+			return;
+		}
+
+		if (this.findGrindableSlot() < 0) {
+			this.grindProgress = 0;
+			return;
+		}
+
+		if (this.isPowered()) {
+			this.advanceGrind(1);
+		}
+	}
+
+	public boolean crank() {
+		if (this.findGrindableSlot() < 0) {
+			return false;
+		}
+		this.advanceGrind(CRANK_PROGRESS);
+		return true;
+	}
+
+	private int findGrindableSlot() {
+		for (int i = 0; i < this.contents.length; ++i) {
+			if (canGrind(this.contents[i])) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	public static boolean canGrind(@Nullable ItemStack stack) {
+		return /**BTXRecipes.MILLSTONE.findRecipe(stack) != null**/ true;
+	}
+
+	private void advanceGrind(int amount) {
+		int slot = this.findGrindableSlot();
+		if (slot < 0) {
+			this.grindProgress = 0;
+			return;
+		}
+
+		this.grindProgress += amount;
+		if (this.grindProgress >= TIME_TO_GRIND) {
+			this.grindProgress = 0;
+			//this.finishGrind(slot);
+			this.setChanged();
+		}
+	}
+
+	/**
+	private void finishGrind(int slot) {
+		MillstoneRecipes.Recipe recipe = MillstoneRecipes.find(this.itemStacks[slot]);
+		if (recipe == null) {
+			return;
+		}
+
+		this.removeItem(slot, 1);
+		this.ejectStack(recipe.createOutput());
+	}
+	 **/
+
+	public int getGrindProgress() {
+		return this.grindProgress;
+	}
+
+	/** Used by MenuMillStone.setData to sync progress to the client. */
+	public void setGrindProgress(int progress) {
+		this.grindProgress = progress;
+	}
+
+	public boolean isGrinding() {
+		return this.grindProgress > 0;
+	}
+
+	public int getGrindProgressScaled(int scale) {
+		return this.grindProgress * scale / TIME_TO_GRIND;
+	}
+
+	private void ejectStack(ItemStack stack) {
+		if (this.worldObj == null || stack == null) {
+			return;
+		}
+
+		Direction direction = Direction.horizontal[this.random.nextInt(Direction.horizontal.length)];
+		TilePos target = new TilePos(this.tilePos.x, this.tilePos.y, this.tilePos.z).add(direction);
+
+		if (this.worldObj.isAirBlock(target)) {
+			EntityItem dropped = new EntityItem(
+				this.worldObj,
+				this.tilePos.x + 0.5 + direction.offsetX() * 0.5,
+				this.tilePos.y + 0.5 + direction.offsetY() * 0.5,
+				this.tilePos.z + 0.5 + direction.offsetZ() * 0.5,
+				stack
+			);
+			dropped.pickupDelay = 10;
+			dropped.fling(direction.offsetX() * 0.3125, direction.offsetY() * 0.3125, direction.offsetZ() * 0.3125, 1.0F);
+			this.worldObj.entityJoinedWorld(dropped);
+		} else {
+			this.worldObj.dropItem(this.tilePos, stack);
+		}
+	}
+
+	public boolean addSingleItemToInventory(int itemId) {
+		return this.addItemStackToInventory(new ItemStack(itemId, 1, 0));
+	}
+
+	public boolean addItemStackToInventory(ItemStack stack) {
+		for (int i = 0; i < this.contents.length && stack.stackSize > 0; ++i) {
+			ItemStack slot = this.contents[i];
+			if (slot != null && slot.itemID == stack.itemID && slot.getMetadata() == stack.getMetadata()) {
+				int space = Math.min(slot.getMaxStackSize(), this.getMaxStackSize()) - slot.stackSize;
+				if (space > 0) {
+					int moved = Math.min(space, stack.stackSize);
+					slot.stackSize += moved;
+					stack.stackSize -= moved;
+					this.setChanged();
+				}
+			}
+		}
+
+		if (stack.stackSize <= 0) {
+			return true;
+		}
+
+		for (int i = 0; i < this.contents.length; ++i) {
+			if (this.contents[i] == null) {
+				this.setItem(i, stack);
+				this.setChanged();
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	@Override
+	public void dropContents(World world, int x, int y, int z) {
+		super.dropContents(world, x, y, z);
+		if (world.getTileEntity(x, y, z) == null) {
+			return;
+		}
+
+		for (int slot = 0; slot < this.getContainerSize(); ++slot) {
+			ItemStack stack = this.getItem(slot);
+			if (stack == null) {
+				continue;
+			}
+
+			float ox = this.random.nextFloat() * 0.8F + 0.1F;
+			float oy = this.random.nextFloat() * 0.8F + 0.1F;
+			float oz = this.random.nextFloat() * 0.8F + 0.1F;
+
+			while (stack.stackSize > 0) {
+				int count = Math.min(this.random.nextInt(21) + 10, stack.stackSize);
+				stack.stackSize -= count;
+
+				EntityItem item = new EntityItem(world, x + ox, y + oy, z + oz,
+					new ItemStack(stack.itemID, count, stack.getMetadata()));
+				float spread = 0.05F;
+				item.xd = (float) this.random.nextGaussian() * spread;
+				item.yd = (float) this.random.nextGaussian() * spread + 0.2F;
+				item.zd = (float) this.random.nextGaussian() * spread;
+				world.entityJoinedWorld(item);
+			}
+		}
+	}
+}
