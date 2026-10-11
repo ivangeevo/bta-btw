@@ -6,7 +6,11 @@
     "defaultRequire": 1
   },
   "mixins": [
-    "gui.screens.PlayerMixinBTXScreens"
+    "gui.screens.PlayerMixinBTXScreens",
+    "world.ChunkLoaderLegacyMixin",
+    "world.ChunkReaderVersion3Mixin",
+    "world.ChunkWriterMixin",
+    "world.WorldMixin"
   ],
   "client": [
     "MixinWorldClientMP",
