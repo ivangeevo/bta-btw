@@ -3,7 +3,7 @@ package ivangeevo.btx.mixin.gui.screens;
 import ivangeevo.btx.block.entity.TileEntityMillStone;
 import ivangeevo.btx.config.BTXConfig;
 import ivangeevo.btx.gui.BTXScreens;
-import ivangeevo.btx.gui.machine.MenuMillStone;
+import ivangeevo.btx.gui.millstone.MenuMillStone;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.core.net.packet.PacketContainerOpen;
