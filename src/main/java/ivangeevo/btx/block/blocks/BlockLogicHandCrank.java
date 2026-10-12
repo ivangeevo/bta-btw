@@ -3,6 +3,7 @@ package ivangeevo.btx.block.blocks;
 import ivangeevo.btx.item.BTXItems;
 import ivangeevo.btx.util.MiscUtils;
 import ivangeevo.btx.util.SoundUtils;
+import ivangeevo.btx.util.WorldUtils;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockLogic;
 import net.minecraft.core.block.BlockLogicSupplier;
@@ -49,7 +50,8 @@ public class BlockLogicHandCrank extends BlockLogic implements MechanicalDevice,
 		);
 	}
 
-	public int getTickRate() {
+	@Override
+	public int tickDelay() {
 		return TICK_RATE;
 	}
 
@@ -98,7 +100,7 @@ public class BlockLogicHandCrank extends BlockLogic implements MechanicalDevice,
 				world.markBlocksDirty(tilePos, tilePos);
 				this.playCrankingSound(world, tilePos, false);
 				world.notifyBlockChange(tilePos, this.block);
-				world.scheduleBlockUpdate(tilePos, this.block, this.getTickRate());
+				world.scheduleBlockUpdate(tilePos, this.block, this.tickDelay());
 			} else {
 				this.breakCrankWithDrop(world, tilePos);
 			}
@@ -108,14 +110,34 @@ public class BlockLogicHandCrank extends BlockLogic implements MechanicalDevice,
 	}
 
 	@Override
+	public void onChunkLoad(@NotNull World world, @NotNull TilePosc tilePos) {
+		int data = world.getBlockData(tilePos);
+		if (data > 0) {
+			world.scheduleBlockUpdate(tilePos, this.block, this.tickDelay());
+		}
+	}
+
+	@Override
 	public void updateTick(@NotNull World world, @NotNull TilePosc tilePos, @NotNull Random rand, boolean isRandomTick) {
 		int data = world.getBlockData(tilePos);
+
+		if (isRandomTick) {
+			if (data > 0) {
+				// verify we have a tick already scheduled to prevent jams on chunk load
+				if (!WorldUtils.isUpdateScheduled(world, tilePos, this.block)) {
+					world.scheduleBlockUpdate(tilePos, this.block, this.tickDelay());
+				}
+			}
+
+			return;
+		}
+
 		if (data > 0) {
 			if (data < 7) {
 				this.playCrankingSound(world, tilePos, false);
 
 				if (data <= 5) {
-					world.scheduleBlockUpdate(tilePos, this.block, this.getTickRate() + data);
+					world.scheduleBlockUpdate(tilePos, this.block, this.tickDelay() + data);
 				} else {
 					world.scheduleBlockUpdate(tilePos, this.block, DELAY_BEFORE_RESET);
 				}
@@ -125,6 +147,7 @@ public class BlockLogicHandCrank extends BlockLogic implements MechanicalDevice,
 				world.setBlockData(tilePos, 0);
 				world.markBlocksDirty(tilePos, tilePos);
 				this.playCrankingSound(world, tilePos, true);
+				world.notifyBlockChange(tilePos, this.block);
 			}
 		}
 	}

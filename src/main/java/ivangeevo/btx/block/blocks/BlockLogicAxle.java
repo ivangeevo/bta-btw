@@ -355,9 +355,8 @@ public class BlockLogicAxle extends BlockLogic implements MechanicalDevice, Clie
 
 		Block<?> targetBlock = world.getBlockType(targetPos);
 
-		if (isBlockAxle(targetBlock)) {
+		if (MechPowerUtils.isBlockAxle(targetBlock)) {
 			if (getAxisAlignment(world, targetPos) == sourceAxis) {
-				// BUG FIX: recurse from targetPos, not tilePos (was infinite recursion)
 				overPowerBlockToFacing(world, targetPos, sourceAxis, facing);
 			}
 		} else if (targetBlock.getLogic() instanceof MechanicalDevice mechDevice) {
@@ -375,20 +374,6 @@ public class BlockLogicAxle extends BlockLogic implements MechanicalDevice, Clie
 	public static int getOppositeFacing(int facing) {
 		return facing ^ 1;
 	}
-
-	public static boolean isBlockAxle(@Nullable Block<?> block) {
-		return block != null && (block == BTXBlocks.AXLE || block == BTXBlocks.AXLE_POWER_SOURCE);
-	}
-
-	/**
-	// TODO: VERIFY: setBlockTypeData(pos, block, data) name and that it does not notify by itself.
-	public static void swapAxleType(World world, TilePosc tilePos, Block<?> newBlock) {
-		int axis = world.getBlockData(tilePos) >> 2;
-
-		world.setBlockTypeData(tilePos, newBlock, axis << 2);
-		world.notifyBlockChange(tilePos, newBlock);
-	}
-	 **/
 
 	public static void swapAxleType(World world, TilePosc tilePos, Block<?> newBlock) {
 		int data = world.getBlockData(tilePos);

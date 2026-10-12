@@ -4,10 +4,10 @@ import com.mojang.logging.LogUtils;
 import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.block.entity.TileEntityMillStone;
 import ivangeevo.btx.gui.BTXScreens;
-import net.minecraft.core.Global;
+import ivangeevo.btx.world.TickPersistence;
+import ivangeevo.btx.util.MechPowerUtils;
 import net.minecraft.core.block.*;
 import net.minecraft.core.block.entity.TileEntity;
-import net.minecraft.core.block.material.Material;
 import net.minecraft.core.block.material.Materials;
 import net.minecraft.core.block.tag.BlockTags;
 import net.minecraft.core.entity.player.Player;
@@ -18,7 +18,6 @@ import net.minecraft.core.sound.SoundCategory;
 import net.minecraft.core.util.helper.Direction;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
-import net.minecraft.core.world.pos.TilePos;
 import net.minecraft.core.world.pos.TilePosc;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -28,7 +27,7 @@ import java.util.Random;
 
 public class BlockLogicMillStone extends BlockLogic implements MechanicalDevice {
 	private static final Logger LOGGER = LogUtils.getLogger();
-	private static int TICK_RATE = 10;
+	private static final int TICK_RATE = 10;
 
 	public BlockLogicMillStone(@NotNull Block<?> block) {
 		super(block, Materials.STONE);
@@ -37,8 +36,8 @@ public class BlockLogicMillStone extends BlockLogic implements MechanicalDevice 
 	public static BlockLogicSupplier<BlockLogicMillStone> properties() {
 		return block -> new BlockLogicMillStone(
 			block
-				.withEntity(TileEntityMillStone::new)
 				.setTicking(true)
+				.withEntity(TileEntityMillStone::new)
 				.withSound(BlockSounds.STONE)
 				.withHardness(3.5f)
 				.withTags(BlockTags.MINEABLE_BY_PICKAXE)
@@ -87,6 +86,16 @@ public class BlockLogicMillStone extends BlockLogic implements MechanicalDevice 
 
 	@Override
 	public void updateTick(@NotNull World world, @NotNull TilePosc tilePos, @NotNull Random rand, boolean isRandomTick) {
+		int data = world.getBlockData(tilePos);
+
+		if (isRandomTick) {
+			if (!isCurrentStateValid(world, tilePos)) {
+				if (data > 0 && !((TickPersistence) world).btx$isUpdateScheduled(tilePos, this.block)) {
+					world.scheduleBlockUpdate(tilePos, this.block, this.tickDelay());
+				}
+			}
+		}
+
 		boolean receivingPower = this.isInputtingMechanicalPower(world, tilePos);
 		boolean isActive = this.isActive(world, tilePos);
 		if (isActive != receivingPower) {
@@ -147,33 +156,24 @@ public class BlockLogicMillStone extends BlockLogic implements MechanicalDevice 
 
 	@Override
 	public boolean isInputtingMechanicalPower(World world, TilePosc tilePos) {
-		for (int facing = 2; facing <= 5; facing++) {
-			TilePos targetPos = new TilePos();
-			tilePos.add(Direction.fromId(facing), targetPos);
-			Block<?> targetBlock = world.getBlockType(targetPos);
-			if (world.hasNeighborSignal(tilePos)) { // temp redstone check
-				//if (targetBlock.isAxleOrientedTowardsFacing(world, targetPos, facing)) {
-					//if (targetBlock.getPowerLevel(world, targetPos) > 0) {
-						return true;
-					//}
-				//}
-			}
-		}
+		return MechPowerUtils.isBlockPoweredByAxle(world, tilePos, this) ||
+			   MechPowerUtils.isBlockPoweredByHandCrank(world, tilePos);
+	}
 
-		for (Direction dir : Direction.horizontal) {
-			TilePos targetPos = new TilePos();
-			tilePos.add(dir, targetPos);
-			Block<?> target = world.getBlockType(targetPos);
-			if (target.getLogic() instanceof MechanicalDevice device && device.isOutputtingMechanicalPower(world, targetPos)) {
-				return true;
-			}
-		}
-
-		return false;
+	@Override
+	public boolean canInputAxlePowerToFacing(World world, TilePosc tilePos, Direction facing) {
+		return facing == Direction.DOWN || facing == Direction.UP;
 	}
 
 	@Override
 	public boolean isOutputtingMechanicalPower(World world, TilePosc tilePos) {
 		return false;
+	}
+
+	public boolean isCurrentStateValid(World world, TilePosc tilePos) {
+		boolean receivingPower = isInputtingMechanicalPower(world, tilePos);
+		boolean isActive = isActive(world, tilePos);
+
+		return isActive == receivingPower;
 	}
 }

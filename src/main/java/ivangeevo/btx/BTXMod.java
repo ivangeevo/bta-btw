@@ -5,7 +5,9 @@ import ivangeevo.btx.config.BTXConfig;
 import ivangeevo.btx.entity.BTXEntities;
 import ivangeevo.btx.item.BTXItems;
 import ivangeevo.btx.recipe.BTXRecipes;
+import ivangeevo.btx.recipe.impl.RecipeEntryMillstone;
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.core.data.registry.Registries;
 import turniplabs.halplibe.HalpLibe;
 import turniplabs.halplibe.event.defs.CommonEvents;
 import turniplabs.halplibe.util.dependency.Key;
@@ -29,10 +31,15 @@ public class BTXMod implements ModInitializer {
 
 	public void beforeGameStart() {
 		BTXConfig.init();
+		registerNewRecipeTypes();
 		BTXEntities.init();
 	}
 
 	public void afterGameStart() {
 		BTXCreativeContents.init();
+	}
+
+	public static void registerNewRecipeTypes() {
+		Registries.RECIPE_TYPES.register("btx:millstone", RecipeEntryMillstone.class);
 	}
 }

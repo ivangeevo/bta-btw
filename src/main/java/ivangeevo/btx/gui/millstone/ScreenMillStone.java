@@ -1,4 +1,4 @@
-package ivangeevo.btx.gui.machine;
+package ivangeevo.btx.gui.millstone;
 
 import ivangeevo.btx.block.entity.TileEntityMillStone;
 import net.minecraft.client.gui.container.ScreenContainerAbstract;

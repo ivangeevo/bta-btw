@@ -2,7 +2,6 @@ package ivangeevo.btx.recipe.impl;
 
 import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.data.registry.recipe.*;
-import net.minecraft.core.data.registry.recipe.adapter.RecipeJsonAdapter;
 import net.minecraft.core.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
@@ -10,13 +9,13 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
-public class RecipeEntryBTXMachine extends RecipeEntryBase<RecipeSymbol, ItemStack, Integer> implements HasJsonAdapter {
+public abstract class RecipeEntryBTX extends RecipeEntryBase<RecipeSymbol, ItemStack, Void> {
 
-	public RecipeEntryBTXMachine(RecipeSymbol input, ItemStack output, Integer time) {
-		super(input, output, time);
+	public RecipeEntryBTX(RecipeSymbol input, ItemStack output) {
+		super(input, output, null);
 	}
 
-	public RecipeEntryBTXMachine() {}
+	public RecipeEntryBTX() {}
 
 	public boolean matches(ItemStack stack) {
 		return stack != null && this.getInput().matches(stack);
@@ -93,7 +92,8 @@ public class RecipeEntryBTXMachine extends RecipeEntryBase<RecipeSymbol, ItemSta
 		}
 
 		if (query.query.getLeft() == SearchQuery.QueryType.GROUP
-			&& !Objects.equals(query.query.getRight(), "")) {
+			&& !Objects.equals(query.query.getRight(), "")
+		) {
 			List<ItemStack> groupStacks =
 				new RecipeSymbol(query.query.getRight()).resolve();
 
@@ -135,8 +135,4 @@ public class RecipeEntryBTXMachine extends RecipeEntryBase<RecipeSymbol, ItemSta
 			.contains(search.toLowerCase(Locale.ROOT));
 	}
 
-	@Override
-	public RecipeJsonAdapter<?> getAdapter() {
-		return new RecipeBTXMachineJsonAdapter();
-	}
 }

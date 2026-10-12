@@ -164,30 +164,6 @@ public class BlockLogicGearBox extends BlockLogicRotatable implements Mechanical
 		world.setBlockDataNotify(tilePos, setFacingInData(world.getBlockData(tilePos), facing));
 	}
 
-	public boolean rotateAroundJAxis(World world, TilePosc tilePos, boolean reverse) {
-		int facing = getFacing(world, tilePos);
-
-		int newFacing = rotateFacingAroundY(facing, reverse);
-
-		if (newFacing != facing) {
-			if (isGearBoxOn(world, tilePos)) {
-				setGearBoxOn(world, tilePos, false);
-			}
-
-			setFacing(world, tilePos, newFacing);
-
-			world.markBlocksDirty(tilePos, tilePos);
-
-			world.scheduleBlockUpdate(tilePos, this.block, getTickRate());
-
-			MechPowerUtils.destroyHorizontallyAttachedAxles(world, tilePos);
-
-			return true;
-		}
-
-		return false;
-	}
-
 	public boolean toggleFacing(World world, TilePosc tilePos, boolean reverse) {
 		if (isGearBoxOn(world, tilePos)) {
 			setGearBoxOn(world, tilePos, false);
@@ -246,7 +222,6 @@ public class BlockLogicGearBox extends BlockLogicRotatable implements Mechanical
 	public void overpower(World world, TilePosc tilePos) {
 		if (isGearBoxOn(world, tilePos)) {
 			// an overpowered gearbox that doesn't have its gears disengaged, is destroyed
-
 			breakGearBox(world, tilePos);
 		}
 	}

@@ -1,0 +1,15 @@
+[
+  {
+    "type": "btx:millstone",
+    "name": "btx:millstone/hemp_to_hemp_fibers",
+    "input": {
+      "stack": {
+        "id": "btx:item/hemp"
+      }
+    },
+    "output": {
+      "id": "btx:item/hemp_fibers",
+      "amount": 4
+    }
+  }
+]

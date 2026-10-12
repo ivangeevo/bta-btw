@@ -1,4 +1,4 @@
-package ivangeevo.btx.gui.machine;
+package ivangeevo.btx.gui.millstone;
 
 import it.unimi.dsi.fastutil.ints.IntList;
 import it.unimi.dsi.fastutil.ints.IntLists;
@@ -82,7 +82,7 @@ public class MenuMillStone extends MenuAbstract {
 		}
 
 		// Millstone slot to player inventory
-		if (slot.index > 0 && slot.index < MILL_SLOTS) {
+		if (slot.index >= 0 && slot.index < MILL_SLOTS) {
 			return this.getSlots(INV_START, PLAYER_SLOTS, false);
 		}
 

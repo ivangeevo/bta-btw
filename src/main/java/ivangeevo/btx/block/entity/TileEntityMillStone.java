@@ -6,6 +6,7 @@ import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.block.blocks.BlockLogicMillStone;
 import ivangeevo.btx.recipe.BTXRecipes;
 import ivangeevo.btx.util.InventoryUtils;
+import ivangeevo.btx.util.MiscUtils;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.EntityItem;
@@ -116,7 +117,9 @@ public class TileEntityMillStone extends TileEntity implements Container {
 
 	protected boolean isPowered() {
 		if (worldObj == null) return false;
+
 		Block<?> block = this.worldObj.getBlockType(tilePos);
+
 		return block == BTXBlocks.MILLSTONE
 			&& block.getLogic() instanceof BlockLogicMillStone logic
 			&& logic.isActive(worldObj, tilePos);
@@ -156,7 +159,9 @@ public class TileEntityMillStone extends TileEntity implements Container {
 	}
 
 	public static boolean canGrind(@Nullable ItemStack stack) {
-		return /**BTXRecipes.MILLSTONE.findRecipe(stack) != null**/ true;
+		if (stack == null) return false;
+
+		return BTXRecipes.MILLSTONE.findRecipe(stack) != null;
 	}
 
 	private void advanceGrind(int amount) {
@@ -169,22 +174,18 @@ public class TileEntityMillStone extends TileEntity implements Container {
 		this.grindProgress += amount;
 		if (this.grindProgress >= TIME_TO_GRIND) {
 			this.grindProgress = 0;
-			//this.finishGrind(slot);
+			this.finishGrind(slot);
 			this.setChanged();
 		}
 	}
 
-	/**
 	private void finishGrind(int slot) {
-		MillstoneRecipes.Recipe recipe = MillstoneRecipes.find(this.itemStacks[slot]);
-		if (recipe == null) {
-			return;
+		ItemStack output = BTXRecipes.MILLSTONE.findOutput(this.contents[slot]);
+		if (output != null) {
+			this.removeItem(slot, 1);
+			this.ejectStack(output);
 		}
-
-		this.removeItem(slot, 1);
-		this.ejectStack(recipe.createOutput());
 	}
-	 **/
 
 	public int getGrindProgress() {
 		return this.grindProgress;
@@ -204,60 +205,14 @@ public class TileEntityMillStone extends TileEntity implements Container {
 	}
 
 	private void ejectStack(ItemStack stack) {
-		if (this.worldObj == null || stack == null) {
-			return;
-		}
+		if (worldObj == null) return;
 
-		Direction direction = Direction.horizontal[this.random.nextInt(Direction.horizontal.length)];
-		TilePos target = new TilePos(this.tilePos.x, this.tilePos.y, this.tilePos.z).add(direction);
+		TilePos targetPos = new TilePos(tilePos.x, tilePos.y, tilePos.z);
+		int directionChance = this.worldObj.rand.nextInt(4);
 
-		if (this.worldObj.isAirBlock(target)) {
-			EntityItem dropped = new EntityItem(
-				this.worldObj,
-				this.tilePos.x + 0.5 + direction.offsetX() * 0.5,
-				this.tilePos.y + 0.5 + direction.offsetY() * 0.5,
-				this.tilePos.z + 0.5 + direction.offsetZ() * 0.5,
-				stack
-			);
-			dropped.pickupDelay = 10;
-			dropped.fling(direction.offsetX() * 0.3125, direction.offsetY() * 0.3125, direction.offsetZ() * 0.3125, 1.0F);
-			this.worldObj.entityJoinedWorld(dropped);
-		} else {
-			this.worldObj.dropItem(this.tilePos, stack);
-		}
-	}
+		targetPos.add(Direction.fromId(2 + directionChance)); // random direction
 
-	public boolean addSingleItemToInventory(int itemId) {
-		return this.addItemStackToInventory(new ItemStack(itemId, 1, 0));
-	}
-
-	public boolean addItemStackToInventory(ItemStack stack) {
-		for (int i = 0; i < this.contents.length && stack.stackSize > 0; ++i) {
-			ItemStack slot = this.contents[i];
-			if (slot != null && slot.itemID == stack.itemID && slot.getMetadata() == stack.getMetadata()) {
-				int space = Math.min(slot.getMaxStackSize(), this.getMaxStackSize()) - slot.stackSize;
-				if (space > 0) {
-					int moved = Math.min(space, stack.stackSize);
-					slot.stackSize += moved;
-					stack.stackSize -= moved;
-					this.setChanged();
-				}
-			}
-		}
-
-		if (stack.stackSize <= 0) {
-			return true;
-		}
-
-		for (int i = 0; i < this.contents.length; ++i) {
-			if (this.contents[i] == null) {
-				this.setItem(i, stack);
-				this.setChanged();
-				return true;
-			}
-		}
-
-		return false;
+		MiscUtils.ejectStackWithRandomOffset(worldObj, targetPos, stack);
 	}
 
 	@Override
@@ -291,4 +246,5 @@ public class TileEntityMillStone extends TileEntity implements Container {
 			}
 		}
 	}
+
 }

@@ -17,6 +17,7 @@ public class MiscUtils {
 		EntityItem entity = new EntityItem(world, x, y, z, stack);
 
 		float spread = 0.05F;
+
 		entity.xd = (float) world.rand.nextGaussian() * spread;
 		entity.yd = (float) world.rand.nextGaussian() * spread + 0.2F;
 		entity.zd = (float) world.rand.nextGaussian() * spread;

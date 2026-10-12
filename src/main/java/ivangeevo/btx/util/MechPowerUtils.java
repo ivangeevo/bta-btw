@@ -6,22 +6,24 @@ import ivangeevo.btx.block.blocks.BlockLogicGearBox;
 import ivangeevo.btx.block.blocks.MechanicalDevice;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.util.helper.Direction;
+import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.WorldSource;
 import net.minecraft.core.world.pos.TilePos;
 import net.minecraft.core.world.pos.TilePosc;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-/** Subset of BTW's MechPowerUtils. Facings use BTW numbering (see BlockLogicAxle). */
 public final class MechPowerUtils {
 	private MechPowerUtils() {}
 
 	public static boolean isBlockPoweredByAxleToSide(World world, TilePosc tilePos, int side) {
-		TilePos targetPos = new TilePos();
-		BlockLogicAxle.addFacingAsOffset(tilePos, side, targetPos);
+		TilePos targetPos = new TilePos(tilePos);
+		targetPos.add(Side.fromId(side));
 
 		Block<?> targetBlock = world.getBlockType(targetPos);
 
-		if (BlockLogicAxle.isBlockAxle(targetBlock) && targetBlock.getLogic() instanceof BlockLogicAxle axle) {
+		if (isBlockAxle(targetBlock) && targetBlock.getLogic() instanceof BlockLogicAxle axle) {
 			if (axle.isAxleOrientedTowardsFacing(world, targetPos, side)) {
 				return axle.getPowerLevel(world, targetPos) > 0;
 			}
@@ -42,13 +44,17 @@ public final class MechPowerUtils {
 		return false;
 	}
 
+	public static boolean isBlockAxle(Block<?> block) {
+		return block == BTXBlocks.AXLE || block == BTXBlocks.AXLE_POWER_SOURCE;
+	}
+
 	public static boolean doesBlockHaveFacingAxleToSide(WorldSource worldSource, TilePosc tilePos, int side) {
 		TilePos targetPos = new TilePos();
 		BlockLogicAxle.addFacingAsOffset(tilePos, side, targetPos);
 
 		Block<?> targetBlock = worldSource.getBlockType(targetPos);
 
-		return BlockLogicAxle.isBlockAxle(targetBlock)
+		return isBlockAxle(targetBlock)
 			&& targetBlock.getLogic() instanceof BlockLogicAxle axle
 			&& axle.isAxleOrientedTowardsFacing(worldSource, targetPos, side);
 	}
@@ -61,7 +67,7 @@ public final class MechPowerUtils {
 
 			Block<?> tempBlock = world.getBlockType(tempPos);
 
-			if (BlockLogicAxle.isBlockAxle(tempBlock) && tempBlock.getLogic() instanceof BlockLogicAxle axle) {
+			if (isBlockAxle(tempBlock) && tempBlock.getLogic() instanceof BlockLogicAxle axle) {
 				if (axle.getPowerLevel(world, tempPos) > 0 && axle.isAxleOrientedTowardsFacing(world, tempPos, facing)) {
 					axle.breakAxle(world, tempPos);
 				}
@@ -75,6 +81,31 @@ public final class MechPowerUtils {
 		if (tempBlock == BTXBlocks.GEARBOX) {
 			if (tempBlock.getLogic() instanceof BlockLogicGearBox g) {
 				return g.isGearBoxOn(source, tilePos);
+			}
+		}
+
+		return false;
+	}
+
+	public static boolean isBlockPoweredByHandCrank(World world, TilePosc tilePos) {
+		for (int facing = 1; facing <= 5; facing++) {
+			if (isBlockPoweredByHandCrankToSide(world, tilePos, facing)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public static boolean isBlockPoweredByHandCrankToSide(World world, TilePosc tilePos, int side) {
+		TilePos targetPos = new TilePos(tilePos);
+		targetPos.add(Direction.fromId(side));
+
+		Block<?> targetBlock = world.getBlockType(targetPos);
+
+		if (targetBlock == BTXBlocks.HAND_CRANK) {
+			if (targetBlock.getLogic() instanceof MechanicalDevice device) {
+				return device.isOutputtingMechanicalPower(world, targetPos);
 			}
 		}
 
