@@ -1,7 +1,33 @@
 [
   {
+    "name": "btx:millstone/flour_from_wheat",
     "type": "btx:millstone",
+    "input": {
+      "stack": {
+        "id": "minecraft:item/wheat"
+      }
+    },
+    "output": {
+      "id": "btx:item/flour",
+      "amount": 1
+    }
+  },
+  {
+    "name": "btx:millstone/scoured_leather",
+    "type": "btx:millstone",
+    "input": {
+      "stack": {
+        "id": "minecraft:item/leather"
+      }
+    },
+    "output": {
+      "id": "btx:item/scoured_leather",
+      "amount": 1
+    }
+  },
+  {
     "name": "btx:millstone/hemp_to_hemp_fibers",
+    "type": "btx:millstone",
     "input": {
       "stack": {
         "id": "btx:item/hemp"
@@ -10,6 +36,19 @@
     "output": {
       "id": "btx:item/hemp_fibers",
       "amount": 4
+    }
+  },
+  {
+    "name": "btx:millstone/sugar",
+    "type": "btx:millstone",
+    "input": {
+      "stack": {
+        "id": "minecraft:item/sugarcane"
+      }
+    },
+    "output": {
+      "id": "minecraft:item/dust_sugar",
+      "amount": 1
     }
   }
 ]

@@ -37,18 +37,17 @@ public class BTXModClient implements ClientModInitializer {
 		dispatcher.addDispatch(new ItemModelStandard(BTXItems.HEMP_FIBERS).setIcon(icon("hemp_fibers")));
 		dispatcher.addDispatch(new ItemModelStandard(BTXItems.HEMP_SEEDS).setIcon(icon("hemp_seeds")));
 		dispatcher.addDispatch(new ItemModelStandard(BTXItems.GEAR).setIcon(icon("gear")));
+		dispatcher.addDispatch(new ItemModelStandard(BTXItems.FLOUR).setIcon(icon("flour")));
+		dispatcher.addDispatch(new ItemModelStandard(BTXItems.SCOURED_LEATHER).setIcon(icon("scoured_leather")));
 	}
 
 	public static void initBlockModels(BlockModelDispatcher dispatcher) {
 		dispatcher.addDispatch(new BlockModelGenericCropsHemp<>(BTXBlocks.HEMP));
 		dispatcher.addDispatch(new BlockModelGeneric<>(BTXBlocks.MILLSTONE, loadDataModel(block("millstone"))));
-		// TODO: Make the hand crank display as a 3d item in the inventory instead of a flat texture
 		dispatcher.addDispatch(new BlockModelGenericHandCrank<>(BTXBlocks.HAND_CRANK));
 		dispatcher.addDispatch(new BlockModelGenericAxle<>(BTXBlocks.AXLE));
 		dispatcher.addDispatch(new BlockModelGenericAxle<>(BTXBlocks.AXLE_POWER_SOURCE));
 		dispatcher.addDispatch(new BlockModelGenericGearBox<>(BTXBlocks.GEARBOX));
-
-
 	}
 
 	public static void registerTextures() {

@@ -21,7 +21,7 @@ public abstract class RecipeEntryBTX extends RecipeEntryBase<RecipeSymbol, ItemS
 		return stack != null && this.getInput().matches(stack);
 	}
 
-	public boolean matchesQueryIgnorExceptions(SearchQuery query) {
+	public boolean matchesQueryIgnoreExceptions(SearchQuery query) {
 		try {
 			return this.matchesQuery(query);
 		} catch (IllegalArgumentException | NullPointerException exception) {
