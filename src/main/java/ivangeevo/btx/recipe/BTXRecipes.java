@@ -12,6 +12,7 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.Items;
 import turniplabs.halplibe.helper.RecipeBuilder;
 import turniplabs.halplibe.helper.recipeBuilders.RecipeBuilderShaped;
+import turniplabs.halplibe.helper.recipeBuilders.RecipeBuilderShapeless;
 
 public class BTXRecipes {
 	public static RecipeNamespace BTX;
@@ -51,6 +52,27 @@ public class BTXRecipes {
 			.addInput('X', BTXItems.GEAR)
 			.addInput('Y', Items.DUST_REDSTONE)
 			.create("gearbox", new ItemStack(BTXBlocks.GEARBOX, 1));
+
+		RecipeBuilderShaped fabric = new RecipeBuilderShaped(BTXMod.MOD_ID, "###", "###", "###");
+		fabric
+			.addInput('#', BTXItems.HEMP_FIBERS)
+			.create("fabric", new ItemStack(BTXItems.FABRIC, 1));
+
+
+		RecipeBuilderShapeless hempFibersFromFabric = new RecipeBuilderShapeless(BTXMod.MOD_ID);
+		hempFibersFromFabric
+			.addInput(BTXItems.FABRIC)
+			.create("hemp_fibers_from_fabric", new ItemStack(BTXItems.HEMP_FIBERS, 9));
+
+		RecipeBuilderShapeless hempFibersFromRope = new RecipeBuilderShapeless(BTXMod.MOD_ID);
+		hempFibersFromRope
+			.addInput(Items.ROPE)
+			.create("hemp_fibers_from_rope", new ItemStack(BTXItems.HEMP_FIBERS, 6));
+
+		RecipeBuilderShapeless string = new RecipeBuilderShapeless(BTXMod.MOD_ID);
+		string
+			.addInput(BTXItems.HEMP_FIBERS).addInput(BTXItems.HEMP_FIBERS)
+			.create("string", new ItemStack(Items.STRING, 1));
 
 	}
 

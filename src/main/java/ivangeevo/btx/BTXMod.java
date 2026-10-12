@@ -4,10 +4,12 @@ import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.config.BTXConfig;
 import ivangeevo.btx.entity.BTXEntities;
 import ivangeevo.btx.item.BTXItems;
+import ivangeevo.btx.networking.NetEntryWindMill;
 import ivangeevo.btx.recipe.BTXRecipes;
 import ivangeevo.btx.recipe.impl.RecipeEntryMillstone;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.core.data.registry.Registries;
+import net.minecraft.core.net.entity.NetEntityHandler;
 import turniplabs.halplibe.HalpLibe;
 import turniplabs.halplibe.event.defs.CommonEvents;
 import turniplabs.halplibe.util.dependency.Key;
@@ -33,6 +35,7 @@ public class BTXMod implements ModInitializer {
 		BTXConfig.init();
 		registerNewRecipeTypes();
 		BTXEntities.init();
+		NetEntityHandler.registerNetworkEntry(new NetEntryWindMill(), BTXConfig.netEntityTypeID());
 	}
 
 	public void afterGameStart() {

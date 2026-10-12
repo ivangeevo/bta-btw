@@ -8,7 +8,7 @@
   "mixins": [
     "gui.screens.PlayerMixinBTXScreens",
     "world.ChunkLoaderLegacyMixin",
-    "world.ChunkReaderVersion3Mixin",
+    "world.ChunkLoaderRegionAsyncMixin",
     "world.ChunkWriterMixin",
     "world.WorldMixin"
   ],

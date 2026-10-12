@@ -1,0 +1,10 @@
+{
+  "model_paths": [
+    "/assets/btx/models/entity/windmill/windmill.geo.json"
+  ],
+  "renderers": {
+    "btx:windmill": {
+      "main": "geometry.windmill"
+    }
+  }
+}

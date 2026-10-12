@@ -2,10 +2,13 @@ package ivangeevo.btx.item;
 
 import ivangeevo.btx.BTXMod;
 import ivangeevo.btx.block.BTXBlocks;
+import ivangeevo.btx.item.items.ItemWindMill;
 import net.minecraft.core.data.tag.Tag;
 import net.minecraft.core.item.Item;
+import net.minecraft.core.item.ItemDye;
 import net.minecraft.core.item.ItemSeeds;
 import net.minecraft.core.item.tag.ItemTags;
+import net.minecraft.core.util.helper.DyeColor;
 import turniplabs.halplibe.helper.ItemBuilder;
 
 import java.util.function.UnaryOperator;
@@ -20,6 +23,9 @@ public final class BTXItems {
 	public static Item GEAR;
 	public static Item FLOUR;
 	public static Item SCOURED_LEATHER;
+	public static Item FABRIC;
+	public static Item DUNG;
+	public static Item WINDMILL;
 
 	private BTXItems() {}
 
@@ -32,7 +38,9 @@ public final class BTXItems {
 		GEAR = registerItem("gear", Item::new);
 		FLOUR = registerItem("flour", Item::new);
 		SCOURED_LEATHER = registerItem("scoured_leather", Item::new);
-
+		FABRIC = registerItem("fabric", Item::new);
+		DUNG = registerItem("dung", (ItemDye::new));
+		WINDMILL = registerItem("windmill", ItemWindMill::new);
 	}
 
 	// No extra settings builder

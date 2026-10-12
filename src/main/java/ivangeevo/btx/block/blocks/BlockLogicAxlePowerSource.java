@@ -59,7 +59,7 @@ public class BlockLogicAxlePowerSource extends BlockLogicAxle {
 	}
 
 	@Override
-	public int getPowerLevelFromMetadata(int data) {
+	public int getPowerLevelFromBlockData(int data) {
 		return 4;
 	}
 
@@ -67,7 +67,7 @@ public class BlockLogicAxlePowerSource extends BlockLogicAxle {
 	public void setPowerLevel(World world, TilePosc tilePos, int powerLevel) {}
 
 	@Override
-	public int setPowerLevelInMetadata(int data, int powerLevel) {
+	public int setPowerLevelInBlockData(int data, int powerLevel) {
 		return data;
 	}
 

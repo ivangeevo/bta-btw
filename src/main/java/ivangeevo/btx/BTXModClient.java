@@ -5,8 +5,11 @@ import ivangeevo.btx.block.render.BlockModelGenericAxle;
 import ivangeevo.btx.block.render.BlockModelGenericCropsHemp;
 import ivangeevo.btx.block.render.BlockModelGenericGearBox;
 import ivangeevo.btx.block.render.BlockModelGenericHandCrank;
+import ivangeevo.btx.entity.entities.WindMillEntity;
+import ivangeevo.btx.entity.entities.WindMillEntityRenderer;
 import ivangeevo.btx.item.BTXItems;
 import net.fabricmc.api.ClientModInitializer;
+import net.minecraft.client.render.EntityRendererDispatcher;
 import net.minecraft.client.render.block.model.BlockModelDispatcher;
 import net.minecraft.client.render.block.model.generic.BlockModelGeneric;
 import net.minecraft.client.render.item.model.ItemModelDispatcher;
@@ -25,6 +28,7 @@ public class BTXModClient implements ClientModInitializer {
 		ClientEvents.BEFORE_CLIENT_START.listen(Key.of(BTXMod.MOD_ID), BTXModClient::beforeClientStart);
 		ClientEvents.BLOCK_MODEL_RELOAD.listen(Key.of(BTXMod.MOD_ID), BTXModClient::initBlockModels);
 		ClientEvents.ITEM_MODEL_RELOAD.listen(Key.of(BTXMod.MOD_ID), BTXModClient::initItemModels);
+		ClientEvents.ENTITY_RENDERER_RELOAD.listen(Key.of(BTXMod.MOD_ID), BTXModClient::initEntityRenderers);
 		BTXGlobals.LOGGER.info("Better Than [X] client initialized.");
 	}
 
@@ -39,6 +43,9 @@ public class BTXModClient implements ClientModInitializer {
 		dispatcher.addDispatch(new ItemModelStandard(BTXItems.GEAR).setIcon(icon("gear")));
 		dispatcher.addDispatch(new ItemModelStandard(BTXItems.FLOUR).setIcon(icon("flour")));
 		dispatcher.addDispatch(new ItemModelStandard(BTXItems.SCOURED_LEATHER).setIcon(icon("scoured_leather")));
+		dispatcher.addDispatch(new ItemModelStandard(BTXItems.FABRIC).setIcon(icon("fabric")));
+		dispatcher.addDispatch(new ItemModelStandard(BTXItems.DUNG).setIcon(icon("dung")));
+		dispatcher.addDispatch(new ItemModelStandard(BTXItems.WINDMILL).setIcon(icon("windmill")));
 	}
 
 	public static void initBlockModels(BlockModelDispatcher dispatcher) {
@@ -48,6 +55,10 @@ public class BTXModClient implements ClientModInitializer {
 		dispatcher.addDispatch(new BlockModelGenericAxle<>(BTXBlocks.AXLE));
 		dispatcher.addDispatch(new BlockModelGenericAxle<>(BTXBlocks.AXLE_POWER_SOURCE));
 		dispatcher.addDispatch(new BlockModelGenericGearBox<>(BTXBlocks.GEARBOX));
+	}
+
+	public static void initEntityRenderers(EntityRendererDispatcher dispatcher) {
+		dispatcher.assignRenderer(WindMillEntity.class, new WindMillEntityRenderer());
 	}
 
 	public static void registerTextures() {

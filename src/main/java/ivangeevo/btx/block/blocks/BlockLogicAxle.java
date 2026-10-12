@@ -196,16 +196,16 @@ public class BlockLogicAxle extends BlockLogic implements MechanicalDevice, Clie
 		world.setBlockDataNotify(tilePos, data);
 	}
 
-	public int getAxisAlignmentFromMetadata(int data) {
+	public int getAxisAlignmentFromBlockData(int data) {
 		return (data >> 2);
 	}
 
 	public void setAxisAlignmentBasedOnFacing(World world, TilePosc tilePos, int facing) {
-		int data = setAxisAlignmentInMetadataBasedOnFacing(world.getBlockData(tilePos), facing);
+		int data = setAxisAlignmentInBlockDataBasedOnFacing(world.getBlockData(tilePos), facing);
 		setDataWithNotify(world, tilePos, data);
 	}
 
-	public int setAxisAlignmentInMetadataBasedOnFacing(int data, int facing) {
+	public int setAxisAlignmentInBlockDataBasedOnFacing(int data, int facing) {
 		int axis = switch (facing) {
 			case 0, 1 -> 0;
 			case 2, 3 -> 1;
@@ -220,26 +220,26 @@ public class BlockLogicAxle extends BlockLogic implements MechanicalDevice, Clie
 	}
 
 	public int getPowerLevel(WorldSource source, TilePosc tilePos) {
-		return getPowerLevelFromMetadata(source.getBlockData(tilePos));
+		return getPowerLevelFromBlockData(source.getBlockData(tilePos));
 	}
 
-	public int getPowerLevelFromMetadata(int data) {
+	public int getPowerLevelFromBlockData(int data) {
 		return data & 3;
 	}
 
 	public void setPowerLevelWithoutNotify(World world, TilePosc tilePos, int powerLevel) {
-		int data = setPowerLevelInMetadata(world.getBlockData(tilePos), powerLevel);
+		int data = setPowerLevelInBlockData(world.getBlockData(tilePos), powerLevel);
 		world.setBlockData(tilePos, data);
 	}
 
 	public void setPowerLevel(World world, TilePosc tilePos, int powerLevel) {
-		int data = setPowerLevelInMetadata(world.getBlockData(tilePos), powerLevel);
+		int data = setPowerLevelInBlockData(world.getBlockData(tilePos), powerLevel);
 		world.setBlockData(tilePos, data);
 		world.notifyBlockChange(tilePos, this.block);
 
 	}
 
-	public int setPowerLevelInMetadata(int data, int powerLevel) {
+	public int setPowerLevelInBlockData(int data, int powerLevel) {
 		powerLevel &= 3;
 		data &= 12;
 		data |= powerLevel;

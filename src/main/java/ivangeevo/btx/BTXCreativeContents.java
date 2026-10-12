@@ -16,6 +16,11 @@ public final class BTXCreativeContents {
 		REG.register(BTXItems.HEMP_FIBERS, inCategory(CreativeInventoryCategory.ORGANIC));
 		REG.register(BTXItems.HEMP_SEEDS, inCategory(CreativeInventoryCategory.ORGANIC));
 		REG.register(BTXItems.GEAR, inCategory(CreativeInventoryCategory.BASICS));
+		REG.register(BTXItems.FLOUR, inCategory(CreativeInventoryCategory.ORGANIC));
+		REG.register(BTXItems.SCOURED_LEATHER, inCategory(CreativeInventoryCategory.ORGANIC));
+		REG.register(BTXItems.FABRIC, inCategory(CreativeInventoryCategory.ORGANIC));
+		REG.register(BTXItems.DUNG, inCategory(CreativeInventoryCategory.ORGANIC));
+		REG.register(BTXItems.WINDMILL, inCategory(CreativeInventoryCategory.PLACEABLES));
 
 		// Blocks
 		// TODO: The blocks we add probably should be in their own category for machines/mech devices

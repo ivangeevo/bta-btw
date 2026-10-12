@@ -3,6 +3,7 @@ package ivangeevo.btx.mixin.world;
 import com.mojang.nbt.tags.CompoundTag;
 import com.mojang.nbt.tags.ListTag;
 import ivangeevo.btx.world.TickPersistence;
+import ivangeevo.btx.world.TickSnapshots;
 import net.minecraft.core.NextTickListEntry;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.Blocks;
@@ -21,20 +22,11 @@ public abstract class ChunkLoaderLegacyMixin {
 
 	@Inject(method = "storeChunkInCompound", at = @At("TAIL"))
 	private static void btx$saveTicks(Chunk chunk, World world, CompoundTag tag, CallbackInfo ci) {
-		TickPersistence tp = (TickPersistence) world;
-		long now = tp.btx$runtime();
-		ListTag list = new ListTag();
-
-		for (NextTickListEntry entry : tp.btx$pendingInChunk(chunk.pos.x, chunk.pos.z)) {
-			CompoundTag tempTag = new CompoundTag();
-			tempTag.putInt("X", entry.tilePos.x());
-			tempTag.putInt("Y", entry.tilePos.y());
-			tempTag.putInt("Z", entry.tilePos.z());
-			tempTag.putInt("Id", entry.block.id());
-			tempTag.putInt("Rel", (int) Math.max(1, entry.delay - now));
-			list.addTag(tempTag);
+		ListTag list = TickSnapshots.take(chunk);
+		if (list == null) {
+			// not queued through the async loader, so we're presumably on the world thread
+			list = TickSnapshots.build(world, chunk.pos.x, chunk.pos.z);
 		}
-
 		tag.putList("TicksList", list);
 	}
 

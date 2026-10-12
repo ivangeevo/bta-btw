@@ -15,9 +15,11 @@ public class BTXConfig {
 
 	private static int BLOCK_ID_STARTING_FROM = 12500;
 	private static int ITEM_ID_STARTING_FROM = 28500;
+	private static int NET_ENTITY_TYPE_STARTING_FROM = 100;
 
 	private static int currentBlockID;
 	private static int currentItemID;
+	private static int currentNetEntityType;
 
 	public static void init() {
 		Toml properties = new Toml("Better Than [X] Configurations.toml");
@@ -26,7 +28,8 @@ public class BTXConfig {
 			.addEntry("cfgVersion", 1)
 			.addEntry("MILLSTONE_SCREEN_ID", MILLSTONE_SCREEN_ID)
 			.addEntry("BLOCK_ID_STARTING_FROM", BLOCK_ID_STARTING_FROM)
-			.addEntry("ITEM_ID_STARTING_FROM", ITEM_ID_STARTING_FROM);
+			.addEntry("ITEM_ID_STARTING_FROM", ITEM_ID_STARTING_FROM)
+			.addEntry("NET_ENTITY_TYPE_STARTING_FROM", NET_ENTITY_TYPE_STARTING_FROM);
 
 		CONFIG = new TomlConfigHandler(BTXMod.MOD_ID, properties);
 
@@ -43,6 +46,7 @@ public class BTXConfig {
 
 		currentBlockID = BLOCK_ID_STARTING_FROM = CONFIG.getInt(CATEGORY + ".BLOCK_ID_STARTING_FROM");
 		currentItemID = ITEM_ID_STARTING_FROM = CONFIG.getInt(CATEGORY + ".ITEM_ID_STARTING_FROM");
+		currentNetEntityType = NET_ENTITY_TYPE_STARTING_FROM = CONFIG.getInt(CATEGORY + ".NET_ENTITY_TYPE_STARTING_FROM");
 	}
 
 	public static int blockID() {
@@ -50,5 +54,8 @@ public class BTXConfig {
 	}
 	public static int itemID() {
 		return currentItemID++;
+	}
+	public static int netEntityTypeID() {
+		return currentNetEntityType++;
 	}
 }
