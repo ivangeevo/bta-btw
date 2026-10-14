@@ -46,6 +46,7 @@ public class BTXModClient implements ClientModInitializer {
 		dispatcher.addDispatch(new ItemModelStandard(BTXItems.FABRIC).setIcon(icon("fabric")));
 		dispatcher.addDispatch(new ItemModelStandard(BTXItems.DUNG).setIcon(icon("dung")));
 		dispatcher.addDispatch(new ItemModelStandard(BTXItems.WINDMILL).setIcon(icon("windmill")));
+		dispatcher.addDispatch(new ItemModelStandard(BTXItems.SAIL).setIcon(icon("sail")));
 	}
 
 	public static void initBlockModels(BlockModelDispatcher dispatcher) {
