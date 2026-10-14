@@ -44,7 +44,9 @@ public final class BTXItems {
 		WINDMILL = registerItem("windmill", (key, namespaceId, id) ->
 			new ItemWindMill(key, namespaceId, id).setMaxStackSize(1)
 		);
-		SAIL = registerItem("sail", Item::new);
+		SAIL = registerItem("sail", (key, namespaceId, id) ->
+			new Item(key, namespaceId, id).setMaxStackSize(1)
+		);
 	}
 
 	// No extra settings builder
