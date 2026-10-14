@@ -46,13 +46,13 @@ public class ItemWindMill extends Item {
 
 						selfStack.stackSize--;
 					} else {
-						if (world.isClientSide && player != null) {
-							player.sendMessageTranslated("messages.windMill.placementObstructed");
+						if (player != null) {
+							player.sendMessageTranslated("messages.windmill.placement.obstructed");
 						}
 					}
 				} else {
-					if (world.isClientSide && player != null) {
-						player.sendMessageTranslated("messages.windMill.notEnoughRoom");
+					if (player != null) {
+						player.sendMessageTranslated("messages.windmill.not.enough.room");
 					}
 				}
 			}
@@ -60,4 +60,5 @@ public class ItemWindMill extends Item {
 
 		return super.onUseOnBlock(selfStack, world, player, blockPos, side, xHit, yHit);
 	}
+
 }
