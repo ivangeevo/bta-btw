@@ -9,7 +9,9 @@ import net.minecraft.core.util.helper.MathHelper;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.pos.TilePos;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.joml.primitives.AABBd;
+import org.joml.primitives.AABBdc;
 
 public abstract class MechanicalPowerSourceEntityHorizonal extends MechanicalPowerSourceEntity {
 
@@ -19,16 +21,12 @@ public abstract class MechanicalPowerSourceEntityHorizonal extends MechanicalPow
 		super(world);
 		alignedToX = true;
 		setBounds();
-		BTXGlobals.LOGGER.info("[WindMill] Horizontal ctor: pos=({}, {}, {}), alignedToX={}, bb={}",
-			x, y, z, alignedToX, bb);
 	}
 
 	public MechanicalPowerSourceEntityHorizonal(@NotNull World world, double x, double y, double z, boolean xAligned) {
 		super(world, x, y, z);
 		alignedToX = xAligned;
 		setBounds();
-		BTXGlobals.LOGGER.info("[WindMill] Horizontal ctor: pos=({}, {}, {}), alignedToX={}, bb={}",
-			x, y, z, alignedToX, bb);
 	}
 
 	@Override
@@ -63,6 +61,10 @@ public abstract class MechanicalPowerSourceEntityHorizonal extends MechanicalPow
 		bb.setMax(x + halfX, bottom + getHeight(), z + halfZ);
 	}
 
+	@Override
+	public @Nullable AABBdc getCollisionAABB() {
+		return this.bb;
+	}
 
 	@Override
 	protected boolean validateConnectedAxles() {

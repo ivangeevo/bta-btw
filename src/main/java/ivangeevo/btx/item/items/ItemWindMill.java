@@ -1,6 +1,5 @@
 package ivangeevo.btx.item.items;
 
-import ivangeevo.btx.BTXGlobals;
 import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.block.blocks.BlockLogicAxle;
 import ivangeevo.btx.entity.entities.WindMillEntity;
@@ -22,14 +21,10 @@ public class ItemWindMill extends Item {
 
 	@Override
 	public boolean onUseOnBlock(@NotNull ItemStack selfStack, @NotNull World world, @Nullable Player player, @NotNull TilePosc blockPos, @NotNull Side side, double xHit, double yHit) {
-		BTXGlobals.LOGGER.info("[WindMill] onUseOnBlock called. clientSide={}, pos={}, side={}, block={}, player={}",
-			world.isClientSide, blockPos, side, world.getBlockType(blockPos), player);
-
 		Block<?> targetBlock = world.getBlockType(blockPos);
 
 		if (targetBlock == BTXBlocks.AXLE && targetBlock.getLogic() instanceof BlockLogicAxle axle) {
 			int axisAlignment = axle.getAxisAlignment(world, blockPos);
-			BTXGlobals.LOGGER.info("[WindMill] Hit AXLE. axisAlignment={}", axisAlignment);
 
 			if (axisAlignment != 0) {
 				boolean isAligned = axisAlignment == 2;
@@ -41,23 +36,12 @@ public class ItemWindMill extends Item {
 					blockPos.z() + 0.5F,
 					isAligned
 				);
-				boolean areaOk = windMill.validateAreaAroundDevice();
-				BTXGlobals.LOGGER.info("[WindMill] validateArea={}, entityPos=({}, {}, {}), alignedToX={}",
-					areaOk, windMill.x, windMill.y, windMill.z, windMill.alignedToX);
 
 				if (windMill.validateAreaAroundDevice()) {
-					boolean clear = windMill.isClearOfBlockingEntities();
-					BTXGlobals.LOGGER.info("[WindMill] isClearOfBlockingEntities={}", clear);
-
 					if (windMill.isClearOfBlockingEntities()) {
 						if (!world.isClientSide) {
-							BTXGlobals.LOGGER.info("[WindMill] Server: calling entityJoinedWorld");
-
 							windMill.setRotationSpeed(windMill.computeRotation());
-							//world.entityJoinedWorld(windMill);
-							boolean joined = world.entityJoinedWorld(windMill);
-							BTXGlobals.LOGGER.info("[WindMill] entityJoinedWorld returned {}", joined);
-
+							world.entityJoinedWorld(windMill);
 						}
 
 						selfStack.stackSize--;
@@ -72,10 +56,7 @@ public class ItemWindMill extends Item {
 					}
 				}
 			}
-		} else {
-			BTXGlobals.LOGGER.info("[WindMill] Not an axle (block={}), ignoring", targetBlock);
 		}
-
 
 		return super.onUseOnBlock(selfStack, world, player, blockPos, side, xHit, yHit);
 	}

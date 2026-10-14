@@ -26,6 +26,7 @@ public final class BTXItems {
 	public static Item FABRIC;
 	public static Item DUNG;
 	public static Item WINDMILL;
+	public static Item SAIL;
 
 	private BTXItems() {}
 
@@ -40,7 +41,10 @@ public final class BTXItems {
 		SCOURED_LEATHER = registerItem("scoured_leather", Item::new);
 		FABRIC = registerItem("fabric", Item::new);
 		DUNG = registerItem("dung", (ItemDye::new));
-		WINDMILL = registerItem("windmill", ItemWindMill::new);
+		WINDMILL = registerItem("windmill", (key, namespaceId, id) ->
+			new ItemWindMill(key, namespaceId, id).setMaxStackSize(1)
+		);
+		SAIL = registerItem("sail", Item::new);
 	}
 
 	// No extra settings builder

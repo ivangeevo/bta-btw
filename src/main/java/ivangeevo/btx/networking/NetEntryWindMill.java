@@ -21,7 +21,6 @@ public class NetEntryWindMill extends NetEntryMechanicalPowerSource<WindMillEnti
 
     @Override
     public PacketAddEntity getSpawnPacket(EntityTrackerEntry entry, WindMillEntity mill) {
-		BTXGlobals.LOGGER.info("[WindMill] getSpawnPacket for entity id={}", mill.id);
 
 		CompoundTag tag = new CompoundTag();
         tag.putBoolean("AlignedToX", mill.alignedToX);
@@ -46,13 +45,10 @@ public class NetEntryWindMill extends NetEntryMechanicalPowerSource<WindMillEnti
 				mill.setBladeColor(i, tag.getInteger("Blade" + i));
 			}
         }
-		BTXGlobals.LOGGER.info("[WindMill] getEntity (client spawn) at ({}, {}, {}), tag={}", x, y, z, tag);
 
 		return mill;
     }
 
 	@Override
-	public void onEntityTracked(EntityTracker var1, EntityTrackerEntry var2, WindMillEntity var3) {
-
-	}
+	public void onEntityTracked(EntityTracker var1, EntityTrackerEntry var2, WindMillEntity var3) {}
 }

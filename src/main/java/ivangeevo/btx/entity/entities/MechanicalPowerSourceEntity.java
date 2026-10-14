@@ -10,6 +10,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.entity.Entity;
+import net.minecraft.core.entity.ICollidable;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.player.gamemode.Gamemodes;
 import net.minecraft.core.util.helper.DamageType;
@@ -22,7 +23,7 @@ import org.jetbrains.annotations.Nullable;
 import org.joml.primitives.AABBd;
 import org.joml.primitives.AABBdc;
 
-public abstract class MechanicalPowerSourceEntity extends Entity {
+public abstract class MechanicalPowerSourceEntity extends Entity implements ICollidable {
 
 	private static final int DATA_ROTATION_SPEED_ID = 22;
 
@@ -32,6 +33,9 @@ public abstract class MechanicalPowerSourceEntity extends Entity {
 
 	private static final int[][] AXLE_FACINGS_FOR_ALIGNMENT = {{0, 1}, {2, 3}, {4, 5}};
 
+	// degrees per tick, change per tick. 0.02 goes from calm (-0.12) to storm (-2.0) in about 5 seconds
+	private static final float SPEED_EASE_STEP = 0.02F;
+
 	public float rotation;
 	public int currentDamage;
 	public int timeSinceHit;
@@ -39,6 +43,9 @@ public abstract class MechanicalPowerSourceEntity extends Entity {
 
 	protected boolean providingPower;
 	protected int fullUpdateTickCount;
+
+	protected float displayedSpeed;
+	private boolean displayedSpeedInitialized;
 
 	public MechanicalPowerSourceEntity(@NotNull World world) {
 		super(world);
@@ -76,17 +83,17 @@ public abstract class MechanicalPowerSourceEntity extends Entity {
 	}
 
 	@Override
-	public @Nullable AABBdc getCollisionAABB() {
-		return this.bb;
-	}
-
-	@Override
 	public boolean isPushable() {
 		return false;
 	}
 
 	@Override
 	public boolean isPickable() {
+		return !removed;
+	}
+
+	@Override
+	public boolean hasCollision() {
 		return !removed;
 	}
 
@@ -128,7 +135,6 @@ public abstract class MechanicalPowerSourceEntity extends Entity {
 	@Override
 	public void tick() {
 		// intentionally doesn't call super method
-
 		if (removed) {
 			return;
 		}
@@ -183,7 +189,17 @@ public abstract class MechanicalPowerSourceEntity extends Entity {
 	private void updateRotationAndDamageState() {
 		// update rotation
 
-		rotation += getRotationSpeed();
+		//rotation += getRotationSpeed();
+
+		float targetSpeed = getRotationSpeed(); // synced target
+		if (!displayedSpeedInitialized) {
+			displayedSpeed = targetSpeed; // snap on the first tick so a loaded or newly joined mill doesn't ramp up from 0
+			displayedSpeedInitialized = true;
+		} else {
+			displayedSpeed = approach(displayedSpeed, targetSpeed, SPEED_EASE_STEP);
+		}
+
+		rotation += displayedSpeed;
 
 		if (rotation > 360F) {
 			rotation -= 360;
@@ -200,6 +216,15 @@ public abstract class MechanicalPowerSourceEntity extends Entity {
 		if (currentDamage > 0) {
 			currentDamage--;
 		}
+	}
+
+	public float getDisplayedRotationSpeed() {
+		return displayedSpeed;
+	}
+
+	private static float approach(float current, float target, float step) {
+		if (current < target) return Math.min(current + step, target);
+		return Math.max(current - step, target);
 	}
 
 	protected void onClientRotationOctantChange() {}
@@ -227,7 +252,7 @@ public abstract class MechanicalPowerSourceEntity extends Entity {
 	protected void onFullUpdateServer() {
 		// validate the entity is still occupying a valid location
 
-		if (!validateAreaAroundDevice() || !validateConnectedAxles()  ) {
+		if (!validateAreaAroundDevice() || !validateConnectedAxles()) {
 			destroyWithDrop();
 			return;
 		}
@@ -236,12 +261,12 @@ public abstract class MechanicalPowerSourceEntity extends Entity {
 
 		setRotationSpeed(computeRotation());
 
-		float fCurrentSpeed = getRotationSpeed();
+		float currentSpeed = getRotationSpeed();
 
-		boolean bNewPoweredState = fCurrentSpeed > 0.01F || fCurrentSpeed < -0.01F;
+		boolean newPoweredState = currentSpeed > 0.01F || currentSpeed < -0.01F;
 
-		if (providingPower != bNewPoweredState ) {
-			providingPower = bNewPoweredState;
+		if (providingPower != newPoweredState ) {
+			providingPower = newPoweredState;
 			transferPowerStateToConnectedAxles();
 		}
 	}

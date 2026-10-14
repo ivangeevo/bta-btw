@@ -151,6 +151,32 @@ public class WindMillEntity extends MechanicalPowerSourceEntityHorizonal {
 	}
 
 	@Override
+	protected void onFullUpdateServer() {
+		super.onFullUpdateServer();
+
+		// update overpower
+		if (overpowerTimer >= 0) {
+			if (overpowerTimer > 0) {
+				overpowerTimer--;
+			}
+
+			if (overpowerTimer <= 0) {
+				int centerX = MathHelper.floor(x);
+				int centerY = MathHelper.floor(y);
+				int centerZ = MathHelper.floor(z);
+
+				TilePos tilePos = getCenterPos();
+
+				// destroy any gearboxes attached to the windmill by overpowering the axle
+				if (BTXBlocks.AXLE.getLogic() instanceof BlockLogicAxle axle) {
+					axle.overpower(world, tilePos);
+				}
+			}
+		}
+
+	}
+
+	@Override
 	public void destroyWithDrop() {
 		if (!world.isClientSide && !removed) {
 			this.dropItem(BTXItems.WINDMILL.id, 1, 0.0F);
@@ -180,7 +206,7 @@ public class WindMillEntity extends MechanicalPowerSourceEntityHorizonal {
 		if (world.canBlockSeeSky(centerTilePos)) {
 			if (world.getCurrentWeather() == Weathers.OVERWORLD_STORM && !overpowerSafeBiome(world, centerX, centerY, centerZ)) {
 				rotationAmount = ROTATION_PER_TICK_IN_STORM;
-				if (overpowerTimer > 0) {
+				if (overpowerTimer < 0) {
 					overpowerTimer = UPDATES_TO_OVERPOWER;
 				}
 			} else {
@@ -200,7 +226,8 @@ public class WindMillEntity extends MechanicalPowerSourceEntityHorizonal {
 
 	@Override
 	protected void onClientRotationOctantChange() {
-		float speed = getRotationSpeed();
+		//float speed = getRotationSpeed();
+		float speed = getDisplayedRotationSpeed();
 
 		if (speed < ROTATION_PER_TICK) {
 			TilePos targetPos = new TilePos(MathHelper.floor(x), MathHelper.floor(y), MathHelper.floor(z));
@@ -257,9 +284,6 @@ public class WindMillEntity extends MechanicalPowerSourceEntityHorizonal {
 					int tempZ = z + (zOffset * widthOffset);
 
 					if (!isValidBlockForWindMillToOccupy(world, tempX, tempY, tempZ)) {
-						BTXGlobals.LOGGER.info("[WindMill] Area blocked at ({}, {}, {}) by {}",
-							tempX, tempY, tempZ, world.getBlockType(new TilePos(tempX, tempY, tempZ)));
-
 						return false;
 					}
 				}

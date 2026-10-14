@@ -1,10 +1,10 @@
 package ivangeevo.btx.entity.entities;
 
-import ivangeevo.btx.BTXGlobals;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.renderer.GLRenderer;
 import net.minecraft.client.render.tessellator.TessellatorGeneral;
 import net.minecraft.client.render.texture.stitcher.TextureRegistry;
+import net.minecraft.core.util.helper.DyeColor;
 import net.minecraft.core.util.helper.MathHelper;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Math;
@@ -12,27 +12,26 @@ import org.joml.Matrix4f;
 
 public class WindMillEntityRenderer extends EntityRenderer<WindMillEntity> {
 
+	private static final String[] BLADE_MODELS = {"blade0", "blade90", "blade180", "blade270"};
+	private static final DyeColor[] DYES = DyeColor.values();
+
 	public WindMillEntityRenderer() {
 		super(0.0F);
-		setModel("main", "geometry.windmill", 0.0);
-		BTXGlobals.LOGGER.info("[WindMill] WindMillEntityRenderer constructed");
+		setModel("shaft", "geometry.windmill_shaft", 0.0);
+		setModel("blade0", "geometry.windmill_blade_0", 0.0);
+		setModel("blade90", "geometry.windmill_blade_90", 0.0);
+		setModel("blade180", "geometry.windmill_blade_180", 0.0);
+		setModel("blade270", "geometry.windmill_blade_270", 0.0);
 	}
-
-	private static int renderLogCount = 0;
-
 
 	@Override
 	public void render(@NotNull TessellatorGeneral tessellator, @NotNull WindMillEntity mill,
-					   double x, double y, double z, float yaw, float partialTick) {
-
-		if (renderLogCount++ < 5) {
-			BTXGlobals.LOGGER.info("[WindMill] render called: rel=({}, {}, {}), rotation={}, alignedToX={}",
-				x, y, z, mill.rotation, mill.alignedToX);
-		}
-
+					   double x, double y, double z, float yaw, float partialTick
+	) {
 		GLRenderer.pushFrame();
-		Matrix4f m = GLRenderer.modelM4f();
-		m.translate((float) x, (float) y, (float) z);
+
+		Matrix4f matrix = GLRenderer.modelM4f();
+		matrix.translate((float) x, (float) y, (float) z);
 
 		// rocking from damage
 		float deltaTime = mill.timeSinceHit - partialTick;
@@ -41,26 +40,40 @@ public class WindMillEntityRenderer extends EntityRenderer<WindMillEntity> {
 			? MathHelper.sin(deltaTime) * deltaTime * deltaDamage / 40.0F * mill.rockDirection
 			: 0.0F;
 
-		// smooth spin between ticks
-		float spin = mill.rotation + mill.getRotationSpeed() * partialTick;
+		// Unlike the original implementation, we apply interpolation to the rotation and also liner easing of the speed
+
+		// Only rotation interpolation (smooth spin between ticks)
+		//float spin = mill.rotation + mill.getRotationSpeed() * partialTick;
+
+		// Rotation interpolation and speed linear easing
+		float spin = mill.rotation + mill.getDisplayedRotationSpeed() * partialTick;
 
 		if (mill.alignedToX) {
-			m.rotateX(Math.toRadians(spin));
-			m.rotateZ(Math.toRadians(rock));
-			m.rotateY(Math.toRadians(90.0F));
+			matrix.rotateX(Math.toRadians(spin));
+			matrix.rotateZ(Math.toRadians(rock));
+			matrix.rotateY(Math.toRadians(90.0F));
 		} else {
-			m.rotateZ(Math.toRadians(spin));
-			m.rotateX(Math.toRadians(rock));
+			matrix.rotateZ(Math.toRadians(spin));
+			matrix.rotateX(Math.toRadians(rock));
 		}
 
-		// the geometry is authored in pixels, centered on (8, 8, 8)
-		// m.scale(0.0625F);
-		m.scale(0.0625F, 0.0625F, -0.0625F);
-		m.translate(-8.0F, -8.0F, -8.0F);
+		matrix.scale(0.0625F, 0.0625F, -0.0625F);
+		matrix.translate(-8.0F, -8.0F, -8.0F);
 
 		TextureRegistry.worldAtlas.bind();
 		this.bindTexture("/assets/btx/textures/entity/windmill.png");
-		this.getModel("main").render();
+
+		GLRenderer.setColor4f(1F, 1F, 1F, 1F);
+
+		this.getModel("shaft").render();
+
+		for (int i = 0; i < 4; i++) {
+			int idx = Math.max(0, Math.min(DYES.length - 1, mill.getBladeColor(i)));
+			GLRenderer.setColor(DYES[idx].color);
+			this.getModel(BLADE_MODELS[i]).render();
+		}
+
+		GLRenderer.setColor4f(1F, 1F, 1F, 1F);
 
 		GLRenderer.popFrame();
 	}

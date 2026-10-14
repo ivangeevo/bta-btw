@@ -3,9 +3,11 @@ package ivangeevo.btx.recipe;
 import ivangeevo.btx.BTXMod;
 import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.item.BTXItems;
+import ivangeevo.btx.recipe.impl.RecipeEntryMillstone;
 import ivangeevo.btx.recipe.impl.RecipeGroupMillstone;
 import net.minecraft.core.block.Blocks;
 import net.minecraft.core.data.DataLoader;
+import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.data.registry.recipe.RecipeNamespace;
 import net.minecraft.core.data.registry.recipe.RecipeSymbol;
 import net.minecraft.core.item.ItemStack;
@@ -17,6 +19,14 @@ import turniplabs.halplibe.helper.recipeBuilders.RecipeBuilderShapeless;
 public class BTXRecipes {
 	public static RecipeNamespace BTX;
 	public static RecipeGroupMillstone MILLSTONE;
+
+	public static void init() {
+		registerNewRecipeTypes();
+	}
+
+	public static void registerNewRecipeTypes() {
+		Registries.RECIPE_TYPES.register("btx:millstone", RecipeEntryMillstone.class);
+	}
 
 	public void onRecipesReady() {
 		BTXRecipes.workbenchRecipes();
@@ -73,6 +83,25 @@ public class BTXRecipes {
 		string
 			.addInput(BTXItems.HEMP_FIBERS).addInput(BTXItems.HEMP_FIBERS)
 			.create("string", new ItemStack(Items.STRING, 1));
+
+		// TODO: Add recipe for crafting sail with different types of woo
+		RecipeBuilderShaped sail = new RecipeBuilderShaped(BTXMod.MOD_ID, "###", "###", "XXX");
+		sail
+			.addInput('#', BTXItems.FABRIC)
+			.addInput('X', Blocks.PLANKS_OAK)
+			.create("sail", new ItemStack(BTXItems.SAIL, 1));
+
+		// TODO: Add recipe for crafting sail with moulding
+		/*sail
+			.addInput('#', BTXItems.FABRIC)
+			.addInput('X', BTXBlocks.MOULDING)
+			.create("sail", new ItemStack(BTXItems.SAIL, 1));
+*/
+
+		RecipeBuilderShaped windMill = new RecipeBuilderShaped(BTXMod.MOD_ID, " # ", "# #", " # ");
+		windMill
+			.addInput('#', BTXItems.SAIL)
+			.create("windmill", new ItemStack(BTXItems.WINDMILL, 1));
 
 	}
 
