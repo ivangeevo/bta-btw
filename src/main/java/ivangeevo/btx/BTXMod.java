@@ -4,6 +4,7 @@ import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.config.BTXConfig;
 import ivangeevo.btx.entity.BTXEntities;
 import ivangeevo.btx.item.BTXItems;
+import ivangeevo.btx.networking.NetEntryWaterWheel;
 import ivangeevo.btx.networking.NetEntryWindMill;
 import ivangeevo.btx.recipe.BTXRecipes;
 import net.fabricmc.api.ModInitializer;
@@ -34,6 +35,7 @@ public class BTXMod implements ModInitializer {
 		BTXRecipes.init();
 		BTXEntities.init();
 		NetEntityHandler.registerNetworkEntry(new NetEntryWindMill(), BTXConfig.netEntityTypeID());
+		NetEntityHandler.registerNetworkEntry(new NetEntryWaterWheel(), BTXConfig.netEntityTypeID());
 	}
 
 	public void afterGameStart() {

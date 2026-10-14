@@ -12,16 +12,18 @@ public final class BTXCreativeContents {
 
 	public static void init() {
 		// Items
-		REG.register(BTXItems.HEMP, inCategory(CreativeInventoryCategory.ORGANIC));
-		REG.register(BTXItems.HEMP_FIBERS, inCategory(CreativeInventoryCategory.ORGANIC));
 		REG.register(BTXItems.HEMP_SEEDS, inCategory(CreativeInventoryCategory.ORGANIC));
+		REG.register(BTXItems.HEMP, inCategory(CreativeInventoryCategory.ORGANIC));
 		REG.register(BTXItems.GEAR, inCategory(CreativeInventoryCategory.BASICS));
 		REG.register(BTXItems.FLOUR, inCategory(CreativeInventoryCategory.ORGANIC));
+		REG.register(BTXItems.HEMP_FIBERS, inCategory(CreativeInventoryCategory.ORGANIC));
 		REG.register(BTXItems.SCOURED_LEATHER, inCategory(CreativeInventoryCategory.ORGANIC));
-		REG.register(BTXItems.FABRIC, inCategory(CreativeInventoryCategory.ORGANIC));
 		REG.register(BTXItems.DUNG, inCategory(CreativeInventoryCategory.ORGANIC));
-		REG.register(BTXItems.WINDMILL, inCategory(CreativeInventoryCategory.PLACEABLES));
+		REG.register(BTXItems.WATERWHEEL, inCategory(CreativeInventoryCategory.PLACEABLES));
 		REG.register(BTXItems.SAIL, inCategory(CreativeInventoryCategory.MISCELLANEOUS));
+		REG.register(BTXItems.WINDMILL, inCategory(CreativeInventoryCategory.PLACEABLES));
+		REG.register(BTXItems.FABRIC, inCategory(CreativeInventoryCategory.ORGANIC));
+		REG.register(BTXItems.WOOD_BLADE, inCategory(CreativeInventoryCategory.MISCELLANEOUS));
 
 		// Blocks
 		// TODO: The blocks we add probably should be in their own category for machines/mech devices

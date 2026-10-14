@@ -5,6 +5,8 @@ import ivangeevo.btx.block.render.BlockModelGenericAxle;
 import ivangeevo.btx.block.render.BlockModelGenericCropsHemp;
 import ivangeevo.btx.block.render.BlockModelGenericGearBox;
 import ivangeevo.btx.block.render.BlockModelGenericHandCrank;
+import ivangeevo.btx.entity.entities.WaterWheelEntity;
+import ivangeevo.btx.entity.entities.WaterWheelEntityRenderer;
 import ivangeevo.btx.entity.entities.WindMillEntity;
 import ivangeevo.btx.entity.entities.WindMillEntityRenderer;
 import ivangeevo.btx.item.BTXItems;
@@ -37,16 +39,18 @@ public class BTXModClient implements ClientModInitializer {
 	}
 
 	public static void initItemModels(ItemModelDispatcher dispatcher) {
-		dispatcher.addDispatch(new ItemModelStandard(BTXItems.HEMP).setIcon(icon("hemp")));
-		dispatcher.addDispatch(new ItemModelStandard(BTXItems.HEMP_FIBERS).setIcon(icon("hemp_fibers")));
 		dispatcher.addDispatch(new ItemModelStandard(BTXItems.HEMP_SEEDS).setIcon(icon("hemp_seeds")));
+		dispatcher.addDispatch(new ItemModelStandard(BTXItems.HEMP).setIcon(icon("hemp")));
 		dispatcher.addDispatch(new ItemModelStandard(BTXItems.GEAR).setIcon(icon("gear")));
 		dispatcher.addDispatch(new ItemModelStandard(BTXItems.FLOUR).setIcon(icon("flour")));
+		dispatcher.addDispatch(new ItemModelStandard(BTXItems.HEMP_FIBERS).setIcon(icon("hemp_fibers")));
 		dispatcher.addDispatch(new ItemModelStandard(BTXItems.SCOURED_LEATHER).setIcon(icon("scoured_leather")));
-		dispatcher.addDispatch(new ItemModelStandard(BTXItems.FABRIC).setIcon(icon("fabric")));
 		dispatcher.addDispatch(new ItemModelStandard(BTXItems.DUNG).setIcon(icon("dung")));
-		dispatcher.addDispatch(new ItemModelStandard(BTXItems.WINDMILL).setIcon(icon("windmill")));
+		dispatcher.addDispatch(new ItemModelStandard(BTXItems.WATERWHEEL).setIcon(icon("water_wheel")));
 		dispatcher.addDispatch(new ItemModelStandard(BTXItems.SAIL).setIcon(icon("sail")));
+		dispatcher.addDispatch(new ItemModelStandard(BTXItems.WINDMILL).setIcon(icon("windmill")));
+		dispatcher.addDispatch(new ItemModelStandard(BTXItems.FABRIC).setIcon(icon("fabric")));
+		dispatcher.addDispatch(new ItemModelStandard(BTXItems.WOOD_BLADE).setIcon(icon("wood_blade")));
 	}
 
 	public static void initBlockModels(BlockModelDispatcher dispatcher) {
@@ -60,6 +64,7 @@ public class BTXModClient implements ClientModInitializer {
 
 	public static void initEntityRenderers(EntityRendererDispatcher dispatcher) {
 		dispatcher.assignRenderer(WindMillEntity.class, new WindMillEntityRenderer());
+		dispatcher.assignRenderer(WaterWheelEntity.class, new WaterWheelEntityRenderer());
 	}
 
 	public static void registerTextures() {

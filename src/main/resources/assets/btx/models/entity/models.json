@@ -1,5 +1,6 @@
 {
   "model_paths": [
-    "/assets/btx/models/entity/windmill/windmill.geo.json"
+    "/assets/btx/models/entity/windmill.geo.json",
+    "/assets/btx/models/entity/waterwheel.geo.json"
   ]
 }

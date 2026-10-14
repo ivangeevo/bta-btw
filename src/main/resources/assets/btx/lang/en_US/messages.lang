@@ -1,2 +1,4 @@
 messages.windmill.placement.obstructed=Wind Mill placement is obstructed by something, or by you
 messages.windmill.not.enough.room=Not enough room to place Wind Mill (They are friggin HUGE!)
+messages.waterwheel.placement.obstructed=Water Wheel placement is obstructed by something, or by you
+messages.waterwheel.not.enough.room=Not enough room to place Water Wheel

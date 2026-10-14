@@ -1,7 +1,6 @@
 package ivangeevo.btx.networking;
 
 import com.mojang.nbt.tags.CompoundTag;
-import ivangeevo.btx.BTXGlobals;
 import ivangeevo.btx.entity.entities.WindMillEntity;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.net.entity.EntityTracker;

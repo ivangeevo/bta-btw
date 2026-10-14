@@ -1,9 +1,8 @@
 package ivangeevo.btx.entity;
 
-import ivangeevo.btx.BTXGlobals;
 import ivangeevo.btx.BTXMod;
 import ivangeevo.btx.block.entity.TileEntityMillStone;
-import ivangeevo.btx.config.BTXConfig;
+import ivangeevo.btx.entity.entities.WaterWheelEntity;
 import ivangeevo.btx.entity.entities.WindMillEntity;
 import net.minecraft.core.entity.EntityDispatcher;
 import net.minecraft.core.util.collection.NamespaceID;
@@ -27,5 +26,6 @@ public final class BTXEntities {
 
 		// Custom Entities
 		dispatcher.addMapping(WindMillEntity.class, NamespaceID.fromPool(BTXMod.MOD_ID, "windmill"), WindMillEntity::new);
+		dispatcher.addMapping(WaterWheelEntity.class, NamespaceID.fromPool(BTXMod.MOD_ID, "waterwheel"), WaterWheelEntity::new);
 	}
 }
