@@ -1,11 +1,9 @@
 package ivangeevo.btx.entity.entities;
 
-import com.mojang.nbt.tags.CompoundTag;
-import ivangeevo.btx.BTXGlobals;
 import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.block.blocks.BlockLogicAxle;
 import ivangeevo.btx.block.blocks.BlockLogicGearBox;
-import ivangeevo.btx.util.MechPowerUtils;
+import ivangeevo.btx.util.utils.MechPowerUtils;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.core.block.Block;
@@ -19,9 +17,7 @@ import net.minecraft.core.world.World;
 import net.minecraft.core.world.pos.TilePos;
 import net.minecraft.core.world.pos.TilePosc;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.joml.primitives.AABBd;
-import org.joml.primitives.AABBdc;
 
 public abstract class MechanicalPowerSourceEntity extends Entity implements ICollidable {
 
@@ -80,16 +76,6 @@ public abstract class MechanicalPowerSourceEntity extends Entity implements ICol
 	@Override
 	protected boolean makeStepSound() {
 		return false;
-	}
-
-	@Override
-	public boolean isPushable() {
-		return false;
-	}
-
-	@Override
-	public boolean isPickable() {
-		return !removed;
 	}
 
 	@Override
