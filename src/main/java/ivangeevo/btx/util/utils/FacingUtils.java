@@ -1,4 +1,4 @@
-package ivangeevo.btx.util;
+package ivangeevo.btx.util.utils;
 
 import net.minecraft.core.util.helper.Direction;
 

@@ -1,9 +1,8 @@
 package ivangeevo.btx.block.blocks;
 
 import ivangeevo.btx.item.BTXItems;
-import ivangeevo.btx.util.MiscUtils;
-import ivangeevo.btx.util.SoundUtils;
-import ivangeevo.btx.util.WorldUtils;
+import ivangeevo.btx.util.utils.MiscUtils;
+import ivangeevo.btx.util.utils.SoundUtils;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockLogic;
 import net.minecraft.core.block.BlockLogicSupplier;

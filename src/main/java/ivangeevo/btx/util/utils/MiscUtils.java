@@ -1,4 +1,4 @@
-package ivangeevo.btx.util;
+package ivangeevo.btx.util.utils;
 
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.item.ItemStack;

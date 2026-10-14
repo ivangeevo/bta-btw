@@ -1,11 +1,10 @@
 package ivangeevo.btx.entity.entities;
 
 import com.mojang.nbt.tags.CompoundTag;
-import ivangeevo.btx.BTXGlobals;
 import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.block.blocks.BlockLogicAxle;
 import ivangeevo.btx.item.BTXItems;
-import ivangeevo.btx.util.MechPowerUtils;
+import ivangeevo.btx.util.utils.MechPowerUtils;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.data.gamerule.GameRules;
 import net.minecraft.core.entity.EntityLightning;
@@ -73,6 +72,17 @@ public class WindMillEntity extends MechanicalPowerSourceEntityHorizonal {
 	}
 
 	@Override
+	public void addAdditionalSaveData(@NotNull CompoundTag tag) {
+		tag.putBoolean("AlignedToX", alignedToX);
+		tag.putFloat("MillRotation", rotation);
+		tag.putBoolean("ProvidingPower", providingPower);
+		tag.putInt("OverpowerTimer", overpowerTimer);
+		for (int i = 0; i < 4; i++) {
+			tag.putInt("BladeColor" + i, getBladeColor(i));
+		}
+	}
+
+	@Override
 	public void readAdditionalSaveData(@NotNull CompoundTag tag) {
 		alignedToX = tag.getBoolean("AlignedToX");
 		rotation = tag.getFloat("MillRotation");
@@ -82,17 +92,6 @@ public class WindMillEntity extends MechanicalPowerSourceEntityHorizonal {
 		setBladeColor(1, tag.getInteger("BladeColor1"));
 		setBladeColor(2, tag.getInteger("BladeColor2"));
 		setBladeColor(3, tag.getInteger("BladeColor3"));
-	}
-
-	@Override
-	public void addAdditionalSaveData(@NotNull CompoundTag tag) {
-		tag.putBoolean("AlignedToX", alignedToX);
-		tag.putFloat("MillRotation", rotation);
-		tag.putBoolean("ProvidingPower", providingPower);
-		tag.putInt("OverpowerTimer", overpowerTimer);
-		for (int i = 0; i < 4; i++) {
-			tag.putInt("BladeColor" + i, getBladeColor(i));
-		}
 	}
 
 	@Override

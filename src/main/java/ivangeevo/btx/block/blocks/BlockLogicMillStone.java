@@ -5,7 +5,7 @@ import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.block.entity.TileEntityMillStone;
 import ivangeevo.btx.gui.BTXScreens;
 import ivangeevo.btx.world.TickPersistence;
-import ivangeevo.btx.util.MechPowerUtils;
+import ivangeevo.btx.util.utils.MechPowerUtils;
 import net.minecraft.core.block.*;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Materials;

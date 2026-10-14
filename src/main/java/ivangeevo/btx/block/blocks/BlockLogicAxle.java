@@ -2,9 +2,9 @@ package ivangeevo.btx.block.blocks;
 
 import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.item.BTXItems;
-import ivangeevo.btx.util.FacingUtils;
-import ivangeevo.btx.util.MechPowerUtils;
-import ivangeevo.btx.util.MiscUtils;
+import ivangeevo.btx.util.utils.FacingUtils;
+import ivangeevo.btx.util.utils.MechPowerUtils;
+import ivangeevo.btx.util.utils.MiscUtils;
 import net.minecraft.core.block.*;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Materials;
@@ -51,7 +51,8 @@ public class BlockLogicAxle extends BlockLogic implements MechanicalDevice {
 		);
 	}
 
-	public int getTickRate() {
+	@Override
+	public int tickDelay() {
 		return TICK_RATE;
 	}
 
@@ -73,7 +74,7 @@ public class BlockLogicAxle extends BlockLogic implements MechanicalDevice {
 	@Override
 	public void onPlacedByWorld(@NotNull World world, @NotNull TilePosc tilePos) {
 		super.onPlacedByWorld(world, tilePos);
-		world.scheduleBlockUpdate(tilePos, this.block, this.getTickRate());
+		world.scheduleBlockUpdate(tilePos, this.block, this.tickDelay());
 		markNearbyForRenderUpdate(world, tilePos);
 	}
 

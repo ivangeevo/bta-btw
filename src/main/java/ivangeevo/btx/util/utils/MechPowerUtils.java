@@ -1,4 +1,4 @@
-package ivangeevo.btx.util;
+package ivangeevo.btx.util.utils;
 
 import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.block.blocks.BlockLogicAxle;
@@ -11,8 +11,6 @@ import net.minecraft.core.world.World;
 import net.minecraft.core.world.WorldSource;
 import net.minecraft.core.world.pos.TilePos;
 import net.minecraft.core.world.pos.TilePosc;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public final class MechPowerUtils {
 	private MechPowerUtils() {}

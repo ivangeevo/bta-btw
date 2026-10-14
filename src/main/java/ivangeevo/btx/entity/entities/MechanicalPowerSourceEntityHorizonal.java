@@ -1,9 +1,8 @@
 package ivangeevo.btx.entity.entities;
 
-import ivangeevo.btx.BTXGlobals;
 import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.block.blocks.BlockLogicAxle;
-import ivangeevo.btx.util.MechPowerUtils;
+import ivangeevo.btx.util.utils.MechPowerUtils;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.util.helper.MathHelper;
 import net.minecraft.core.world.World;

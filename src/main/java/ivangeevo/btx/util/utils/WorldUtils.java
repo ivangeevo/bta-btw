@@ -1,4 +1,4 @@
-package ivangeevo.btx.util;
+package ivangeevo.btx.util.utils;
 
 import ivangeevo.btx.world.TickPersistence;
 import net.minecraft.core.block.Block;

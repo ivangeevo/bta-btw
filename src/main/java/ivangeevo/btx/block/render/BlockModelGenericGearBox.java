@@ -1,8 +1,7 @@
 package ivangeevo.btx.block.render;
 
-import ivangeevo.btx.block.blocks.BlockLogicGearBox;
-import ivangeevo.btx.util.FacingUtils;
-import ivangeevo.btx.util.MechPowerUtils;
+import ivangeevo.btx.util.utils.FacingUtils;
+import ivangeevo.btx.util.utils.MechPowerUtils;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
