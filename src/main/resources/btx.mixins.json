@@ -6,15 +6,10 @@
     "defaultRequire": 1
   },
   "mixins": [
-    "gui.screens.PlayerMixinBTXScreens",
-    "world.ChunkLoaderLegacyMixin",
-    "world.ChunkLoaderRegionAsyncMixin",
-    "world.ChunkWriterMixin",
-    "world.WorldMixin"
+    "gui.screens.PlayerMixinBTXScreens"
   ],
   "client": [
     "gui.screens.PlayerLocalMixinBTXScreens",
-    "net.PacketHandlerClientMixin",
     "net.PacketHandlerClientMixinBTXMachines"
   ],
   "server": [

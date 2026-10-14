@@ -17,7 +17,6 @@ public final class BTXEntities {
 			initialized = true;
 			initializeEntities();
 		}
-		BTXGlobals.LOGGER.info("[WindMill] BTXEntities.init() done, netEntityTypeID={}", BTXConfig.netEntityTypeID());
 	}
 
 	private static void initializeEntities() {

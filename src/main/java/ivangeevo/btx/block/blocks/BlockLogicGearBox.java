@@ -1,8 +1,8 @@
 package ivangeevo.btx.block.blocks;
 
 import ivangeevo.btx.block.BTXBlocks;
+import ivangeevo.btx.config.BTXConfig;
 import ivangeevo.btx.item.BTXItems;
-import ivangeevo.btx.networking.ClientDataChangeListener;
 import ivangeevo.btx.util.FacingUtils;
 import ivangeevo.btx.util.MechPowerUtils;
 import ivangeevo.btx.util.MiscUtils;
@@ -32,14 +32,11 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-public class BlockLogicGearBox extends BlockLogicRotatable implements MechanicalDevice, ClientDataChangeListener {
+public class BlockLogicGearBox extends BlockLogicRotatable implements MechanicalDevice {
 	public static final int TICK_RATE = 10;
 
 	private static final int TURN_ON_TICK_RATE = 10;
 	private static final int TURN_OFF_TICK_RATE = 9;
-
-	/** BTW: BTWMod.disableGearBoxPowerDrain */
-	public static boolean disableGearBoxPowerDrain = false;
 
 	public BlockLogicGearBox(@NotNull Block<?> block) {
 		super(block, Materials.WOOD);
@@ -106,8 +103,7 @@ public class BlockLogicGearBox extends BlockLogicRotatable implements Mechanical
 	@Override
 	public void onNeighborChanged(@NotNull World world, @NotNull TilePosc tilePos, @NotNull Block<?> neighbor) {
 		if (!isCurrentStateValid(world, tilePos)) {
-			int delay = (!disableGearBoxPowerDrain && isGearBoxOn(world, tilePos))
-				? TURN_OFF_TICK_RATE : TURN_ON_TICK_RATE;
+			int delay = (!BTXConfig.disableGearBoxPowerDrain && isGearBoxOn(world, tilePos)) ? TURN_OFF_TICK_RATE : TURN_ON_TICK_RATE;
 			world.scheduleBlockUpdate(tilePos, this.block, delay);
 		}
 	}
@@ -273,7 +269,7 @@ public class BlockLogicGearBox extends BlockLogicRotatable implements Mechanical
 		world.playSoundEffect(null, SoundCategory.ENTITY_SOUNDS,
 			tilePos.x() + 0.5, tilePos.y() + 0.5, tilePos.z() + 0.5, "random.explode", 0.2F, 1.25F);
 		world.setBlockTypeNotify(tilePos, Blocks.AIR);
-		// client-side ±3 refresh is needed here too, see the caveat below
+		markRangeForRenderUpdate(world, tilePos, 3);
 	}
 
 	private void emitGearBoxParticles(World world, TilePosc tilePos, Random rand) {
@@ -309,23 +305,5 @@ public class BlockLogicGearBox extends BlockLogicRotatable implements Mechanical
 			new TilePos(pos.x() - radius, pos.y() - radius, pos.z() - radius),
 			new TilePos(pos.x() + radius, pos.y() + radius, pos.z() + radius)
 		);
-	}
-
-	@Override
-	public void clientNotificationOfDataChange(World world, TilePosc pos, int oldData, int newData) {
-		if (!isGearBoxOn(oldData) && isGearBoxOn(newData)) {
-			//world.playSoundEffectAtTile(null, SoundCategory.ENTITY_SOUNDS, pos,
-				//"random.chestopen", 0.25F, world.rand.nextFloat() * 0.25F + 0.25F);
-			emitGearBoxParticles(world, pos, world.rand);
-		}
-		markRangeForRenderUpdate(world, pos, 3);
-	}
-
-	@Override public void clientBlockAdded(World world, TilePosc tilePos) {
-		markRangeForRenderUpdate(world, tilePos, 3);
-	}
-
-	@Override public void clientBlockRemoved(World world, TilePosc tilePos, int oldData) {
-		markRangeForRenderUpdate(world, tilePos, 3);
 	}
 }

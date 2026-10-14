@@ -2,7 +2,6 @@ package ivangeevo.btx.block.blocks;
 
 import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.item.BTXItems;
-import ivangeevo.btx.networking.ClientDataChangeListener;
 import ivangeevo.btx.util.FacingUtils;
 import ivangeevo.btx.util.MechPowerUtils;
 import ivangeevo.btx.util.MiscUtils;
@@ -28,7 +27,7 @@ import org.joml.primitives.AABBdc;
 
 import java.util.Random;
 
-public class BlockLogicAxle extends BlockLogic implements MechanicalDevice, ClientDataChangeListener {
+public class BlockLogicAxle extends BlockLogic implements MechanicalDevice {
 	protected static final double AXLE_WIDTH = 0.25;
 	protected static final double AXLE_HALF_WIDTH = (AXLE_WIDTH / 2);
 
@@ -375,13 +374,6 @@ public class BlockLogicAxle extends BlockLogic implements MechanicalDevice, Clie
 		return facing ^ 1;
 	}
 
-	public static void swapAxleType(World world, TilePosc tilePos, Block<?> newBlock) {
-		int data = world.getBlockData(tilePos);
-
-		world.setBlockTypeData(tilePos, newBlock, data);
-		world.notifyBlockChange(tilePos, newBlock);
-	}
-
 	public static int facingFromSide(Side side) {
 		return switch (side) {
 			case BOTTOM -> 0;
@@ -439,16 +431,4 @@ public class BlockLogicAxle extends BlockLogic implements MechanicalDevice, Clie
 		world.markBlocksDirty(min, max);
 	}
 
-	@Override public void clientBlockAdded(World world, TilePosc tilePos) {
-		BlockLogicGearBox.markRangeForRenderUpdate(world, tilePos, 3);
-	}
-
-	@Override public void clientBlockRemoved(World world, TilePosc tilePos, int oldData) {
-		BlockLogicGearBox.markRangeForRenderUpdate(world, tilePos, 3);
-	}
-
-	@Override
-	public void clientNotificationOfDataChange(World world, TilePosc pos, int oldData, int newData) {
-
-	}
 }
