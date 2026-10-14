@@ -47,7 +47,7 @@ public abstract class MechanicalPowerSourceEntityHorizonal extends MechanicalPow
 		super.remove();
 	}
 
-	@Override
+	/*@Override
 	public void setBounds() {
 		double halfWidth = getWidth() * 0.5;
 		double halfDepth = getDepth() * 0.5;
@@ -58,6 +58,15 @@ public abstract class MechanicalPowerSourceEntityHorizonal extends MechanicalPow
 		double bottom = y - heightOffset + ySlideOffset;
 		bb.setMin(x - halfX, bottom, z - halfZ);
 		bb.setMax(x + halfX, bottom + getHeight(), z + halfZ);
+	}*/
+
+	@Override
+	public void setBounds() {
+		double hx = (alignedToX ? getDepth() : getWidth()) / 2.0;
+		double hz = (alignedToX ? getWidth() : getDepth()) / 2.0;
+		double minY = y - heightOffset + ySlideOffset;
+		bb.setMin(x - hx, minY, z - hz);
+		bb.setMax(x + hx, minY + getHeight(), z + hz);
 	}
 
 	@Override

@@ -79,6 +79,16 @@ public abstract class MechanicalPowerSourceEntity extends Entity implements ICol
 	}
 
 	@Override
+	public boolean isPickable() {
+		return !removed;
+	}
+
+	@Override
+	public float getPickRadius() {
+		return 0.0F; // 0.4 half-depth + 0 = 0.4 < 0.5, so the axle face is always hit first
+	}
+
+	@Override
 	public boolean hasCollision() {
 		return !removed;
 	}

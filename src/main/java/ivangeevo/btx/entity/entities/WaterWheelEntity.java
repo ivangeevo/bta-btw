@@ -5,7 +5,6 @@ import ivangeevo.btx.item.BTXItems;
 import ivangeevo.btx.util.WaterFlowHelper;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.Blocks;
-import net.minecraft.core.util.helper.Direction;
 import net.minecraft.core.util.helper.MathHelper;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.pos.TilePos;
