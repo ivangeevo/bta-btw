@@ -1,0 +1,8 @@
+{
+  "parent": "btx:block/moulding/connector/moulding_connector_template",
+  "textures": {
+    "side": "minecraft:block/planks/black",
+    "top": "minecraft:block/planks/black",
+    "bottom": "minecraft:block/planks/black"
+  }
+}

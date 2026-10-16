@@ -15,12 +15,6 @@ import org.jetbrains.annotations.NotNull;
 import org.useless.dragonfly.data.block.mojang.BlockModelMojangData;
 import org.useless.dragonfly.models.block.StaticBlockModel;
 
-/**
- * BTW: GearBoxBlock.getBlockTexture.
- * One template model (gearbox_template.json) whose six face texture variables are overridden in code,
- * one derived model per (input face, set of output faces). Faces use BTW facing numbering:
- * 0 down, 1 up, 2 north, 3 south, 4 west, 5 east.
- */
 @Environment(EnvType.CLIENT)
 public class BlockModelGenericGearBox<T extends BlockLogic> extends BlockModelGeneric<T> {
 	private static final String TEMPLATE = "btx:block/gearbox";

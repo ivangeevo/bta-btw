@@ -1,10 +1,7 @@
 package ivangeevo.btx;
 
 import ivangeevo.btx.block.BTXBlocks;
-import ivangeevo.btx.block.render.BlockModelGenericAxle;
-import ivangeevo.btx.block.render.BlockModelGenericCropsHemp;
-import ivangeevo.btx.block.render.BlockModelGenericGearBox;
-import ivangeevo.btx.block.render.BlockModelGenericHandCrank;
+import ivangeevo.btx.block.render.*;
 import ivangeevo.btx.entity.entities.WaterWheelEntity;
 import ivangeevo.btx.entity.entities.WaterWheelEntityRenderer;
 import ivangeevo.btx.entity.entities.WindMillEntity;
@@ -60,6 +57,12 @@ public class BTXModClient implements ClientModInitializer {
 		dispatcher.addDispatch(new BlockModelGenericAxle<>(BTXBlocks.AXLE));
 		dispatcher.addDispatch(new BlockModelGenericAxle<>(BTXBlocks.AXLE_POWER_SOURCE));
 		dispatcher.addDispatch(new BlockModelGenericGearBox<>(BTXBlocks.GEARBOX));
+		dispatcher.addDispatch(new BlockModelGenericSiding<>(BTXBlocks.SIDING_OAK, loadDataModel(block("siding/siding_oak"))));
+		dispatcher.addDispatch(new BlockModelGenericSidingPainted<>(BTXBlocks.SIDING_OAK_PAINTED));
+		dispatcher.addDispatch(new BlockModelGenericMoulding<>(BTXBlocks.MOULDING_OAK, "minecraft:block/planks/oak", "oak"));
+		dispatcher.addDispatch(new BlockModelGenericMouldingPainted<>(BTXBlocks.MOULDING_OAK_PAINTED));
+		dispatcher.addDispatch(new BlockModelGenericCorner<>(BTXBlocks.CORNER_OAK, loadDataModel(block("corner/corner_oak"))));
+		dispatcher.addDispatch(new BlockModelGenericCornerPainted<>(BTXBlocks.CORNER_OAK_PAINTED));
 	}
 
 	public static void initEntityRenderers(EntityRendererDispatcher dispatcher) {

@@ -1,0 +1,8 @@
+{
+  "parent": "btx:block/siding/siding_template",
+  "textures": {
+    "side": "minecraft:block/planks/silver",
+    "top": "minecraft:block/planks/silver",
+    "bottom": "minecraft:block/planks/silver"
+  }
+}

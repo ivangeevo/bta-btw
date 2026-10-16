@@ -1,0 +1,8 @@
+{
+  "parent": "btx:block/corner/corner_template",
+  "textures": {
+    "side": "minecraft:block/planks/purple",
+    "top": "minecraft:block/planks/purple",
+    "bottom": "minecraft:block/planks/purple"
+  }
+}

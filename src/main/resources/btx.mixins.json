@@ -6,9 +6,11 @@
     "defaultRequire": 1
   },
   "mixins": [
+    "client.MinecraftMixin",
     "gui.screens.PlayerMixinBTXScreens"
   ],
   "client": [
+    "client.render.RenderGlobalMixin",
     "gui.screens.PlayerLocalMixinBTXScreens",
     "net.PacketHandlerClientMixinBTXMachines"
   ],

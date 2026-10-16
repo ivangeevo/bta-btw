@@ -1,0 +1,8 @@
+{
+  "parent": "btx:block/moulding/moulding_template_y",
+  "textures": {
+    "side": "minecraft:block/planks/oak",
+    "top": "minecraft:block/planks/oak",
+    "bottom": "minecraft:block/planks/oak"
+  }
+}

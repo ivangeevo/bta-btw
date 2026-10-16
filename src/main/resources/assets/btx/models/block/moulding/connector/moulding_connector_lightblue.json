@@ -1,0 +1,8 @@
+{
+  "parent": "btx:block/moulding/connector/moulding_connector_template",
+  "textures": {
+    "side": "minecraft:block/planks/lightblue",
+    "top": "minecraft:block/planks/lightblue",
+    "bottom": "minecraft:block/planks/lightblue"
+  }
+}

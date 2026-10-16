@@ -1,0 +1,8 @@
+{
+  "parent": "btx:block/moulding/moulding_template",
+  "textures": {
+    "side": "minecraft:block/planks/brown",
+    "top": "minecraft:block/planks/brown",
+    "bottom": "minecraft:block/planks/brown"
+  }
+}

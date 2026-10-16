@@ -1,0 +1,8 @@
+{
+  "parent": "btx:block/corner/corner_template",
+  "textures": {
+    "side": "minecraft:block/planks/lime",
+    "top": "minecraft:block/planks/lime",
+    "bottom": "minecraft:block/planks/lime"
+  }
+}
