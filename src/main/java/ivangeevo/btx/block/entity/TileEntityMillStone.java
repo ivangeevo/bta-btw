@@ -33,7 +33,7 @@ public class TileEntityMillStone extends TileEntity implements Container {
 	private final Random random = new Random();
 
 	private ItemStack[] contents = new ItemStack[3];
-	private int grindProgress = 0;
+	private int grindCounter = 0;
 
 	@Override
 	public @NotNull String getNameTranslationKey() {
@@ -83,7 +83,7 @@ public class TileEntityMillStone extends TileEntity implements Container {
 		}
 
 		if (compoundTag.containsKey("GrindProgress")) {
-			this.grindProgress = compoundTag.getInteger("GrindProgress");
+			this.grindCounter = compoundTag.getInteger("GrindProgress");
 		}
 	}
 
@@ -101,7 +101,7 @@ public class TileEntityMillStone extends TileEntity implements Container {
 		}
 
 		compoundTag.put("Items", nbtTagList);
-		compoundTag.putInt("GrindProgress", this.grindProgress);
+		compoundTag.putInt("GrindCounter", this.grindCounter);
 	}
 
 	public boolean stillValid(@NotNull Player player) {
@@ -132,7 +132,7 @@ public class TileEntityMillStone extends TileEntity implements Container {
 		}
 
 		if (this.findGrindableSlot() < 0) {
-			this.grindProgress = 0;
+			this.grindCounter = 0;
 			return;
 		}
 
@@ -167,13 +167,13 @@ public class TileEntityMillStone extends TileEntity implements Container {
 	private void advanceGrind(int amount) {
 		int slot = this.findGrindableSlot();
 		if (slot < 0) {
-			this.grindProgress = 0;
+			this.grindCounter = 0;
 			return;
 		}
 
-		this.grindProgress += amount;
-		if (this.grindProgress >= TIME_TO_GRIND) {
-			this.grindProgress = 0;
+		this.grindCounter += amount;
+		if (this.grindCounter >= TIME_TO_GRIND) {
+			this.grindCounter = 0;
 			this.finishGrind(slot);
 			this.setChanged();
 		}
@@ -187,21 +187,21 @@ public class TileEntityMillStone extends TileEntity implements Container {
 		}
 	}
 
-	public int getGrindProgress() {
-		return this.grindProgress;
+	public int getGrindCounter() {
+		return this.grindCounter;
 	}
 
 	/** Used by MenuMillStone.setData to sync progress to the client. */
-	public void setGrindProgress(int progress) {
-		this.grindProgress = progress;
+	public void setGrindCounter(int progress) {
+		this.grindCounter = progress;
 	}
 
 	public boolean isGrinding() {
-		return this.grindProgress > 0;
+		return this.grindCounter > 0;
 	}
 
 	public int getGrindProgressScaled(int scale) {
-		return this.grindProgress * scale / TIME_TO_GRIND;
+		return this.grindCounter * scale / TIME_TO_GRIND;
 	}
 
 	private void ejectStack(ItemStack stack) {

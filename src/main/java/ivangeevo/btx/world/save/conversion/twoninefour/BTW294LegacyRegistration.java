@@ -1,5 +1,8 @@
 package ivangeevo.btx.world.save.conversion.twoninefour;
 
+import ivangeevo.btx.block.entity.TileEntityMillStone;
+import ivangeevo.btx.entity.entities.WaterWheelEntity;
+import ivangeevo.btx.entity.entities.WindMillEntity;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.entity.TileEntityDispatcher;
 import net.minecraft.core.entity.Entity;
@@ -8,17 +11,48 @@ import net.minecraft.core.entity.factories.EntityFactory;
 import net.minecraft.core.util.collection.NamespaceID;
 
 /**
- * Entities and tile entities need NO conversion step. Both dispatchers keep a read-only "Legacy" name table, so we
- * register each addon class twice:
- *   - under its modern NamespaceID (used when SAVING), and
- *   - under BTW's old saved name (used when LOADING a b1.7.3 world).
- * Call register() once, after TileEntityDispatcher.init() and the vanilla EntityDispatcher have run.
+ * <h2>Why no conversion step is needed</h2>
+ * <p>
+ * Entities and tile entities require <strong>NO conversion step</strong>.
+ * Both dispatchers maintain a read-only {@code "Legacy"} name table, so
+ * each addon class must be registered twice:
+ * </p>
  *
- * Legacy tile entity names must be unique (addMapping throws on duplicates); none of BTW's collide with stock ones.
- * Legacy entity numeric IDs must be unique too; BTW's tracker IDs 222-227 don't collide with stock (1-96).
+ * <ul>
+ *   <li>Under its modern {@code NamespaceID}, used when <strong>SAVING</strong>.</li>
+ *   <li>Under BTW's old saved name, used when <strong>LOADING</strong> a b1.7.3 world.</li>
+ * </ul>
  *
- * The addon classes read their own NBT, so keep BTW's key names as a fallback when loading (e.g. "dryTime",
- * "grindCounter", and the misspelled "iHoppeContainedSoulCount").
+ * <p>
+ * Call {@code register()} once, after {@code TileEntityDispatcher.init()}
+ * and the vanilla {@code EntityDispatcher} have run.
+ * </p>
+ *
+ * <h2>Registration constraints</h2>
+ * <ul>
+ *   <li>
+ *     <strong>Tile entities:</strong> Legacy names must be unique.
+ *     {@code addMapping} throws an exception on duplicates.
+ *     None of BTW's names collide with vanilla ones.
+ *   </li>
+ *   <li>
+ *     <strong>Entities:</strong> Legacy numeric IDs must also be unique.
+ *     BTW's tracker IDs {@code 222-227} do not collide with vanilla IDs
+ *     {@code 1-96}.
+ *   </li>
+ * </ul>
+ *
+ * <h2>NBT compatibility</h2>
+ * <p>
+ * The addon classes read their own NBT, so preserve BTW's original key
+ * names as fallbacks when loading legacy data. Examples include:
+ * </p>
+ *
+ * <ul>
+ *   <li>{@code "dryTime"}</li>
+ *   <li>{@code "grindCounter"}</li>
+ *   <li>{@code "iHoppeContainedSoulCount"} (original misspelling)</li>
+ * </ul>
  */
 public final class BTW294LegacyRegistration {
     private BTW294LegacyRegistration() {}
@@ -35,6 +69,7 @@ public final class BTW294LegacyRegistration {
         // tile(BtwUnfiredPotteryEntity.class,  "unfired_pottery",  "UnfiredPottery");
         // tile(BtwVaseEntity.class,            "vase",             "Vase");
         // tile(BtwCrucibleEntity.class,        "crucible",         "Crucible");
+		legacyTile(TileEntityMillStone.class,"MillStone");
 
         // Entities: (class, modern key, factory, BTW saved name, BTW tracker id)
         // entity(BtwWaterWheel.class,       "water_wheel",             BtwWaterWheel::new,       "WaterWheel",            222);
@@ -43,16 +78,29 @@ public final class BTW294LegacyRegistration {
         // entity(BtwMovingPlatform.class,   "moving_platform",         BtwMovingPlatform::new,   "MovingPlatform",        225);
         // entity(BtwLiftedBlock.class,      "block_lifted_by_platform",BtwLiftedBlock::new,      "BlockLiftedByPlatform", 226);
         // entity(BtwBroadheadArrow.class,   "broadhead_arrow",         BtwBroadheadArrow::new,   "BroadheadArrow",        227);
-    }
+		legacyEntity(WindMillEntity.class, "WaterWheel", 222);
+		legacyEntity(WindMillEntity.class, "WindMill", 223);
+	}
 
     private static void tile(Class<? extends TileEntity> clazz, String key, String legacyName) {
-        TileEntityDispatcher.addMapping(clazz, NamespaceID.fromPool("btw", key));
-        TileEntityDispatcher.Legacy.addMapping(clazz, legacyName);
+		TileEntityDispatcher.addMapping(clazz, NamespaceID.fromPool("btx", key));
+		TileEntityDispatcher.Legacy.addMapping(clazz, legacyName);
     }
+
+	private static void legacyTile(Class<? extends TileEntity> clazz, String legacyName) {
+		TileEntityDispatcher.Legacy.addMapping(clazz, legacyName);
+	}
 
     private static <T extends Entity> void entity(Class<T> clazz, String key, EntityFactory<T> factory,
                                                   String legacyName, int legacyId) {
-        EntityDispatcher.getInstance().addMapping(clazz, NamespaceID.fromPool("btw", key), factory);
-        EntityDispatcher.Legacy.addMapping(clazz, legacyName, legacyId);
+		EntityDispatcher.getInstance().addMapping(clazz, NamespaceID.fromPool("btx", key), factory);
+
+		EntityDispatcher.Legacy.addMapping(clazz, legacyName, legacyId);
     }
+
+	private static <T extends Entity> void legacyEntity(Class<T> clazz, String legacyName, int legacyId) {
+		EntityDispatcher.Legacy.addMapping(clazz, legacyName, legacyId);
+	}
+
+
 }

@@ -34,15 +34,50 @@ import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 
 /**
- * Why this exists: item IDs are NOT converted by a save step. ItemStack.readFromNBT converts lazily and blindly:
- * a legacy stack (no "Expanded" tag) with id >= 256 just gets id += 16128. BTW items (legacy 478-523) would land on
- * 16606-16651, which are almost certainly real BTA items. So, for BTW worlds only, we rewrite BTW stacks to their
- * FINAL form (final id, "Expanded"=1, "Version"=19135) before the stock converter runs; ItemStack then leaves them alone.
+ * <h2>Why this exists</h2>
+ * <p>
+ * Item IDs are <strong>NOT converted by a save step</strong>.
+ * </p>
  *
- * Installed at index 0 of SaveConverters.saveConverters with the same from/to versions as the stock step. The selection
- * loop in Minecraft.convertSaveVersion keeps the FIRST converter on a tie, so ours wins and then delegates to stock.
+ * <p>
+ * {@code ItemStack.readFromNBT} converts IDs lazily and blindly:
+ * a legacy stack without an {@code "Expanded"} tag and with
+ * {@code id >= 256} simply gets {@code id += 16128}.
+ * </p>
  *
- * NOT TESTED against a real BTA build.
+ * <p>
+ * BTW items (legacy IDs {@code 478-523}) would therefore land on
+ * IDs {@code 16606-16651}, which are almost certainly real BTA items.
+ * </p>
+ *
+ * <p>
+ * For <strong>BTW worlds only</strong>, we rewrite BTW stacks to their
+ * <strong>final form</strong> before the stock converter runs:
+ * </p>
+ *
+ * <ul>
+ *   <li>Set the final item ID.</li>
+ *   <li>Set {@code "Expanded"} to {@code 1}.</li>
+ *   <li>Set {@code "Version"} to {@code 19135}.</li>
+ * </ul>
+ *
+ * <p>
+ * The stock {@code ItemStack} converter then leaves these stacks alone.
+ * </p>
+ *
+ * <h2>Converter priority</h2>
+ * <p>
+ * Installed at index {@code 0} of {@code SaveConverters.saveConverters},
+ * using the same {@code fromVersion} and {@code toVersion} as the stock
+ * step. The selection loop in {@code Minecraft.convertSaveVersion}
+ * keeps the <strong>first converter on a tie</strong>, so ours wins
+ * and then delegates to the stock converter.
+ * </p>
+ *
+ * <h2>Testing status</h2>
+ * <p>
+ * <strong>NOT TESTED against a real BTA build.</strong>
+ * </p>
  */
 public class BTW294SaveConverter implements ISaveConverter {
 	private static final Logger LOGGER = BTXGlobals.LOGGER;
@@ -83,7 +118,7 @@ public class BTW294SaveConverter implements ISaveConverter {
 	@Override
 	public void convertSave(@NotNull CompoundTag levelData, @NotNull File savesDir, @NotNull String worldDirName,
 							@NotNull ProgressListener progress) {
-		LOGGER.info("[BTX] convertSave called for '{}'", worldDirName);   // very first line
+		LOGGER.info("[BTX] convertSave called for '{}'", worldDirName);
 
 		ISaveFormat from = SaveFormats.createSaveFormat(FROM, savesDir);
 		if (from == null) {
@@ -283,7 +318,8 @@ public class BTW294SaveConverter implements ISaveConverter {
 
 		private BtwItems() {}
 
-		/** Real items: pass the ID as written in the BTW source (fcWindMillItemID = 238). Same damage value, new ID. */		public static void simple(int btwSourceId, int newId) {
+		/** Real items: pass the ID as written in the BTW source (fcWindMillItemID = 238). Same damage value, new ID. */
+		public static void simple(int btwSourceId, int newId) {
 			RULES.put(btwSourceId + ITEM_ID_OFFSET, d -> new int[]{newId, d});
 		}
 		public static void rule(int btwSourceId, Rule rule) {

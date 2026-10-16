@@ -93,7 +93,7 @@ public class MenuMillStone extends MenuAbstract {
 	public void broadcastChanges() {
 		super.broadcastChanges();
 
-		int progress = this.millStone.getGrindProgress();
+		int progress = this.millStone.getGrindCounter();
 
 		if (this.currentGrindProgress != progress) {
 			for (ContainerListener listener : this.containerListeners) {
@@ -106,7 +106,7 @@ public class MenuMillStone extends MenuAbstract {
 	@Override
 	public void setData(int id, int value) {
 		if (id == 0) {
-			this.millStone.setGrindProgress(value);
+			this.millStone.setGrindCounter(value);
 		}
 	}
 

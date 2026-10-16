@@ -42,16 +42,16 @@ public class WaterWheelEntity extends MechanicalPowerSourceEntityHorizonal{
 
 	@Override
 	public void addAdditionalSaveData(@NotNull CompoundTag tag) {
-		tag.putBoolean("AlignedToX", alignedToX);
-		tag.putFloat("WheelRotation", rotation);
-		tag.putBoolean("ProvidingPower", providingPower);
+		tag.putBoolean("bWaterWheelIAligned", alignedToX);
+		tag.putFloat("fRotation", rotation);
+		tag.putBoolean("bProvidingPower", providingPower);
 	}
 
 	@Override
 	public void readAdditionalSaveData(@NotNull CompoundTag tag) {
-		alignedToX = tag.getBoolean("AlignedToX");
-		rotation = tag.getFloat("MillRotation");
-		providingPower = tag.getBoolean("ProvidingPower");
+		alignedToX = tag.getBoolean("bWaterWheelIAligned");
+		rotation = tag.getFloat("fRotation");
+		providingPower = tag.getBoolean("bProvidingPower");
 	}
 
 	@Override

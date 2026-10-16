@@ -73,25 +73,26 @@ public class WindMillEntity extends MechanicalPowerSourceEntityHorizonal {
 
 	@Override
 	public void addAdditionalSaveData(@NotNull CompoundTag tag) {
-		tag.putBoolean("AlignedToX", alignedToX);
-		tag.putFloat("MillRotation", rotation);
-		tag.putBoolean("ProvidingPower", providingPower);
-		tag.putInt("OverpowerTimer", overpowerTimer);
+		tag.putBoolean("bWindMillIAligned", alignedToX);
+		tag.putFloat("fRotation", rotation);
+		tag.putBoolean("bProvidingPower", providingPower);
+		tag.putInt("iOverpowerTimer", overpowerTimer);
 		for (int i = 0; i < 4; i++) {
-			tag.putInt("BladeColor" + i, getBladeColor(i));
+			tag.putInt("iBladeColors" + i, getBladeColor(i));
 		}
 	}
 
 	@Override
 	public void readAdditionalSaveData(@NotNull CompoundTag tag) {
-		alignedToX = tag.getBoolean("AlignedToX");
-		rotation = tag.getFloat("MillRotation");
-		providingPower = tag.getBoolean("ProvidingPower");
-		overpowerTimer = tag.getInteger("OverpowerTimer");
-		setBladeColor(0, tag.getInteger("BladeColor0"));
-		setBladeColor(1, tag.getInteger("BladeColor1"));
-		setBladeColor(2, tag.getInteger("BladeColor2"));
-		setBladeColor(3, tag.getInteger("BladeColor3"));
+		alignedToX = tag.getBoolean("bWindMillIAligned");
+		rotation = tag.getFloat("fRotation");
+		providingPower = tag.getBoolean("bProvidingPower");
+		overpowerTimer = tag.getInteger("iOverpowerTimer");
+		setBladeColor(0, tag.getInteger("iBladeColors0"));
+		setBladeColor(1, tag.getInteger("iBladeColors1"));
+		setBladeColor(2, tag.getInteger("iBladeColors2"));
+		setBladeColor(3, tag.getInteger("iBladeColors3"));
+		setBounds();
 	}
 
 	@Override

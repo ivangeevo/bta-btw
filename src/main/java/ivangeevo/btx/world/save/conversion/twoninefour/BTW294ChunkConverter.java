@@ -1,6 +1,8 @@
 package ivangeevo.btx.world.save.conversion.twoninefour;
 
 import java.lang.reflect.Field;
+
+import ivangeevo.btx.block.BTXBlocks;
 import net.minecraft.core.world.save.conversion.ChunkConverter;
 
 /**
@@ -69,7 +71,10 @@ public class BTW294ChunkConverter extends ChunkConverter {
         // addMapping(new MappingSimple(247, 0 /* AXLE */));
         // addMapping(new MappingBitSplit(246, 1, 0 /* PANEL_STONE */, 0 /* PANEL_WOOD */, 1));
         // addMapping(new MappingBitSplit(237, 8, 0 /* COMPANION_CUBE */, 0 /* COMPANION_SLAB */, 0));
-    }
+		addMapping(new MappingSimple(243, BTXBlocks.MILLSTONE.id()));
+		addMapping(new MappingSimple(247, BTXBlocks.AXLE.id()));
+
+	}
 
     /** One block or item stack: returns {newId, newMeta}. Unmapped IDs become {0, 0} like the stock converter. */
     public static int[] convertOne(int id, int meta) {
