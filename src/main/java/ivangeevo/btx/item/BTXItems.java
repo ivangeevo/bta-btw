@@ -2,11 +2,11 @@ package ivangeevo.btx.item;
 
 import ivangeevo.btx.BTXMod;
 import ivangeevo.btx.block.BTXBlocks;
+import ivangeevo.btx.item.items.ItemDung;
 import ivangeevo.btx.item.items.ItemWaterWheel;
 import ivangeevo.btx.item.items.ItemWindMill;
 import net.minecraft.core.data.tag.Tag;
 import net.minecraft.core.item.Item;
-import net.minecraft.core.item.ItemDye;
 import net.minecraft.core.item.ItemSeeds;
 import net.minecraft.core.item.tag.ItemTags;
 import turniplabs.halplibe.helper.ItemBuilder;
@@ -68,7 +68,7 @@ public final class BTXItems {
 		FLOUR = registerItem("flour", Item::new);
 		HEMP_FIBERS = registerItem("hemp_fibers", Item::new);
 		SCOURED_LEATHER = registerItem("scoured_leather", Item::new);
-		DUNG = registerItem("dung", (ItemDye::new));
+		DUNG = registerItem("dung", ItemDung::new);
 		WATERWHEEL = registerItem("waterwheel", (key, namespaceId, id) ->
 			new ItemWaterWheel(key, namespaceId, id).setMaxStackSize(1)
 		);

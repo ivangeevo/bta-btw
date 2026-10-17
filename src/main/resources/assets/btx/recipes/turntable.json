@@ -1,0 +1,69 @@
+[
+  {
+    "name": "btx:turntable/brick_clay_from_block_clay",
+    "type": "btx:turntable",
+    "input": {
+      "stack": {
+        "id": "minecraft:block/block_clay"
+      }
+    },
+    "output": {
+      "id": "minecraft:block/brick_clay",
+      "amount": 1
+    },
+    "rotations": 8,
+    "input_data": [],
+    "extra_outputs": [ { "id": "minecraft:item/clay" } ]
+  },
+  {
+    "name": "btx:turntable/cobble_stone_from_brick_clay",
+    "type": "btx:turntable",
+    "input": {
+      "stack": {
+        "id": "minecraft:block/brick_clay"
+      }
+    },
+    "output": {
+      "id": "minecraft:block/cobble_stone",
+      "amount": 1
+    },
+    "rotations": 8,
+    "input_data": [],
+    "extra_outputs": [ { "id": "minecraft:item/stick" } ]
+  },
+  {
+    "name": "btx:turntable/stone_from_cobble_stone",
+    "type": "btx:turntable",
+    "input": {
+      "stack": {
+        "id": "minecraft:block/cobble_stone"
+      }
+    },
+    "output": {
+      "id": "minecraft:block/stone",
+      "amount": 1
+    },
+    "rotations": 8,
+    "input_data": [],
+    "extra_outputs": []
+  },
+  {
+    "name": "btx:turntable/planks_oak_from_stone",
+    "type": "btx:turntable",
+    "input": {
+      "stack": {
+        "id": "minecraft:block/stone"
+      }
+    },
+    "output": {
+      "id": "minecraft:block/planks_oak",
+      "amount": 1
+    },
+    "rotations": 8,
+    "input_data": [],
+    "extra_outputs": [
+      { "id": "minecraft:item/stick" },
+      { "id": "minecraft:item/stick" }
+    ]
+  }
+]

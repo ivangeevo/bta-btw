@@ -6,10 +6,17 @@
     "defaultRequire": 1
   },
   "mixins": [
+    "BlockLogicFireAccessor",
+    "BlockLogicFireMixin",
     "client.MinecraftMixin",
-    "gui.screens.PlayerMixinBTXScreens"
+    "gui.screens.PlayerMixinBTXScreens",
+    "world.ChunkLoaderLegacyMixin",
+    "world.ChunkLoaderRegionAsyncMixin",
+    "world.WorldMixin"
   ],
   "client": [
+    "client.render.BlockModelFireMixin",
+    "client.render.MixinBlockModelGeneric",
     "client.render.RenderGlobalMixin",
     "gui.screens.PlayerLocalMixinBTXScreens",
     "net.PacketHandlerClientMixinBTXMachines"

@@ -1,12 +1,12 @@
 package ivangeevo.btx.block.blocks.mini_blocks;
 
-import ivangeevo.btx.util.TurntableAware;
+import ivangeevo.btx.block.blocks.turntable.TurntableInteraction;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockLogic;
 import net.minecraft.core.block.material.Materials;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class BlockLogicWoodPiece extends BlockLogic implements TurntableAware {
+public abstract class BlockLogicWoodPiece extends BlockLogic implements TurntableInteraction {
 	protected BlockLogicWoodPiece(@NotNull Block<?> block) {
 		super(block, Materials.WOOD);
 	}

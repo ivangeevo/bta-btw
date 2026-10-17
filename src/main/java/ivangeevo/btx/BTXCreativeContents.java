@@ -66,6 +66,10 @@ public final class BTXCreativeContents {
 		REG.register(BTXBlocks.SIDING_OAK_PAINTED, inCategory(CreativeInventoryCategory.WOOD).setCustomSupplier(() -> allColors(BTXBlocks.SIDING_OAK_PAINTED)));
 		REG.register(BTXBlocks.MOULDING_OAK_PAINTED, inCategory(CreativeInventoryCategory.WOOD).setCustomSupplier(() -> allColors(BTXBlocks.MOULDING_OAK_PAINTED)));
 		REG.register(BTXBlocks.CORNER_OAK_PAINTED, inCategory(CreativeInventoryCategory.WOOD).setCustomSupplier(() -> allColors(BTXBlocks.CORNER_OAK_PAINTED)));
+		REG.register(BTXBlocks.CORNER_OAK_PAINTED, inCategory(CreativeInventoryCategory.WOOD).setCustomSupplier(() -> allColors(BTXBlocks.CORNER_OAK_PAINTED)));
+		REG.register(BTXBlocks.HIBACHI, inCategory(CreativeInventoryCategory.WORKBENCHES));
+		REG.register(BTXBlocks.BELLOWS, inCategory(CreativeInventoryCategory.WORKBENCHES));
+		REG.register(BTXBlocks.TURNTABLE, inCategory(CreativeInventoryCategory.WORKBENCHES));
 	}
 
 	private static List<ItemStack> allColors(Block<?> block) {

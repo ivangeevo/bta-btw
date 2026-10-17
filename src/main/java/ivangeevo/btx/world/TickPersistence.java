@@ -15,6 +15,9 @@ public interface TickPersistence {
 	/** Returns the pending scheduled updates located in the given chunk. */
 	List<NextTickListEntry> btx$pendingInChunk(int chunkX, int chunkZ);
 
+	/** True while this block's own scheduled tick is running (it has already left the pending set). */
+	boolean btx$isUpdatePendingThisTick(TilePosc pos, Block<?> block);
+
 	/** Returns the world's current tick counter. */
 	long btx$runtime();
 

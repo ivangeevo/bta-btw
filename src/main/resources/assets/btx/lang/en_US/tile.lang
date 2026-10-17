@@ -7,9 +7,19 @@ tile.btx.hand.crank.desc=A primitive manual mechanical power generation device.
 tile.btx.axle.name=Axle
 tile.btx.axle.desc=Lengths of wood bound tightly with rope.
 tile.btx.axle.power.source.name=Powered Axle
-tile.btx.axle.power.source.desc=Infinite power... you cheater!
+tile.btx.axle.power.source.desc=An axle that spins on its own, supplying endless mechanical power.
 tile.btx.gearbox.name=Gearbox
 tile.btx.gearbox.desc=Relays and distributes mechanical power.
+tile.btx.hibachi.name=Hibachi
+tile.btx.hibachi.desc=The Netherrack of the modern man.
+tile.btx.stoked.fire.name=Stoked Fire
+tile.btx.stoked.fire.desc=Playing with fire, cheater?
+tile.btx.bellows.name=Bellows
+tile.btx.bellows.desc=Breathes fury into the flames of a Hibachi. Blows light items away, too.
+tile.btx.kiln.name=Kiln Block
+tile.btx.kiln.desc=Cheating? That's brick-ly forbidden.
+tile.btx.turntable.name=Turntable
+tile.btx.turntable.desc=Spins the blocks on top in steady quarter turns.
 
 # Sidings
 tile.btx.siding.oak.name=Wooden Oak Siding

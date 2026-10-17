@@ -3,6 +3,7 @@ package ivangeevo.btx.block.blocks;
 import ivangeevo.btx.item.BTXItems;
 import ivangeevo.btx.util.utils.MiscUtils;
 import ivangeevo.btx.util.utils.SoundUtils;
+import ivangeevo.btx.util.utils.WorldUtils;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockLogic;
 import net.minecraft.core.block.BlockLogicSupplier;
@@ -112,10 +113,11 @@ public class BlockLogicHandCrank extends BlockLogic implements MechanicalDevice,
 	public void onChunkLoad(@NotNull World world, @NotNull TilePosc tilePos) {
 		int data = world.getBlockData(tilePos);
 		if (data > 0) {
-			// Reset the data of the hand crank to prevent stuck states if re-logging
+			// Reset the data to prevent stuck states if re-logging
 			// BTW: CE handles this with the uncommented isUpdateScheduled check in updateTick(),
 			// But since BTA doesn't have tick persistence(saving scheduled ticks), it takes around 30-40 seconds for it to kick in
-			world.setBlockData(tilePos, 0);
+			//world.setBlockData(tilePos, 0);
+
 			world.scheduleBlockUpdate(tilePos, this.block, this.tickDelay());
 		}
 	}
@@ -128,9 +130,9 @@ public class BlockLogicHandCrank extends BlockLogic implements MechanicalDevice,
 			if (data > 0) {
 				// verify we have a tick already scheduled to prevent jams on chunk load
 				// Disabled because of the setBlockData change in the onChunkLoad method
-				//if (!WorldUtils.isUpdateScheduled(world, tilePos, this.block)) {
-					//world.scheduleBlockUpdate(tilePos, this.block, this.tickDelay());
-				//}
+				if (!WorldUtils.isUpdateScheduled(world, tilePos, this.block)) {
+					world.scheduleBlockUpdate(tilePos, this.block, this.tickDelay());
+				}
 			}
 
 			return;
@@ -204,7 +206,7 @@ public class BlockLogicHandCrank extends BlockLogic implements MechanicalDevice,
 		MiscUtils.ejectSingleItemWithRandomOffset(world, tilePos, Blocks.COBBLE_STONE.asItem().id, 0);
 		MiscUtils.ejectSingleItemWithRandomOffset(world, tilePos, Blocks.COBBLE_STONE.asItem().id, 0);
 		MiscUtils.ejectSingleItemWithRandomOffset(world, tilePos, BTXItems.GEAR.id, 0);
-		SoundUtils.playAtTileCenter(world, tilePos, SoundCategory.ENTITY_SOUNDS, "random.explode", 0.2F, 1.25F);
+		SoundUtils.playAtTileCenter(world, tilePos, SoundCategory.WORLD_SOUNDS, "random.explode", 0.2F, 1.25F);
 		world.setBlockType(tilePos, Blocks.AIR);
 	}
 
@@ -216,7 +218,7 @@ public class BlockLogicHandCrank extends BlockLogic implements MechanicalDevice,
 			volume = 0.3F; pitch = 0.7F;
 		}
 
-		SoundUtils.playAtTileCenter(world, tilePos, SoundCategory.ENTITY_SOUNDS, "random.click", volume, pitch);
+		SoundUtils.playAtTileCenter(world, tilePos, SoundCategory.WORLD_SOUNDS, "random.click", volume, pitch);
 	}
 
 }

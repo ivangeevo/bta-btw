@@ -5,6 +5,10 @@ import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.item.BTXItems;
 import ivangeevo.btx.recipe.impl.RecipeEntryMillstone;
 import ivangeevo.btx.recipe.impl.RecipeGroupMillstone;
+import ivangeevo.btx.recipe.kiln.RecipeEntryKiln;
+import ivangeevo.btx.recipe.kiln.RecipeGroupKiln;
+import ivangeevo.btx.recipe.turntable.RecipeEntryTurntable;
+import ivangeevo.btx.recipe.turntable.RecipeGroupTurntable;
 import net.minecraft.core.block.Blocks;
 import net.minecraft.core.data.DataLoader;
 import net.minecraft.core.data.registry.Registries;
@@ -19,6 +23,8 @@ import turniplabs.halplibe.helper.recipeBuilders.RecipeBuilderShapeless;
 public class BTXRecipes {
 	public static RecipeNamespace BTX;
 	public static RecipeGroupMillstone MILLSTONE;
+	public static RecipeGroupKiln KILN;
+	public static RecipeGroupTurntable TURNTABLE;
 
 	public static void init() {
 		registerNewRecipeTypes();
@@ -26,6 +32,9 @@ public class BTXRecipes {
 
 	public static void registerNewRecipeTypes() {
 		Registries.RECIPE_TYPES.register("btx:millstone", RecipeEntryMillstone.class);
+		Registries.RECIPE_TYPES.register("btx:kiln", RecipeEntryKiln.class);
+		Registries.RECIPE_TYPES.register("btx:turntable", RecipeEntryTurntable.class);
+
 	}
 
 	public void onRecipesReady() {
@@ -116,6 +125,8 @@ public class BTXRecipes {
 
 	public static void modCustomRecipes() {
 		DataLoader.loadRecipesFromFile("/assets/btx/recipes/millstone.json");
+		DataLoader.loadRecipesFromFile("/assets/btx/recipes/kiln.json");
+		DataLoader.loadRecipesFromFile("/assets/btx/recipes/turntable.json");
 	}
 
 	public void initNamespaces() {
@@ -124,8 +135,12 @@ public class BTXRecipes {
 		RecipeBuilder.getRecipeNamespace(BTXMod.MOD_ID);
 
 		MILLSTONE = new RecipeGroupMillstone(new RecipeSymbol(new ItemStack(BTXBlocks.MILLSTONE.getDefaultStack())));
+		KILN = new RecipeGroupKiln(new RecipeSymbol(new ItemStack(BTXBlocks.KILN.getDefaultStack())));
+		TURNTABLE = new RecipeGroupTurntable(new RecipeSymbol(new ItemStack(BTXBlocks.TURNTABLE.getDefaultStack())));
 
 		BTX.register("millstone", MILLSTONE);
+		BTX.register("kiln", KILN);
+		BTX.register("turntable", TURNTABLE);
 	}
 
 }

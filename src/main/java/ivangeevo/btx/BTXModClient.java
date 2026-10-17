@@ -63,6 +63,16 @@ public class BTXModClient implements ClientModInitializer {
 		dispatcher.addDispatch(new BlockModelGenericMouldingPainted<>(BTXBlocks.MOULDING_OAK_PAINTED));
 		dispatcher.addDispatch(new BlockModelGenericCorner<>(BTXBlocks.CORNER_OAK, loadDataModel(block("corner/corner_oak"))));
 		dispatcher.addDispatch(new BlockModelGenericCornerPainted<>(BTXBlocks.CORNER_OAK_PAINTED));
+		dispatcher.addDispatch(new BlockModelGeneric<>(BTXBlocks.HIBACHI, loadDataModel(block("hibachi"))));
+		dispatcher.addDispatch(new BlockModelStokedFire<>(BTXBlocks.STOKED_FIRE));
+		dispatcher.addDispatch(new BlockModelGenericBellows<>(
+			BTXBlocks.BELLOWS,
+			loadDataModel(block("bellows/bellows_off")),
+			loadDataModel(block("bellows/bellows_on")))
+		);
+		dispatcher.addDispatch(new BlockModelGenericTurntable(BTXBlocks.TURNTABLE));
+
+		dispatcher.addDispatch(new BlockModelGeneric<>(BTXBlocks.KILN, loadDataModel(block("kiln"))));
 	}
 
 	public static void initEntityRenderers(EntityRendererDispatcher dispatcher) {

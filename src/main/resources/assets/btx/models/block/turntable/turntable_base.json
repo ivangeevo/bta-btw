@@ -1,0 +1,23 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "btx:block/turntable/turntable",
+    "top": "btx:block/turntable/turntable_top",
+    "side": "btx:block/turntable/turntable",
+    "bottom": "btx:block/turntable/turntable_bottom"
+  },
+  "elements": [
+    {
+      "from": [0, 0, 0],
+      "to": [16, 16, 16],
+      "faces": {
+        "north": { "texture": "#side" },
+        "south": { "texture": "#side" },
+        "east":  { "texture": "#side" },
+        "west":  { "texture": "#side" },
+        "up":    { "texture": "#top" },
+        "down":  { "texture": "#bottom" }
+      }
+    }
+  ]
+}

@@ -108,7 +108,7 @@ public class BlockLogicMillStone extends BlockLogic implements MechanicalDevice 
 					//world.playSoundEffectAtTile(null, SoundCategory.ENTITY_SOUNDS, tilePos.x() + 0.5, tilePos.y() + 0.5, tilePos.z() + 0.5, "mob.wolf.hurt", 5.0F, (world.rand.nextFloat() - world.rand.nextFloat()) * 0.2F + 1.0F);
 					//}
 
-					world.playSoundEffect(null, SoundCategory.ENTITY_SOUNDS, tilePos.x() + 0.5, tilePos.y() + 0.5, tilePos.z() + 0.5, "random.explode", 0.2F, 1.25F);
+					world.playSoundEffect(null, SoundCategory.WORLD_SOUNDS, tilePos.x() + 0.5, tilePos.y() + 0.5, tilePos.z() + 0.5, "random.explode", 0.2F, 1.25F);
 					this.emitMillingParticles(world, tilePos, rand);
 					this.setActive(world, tilePos, true);
 				}

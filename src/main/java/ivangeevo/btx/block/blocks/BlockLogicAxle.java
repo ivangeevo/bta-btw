@@ -259,7 +259,7 @@ public class BlockLogicAxle extends BlockLogic implements MechanicalDevice {
 	public void breakAxle(World world, TilePosc tilePos) {
 		if (world.getBlockType(tilePos) == this.block) {
 			dropComponentItemsOnBadBreak(world, tilePos, world.getBlockData(tilePos), 1F);
-			world.playSoundEffect(null, SoundCategory.ENTITY_SOUNDS,
+			world.playSoundEffect(null, SoundCategory.WORLD_SOUNDS,
 				tilePos.x() + 0.5, tilePos.y() + 0.5, tilePos.z() + 0.5, "random.explode", 0.2F, 1.25F);
 			world.setBlockTypeNotify(tilePos, Blocks.AIR);
 			markNearbyForRenderUpdate(world, tilePos); // harmless if onRemoved also does it

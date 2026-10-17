@@ -58,11 +58,6 @@ public abstract class BlockLogicMouldingBase extends BlockLogicWoodPiece
 		this.matchingCorner = matchingCorner;
 	}
 
-	@Override
-	public float getAmbientOcclusionStrength(@NotNull WorldSource source, @NotNull TilePosc tilePos) {
-		return super.getAmbientOcclusionStrength(source, tilePos);
-	}
-
 	//------------- Bounds -------------//
 
 	@Override

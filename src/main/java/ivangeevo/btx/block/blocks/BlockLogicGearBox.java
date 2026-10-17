@@ -80,7 +80,7 @@ public class BlockLogicGearBox extends BlockLogicRotatable implements Mechanical
 		if (player.getHeldItem() == null && !MechPowerUtils.isBlockPoweredByAxle(world, tilePos, this)) {
 			if (!world.isClientSide) {
 				toggleFacing(world, tilePos, false);
-				SoundUtils.playAtTileCenter(world, tilePos, SoundCategory.ENTITY_SOUNDS, this.block.getSound().getBreakSoundName(), 1.0F, 0.8f);
+				SoundUtils.playAtTileCenter(world, tilePos, SoundCategory.WORLD_SOUNDS, this.block.getSound().getBreakSoundName(), 1.0F, 0.8f);
 			}
 
 			return true;
@@ -97,7 +97,7 @@ public class BlockLogicGearBox extends BlockLogicRotatable implements Mechanical
 			}
 			return;
 		}
-		updateMechPoweredState(world, tilePos, isInputtingMechanicalPower(world, tilePos));
+		updateMechPoweredState(world, tilePos, shouldBeOn(world, tilePos));
 	}
 
 	@Override
@@ -130,6 +130,17 @@ public class BlockLogicGearBox extends BlockLogicRotatable implements Mechanical
 	@Override
 	public int getPistonPushReaction(@NotNull World world, @NotNull TilePosc tilePos) {
 		return 1;
+	}
+
+	// Redstone on the gearbox itself or the block above it (same as BTW)
+	protected boolean isRedstonePowered(World world, TilePosc tilePos) {
+		return world.hasDirectSignal(tilePos)
+			|| world.hasDirectSignal(new TilePos(tilePos.x(), tilePos.y() + 1, tilePos.z()));
+	}
+
+	// Single source of truth for the desired state
+	protected boolean shouldBeOn(World world, TilePosc tilePos) {
+		return !isRedstonePowered(world, tilePos) && isInputtingMechanicalPower(world, tilePos);
 	}
 
 	public boolean dropComponentItemsOnBadBreak(World world, TilePosc tilePos, int data, float chanceOfDrop) {
@@ -216,8 +227,8 @@ public class BlockLogicGearBox extends BlockLogicRotatable implements Mechanical
 
 	@Override
 	public void overpower(World world, TilePosc tilePos) {
-		if (isGearBoxOn(world, tilePos)) {
-			// an overpowered gearbox that doesn't have its gears disengaged, is destroyed
+		// BTW: a redstone-disabled gearbox is immune to overpower
+		if (isGearBoxOn(world, tilePos) && !isRedstonePowered(world, tilePos)) {
 			breakGearBox(world, tilePos);
 		}
 	}
@@ -230,14 +241,14 @@ public class BlockLogicGearBox extends BlockLogicRotatable implements Mechanical
 
 			if (shouldBePowered) {
 				// BTW played this client side in clientNotificationOfMetadataChange
-				world.playSoundEffectAtTile(null, SoundCategory.ENTITY_SOUNDS, tilePos,
+				world.playSoundEffectAtTile(null, SoundCategory.WORLD_SOUNDS, tilePos,
 					"random.explode", 0.05F, 1.0F);
 			}
 		}
 	}
 
 	protected boolean isCurrentStateValid(World world, TilePosc tilePos) {
-		return isGearBoxOn(world, tilePos) == isInputtingMechanicalPower(world, tilePos);
+		return isGearBoxOn(world, tilePos) == shouldBeOn(world, tilePos);
 	}
 
 	public boolean isGearBoxOn(WorldSource worldSource, TilePosc tilePos) {
@@ -266,7 +277,7 @@ public class BlockLogicGearBox extends BlockLogicRotatable implements Mechanical
 
 	public void breakGearBox(World world, TilePosc tilePos) {
 		dropComponentItemsOnBadBreak(world, tilePos, world.getBlockData(tilePos), 1F);
-		world.playSoundEffect(null, SoundCategory.ENTITY_SOUNDS,
+		world.playSoundEffect(null, SoundCategory.WORLD_SOUNDS,
 			tilePos.x() + 0.5, tilePos.y() + 0.5, tilePos.z() + 0.5, "random.explode", 0.2F, 1.25F);
 		world.setBlockTypeNotify(tilePos, Blocks.AIR);
 		markRangeForRenderUpdate(world, tilePos, 3);

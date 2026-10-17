@@ -1,0 +1,15 @@
+[
+  {
+    "name": "btx:kiln/brick_clay_from_block_clay",
+    "type": "btx:kiln",
+    "input": {
+      "stack": {
+        "id": "minecraft:block/block_clay"
+      }
+    },
+    "output": {
+      "id": "minecraft:item/brick_clay",
+      "amount": 1
+    }
+  }
+]

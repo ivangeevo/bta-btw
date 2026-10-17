@@ -1,0 +1,10 @@
+{
+  "bellows.blow": {
+    "subtitle": "subtitles.bellows.blow",
+    "sounds": ["bellows/blow.ogg"]
+  },
+  "bellows.retract": {
+    "subtitle": "subtitles.bellows.retract",
+    "sounds": ["bellows/retract.ogg"]
+  }
+}

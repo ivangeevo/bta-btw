@@ -11,4 +11,7 @@ public class WorldUtils {
 		return world instanceof TickPersistence tp && tp.btx$isUpdateScheduled(pos, block);
 	}
 
+	public static boolean isUpdatePendingThisTick(World world, TilePosc pos, Block<?> block) {
+		return world instanceof TickPersistence tp && tp.btx$isUpdatePendingThisTick(pos, block);
+	}
 }

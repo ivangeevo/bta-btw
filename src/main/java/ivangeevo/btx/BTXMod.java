@@ -1,6 +1,7 @@
 package ivangeevo.btx;
 
 import ivangeevo.btx.block.BTXBlocks;
+import ivangeevo.btx.block.blocks.turntable.TurntableAttachments;
 import ivangeevo.btx.config.BTXConfig;
 import ivangeevo.btx.entity.BTXEntities;
 import ivangeevo.btx.item.BTXItems;
@@ -40,6 +41,8 @@ public class BTXMod implements ModInitializer {
 
 	public void afterGameStart() {
 		BTXCreativeContents.init();
+		BTXSoundTypes.init();
+		TurntableAttachments.registerDefaults();
 		//BTXLegacyConversion.init();
 	}
 }

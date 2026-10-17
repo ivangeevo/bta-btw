@@ -1,8 +1,8 @@
 package ivangeevo.btx.util;
 
+import ivangeevo.btx.block.blocks.turntable.TurntableInteraction;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockLogic;
-import net.minecraft.core.world.World;
 import net.minecraft.core.world.WorldSource;
 import net.minecraft.core.world.pos.TilePosc;
 
@@ -50,7 +50,7 @@ public final class TurntableHelper {
 	private static Behavior find(Block<?> block) {
 		BlockLogic logic = block.getLogic();
 
-		if (logic instanceof TurntableAware aware) {
+		if (logic instanceof TurntableInteraction aware) {
 			return new Behavior(
 				aware::canRotateOnTurntable,
 				aware::canTransmitRotationHorizontally,

@@ -2,7 +2,9 @@ package ivangeevo.btx.block;
 
 import ivangeevo.btx.BTXMod;
 import ivangeevo.btx.block.blocks.*;
+import ivangeevo.btx.block.blocks.kiln.BlockLogicKiln;
 import ivangeevo.btx.block.blocks.mini_blocks.*;
+import ivangeevo.btx.block.blocks.turntable.BlockLogicTurntable;
 import ivangeevo.btx.config.BTXConfig;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockLogic;
@@ -24,6 +26,11 @@ public final class BTXBlocks {
 	public static Block<BlockLogicMouldingPainted> MOULDING_OAK_PAINTED;
 	public static Block<?> CORNER_OAK;
 	public static Block<BlockLogicCornerPainted> CORNER_OAK_PAINTED;
+	public static Block<?> HIBACHI;
+	public static Block<?> STOKED_FIRE;
+	public static Block<BlockLogicKiln> KILN;
+	public static Block<BlockLogicBellows> BELLOWS;
+	public static Block<BlockLogicTurntable> TURNTABLE;
 
 	private static <T extends BlockLogic> Block<T> registerBlock(String name, BlockLogicSupplier<T> logicSupplier) {
 		String namespaceId = BTXMod.MOD_ID + ":block/" + name;
@@ -44,5 +51,10 @@ public final class BTXBlocks {
 		MOULDING_OAK_PAINTED = registerBlock("moulding_oak_painted", BlockLogicMouldingPainted.properties());
 		CORNER_OAK = registerBlock("corner_oak", BlockLogicCorner.properties());
 		CORNER_OAK_PAINTED = registerBlock("corner_oak_painted", BlockLogicCornerPainted.properties());
+		HIBACHI = registerBlock("hibachi", BlockLogicHibachi.properties());
+		STOKED_FIRE = registerBlock("stoked_fire", BlockLogicStokedFire.properties());
+		KILN = registerBlock("kiln", BlockLogicKiln.properties());
+		BELLOWS = registerBlock("bellows", BlockLogicBellows.properties());
+		TURNTABLE = registerBlock("turntable", BlockLogicTurntable.properties());
 	}
 }
