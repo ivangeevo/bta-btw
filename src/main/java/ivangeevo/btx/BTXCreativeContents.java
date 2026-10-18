@@ -51,7 +51,10 @@ public final class BTXCreativeContents {
 		REG.register(BTXItems.SAIL, inCategory(CreativeInventoryCategory.MISCELLANEOUS));
 		REG.register(BTXItems.WINDMILL, inCategory(CreativeInventoryCategory.PLACEABLES));
 		REG.register(BTXItems.FABRIC, inCategory(CreativeInventoryCategory.ORGANIC));
+		REG.register(BTXItems.BELT, inCategory(CreativeInventoryCategory.ORGANIC));
 		REG.register(BTXItems.WOOD_BLADE, inCategory(CreativeInventoryCategory.MISCELLANEOUS));
+		REG.register(BTXItems.CONCENTRATED_HELLFIRE, inCategory(CreativeInventoryCategory.MISCELLANEOUS));
+
 
 		// Blocks
 		// TODO: The blocks we add probably should be in their own category for machines/mech devices

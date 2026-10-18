@@ -5,6 +5,7 @@ import ivangeevo.btx.block.blocks.turntable.TurntableAttachments;
 import ivangeevo.btx.config.BTXConfig;
 import ivangeevo.btx.entity.BTXEntities;
 import ivangeevo.btx.item.BTXItems;
+import ivangeevo.btx.item.HoeDrops;
 import ivangeevo.btx.networking.NetEntryWaterWheel;
 import ivangeevo.btx.networking.NetEntryWindMill;
 import ivangeevo.btx.recipe.BTXRecipes;
@@ -43,6 +44,7 @@ public class BTXMod implements ModInitializer {
 		BTXCreativeContents.init();
 		BTXSoundTypes.init();
 		TurntableAttachments.registerDefaults();
+		HoeDrops.registerDefaults();
 		//BTXLegacyConversion.init();
 	}
 }

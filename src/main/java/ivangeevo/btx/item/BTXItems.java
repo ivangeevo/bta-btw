@@ -79,9 +79,12 @@ public final class BTXItems {
 			new ItemWindMill(key, namespaceId, id).setMaxStackSize(1)
 		);
 		FABRIC = registerItem("fabric", Item::new);
+		TANNED_LEATHER = registerItem("tanned_leather", Item::new); //recipe needed
+		BELT = registerItem("belt", Item::new); //recipe needed
 		WOOD_BLADE = registerItem("wood_blade", (key, namespaceId, id) ->
 			new Item(key, namespaceId, id).setMaxStackSize(1)
 		);
+		CONCENTRATED_HELLFIRE = registerItem("concentrated_hellfire", Item::new); //recipe needed
 	}
 
 	// No extra settings builder
