@@ -34,7 +34,6 @@ public class BTXRecipes {
 		Registries.RECIPE_TYPES.register("btx:millstone", RecipeEntryMillstone.class);
 		Registries.RECIPE_TYPES.register("btx:kiln", RecipeEntryKiln.class);
 		Registries.RECIPE_TYPES.register("btx:turntable", RecipeEntryTurntable.class);
-
 	}
 
 	public void onRecipesReady() {
@@ -112,6 +111,31 @@ public class BTXRecipes {
 			.addInput('#', BTXItems.SAIL)
 			.create("windmill", new ItemStack(BTXItems.WINDMILL, 1));
 
+		RecipeBuilderShaped hibachi = new RecipeBuilderShaped(BTXMod.MOD_ID, "XXX", "#Z#", "#Y#");
+		hibachi
+			.addInput('#', Blocks.STONE)
+			.addInput('X', BTXItems.CONCENTRATED_HELLFIRE)
+			.addInput('Y', Items.DUST_REDSTONE)
+			.addInput('Z', Items.DUST_GLOWSTONE)
+			.create("hibachi", new ItemStack(BTXBlocks.HIBACHI, 1));
+
+		// TODO: Add colored planks support
+		RecipeBuilderShaped bellows = new RecipeBuilderShaped(BTXMod.MOD_ID, "###", "XXX", "YZY");
+		bellows
+			.addInput('#', BTXBlocks.CORNER_OAK)
+			.addInput('X', BTXItems.TANNED_LEATHER)
+			.addInput('Y', BTXItems.GEAR)
+			.addInput('Z', BTXItems.BELT)
+			.create("bellows", new ItemStack(BTXBlocks.BELLOWS, 1));
+
+		// TODO: Add colored planks support
+		RecipeBuilderShaped turntable = new RecipeBuilderShaped(BTXMod.MOD_ID, "###", "ZXZ", "ZYZ");
+		turntable
+			.addInput('#', BTXBlocks.CORNER_OAK)
+			.addInput('X', Items.DUST_REDSTONE)
+			.addInput('Y', BTXItems.GEAR)
+			.addInput('Z', Blocks.STONE)
+			.create("turntable", new ItemStack(BTXBlocks.TURNTABLE, 1));
 	}
 
 	public static void modifyVanillaRecipes() {
