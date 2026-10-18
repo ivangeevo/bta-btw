@@ -8,6 +8,7 @@
   "mixins": [
     "BlockLogicFireAccessor",
     "BlockLogicFireMixin",
+    "MixinItemToolHoe",
     "client.MinecraftMixin",
     "gui.screens.PlayerMixinBTXScreens",
     "world.ChunkLoaderLegacyMixin",
