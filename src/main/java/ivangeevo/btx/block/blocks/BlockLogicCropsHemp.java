@@ -12,15 +12,19 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.sound.BlockSounds;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
+import net.minecraft.core.world.WorldSource;
 import net.minecraft.core.world.pos.TilePos;
 import net.minecraft.core.world.pos.TilePosc;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.joml.primitives.AABBd;
+import org.joml.primitives.AABBdc;
 
 import java.util.Random;
 
 public class BlockLogicCropsHemp extends BlockLogicFlower {
 	public static final int MAX_GROWTH_STATE = 7;
+	private static final double HALF_WIDTH = 0.2;
 
 	public BlockLogicCropsHemp(@NotNull Block<?> block) {
 		super(block);
@@ -39,10 +43,27 @@ public class BlockLogicCropsHemp extends BlockLogicFlower {
 		);
 	}
 
-	// Can be placed on a farmland or on top of itself (2 tall plant)
+	// Grows taller with each stage, like CE's HempCropBlock. Tops are placed fully grown, so they're always full height.
+	@Override
+	public @NotNull AABBdc getBoundsFromState(@NotNull WorldSource source, @NotNull TilePosc tilePos) {
+		int growthLevel = Math.min(source.getBlockData(tilePos) & 7, MAX_GROWTH_STATE);
+		double height = (1 + growthLevel) / 8.0;
+		return new AABBd(0.5 - HALF_WIDTH, 0.0, 0.5 - HALF_WIDTH, 0.5 + HALF_WIDTH, height, 0.5 + HALF_WIDTH);
+	}
+
+	// Can be placed on a farmland, a soil planter or on top of itself (2 tall plant)
 	@Override
 	protected boolean mayPlaceOn(@NotNull Block<?> block) {
-		return block == Blocks.FARMLAND_DIRT || block == BTXBlocks.HEMP;
+		return isSoil(block) || block == BTXBlocks.HEMP;
+	}
+
+	private static boolean isSoil(Block<?> block) {
+		return block == Blocks.FARMLAND_DIRT || block == BTXBlocks.PLANTER_SOIL;
+	}
+
+	// A soil planter never needs water (BTW 2.94)
+	private static boolean isHydratedSoil(Block<?> block, int data) {
+		return block == BTXBlocks.PLANTER_SOIL || block == Blocks.FARMLAND_DIRT && BlockLogicFarmland.isWet(data);
 	}
 
 	@Override
@@ -52,10 +73,14 @@ public class BlockLogicCropsHemp extends BlockLogicFlower {
 			TilePos tileBelow = tilePos.down(new TilePos());
 			Block<?> blockBelow = world.getBlockType(tileBelow);
 
-			if (blockBelow == Blocks.FARMLAND_DIRT && BlockLogicFarmland.isWet(world.getBlockData(tileBelow))) {
+			int dataBelow = world.getBlockData(tileBelow);
+
+			if (isHydratedSoil(blockBelow, dataBelow)) {
 				int growthLevel = world.getBlockData(tilePos);
 				if (growthLevel < MAX_GROWTH_STATE) {
-					if (rand.nextInt(20) == 0) {
+					// fertilized soil grows about 1.5x faster, like BTA wheat
+					int growthChance = BlockLogicFarmland.isFertilized(dataBelow) ? 13 : 20;
+					if (rand.nextInt(growthChance) == 0) {
 						world.setBlockDataNotify(tilePos, ++growthLevel);
 					}
 				} else {
@@ -85,7 +110,7 @@ public class BlockLogicCropsHemp extends BlockLogicFlower {
 			pos = pos.down(new TilePos());
 		}
 
-		if (world.getBlockType(pos) != Blocks.FARMLAND_DIRT) return;
+		if (!isSoil(world.getBlockType(pos))) return;
 
 		int farmlandData = world.getBlockData(pos);
 		if (BlockLogicFarmland.isFertilized(farmlandData) && world.rand.nextInt(3) == 2) {
@@ -112,7 +137,7 @@ public class BlockLogicCropsHemp extends BlockLogicFlower {
 
 		if (world.isClientSide) return;
 
-		boolean isBottom = world.getBlockType(tilePos.down(new TilePos())) == Blocks.FARMLAND_DIRT;
+		boolean isBottom = isSoil(world.getBlockType(tilePos.down(new TilePos())));
 		if (!isBottom && world.rand.nextInt(100) < 50) {
 			world.dropItem(tilePos, new ItemStack(BTXItems.HEMP_SEEDS));
 		}
