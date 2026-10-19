@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/cube",
+  "parent": "block/block",
   "textures": {
     "particle": "btx:block/bellows/bellows_compressed",
     "side": "btx:block/bellows/bellows_compressed",

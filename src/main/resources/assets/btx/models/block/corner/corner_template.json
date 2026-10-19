@@ -3,6 +3,13 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
+    "overlay": "#side",
+    "particle_up": "#top",
+    "particle_down": "#bottom",
+    "particle_north": "#side",
+    "particle_south": "#side",
+    "particle_west": "#side",
+    "particle_east": "#side",
     "side": "#side",
     "top": "#top",
     "bottom": "#bottom"

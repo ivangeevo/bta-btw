@@ -1,7 +1,7 @@
 {
-  "parent": "minecraft:block/cube",
+  "parent": "block/block",
   "textures": {
-    "particle": "btx:block/bellows/bellows_",
+    "particle": "btx:block/bellows/bellows",
     "side": "btx:block/bellows/bellows",
     "top": "btx:block/bellows/bellows_top",
     "front": "btx:block/bellows/bellows_front"

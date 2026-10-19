@@ -1,6 +1,6 @@
 {
 	"format_version": "1.9.0",
-  "parent": "minecraft:block/cube",
+  "parent": "block/block",
   "textures": {
 		"side": "btx:block/hibachi/hibachi",
 		"bottom": "btx:block/hibachi/hibachi_bottom",

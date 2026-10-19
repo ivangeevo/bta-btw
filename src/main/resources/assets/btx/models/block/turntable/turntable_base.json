@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/cube",
+  "parent": "block/block",
   "textures": {
     "particle": "btx:block/turntable/turntable",
     "top": "btx:block/turntable/turntable_top",
