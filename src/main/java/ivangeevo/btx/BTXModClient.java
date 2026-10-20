@@ -68,12 +68,14 @@ public class BTXModClient implements ClientModInitializer {
 		dispatcher.addDispatch(new ItemModelStandard(BTXItems.FABRIC).setIcon(icon("fabric")));
 		dispatcher.addDispatch(new ItemModelStandard(BTXItems.WOOD_BLADE).setIcon(icon("wood_blade")));
 		dispatcher.addDispatch(new ItemModelStandard(BTXItems.FOUL_FOOD).setIcon(icon("foul_food")));
+		dispatcher.addDispatch(new ItemModelStandard(BTXItems.KIBBLE).setIcon(icon("kibble")));
 		dispatcher.addDispatch(new ItemModelStandard(BTXItems.COAL_DUST).setIcon(icon("coal_dust")));
 		dispatcher.addDispatch(new ItemModelStandard(BTXItems.GROUND_NETHERRACK).setIcon(icon("ground_netherrack")));
 		dispatcher.addDispatch(new ItemModelStandard(BTXItems.HELLFIRE_DUST).setIcon(icon("hellfire_dust")));
 		dispatcher.addDispatch(new ItemModelStandard(BTXItems.CONCENTRATED_HELLFIRE).setIcon(icon("concentrated_hellfire")));
 		dispatcher.addDispatch(new ItemModelStandard(BTXItems.WICKER).setIcon(icon("wicker")));
-		// panes show their flat icon instead of a 3D block, like CE
+		dispatcher.addDispatch(new ItemModelStandard(BTXItems.FOOD_WOLF_CHOP_RAW).setIcon(icon("food_wolf_chop_raw")));
+		dispatcher.addDispatch(new ItemModelStandard(BTXItems.FOOD_WOLF_CHOP_COOKED).setIcon(icon("food_wolf_chop_cooked")));
 		dispatcher.addDispatch(new ItemModelStandard(BTXBlocks.GRATE.asItem()).setIcon(icon("grate")));
 		dispatcher.addDispatch(new ItemModelStandard(BTXBlocks.SLATS.asItem()).setIcon(icon("slats")));
 		dispatcher.addDispatch(new ItemModelStandard(BTXBlocks.WICKER_PANE.asItem()).setIcon(icon("wicker_pane")));
@@ -113,6 +115,12 @@ public class BTXModClient implements ClientModInitializer {
 			loadDataModel(block("wicker/wicker_slab_lower")),
 			loadDataModel(block("wicker/wicker_slab_upper")),
 			loadDataModel(block("wicker/wicker_slab_full")))
+		);
+		dispatcher.addDispatch(new BlockModelGenericCompanionCube<>(BTXBlocks.COMPANION_CUBE));
+		dispatcher.addDispatch(new BlockModelGenericSlab<>(BTXBlocks.COMPANION_SLAB,
+			loadDataModel(block("companion_cube/companion_cube_slab")),
+			loadDataModel(block("companion_cube/companion_cube_slab_upper")),
+			loadDataModel(block("companion_cube/companion_cube")))
 		);
 		dispatcher.addDispatch(new BlockModelGeneric<>(BTXBlocks.PLANTER, loadDataModel(block("planter/planter"))));
 		dispatcher.addDispatch(new BlockModelGenericPlanterSoil<>(BTXBlocks.PLANTER_SOIL));

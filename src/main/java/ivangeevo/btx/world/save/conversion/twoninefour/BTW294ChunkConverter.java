@@ -70,7 +70,6 @@ public class BTW294ChunkConverter extends ChunkConverter {
         // Examples (replace the 0s with your block IDs):
         // addMapping(new MappingSimple(247, 0 /* AXLE */));
         // addMapping(new MappingBitSplit(246, 1, 0 /* PANEL_STONE */, 0 /* PANEL_WOOD */, 1));
-        // addMapping(new MappingBitSplit(237, 8, 0 /* COMPANION_CUBE */, 0 /* COMPANION_SLAB */, 0));
 		addMapping(new MappingSimple(243, BTXBlocks.MILLSTONE.id()));
 		addMapping(new MappingSimple(247, BTXBlocks.AXLE.id()));
 		// unfired pottery: meta 0 crucible, 1 planter, 2 vase -> separate blocks
@@ -79,6 +78,7 @@ public class BTW294ChunkConverter extends ChunkConverter {
 		addMapping(new MappingSplitOnZero(255, BTXBlocks.VASE.id(), BTXBlocks.VASE_PAINTED.id()));
 		// hopper: keep bit 1 (on) and bit 8 (filter), drop 2.94's full (2) and redstone (4) bits
 		addMapping(new MappingMasked(225, BTXBlocks.HOPPER.id(), 1 | 8));
+		addMapping(new MappingCompanionCube(237, BTXBlocks.COMPANION_CUBE.id(), BTXBlocks.COMPANION_SLAB.id()));
 
 	}
 
@@ -114,6 +114,21 @@ public class BTW294ChunkConverter extends ChunkConverter {
      * One old ID becomes two new blocks depending on one metadata bit.
      * New meta = (old meta without that bit) >> shift.
      */
+    protected static final class MappingCompanionCube extends MappingBase {
+        private final int cubeId, slabId;
+
+        public MappingCompanionCube(int oldId, int cubeId, int slabId) {
+            super(oldId);
+            this.cubeId = cubeId;
+            this.slabId = slabId;
+        }
+
+        @Override
+        public int[] getConversion(int meta) {
+            return (meta & 8) != 0 ? new int[]{this.slabId, 0} : new int[]{this.cubeId, meta & 7};
+        }
+    }
+
     /** One old ID to one new block, keeping only the metadata bits in mask. */
     protected static final class MappingMasked extends MappingBase {
         private final int newId, mask;

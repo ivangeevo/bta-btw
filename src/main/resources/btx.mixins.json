@@ -15,6 +15,7 @@
     "MixinItemToolHoe",
     "MixinProjectileArrow",
     "entity.EntityMixin",
+    "entity.MobWolfMixin",
     "entity.ProjectileArrowMixin",
     "gui.MenuInventoryCreativeMixin",
     "client.MinecraftMixin",

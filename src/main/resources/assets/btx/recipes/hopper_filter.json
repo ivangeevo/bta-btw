@@ -300,6 +300,11 @@
       },
       {
         "stack": {
+          "id": "btx:item/kibble"
+        }
+      },
+      {
+        "stack": {
           "id": "minecraft:block/flower_yellow"
         }
       },

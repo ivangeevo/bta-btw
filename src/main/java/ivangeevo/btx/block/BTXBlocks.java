@@ -57,6 +57,8 @@ public final class BTXBlocks {
 	public static Block<BlockLogicPaneBTX> WICKER_PANE;
 	public static Block<?> WICKER_BLOCK;
 	public static Block<?> WICKER_SLAB;
+	public static Block<BlockLogicCompanionCube> COMPANION_CUBE;
+	public static Block<BlockLogicCompanionSlab> COMPANION_SLAB;
 
 	private static <T extends BlockLogic> Block<T> registerBlock(String name, BlockLogicSupplier<T> logicSupplier) {
 		String namespaceId = BTXMod.MOD_ID + ":block/" + name;
@@ -100,6 +102,8 @@ public final class BTXBlocks {
 		WICKER_PANE = registerBlock("wicker_pane", BlockLogicPaneBTX.wickerProperties());
 		WICKER_BLOCK = registerBlock("wicker_block", BlockLogicWicker.blockProperties());
 		WICKER_SLAB = registerBlock("wicker_slab", BlockLogicWicker.slabProperties(WICKER_BLOCK));
+		COMPANION_CUBE = registerBlock("companion_cube", BlockLogicCompanionCube.properties());
+		COMPANION_SLAB = registerBlock("companion_slab", BlockLogicCompanionSlab.properties(COMPANION_CUBE));
 
 		// BTW CE: Flammability.PLANKS (5, 20) and Flammability.WICKER (60, 100)
 		BlockLogicFire.setFlammable(GRATE, 5, 20);
@@ -107,5 +111,7 @@ public final class BTXBlocks {
 		BlockLogicFire.setFlammable(WICKER_PANE, 60, 100);
 		BlockLogicFire.setFlammable(WICKER_BLOCK, 60, 100);
 		BlockLogicFire.setFlammable(WICKER_SLAB, 60, 100);
+		BlockLogicFire.setFlammable(COMPANION_CUBE, 30, 60);
+		BlockLogicFire.setFlammable(COMPANION_SLAB, 30, 60);
 	}
 }

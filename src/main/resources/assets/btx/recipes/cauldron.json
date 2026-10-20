@@ -238,6 +238,16 @@
     ]
   },
   {
+    "name": "btx:cauldron/wolf_chop_cooked_from_wolf_chop_raw",
+    "type": "btx:cauldron",
+    "inputs": [
+      {"stack": {"id": "btx:item/food_wolf_chop_raw"}}
+    ],
+    "outputs": [
+      {"id": "btx:item/food_wolf_chop_cooked"}
+    ]
+  },
+  {
     "name": "btx:cauldron/food_venison_cooked_from_food_venison_raw",
     "type": "btx:cauldron",
     "inputs": [

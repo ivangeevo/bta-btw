@@ -3,22 +3,27 @@ package ivangeevo.btx.block.entity;
 import com.mojang.nbt.tags.CompoundTag;
 import com.mojang.nbt.tags.ListTag;
 import ivangeevo.btx.block.BTXBlocks;
+import ivangeevo.btx.block.blocks.BlockLogicCompanionCube;
 import ivangeevo.btx.block.blocks.BlockLogicMillStone;
 import ivangeevo.btx.recipe.BTXRecipes;
 import ivangeevo.btx.util.utils.InventoryUtils;
 import ivangeevo.btx.util.utils.MiscUtils;
+import ivangeevo.btx.util.utils.SoundUtils;
 import net.minecraft.core.block.Block;
+import net.minecraft.core.block.Blocks;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.container.Container;
+import net.minecraft.core.sound.SoundCategory;
 import net.minecraft.core.util.helper.Direction;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.pos.TilePos;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Random;
 
 public class TileEntityMillStone extends TileEntity implements Container {
@@ -137,6 +142,13 @@ public class TileEntityMillStone extends TileEntity implements Container {
 		}
 
 		if (this.isPowered()) {
+			if (this.isWholeCompanionCubeNextToBeProcessed() && this.worldObj.rand.nextInt(10) == 0) {
+				BlockLogicCompanionCube.playHurt(this.worldObj, this.tilePos, 2.0F);
+			} else if (this.isNetherrackNextToBeProcessed() && this.worldObj.rand.nextInt(10) == 0) {
+				SoundUtils.playAtTileCenter(this.worldObj, this.tilePos, SoundCategory.ENTITY_SOUNDS, "mob.ghast.scream",
+					0.25F, this.worldObj.rand.nextFloat() * 0.4F + 0.8F);
+			}
+
 			this.advanceGrind(1);
 		}
 	}
@@ -180,10 +192,45 @@ public class TileEntityMillStone extends TileEntity implements Container {
 	}
 
 	private void finishGrind(int slot) {
-		ItemStack output = BTXRecipes.MILLSTONE.findOutput(this.contents[slot]);
-		if (output != null) {
+		List<ItemStack> outputs = BTXRecipes.MILLSTONE.findOutputs(this.contents[slot]);
+		if (outputs != null) {
+			if (this.contents[slot].getItem() == BTXBlocks.COMPANION_CUBE.asItem()) {
+				BlockLogicCompanionCube.playDeathEffect(this.worldObj, this.tilePos);
+			}
+
 			this.removeItem(slot, 1);
-			this.ejectStack(output);
+
+			for (ItemStack output : outputs) {
+				this.ejectStack(output);
+			}
+		}
+	}
+
+	public boolean containsWholeCompanionCube() {
+		for (ItemStack stack : this.contents) {
+			if (stack != null && stack.getItem().equals(BTXBlocks.COMPANION_CUBE.asItem())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean isWholeCompanionCubeNextToBeProcessed() {
+		int slot = this.findGrindableSlot();
+		return slot >= 0 && this.contents[slot].getItem().equals(BTXBlocks.COMPANION_CUBE.asItem());
+	}
+
+	public boolean isNetherrackNextToBeProcessed() {
+		int slot = this.findGrindableSlot();
+		return slot >= 0 && this.contents[slot].getItem().equals(Blocks.NETHERRACK.asItem());
+	}
+
+	@Override
+	public void setChanged() {
+		super.setChanged();
+
+		if (this.worldObj != null && !this.worldObj.isClientSide && this.containsWholeCompanionCube()) {
+			BlockLogicCompanionCube.playWhine(this.worldObj, this.tilePos);
 		}
 	}
 
@@ -246,5 +293,4 @@ public class TileEntityMillStone extends TileEntity implements Container {
 			}
 		}
 	}
-
 }

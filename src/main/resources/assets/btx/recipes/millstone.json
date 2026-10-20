@@ -78,5 +78,56 @@
       "id": "btx:item/coal_dust",
       "amount": 1
     }
+  },
+  {
+    "name": "btx:millstone/companion_cube",
+    "type": "btx:millstone",
+    "input": {
+      "stack": {
+        "id": "btx:block/companion_cube"
+      }
+    },
+    "outputs": [
+      {"id": "minecraft:item/string", "amount": 1},
+      {"id": "minecraft:item/string", "amount": 1},
+      {"id": "minecraft:item/string", "amount": 1},
+      {"id": "minecraft:item/string", "amount": 1},
+      {"id": "minecraft:item/string", "amount": 1},
+      {"id": "minecraft:item/string", "amount": 1},
+      {"id": "minecraft:item/string", "amount": 1},
+      {"id": "minecraft:item/string", "amount": 1},
+      {"id": "minecraft:item/string", "amount": 1},
+      {"id": "minecraft:item/string", "amount": 1},
+      {"id": "minecraft:item/dye", "amount": 1, "meta": 1},
+      {"id": "minecraft:item/dye", "amount": 1, "meta": 1},
+      {"id": "minecraft:item/dye", "amount": 1, "meta": 1},
+      {"id": "btx:item/food_wolf_chop_raw", "amount": 1}
+    ]
+  },
+  {
+    "name": "btx:millstone/companion_slab",
+    "type": "btx:millstone",
+    "input": {
+      "stack": {
+        "id": "btx:block/companion_slab"
+      }
+    },
+    "output": {
+      "id": "btx:item/food_wolf_chop_raw",
+      "amount": 1
+    }
+  },
+  {
+    "name": "btx:millstone/ground_netherrack",
+    "type": "btx:millstone",
+    "input": {
+      "stack": {
+        "id": "minecraft:block/netherrack"
+      }
+    },
+    "output": {
+      "id": "btx:item/ground_netherrack",
+      "amount": 1
+    }
   }
 ]

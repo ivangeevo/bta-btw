@@ -4,10 +4,12 @@ import ivangeevo.btx.BTXMod;
 import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.item.items.ItemDung;
 import ivangeevo.btx.item.items.ItemFoulFood;
+import ivangeevo.btx.item.items.ItemKibble;
 import ivangeevo.btx.item.items.ItemWaterWheel;
 import ivangeevo.btx.item.items.ItemWindMill;
 import net.minecraft.core.data.tag.Tag;
 import net.minecraft.core.item.Item;
+import net.minecraft.core.item.ItemFood;
 import net.minecraft.core.item.ItemSeeds;
 import net.minecraft.core.item.tag.ItemTags;
 import turniplabs.halplibe.helper.ItemBuilder;
@@ -37,6 +39,9 @@ public final class BTXItems {
 	public static Item STRAP;
 	public static Item BELT;
 	public static Item FOUL_FOOD;
+	public static Item KIBBLE;
+	public static Item FOOD_WOLF_CHOP_RAW;
+	public static Item FOOD_WOLF_CHOP_COOKED;
 	public static Item WOOD_BLADE;
 	public static Item GLUE;
 	public static Item TALLOW;
@@ -86,9 +91,16 @@ public final class BTXItems {
 		CONCENTRATED_HELLFIRE = registerItem("concentrated_hellfire", Item::new); //recipe needed
 		HELLFIRE_DUST = registerItem("hellfire_dust", Item::new);
 		FOUL_FOOD = registerItem("foul_food", ItemFoulFood::new);
+		KIBBLE = registerItem("kibble", ItemKibble::new);
 		COAL_DUST = registerItem("coal_dust", Item::new);
 		GROUND_NETHERRACK = registerItem("ground_netherrack", Item::new);
 		WICKER = registerItem("wicker", Item::new);
+		FOOD_WOLF_CHOP_RAW = registerItem("food_wolf_chop_raw", (key, namespaceId, id) ->
+			new ItemFood(key, namespaceId, id, 3, 16, false, 4)
+		);
+		FOOD_WOLF_CHOP_COOKED = registerItem("food_wolf_chop_cooked", (key, namespaceId, id) ->
+			new ItemFood(key, namespaceId, id, 8, 16, false, 4)
+		);
 	}
 
 	// No extra settings builder

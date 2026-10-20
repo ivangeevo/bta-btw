@@ -194,3 +194,7 @@ tile.btx.wicker.block.name=Block of Wicker
 tile.btx.wicker.block.desc=A solid block of woven wicker. Burns fast.
 tile.btx.wicker.slab.name=Wicker Slab
 tile.btx.wicker.slab.desc=Half a block of woven wicker. Burns fast.
+tile.btx.companion.cube.name=Companion Cube
+tile.btx.companion.cube.desc=Your best friend, forever.
+tile.btx.companion.slab.name=Companion Slab
+tile.btx.companion.slab.desc=Half of your best friend. Put two together for a happy reunion.

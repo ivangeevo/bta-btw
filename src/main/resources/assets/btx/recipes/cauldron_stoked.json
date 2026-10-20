@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "name": "btx:cauldron_stoked/kibble",
+    "type": "btx:cauldron_stoked",
+    "inputs": [
+      {"stack": {"id": "btx:item/foul_food"}},
+      {"stack": {"id": "minecraft:item/dye", "meta": 15}},
+      {"stack": {"id": "minecraft:item/dust_sugar"}}
+    ],
+    "outputs": [
+      {"id": "btx:item/kibble", "amount": 2}
+    ]
+  }
+]

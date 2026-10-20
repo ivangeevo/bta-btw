@@ -17,4 +17,6 @@ public interface FireInteraction {
 	default boolean canBeIncinerated(World world, TilePosc pos) {
 		return FireUtils.defaultCanBeIncinerated(world, pos);
 	}
+	default void onBurned(World world, TilePosc pos) {
+	}
 }

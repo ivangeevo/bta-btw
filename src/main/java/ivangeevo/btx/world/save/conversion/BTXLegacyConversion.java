@@ -9,11 +9,12 @@ public final class BTXLegacyConversion {
     public static void init() {
         // 1. item rules (needs BTXItems / BTXBlocks populated)
         BTW294SaveConverter.BtwItems.simple(238, BTXItems.WINDMILL.id);
+
         // 2.94's grate, rollers and wicker were items only; they become the CE pane blocks
         BTW294SaveConverter.BtwItems.simple(240, BTXBlocks.GRATE.id());
         BTW294SaveConverter.BtwItems.simple(234, BTXBlocks.SLATS.id());
         BTW294SaveConverter.BtwItems.simple(241, BTXBlocks.WICKER_PANE.id());
-        // BtwSaveConverter.BtwItems.rule(237, d -> new int[]{ d > 0 ? COMPANION_SLAB : COMPANION_CUBE, 0 });
+        BTW294SaveConverter.BtwItems.blockRule(237, d -> new int[]{d > 0 ? BTXBlocks.COMPANION_SLAB.id() : BTXBlocks.COMPANION_CUBE.id(), 0});
 
 		// 2. old BTW names as aliases for classes already registered
         BTW294LegacyRegistration.register();

@@ -4,9 +4,11 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.block.blocks.BlockLogicStokedFire;
+import ivangeevo.btx.block.blocks.util.FireInteraction;
 import ivangeevo.btx.util.utils.FireUtils;
 import net.minecraft.core.block.BlockLogicFire;
 import net.minecraft.core.block.Blocks;
+import net.minecraft.core.enums.EnumFireSpread;
 import net.minecraft.core.util.phys.HitResult;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.pos.TilePos;
@@ -33,7 +35,6 @@ public abstract class MixinBlockLogicFire {
 		}
 	}
 
-    // BTW: hasInfiniteBurnNeighbor, OR'd into the tag check
 	@ModifyExpressionValue(
 		method = "updateTick(Lnet/minecraft/core/world/World;Lnet/minecraft/core/world/pos/TilePosc;Ljava/util/Random;Z)V",
 		at = @At(
@@ -79,6 +80,16 @@ public abstract class MixinBlockLogicFire {
 
 		if (besideStokedFire) {
 			cir.setReturnValue(null);
+		}
+	}
+
+	@Inject(method = "checkBurn", at = {
+		@At(value = "INVOKE", target = "Lnet/minecraft/core/block/BlockLogicFire;setBurnResult(Lnet/minecraft/core/world/World;Lnet/minecraft/core/world/pos/TilePosc;)V"),
+		@At(value = "INVOKE", target = "Lnet/minecraft/core/world/World;setBlockTypeDataNotify(Lnet/minecraft/core/world/pos/TilePosc;Lnet/minecraft/core/block/Block;I)Z")
+	})
+	private void btx$onBurned(World world, TilePos tilePos, int chance, Random random, int meta, EnumFireSpread spreadRule, CallbackInfo ci) {
+		if (world.getBlockType(tilePos).getLogic() instanceof FireInteraction fireInteraction) {
+			fireInteraction.onBurned(world, tilePos);
 		}
 	}
 }

@@ -6,6 +6,7 @@ import ivangeevo.btx.block.entity.TileEntityMillStone;
 import ivangeevo.btx.gui.BTXScreens;
 import ivangeevo.btx.world.TickPersistence;
 import ivangeevo.btx.util.utils.MechPowerUtils;
+import ivangeevo.btx.util.utils.SoundUtils;
 import net.minecraft.core.block.*;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Materials;
@@ -104,9 +105,9 @@ public class BlockLogicMillStone extends BlockLogic implements MechanicalDevice 
 			} else {
 				TileEntity tileEntity = world.getTileEntity(tilePos);
 				if (tileEntity instanceof TileEntityMillStone tileEntityMillStone) {
-					//if (tileEntityMillStone.isWholeCompanionCubeNextToBeProcessed()) {
-					//world.playSoundEffectAtTile(null, SoundCategory.ENTITY_SOUNDS, tilePos.x() + 0.5, tilePos.y() + 0.5, tilePos.z() + 0.5, "mob.wolf.hurt", 5.0F, (world.rand.nextFloat() - world.rand.nextFloat()) * 0.2F + 1.0F);
-					//}
+					if (tileEntityMillStone.isWholeCompanionCubeNextToBeProcessed()) {
+						BlockLogicCompanionCube.playHurt(world, tilePos, 5.0F);
+					}
 
 					world.playSoundEffect(null, SoundCategory.WORLD_SOUNDS, tilePos.x() + 0.5, tilePos.y() + 0.5, tilePos.z() + 0.5, "random.explode", 0.2F, 1.25F);
 					this.emitMillingParticles(world, tilePos, rand);
@@ -120,6 +121,11 @@ public class BlockLogicMillStone extends BlockLogic implements MechanicalDevice 
 	public void animationTick(@NotNull World world, @NotNull TilePosc tilePos, @NotNull Random rand) {
 		if (this.isActive(world, tilePos)) {
 			this.emitMillingParticles(world, tilePos, rand);
+
+			if (rand.nextInt(5) == 0) {
+				SoundUtils.playAtTileCenter(world, tilePos, SoundCategory.WORLD_SOUNDS, "random.explode",
+					0.1F + rand.nextFloat() * 0.1F, 1.25F + rand.nextFloat() * 0.1F);
+			}
 		}
 	}
 

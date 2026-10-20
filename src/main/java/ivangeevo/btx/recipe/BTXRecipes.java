@@ -27,6 +27,7 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.Items;
 import net.minecraft.core.util.helper.DyeColor;
 import turniplabs.halplibe.helper.RecipeBuilder;
+import turniplabs.halplibe.helper.recipeBuilders.RecipeBuilderFurnace;
 import turniplabs.halplibe.helper.recipeBuilders.RecipeBuilderShaped;
 import turniplabs.halplibe.helper.recipeBuilders.RecipeBuilderShapeless;
 
@@ -67,6 +68,10 @@ public class BTXRecipes {
 	// TODO: Make some of these recipes handle tags(multiple types of item/block entries) instead of just single ones
 	public static void workbenchRecipes() {
 		// Blocks
+		RecipeBuilderFurnace wolfChopCooked = new RecipeBuilderFurnace(BTXMod.MOD_ID).setInput(BTXItems.FOOD_WOLF_CHOP_RAW);
+		wolfChopCooked
+			.create("food_wolf_chop_cooked", new ItemStack(BTXItems.FOOD_WOLF_CHOP_COOKED));
+
 		RecipeBuilderShaped millStone = new RecipeBuilderShaped(BTXMod.MOD_ID, "YYY", "YYY", "YXY");
 		millStone
 			.addInput('Y', Blocks.STONE)

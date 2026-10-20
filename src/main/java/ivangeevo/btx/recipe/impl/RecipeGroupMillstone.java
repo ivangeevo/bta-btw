@@ -4,8 +4,10 @@ import net.minecraft.core.data.registry.recipe.RecipeGroup;
 import net.minecraft.core.data.registry.recipe.RecipeSymbol;
 import net.minecraft.core.item.ItemStack;
 
-public class RecipeGroupMillstone extends RecipeGroup<RecipeEntryMillstone> {
+import java.util.ArrayList;
+import java.util.List;
 
+public class RecipeGroupMillstone extends RecipeGroup<RecipeEntryMillstone> {
 	public RecipeGroupMillstone(RecipeSymbol machine) {
 		super(machine);
 	}
@@ -20,9 +22,14 @@ public class RecipeGroupMillstone extends RecipeGroup<RecipeEntryMillstone> {
 		return null;
 	}
 
-	public ItemStack findOutput(ItemStack input) {
+	public List<ItemStack> findOutputs(ItemStack input) {
 		RecipeEntryMillstone recipe = this.findRecipe(input);
-		return recipe == null ? null : recipe.getOutput().copy();
-	}
+		if (recipe == null) return null;
 
+		List<ItemStack> outputs = new ArrayList<>();
+		for (ItemStack output : recipe.getOutputs()) {
+			outputs.add(output.copy());
+		}
+		return outputs;
+	}
 }

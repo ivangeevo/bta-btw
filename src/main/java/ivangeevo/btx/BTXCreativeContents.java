@@ -57,6 +57,9 @@ public final class BTXCreativeContents {
 		REG.register(BTXItems.HELLFIRE_DUST, inCategory(CreativeInventoryCategory.MISCELLANEOUS));
 		REG.register(BTXItems.GROUND_NETHERRACK, inCategory(CreativeInventoryCategory.MISCELLANEOUS));
 		REG.register(BTXItems.FOUL_FOOD, inCategory(CreativeInventoryCategory.MISCELLANEOUS));
+		REG.register(BTXItems.FOOD_WOLF_CHOP_RAW, inCategory(CreativeInventoryCategory.ORGANIC));
+		REG.register(BTXItems.FOOD_WOLF_CHOP_COOKED, inCategory(CreativeInventoryCategory.ORGANIC));
+		REG.register(BTXItems.KIBBLE, inCategory(CreativeInventoryCategory.ORGANIC));
 		REG.register(BTXItems.COAL_DUST, inCategory(CreativeInventoryCategory.MISCELLANEOUS));
 
 		// Blocks
@@ -68,6 +71,8 @@ public final class BTXCreativeContents {
 		REG.register(BTXBlocks.WICKER_PANE, inCategory(CreativeInventoryCategory.WOOD));
 		REG.register(BTXBlocks.WICKER_BLOCK, inCategory(CreativeInventoryCategory.WOOD));
 		REG.register(BTXBlocks.WICKER_SLAB, inCategory(CreativeInventoryCategory.WOOD));
+		REG.register(BTXBlocks.COMPANION_CUBE, inCategory(CreativeInventoryCategory.MISCELLANEOUS));
+		REG.register(BTXBlocks.COMPANION_SLAB, inCategory(CreativeInventoryCategory.MISCELLANEOUS));
 		REG.register(BTXBlocks.HAND_CRANK, inCategory(CreativeInventoryCategory.WORKBENCHES));
 		REG.register(BTXBlocks.AXLE, inCategory(CreativeInventoryCategory.WORKBENCHES));
 		REG.register(BTXBlocks.AXLE_POWER_SOURCE, inCategory(CreativeInventoryCategory.WORKBENCHES));
