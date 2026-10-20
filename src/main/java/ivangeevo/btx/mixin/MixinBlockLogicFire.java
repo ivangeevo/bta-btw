@@ -11,6 +11,7 @@ import net.minecraft.core.block.Blocks;
 import net.minecraft.core.enums.EnumFireSpread;
 import net.minecraft.core.util.phys.HitResult;
 import net.minecraft.core.world.World;
+import net.minecraft.core.world.WorldSource;
 import net.minecraft.core.world.pos.TilePos;
 import net.minecraft.core.world.pos.TilePosc;
 import org.spongepowered.asm.mixin.Mixin;
@@ -90,6 +91,27 @@ public abstract class MixinBlockLogicFire {
 	private void btx$onBurned(World world, TilePos tilePos, int chance, Random random, int meta, EnumFireSpread spreadRule, CallbackInfo ci) {
 		if (world.getBlockType(tilePos).getLogic() instanceof FireInteraction fireInteraction) {
 			fireInteraction.onBurned(world, tilePos);
+		}
+	}
+
+	@ModifyExpressionValue(
+		method = "getShapeMask",
+		at = @At(
+			value = "INVOKE",
+			target = "Lnet/minecraft/core/world/WorldSource;isBlockNormalCube(Lnet/minecraft/core/world/pos/TilePosc;)Z"
+		)
+	)
+	private static boolean btx$sideShapeBesideClingBlock(boolean original,
+														 @Local(argsOnly = true) WorldSource source,
+														 @Local(argsOnly = true) TilePosc tilePos) {
+		return original && !FireUtils.prefersSideDisplay(source, tilePos);
+	}
+
+	@Inject(method = "canBurn(Lnet/minecraft/core/world/WorldSource;Lnet/minecraft/core/world/pos/TilePosc;)Z", at = @At("HEAD"), cancellable = true)
+	private static void btx$fireClingsTo(WorldSource source, TilePosc tilePos, CallbackInfoReturnable<Boolean> cir) {
+		if (source.getBlockType(tilePos).getLogic() instanceof FireInteraction fireInteraction
+			&& fireInteraction.canFireCling(source, tilePos)) {
+			cir.setReturnValue(true);
 		}
 	}
 }

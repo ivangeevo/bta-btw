@@ -111,6 +111,7 @@ public class BTXModClient implements ClientModInitializer {
 		dispatcher.addDispatch(new BlockModelGenericPane<>(BTXBlocks.SLATS, block("slats/slats_half")));
 		dispatcher.addDispatch(new BlockModelGenericPane<>(BTXBlocks.WICKER_PANE, block("wicker_pane/wicker_pane_half")));
 		dispatcher.addDispatch(new BlockModelGeneric<>(BTXBlocks.WICKER_BLOCK, loadDataModel(block("wicker/wicker_block"))));
+		dispatcher.addDispatch(new BlockModelGeneric<>(BTXBlocks.CONCENTRATED_HELLFIRE_BLOCK, loadDataModel(block("concentrated_hellfire_block"))));
 		dispatcher.addDispatch(new BlockModelGenericSlab<>(BTXBlocks.WICKER_SLAB,
 			loadDataModel(block("wicker/wicker_slab_lower")),
 			loadDataModel(block("wicker/wicker_slab_upper")),

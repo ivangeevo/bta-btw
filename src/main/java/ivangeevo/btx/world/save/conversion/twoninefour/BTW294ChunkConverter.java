@@ -79,7 +79,21 @@ public class BTW294ChunkConverter extends ChunkConverter {
 		// hopper: keep bit 1 (on) and bit 8 (filter), drop 2.94's full (2) and redstone (4) bits
 		addMapping(new MappingMasked(225, BTXBlocks.HOPPER.id(), 1 | 8));
 		addMapping(new MappingCompanionCube(237, BTXBlocks.COMPANION_CUBE.id(), BTXBlocks.COMPANION_SLAB.id()));
-
+		addMapping(new MappingSimple(224, BTXBlocks.HIBACHI.id()));
+		addMapping(new MappingSimple(231, BTXBlocks.MOULDING_OAK.id()));
+		addMapping(new MappingMasked(232, BTXBlocks.CORNER_OAK.id(), 7));
+		addMapping(new MappingMasked(234, BTXBlocks.CAULDRON.id(), 0));
+		addMapping(new MappingSimple(241, BTXBlocks.HEMP.id()));
+		addMapping(new MappingSimple(242, BTXBlocks.HAND_CRANK.id()));
+		// panel: bit 0 set = wood, facing in bits 1-3; stone panels have no BTX block yet and become air
+		addMapping(new MappingBitSplit(246, 1, 0, BTXBlocks.SIDING_OAK.id(), 1));
+		addMapping(new MappingSimple(248, BTXBlocks.GEARBOX.id()));
+		// turntable: the switch setting is restored from the tile entity's m_iSwitchSetting
+		addMapping(new MappingMasked(249, BTXBlocks.TURNTABLE.id(), 3));
+		addMapping(new MappingMasked(250, BTXBlocks.BELLOWS.id(), 7));
+		addMapping(new MappingSimple(251, BTXBlocks.STOKED_FIRE.id()));
+		addMapping(new MappingMasked(253, BTXBlocks.CRUCIBLE.id(), 0));
+		addMapping(new MappingByBit(254, 1, BTXBlocks.PLANTER.id(), BTXBlocks.PLANTER_SOIL.id()));
 	}
 
     /** One block or item stack: returns {newId, newMeta}. Unmapped IDs become {0, 0} like the stock converter. */
@@ -191,7 +205,25 @@ public class BTW294ChunkConverter extends ChunkConverter {
 
         @Override
         public int[] getConversion(int meta) {
-            return new int[]{(meta & this.bit) != 0 ? this.idSet : this.idClear, (meta & ~this.bit) >> this.shift};
+            int id = (meta & this.bit) != 0 ? this.idSet : this.idClear;
+            return new int[]{id, id == 0 ? 0 : (meta & ~this.bit) >> this.shift};
+        }
+    }
+
+    /** One old ID becomes one of two new blocks depending on one metadata bit; the new meta is 0. */
+    protected static final class MappingByBit extends MappingBase {
+        private final int bit, idClear, idSet;
+
+        public MappingByBit(int oldId, int bit, int idClear, int idSet) {
+            super(oldId);
+            this.bit = bit;
+            this.idClear = idClear;
+            this.idSet = idSet;
+        }
+
+        @Override
+        public int[] getConversion(int meta) {
+            return new int[]{(meta & this.bit) != 0 ? this.idSet : this.idClear, 0};
         }
     }
 }

@@ -140,6 +140,16 @@ public class BTXRecipes {
 			.addInput(BTXBlocks.WICKER_SLAB)
 			.create("wicker_block_from_slabs", new ItemStack(BTXBlocks.WICKER_BLOCK, 1));
 
+		RecipeBuilderShaped concentratedHellfireBlock = new RecipeBuilderShaped(BTXMod.MOD_ID, "###", "###", "###");
+		concentratedHellfireBlock
+			.addInput('#', BTXItems.CONCENTRATED_HELLFIRE)
+			.create("concentrated_hellfire_block", new ItemStack(BTXBlocks.CONCENTRATED_HELLFIRE_BLOCK, 1));
+
+		RecipeBuilderShapeless concentratedHellfireFromBlock = new RecipeBuilderShapeless(BTXMod.MOD_ID);
+		concentratedHellfireFromBlock
+			.addInput(BTXBlocks.CONCENTRATED_HELLFIRE_BLOCK)
+			.create("concentrated_hellfire_from_block", new ItemStack(BTXItems.CONCENTRATED_HELLFIRE, 9));
+
 		RecipeBuilderShaped handCrank = new RecipeBuilderShaped(BTXMod.MOD_ID, "  Y", " Y ", "#X#");
 		handCrank.addInput('#', Blocks.COBBLE_STONE)
 			.addInput('X', BTXItems.GEAR)

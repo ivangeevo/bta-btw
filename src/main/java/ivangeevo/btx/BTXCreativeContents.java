@@ -70,6 +70,7 @@ public final class BTXCreativeContents {
 		REG.register(BTXBlocks.SLATS, inCategory(CreativeInventoryCategory.WOOD));
 		REG.register(BTXBlocks.WICKER_PANE, inCategory(CreativeInventoryCategory.WOOD));
 		REG.register(BTXBlocks.WICKER_BLOCK, inCategory(CreativeInventoryCategory.WOOD));
+		REG.register(BTXBlocks.CONCENTRATED_HELLFIRE_BLOCK, inCategory(CreativeInventoryCategory.STORAGE));
 		REG.register(BTXBlocks.WICKER_SLAB, inCategory(CreativeInventoryCategory.WOOD));
 		REG.register(BTXBlocks.COMPANION_CUBE, inCategory(CreativeInventoryCategory.MISCELLANEOUS));
 		REG.register(BTXBlocks.COMPANION_SLAB, inCategory(CreativeInventoryCategory.MISCELLANEOUS));

@@ -59,6 +59,7 @@ public final class BTXBlocks {
 	public static Block<?> WICKER_SLAB;
 	public static Block<BlockLogicCompanionCube> COMPANION_CUBE;
 	public static Block<BlockLogicCompanionSlab> COMPANION_SLAB;
+	public static Block<BlockLogicConcentratedHellfire> CONCENTRATED_HELLFIRE_BLOCK;
 
 	private static <T extends BlockLogic> Block<T> registerBlock(String name, BlockLogicSupplier<T> logicSupplier) {
 		String namespaceId = BTXMod.MOD_ID + ":block/" + name;
@@ -104,6 +105,7 @@ public final class BTXBlocks {
 		WICKER_SLAB = registerBlock("wicker_slab", BlockLogicWicker.slabProperties(WICKER_BLOCK));
 		COMPANION_CUBE = registerBlock("companion_cube", BlockLogicCompanionCube.properties());
 		COMPANION_SLAB = registerBlock("companion_slab", BlockLogicCompanionSlab.properties(COMPANION_CUBE));
+		CONCENTRATED_HELLFIRE_BLOCK = registerBlock("concentrated_hellfire_block", BlockLogicConcentratedHellfire.properties());
 
 		// BTW CE: Flammability.PLANKS (5, 20) and Flammability.WICKER (60, 100)
 		BlockLogicFire.setFlammable(GRATE, 5, 20);

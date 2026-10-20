@@ -3,6 +3,7 @@ package ivangeevo.btx.block.blocks.util;
 import ivangeevo.btx.util.utils.FireUtils;
 import net.minecraft.core.util.helper.Direction;
 import net.minecraft.core.world.World;
+import net.minecraft.core.world.WorldSource;
 import net.minecraft.core.world.pos.TilePosc;
 
 public interface FireInteraction {
@@ -18,5 +19,8 @@ public interface FireInteraction {
 		return FireUtils.defaultCanBeIncinerated(world, pos);
 	}
 	default void onBurned(World world, TilePosc pos) {
+	}
+	default boolean canFireCling(WorldSource source, TilePosc pos) {
+		return false;
 	}
 }

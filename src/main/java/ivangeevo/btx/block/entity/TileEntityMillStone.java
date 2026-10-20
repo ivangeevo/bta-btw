@@ -87,8 +87,8 @@ public class TileEntityMillStone extends TileEntity implements Container {
 			}
 		}
 
-		if (compoundTag.containsKey("GrindProgress")) {
-			this.grindCounter = compoundTag.getInteger("GrindProgress");
+		if (compoundTag.containsKey("GrindCounter")) {
+			this.grindCounter = compoundTag.getInteger("GrindCounter");
 		}
 	}
 
