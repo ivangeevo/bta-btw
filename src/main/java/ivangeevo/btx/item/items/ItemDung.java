@@ -40,6 +40,7 @@ public class ItemDung extends ItemDye {
 		if (used && brown.stackSize < 1) {
 			selfStack.stackSize--;
 		}
+
 		return used;
 	}
 

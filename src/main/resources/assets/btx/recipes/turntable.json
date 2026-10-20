@@ -1,6 +1,6 @@
 [
   {
-    "name": "btx:turntable/brick_clay_from_block_clay",
+    "name": "btx:turntable/unfired_crucible_from_block_clay",
     "type": "btx:turntable",
     "input": {
       "stack": {
@@ -8,7 +8,7 @@
       }
     },
     "output": {
-      "id": "minecraft:block/brick_clay",
+      "id": "btx:block/unfired_crucible",
       "amount": 1
     },
     "rotations": 8,
@@ -16,54 +16,51 @@
     "extra_outputs": [ { "id": "minecraft:item/clay" } ]
   },
   {
-    "name": "btx:turntable/cobble_stone_from_brick_clay",
+    "name": "btx:turntable/unfired_planter_from_unfired_crucible",
     "type": "btx:turntable",
     "input": {
       "stack": {
-        "id": "minecraft:block/brick_clay"
+        "id": "btx:block/unfired_crucible"
       }
     },
     "output": {
-      "id": "minecraft:block/cobble_stone",
+      "id": "btx:block/unfired_planter",
       "amount": 1
     },
     "rotations": 8,
     "input_data": [],
-    "extra_outputs": [ { "id": "minecraft:item/stick" } ]
+    "extra_outputs": [ { "id": "minecraft:item/clay" } ]
   },
   {
-    "name": "btx:turntable/stone_from_cobble_stone",
+    "name": "btx:turntable/unfired_vase_from_unfired_planter",
     "type": "btx:turntable",
     "input": {
       "stack": {
-        "id": "minecraft:block/cobble_stone"
+        "id": "btx:block/unfired_planter"
       }
     },
     "output": {
-      "id": "minecraft:block/stone",
+      "id": "btx:block/unfired_vase",
       "amount": 1
     },
     "rotations": 8,
     "input_data": [],
-    "extra_outputs": []
+    "extra_outputs": [ { "id": "minecraft:item/clay" } ]
   },
   {
-    "name": "btx:turntable/planks_oak_from_stone",
+    "name": "btx:turntable/nothing_from_unfired_vase",
     "type": "btx:turntable",
     "input": {
       "stack": {
-        "id": "minecraft:block/stone"
+        "id": "btx:block/unfired_vase"
       }
     },
     "output": {
-      "id": "minecraft:block/planks_oak",
+      "id": "minecraft:block/air",
       "amount": 1
     },
     "rotations": 8,
     "input_data": [],
-    "extra_outputs": [
-      { "id": "minecraft:item/stick" },
-      { "id": "minecraft:item/stick" }
-    ]
+    "extra_outputs": [ { "id": "minecraft:item/clay" } ]
   }
 ]

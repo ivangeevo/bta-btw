@@ -1,0 +1,12 @@
+[
+  {
+    "name": "btx:crucible_stoked/gold_ingots_from_gold_pickaxe",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      { "stack": { "id": "minecraft:item/tool_pickaxe_gold", "amount": 1 } }
+    ],
+    "outputs": [
+      { "id": "minecraft:item/ingot_gold", "amount": 2 }
+    ]
+  }
+]

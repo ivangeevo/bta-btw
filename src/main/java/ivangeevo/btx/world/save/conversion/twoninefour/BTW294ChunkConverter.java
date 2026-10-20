@@ -73,6 +73,12 @@ public class BTW294ChunkConverter extends ChunkConverter {
         // addMapping(new MappingBitSplit(237, 8, 0 /* COMPANION_CUBE */, 0 /* COMPANION_SLAB */, 0));
 		addMapping(new MappingSimple(243, BTXBlocks.MILLSTONE.id()));
 		addMapping(new MappingSimple(247, BTXBlocks.AXLE.id()));
+		// unfired pottery: meta 0 crucible, 1 planter, 2 vase -> separate blocks
+		addMapping(new MappingByMeta(252, BTXBlocks.UNFIRED_CRUCIBLE.id(), BTXBlocks.UNFIRED_PLANTER.id(), BTXBlocks.UNFIRED_VASE.id()));
+		// vase: meta is the wool color (0 = white), the same as BTA's DyeColor block meta. White is the plain vase.
+		addMapping(new MappingSplitOnZero(255, BTXBlocks.VASE.id(), BTXBlocks.VASE_PAINTED.id()));
+		// hopper: keep bit 1 (on) and bit 8 (filter), drop 2.94's full (2) and redstone (4) bits
+		addMapping(new MappingMasked(225, BTXBlocks.HOPPER.id(), 1 | 8));
 
 	}
 
@@ -108,6 +114,55 @@ public class BTW294ChunkConverter extends ChunkConverter {
      * One old ID becomes two new blocks depending on one metadata bit.
      * New meta = (old meta without that bit) >> shift.
      */
+    /** One old ID to one new block, keeping only the metadata bits in mask. */
+    protected static final class MappingMasked extends MappingBase {
+        private final int newId, mask;
+
+        public MappingMasked(int oldId, int newId, int mask) {
+            super(oldId);
+            this.newId = newId;
+            this.mask = mask;
+        }
+
+        @Override
+        public int[] getConversion(int meta) {
+            return new int[]{this.newId, meta & this.mask};
+        }
+    }
+
+    /** One old ID to one new block per metadata value (meta becomes 0). Metas past the list fall back to the first. */
+    protected static final class MappingByMeta extends MappingBase {
+        private final int[] idsByMeta;
+
+        public MappingByMeta(int oldId, int... idsByMeta) {
+            super(oldId);
+            this.idsByMeta = idsByMeta;
+        }
+
+        @Override
+        public int[] getConversion(int meta) {
+            int index = meta >= 0 && meta < this.idsByMeta.length ? meta : 0;
+            return new int[]{this.idsByMeta[index], 0};
+        }
+    }
+
+    /** Meta 0 goes to idZero with meta 0; anything else goes to idOther, keeping the meta. */
+    protected static final class MappingSplitOnZero extends MappingBase {
+        private final int idZero, idOther;
+
+        public MappingSplitOnZero(int oldId, int idZero, int idOther) {
+            super(oldId);
+            this.idZero = idZero;
+            this.idOther = idOther;
+        }
+
+        @Override
+        public int[] getConversion(int meta) {
+            int m = meta & 0xF;
+            return m == 0 ? new int[]{this.idZero, 0} : new int[]{this.idOther, m};
+        }
+    }
+
     protected static final class MappingBitSplit extends MappingBase {
         private final int bit, idClear, idSet, shift;
 

@@ -1,0 +1,6 @@
+{
+	"parent": "btx:block/vase/vase_template",
+	"textures": {
+		"all": "btx:block/vase/vase_white"
+	}
+}

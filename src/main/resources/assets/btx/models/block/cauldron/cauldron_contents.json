@@ -1,0 +1,17 @@
+{
+	"format_version": "1.9.0",
+	"ambientocclusion": false,
+	"textures": {
+		"particle": "btx:block/cauldron/cauldron_contents",
+		"contents": "btx:block/cauldron/cauldron_contents"
+	},
+	"elements": [
+		{
+			"from": [3, 9, 3],
+			"to": [13, 10, 13],
+			"faces": {
+				"up": {"uv": [3, 3, 13, 13], "texture": "#contents"}
+			}
+		}
+	]
+}

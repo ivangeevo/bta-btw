@@ -1,0 +1,526 @@
+[
+  {
+    "name": "btx:hopper_filter/soul",
+    "type": "btx:hopper_filter",
+    "input": {
+      "stack": {
+        "id": "minecraft:block/soulsand"
+      }
+    },
+    "accepts": [
+      {
+        "stack": {
+          "id": "btx:item/ground_netherrack"
+        }
+      }
+    ]
+  },
+  {
+    "name": "btx:hopper_filter/powder",
+    "type": "btx:hopper_filter",
+    "input": {
+      "stack": {
+        "id": "btx:block/wicker_pane"
+      }
+    },
+    "accepts": [
+      {
+        "stack": {
+          "id": "minecraft:item/seeds_wheat"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:item/seeds_pumpkin"
+        }
+      },
+      {
+        "stack": {
+          "id": "btx:item/hemp_seeds"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:item/gunpowder"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:item/dust_redstone"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:item/dust_glowstone"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:item/dust_sugar"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:item/sulfur"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:item/dye",
+          "meta": -1
+        }
+      },
+      {
+        "stack": {
+          "id": "btx:item/flour"
+        }
+      },
+      {
+        "stack": {
+          "id": "btx:item/coal_dust"
+        }
+      },
+      {
+        "stack": {
+          "id": "btx:item/ground_netherrack"
+        }
+      },
+      {
+        "stack": {
+          "id": "btx:item/hellfire_dust"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:item/wheat"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:block/sand"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:block/gravel"
+        }
+      }
+    ]
+  },
+  {
+    "name": "btx:hopper_filter/thin",
+    "type": "btx:hopper_filter",
+    "input": {
+      "stack": {
+        "id": "btx:block/slats"
+      }
+    },
+    "accepts": [
+      {
+        "stack": {
+          "id": "minecraft:item/leather"
+        }
+      },
+      {
+        "stack": {
+          "id": "btx:item/scoured_leather"
+        }
+      },
+      {
+        "stack": {
+          "id": "btx:item/tanned_leather"
+        }
+      },
+      {
+        "group": "minecraft:wools"
+      },
+      {
+        "stack": {
+          "id": "minecraft:item/cloth"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:item/paper"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:item/map"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:item/string"
+        }
+      },
+      {
+        "stack": {
+          "id": "btx:item/fabric"
+        }
+      },
+      {
+        "stack": {
+          "id": "btx:item/hemp"
+        }
+      },
+      {
+        "stack": {
+          "id": "btx:item/hemp_fibers"
+        }
+      },
+      {
+        "stack": {
+          "id": "btx:item/wicker"
+        }
+      }
+    ],
+    "includes": [
+      "btx:hopper_filter/powder"
+    ]
+  },
+  {
+    "name": "btx:hopper_filter/small",
+    "type": "btx:hopper_filter",
+    "input": {
+      "stack": {
+        "id": "btx:block/grate"
+      }
+    },
+    "accepts": [
+      {
+        "stack": {
+          "id": "minecraft:item/coal"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:item/nethercoal"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:item/diamond"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:item/quartz"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:item/olivine"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:item/flint"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:item/feather_chicken"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:item/egg_chicken"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:item/ammo_snowball"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:item/ammo_pebble"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:item/clay"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:item/slimeball"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:item/food_cookie"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:item/food_apple"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:item/food_apple_gold"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:item/food_cherry"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:item/string"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:item/paper"
+        }
+      },
+      {
+        "group": "minecraft:wools"
+      },
+      {
+        "stack": {
+          "id": "btx:item/dung"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:block/flower_yellow"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:block/flower_red"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:block/flower_pink"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:block/flower_purple"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:block/flower_light_blue"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:block/flower_orange"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:block/mushroom_brown"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:block/mushroom_red"
+        }
+      }
+    ],
+    "includes": [
+      "btx:hopper_filter/powder"
+    ]
+  },
+  {
+    "name": "btx:hopper_filter/narrow",
+    "type": "btx:hopper_filter",
+    "input": {
+      "group": "minecraft:trapdoor_planks"
+    },
+    "accepts": [
+      {
+        "stack": {
+          "id": "minecraft:item/ammo_arrow"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:item/ammo_arrow_gold"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:item/ammo_arrow_purple"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:item/ammo_arrow_flaming"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:item/tool_fishingrod"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:block/torch_coal"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:block/torch_redstone_idle"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:item/bone"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:item/stick"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:item/sugarcane"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:item/rope"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:item/wheat"
+        }
+      },
+      {
+        "stack": {
+          "id": "btx:item/belt"
+        }
+      }
+    ],
+    "includes": [
+      "btx:hopper_filter/small"
+    ]
+  },
+  {
+    "name": "btx:hopper_filter/narrow_iron",
+    "type": "btx:hopper_filter",
+    "input": {
+      "stack": {
+        "id": "minecraft:block/trapdoor_iron"
+      }
+    },
+    "includes": [
+      "btx:hopper_filter/narrow"
+    ]
+  },
+  {
+    "name": "btx:hopper_filter/narrow_glass",
+    "type": "btx:hopper_filter",
+    "input": {
+      "stack": {
+        "id": "minecraft:block/trapdoor_glass"
+      }
+    },
+    "includes": [
+      "btx:hopper_filter/narrow"
+    ]
+  },
+  {
+    "name": "btx:hopper_filter/narrow_steel",
+    "type": "btx:hopper_filter",
+    "input": {
+      "stack": {
+        "id": "minecraft:block/trapdoor_steel"
+      }
+    },
+    "includes": [
+      "btx:hopper_filter/narrow"
+    ]
+  },
+  {
+    "name": "btx:hopper_filter/stackable",
+    "type": "btx:hopper_filter",
+    "input": {
+      "stack": {
+        "id": "minecraft:block/mesh"
+      }
+    },
+    "accepts": [
+      {
+        "stack": {
+          "id": "minecraft:block/sapling_oak"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:block/sapling_oak_retro"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:block/sapling_birch"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:block/sapling_pine"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:block/sapling_cherry"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:block/sapling_eucalyptus"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:block/sapling_palm"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:block/sapling_shrub"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:block/sapling_thorn"
+        }
+      },
+      {
+        "stack": {
+          "id": "minecraft:block/sapling_cacao"
+        }
+      }
+    ],
+    "includes": [
+      "btx:hopper_filter/thin",
+      "btx:hopper_filter/narrow"
+    ],
+    "match": "non_block_stackable"
+  },
+  {
+    "name": "btx:hopper_filter/items",
+    "type": "btx:hopper_filter",
+    "input": {
+      "stack": {
+        "id": "minecraft:block/ladder_oak"
+      }
+    },
+    "includes": [
+      "btx:hopper_filter/stackable"
+    ],
+    "match": "non_block"
+  }
+]

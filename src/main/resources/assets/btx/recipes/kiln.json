@@ -1,14 +1,40 @@
 [
   {
-    "name": "btx:kiln/brick_clay_from_block_clay",
+    "name": "btx:kiln/crucible_from_unfired_crucible",
     "type": "btx:kiln",
     "input": {
       "stack": {
-        "id": "minecraft:block/block_clay"
+        "id": "btx:block/unfired_crucible"
       }
     },
     "output": {
-      "id": "minecraft:item/brick_clay",
+      "id": "btx:block/crucible",
+      "amount": 1
+    }
+  },
+  {
+    "name": "btx:kiln/planter_from_unfired_planter",
+    "type": "btx:kiln",
+    "input": {
+      "stack": {
+        "id": "btx:block/unfired_planter"
+      }
+    },
+    "output": {
+      "id": "btx:block/planter",
+      "amount": 1
+    }
+  },
+  {
+    "name": "btx:kiln/vase_from_unfired_vase",
+    "type": "btx:kiln",
+    "input": {
+      "stack": {
+        "id": "btx:block/unfired_vase"
+      }
+    },
+    "output": {
+      "id": "btx:block/vase",
       "amount": 1
     }
   }

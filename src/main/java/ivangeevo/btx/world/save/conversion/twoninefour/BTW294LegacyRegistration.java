@@ -1,6 +1,6 @@
 package ivangeevo.btx.world.save.conversion.twoninefour;
 
-import ivangeevo.btx.block.entity.TileEntityMillStone;
+import ivangeevo.btx.block.entity.*;
 import ivangeevo.btx.entity.entities.WaterWheelEntity;
 import ivangeevo.btx.entity.entities.WindMillEntity;
 import net.minecraft.core.block.entity.TileEntity;
@@ -69,7 +69,14 @@ public final class BTW294LegacyRegistration {
         // tile(BtwUnfiredPotteryEntity.class,  "unfired_pottery",  "UnfiredPottery");
         // tile(BtwVaseEntity.class,            "vase",             "Vase");
         // tile(BtwCrucibleEntity.class,        "crucible",         "Crucible");
+		legacyTile(TileEntityCauldron.class,"Cauldron");
 		legacyTile(TileEntityMillStone.class,"MillStone");
+		legacyTile(TileEntityHopper.class, "Hopper");
+		legacyTile(TileEntityTurntable.class, "Turntable");
+		legacyTile(TileEntityVase.class, "Vase");
+		// "UnfiredPottery" is left unmapped on purpose: it only held 2.94's in-kiln cook timer, and BTX's unfired
+		// pottery has no tile entity (BlockLogicKiln does the cooking), so the block converts and the timer is dropped.
+		legacyTile(TileEntityCrucible.class, "Crucible");
 
         // Entities: (class, modern key, factory, BTW saved name, BTW tracker id)
         // entity(BtwWaterWheel.class,       "water_wheel",             BtwWaterWheel::new,       "WaterWheel",            222);
@@ -78,7 +85,7 @@ public final class BTW294LegacyRegistration {
         // entity(BtwMovingPlatform.class,   "moving_platform",         BtwMovingPlatform::new,   "MovingPlatform",        225);
         // entity(BtwLiftedBlock.class,      "block_lifted_by_platform",BtwLiftedBlock::new,      "BlockLiftedByPlatform", 226);
         // entity(BtwBroadheadArrow.class,   "broadhead_arrow",         BtwBroadheadArrow::new,   "BroadheadArrow",        227);
-		legacyEntity(WindMillEntity.class, "WaterWheel", 222);
+		legacyEntity(WaterWheelEntity.class, "WaterWheel", 222);
 		legacyEntity(WindMillEntity.class, "WindMill", 223);
 	}
 

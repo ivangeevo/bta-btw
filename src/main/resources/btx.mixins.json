@@ -7,8 +7,16 @@
   },
   "mixins": [
     "BlockLogicFireAccessor",
-    "BlockLogicFireMixin",
+    "MixinBlockLogicFire",
+    "MixinBlockLogicCropsPumpkin",
+    "MixinBlockLogicCropsWheat",
+    "MixinBlockLogicSugarcane",
+    "MixinItemSeeds",
     "MixinItemToolHoe",
+    "MixinProjectileArrow",
+    "entity.EntityMixin",
+    "entity.ProjectileArrowMixin",
+    "gui.MenuInventoryCreativeMixin",
     "client.MinecraftMixin",
     "gui.screens.PlayerMixinBTXScreens",
     "world.ChunkLoaderLegacyMixin",
@@ -18,6 +26,7 @@
   "client": [
     "client.render.BlockModelFireMixin",
     "client.render.MixinBlockModelGeneric",
+    "client.render.MixinBlockModelGenericShifted",
     "client.render.RenderGlobalMixin",
     "gui.screens.PlayerLocalMixinBTXScreens",
     "net.PacketHandlerClientMixinBTXMachines"

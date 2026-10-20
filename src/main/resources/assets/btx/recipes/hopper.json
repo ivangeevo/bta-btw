@@ -1,0 +1,43 @@
+[
+  {
+    "name": "btx:hopper/sand_from_gravel",
+    "type": "btx:hopper",
+    "input": {
+      "stack": {
+        "id": "minecraft:block/gravel"
+      }
+    },
+    "filter": {
+      "stack": {
+        "id": "btx:block/wicker_pane"
+      }
+    },
+    "output": {
+      "id": "minecraft:block/sand",
+      "amount": 1
+    },
+    "filtered_output": {
+      "id": "minecraft:item/flint",
+      "amount": 1
+    }
+  },
+  {
+    "name": "btx:hopper/hellfire_dust_from_ground_netherrack",
+    "type": "btx:hopper",
+    "input": {
+      "stack": {
+        "id": "btx:item/ground_netherrack"
+      }
+    },
+    "filter": {
+      "stack": {
+        "id": "minecraft:block/soulsand"
+      }
+    },
+    "filtered_output": {
+      "id": "btx:item/hellfire_dust",
+      "amount": 1
+    },
+    "souls": true
+  }
+]

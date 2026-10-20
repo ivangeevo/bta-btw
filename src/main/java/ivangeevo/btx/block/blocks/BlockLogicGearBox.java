@@ -295,17 +295,6 @@ public class BlockLogicGearBox extends BlockLogicRotatable implements Mechanical
 
 	//------------- BTW facing helpers (Block.rotateFacingAroundY / cycleFacing) -------------//
 
-	private static final int[] HORIZONTAL_CLOCKWISE = {2, 5, 3, 4}; // N, E, S, W
-
-	public static int rotateFacingAroundY(int facing, boolean reverse) {
-		for (int i = 0; i < 4; i++) {
-			if (HORIZONTAL_CLOCKWISE[i] == facing) {
-				return HORIZONTAL_CLOCKWISE[(i + (reverse ? 3 : 1)) % 4];
-			}
-		}
-
-		return facing; // up / down do not rotate around Y
-	}
 
 	public static int cycleFacing(int facing, boolean reverse) {
 		return (facing + (reverse ? 5 : 1)) % 6;

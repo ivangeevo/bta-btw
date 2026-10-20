@@ -1,7 +1,12 @@
 package ivangeevo.btx.mixin.gui.screens;
 
+import ivangeevo.btx.block.entity.TileEntityCauldron;
+import ivangeevo.btx.block.entity.TileEntityCrucible;
+import ivangeevo.btx.block.entity.TileEntityHopper;
+import ivangeevo.btx.gui.hopper.ScreenHopper;
 import ivangeevo.btx.block.entity.TileEntityMillStone;
 import ivangeevo.btx.gui.BTXScreens;
+import ivangeevo.btx.gui.cookingvessel.ScreenCookingVessel;
 import ivangeevo.btx.gui.millstone.ScreenMillStone;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -26,4 +31,18 @@ public abstract class PlayerLocalMixinBTXScreens extends Player implements BTXSc
         this.mc.displayScreen(new ScreenMillStone(this.inventory, tileEntity));
     }
 
+	@Override
+	public void btx$displayCrucibleScreen(TileEntityCrucible tileEntity) {
+		this.mc.displayScreen(new ScreenCookingVessel(this.inventory, tileEntity, "btx.gui.crucible.title"));
+	}
+
+	@Override
+	public void btx$displayCauldronScreen(TileEntityCauldron tileEntity) {
+		this.mc.displayScreen(new ScreenCookingVessel(this.inventory, tileEntity, "btx.gui.cauldron.title"));
+	}
+
+	@Override
+	public void btx$displayHopperScreen(TileEntityHopper tileEntity) {
+		this.mc.displayScreen(new ScreenHopper(this.inventory, tileEntity));
+	}
 }

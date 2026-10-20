@@ -1,5 +1,8 @@
 package ivangeevo.btx.mixin.net;
 
+import ivangeevo.btx.block.entity.TileEntityCauldron;
+import ivangeevo.btx.block.entity.TileEntityCrucible;
+import ivangeevo.btx.block.entity.TileEntityHopper;
 import ivangeevo.btx.block.entity.TileEntityMillStone;
 import ivangeevo.btx.config.BTXConfig;
 import ivangeevo.btx.gui.BTXScreens;
@@ -29,6 +32,18 @@ public abstract class PacketHandlerClientMixinBTXMachines {
         if (packetContainerOpen.inventoryType == BTXConfig.MILLSTONE_SCREEN_ID) {
             TileEntityMillStone machine = new TileEntityMillStone();
             playerScreen.btx$displayMillStoneScreen(machine);
+            playerLocal.containerMenu.containerId = packetContainerOpen.windowId;
+        } else if (packetContainerOpen.inventoryType == BTXConfig.CRUCIBLE_SCREEN_ID) {
+            TileEntityCrucible machine = new TileEntityCrucible();
+            playerScreen.btx$displayCrucibleScreen(machine);
+            playerLocal.containerMenu.containerId = packetContainerOpen.windowId;
+        } else if (packetContainerOpen.inventoryType == BTXConfig.CAULDRON_SCREEN_ID) {
+            TileEntityCauldron machine = new TileEntityCauldron();
+            playerScreen.btx$displayCauldronScreen(machine);
+            playerLocal.containerMenu.containerId = packetContainerOpen.windowId;
+        } else if (packetContainerOpen.inventoryType == BTXConfig.HOPPER_SCREEN_ID) {
+            TileEntityHopper machine = new TileEntityHopper();
+            playerScreen.btx$displayHopperScreen(machine);
             playerLocal.containerMenu.containerId = packetContainerOpen.windowId;
         }
     }

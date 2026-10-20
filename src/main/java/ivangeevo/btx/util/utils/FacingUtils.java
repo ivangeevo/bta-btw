@@ -64,4 +64,13 @@ public final class FacingUtils {
 		}
 		return box;
 	}
+
+	// BTW: Block.rotatedFacingsAroundJClockwise / rotatedFacingsAroundJCounterclockwise, indexed by facing
+	private static final int[] ROTATED_AROUND_Y = {0, 1, 4, 5, 3, 2};
+	private static final int[] ROTATED_AROUND_Y_REVERSE = {0, 1, 5, 4, 2, 3};
+
+	/** BTW: Block.rotateFacingAroundY. Up and down (0, 1) don't rotate. */
+	public static int rotateFacingAroundY(int facing, boolean reverse) {
+		return reverse ? ROTATED_AROUND_Y_REVERSE[facing] : ROTATED_AROUND_Y[facing];
+	}
 }

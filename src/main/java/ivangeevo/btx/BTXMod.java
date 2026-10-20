@@ -9,6 +9,7 @@ import ivangeevo.btx.item.HoeDrops;
 import ivangeevo.btx.networking.NetEntryWaterWheel;
 import ivangeevo.btx.networking.NetEntryWindMill;
 import ivangeevo.btx.recipe.BTXRecipes;
+import ivangeevo.btx.recipe.cooking.CrucibleIncineration;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.core.net.entity.NetEntityHandler;
 import turniplabs.halplibe.HalpLibe;
@@ -45,6 +46,7 @@ public class BTXMod implements ModInitializer {
 		BTXSoundTypes.init();
 		TurntableAttachments.registerDefaults();
 		HoeDrops.registerDefaults();
+		CrucibleIncineration.registerDefaults();
 		//BTXLegacyConversion.init();
 	}
 }

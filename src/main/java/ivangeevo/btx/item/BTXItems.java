@@ -3,6 +3,7 @@ package ivangeevo.btx.item;
 import ivangeevo.btx.BTXMod;
 import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.item.items.ItemDung;
+import ivangeevo.btx.item.items.ItemFoulFood;
 import ivangeevo.btx.item.items.ItemWaterWheel;
 import ivangeevo.btx.item.items.ItemWindMill;
 import net.minecraft.core.data.tag.Tag;
@@ -26,13 +27,11 @@ public final class BTXItems {
 	public static Item HEMP_FIBERS;
 	public static Item SCOURED_LEATHER;
 	public static Item DONUT;
-	public static Item SLATS;
 	public static Item DUNG;
 	public static Item WATERWHEEL;
 	public static Item SAIL;
 	public static Item WINDMILL;
 	public static Item FABRIC;
-	public static Item GRATE;
 	public static Item WICKER;
 	public static Item TANNED_LEATHER;
 	public static Item STRAP;
@@ -85,6 +84,11 @@ public final class BTXItems {
 			new Item(key, namespaceId, id).setMaxStackSize(1)
 		);
 		CONCENTRATED_HELLFIRE = registerItem("concentrated_hellfire", Item::new); //recipe needed
+		HELLFIRE_DUST = registerItem("hellfire_dust", Item::new);
+		FOUL_FOOD = registerItem("foul_food", ItemFoulFood::new);
+		COAL_DUST = registerItem("coal_dust", Item::new);
+		GROUND_NETHERRACK = registerItem("ground_netherrack", Item::new);
+		WICKER = registerItem("wicker", Item::new);
 	}
 
 	// No extra settings builder

@@ -1,0 +1,17 @@
+{
+	"format_version": "1.9.0",
+	"ambientocclusion": false,
+	"textures": {
+		"particle": "btx:block/crucible/crucible_contents",
+		"contents": "btx:block/crucible/crucible_contents"
+	},
+	"elements": [
+		{
+			"from": [3, 3, 3],
+			"to": [13, 4, 13],
+			"faces": {
+				"up": {"uv": [3, 3, 13, 13], "texture": "#contents"}
+			}
+		}
+	]
+}

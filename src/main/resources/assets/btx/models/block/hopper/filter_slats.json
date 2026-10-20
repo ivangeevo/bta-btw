@@ -1,0 +1,42 @@
+{
+ "format_version": "1.9.0",
+ "ambientocclusion": false,
+ "textures": {
+  "particle": "btx:block/pane/slats",
+  "filter": "btx:block/pane/slats"
+ },
+ "elements": [
+  {
+   "from": [
+    2,
+    14,
+    2
+   ],
+   "to": [
+    14,
+    15,
+    14
+   ],
+   "faces": {
+    "up": {
+     "uv": [
+      2,
+      2,
+      14,
+      14
+     ],
+     "texture": "#filter"
+    },
+    "down": {
+     "uv": [
+      2,
+      2,
+      14,
+      14
+     ],
+     "texture": "#filter"
+    }
+   }
+  }
+ ]
+}

@@ -1,0 +1,17 @@
+{
+	"format_version": "1.9.0",
+	"ambientocclusion": false,
+	"textures": {
+		"particle": "minecraft:block/fluid/lava/still",
+		"contents": "minecraft:block/fluid/lava/still"
+	},
+	"elements": [
+		{
+			"from": [3, 3, 3],
+			"to": [13, 4, 13],
+			"faces": {
+				"up": {"uv": [3, 3, 13, 13], "texture": "#contents"}
+			}
+		}
+	]
+}

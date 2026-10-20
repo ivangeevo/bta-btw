@@ -1,0 +1,260 @@
+[
+  {
+    "name": "btx:cauldron/concentrated_hellfire_from_hellfire_dust",
+    "type": "btx:cauldron",
+    "inputs": [
+      {"stack": {"id": "btx:item/hellfire_dust", "amount": 8}}
+    ],
+    "outputs": [
+      {"id": "btx:item/concentrated_hellfire"}
+    ]
+  },
+  {
+    "name": "btx:cauldron/tanned_leather_from_scoured_leather",
+    "type": "btx:cauldron",
+    "inputs": [
+      {"stack": {"id": "btx:item/dung"}},
+      {"stack": {"id": "btx:item/scoured_leather"}}
+    ],
+    "outputs": [
+      {"id": "btx:item/tanned_leather"}
+    ]
+  },
+  {
+    "name": "btx:cauldron/orange_wool_from_white_wool",
+    "type": "btx:cauldron",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/dye", "meta": 14}},
+      {"stack": {"id": "minecraft:block/wool", "amount": 8, "meta": 0}}
+    ],
+    "outputs": [
+      {"id": "minecraft:block/wool", "amount": 8, "meta": 1}
+    ]
+  },
+  {
+    "name": "btx:cauldron/magenta_wool_from_white_wool",
+    "type": "btx:cauldron",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/dye", "meta": 13}},
+      {"stack": {"id": "minecraft:block/wool", "amount": 8, "meta": 0}}
+    ],
+    "outputs": [
+      {"id": "minecraft:block/wool", "amount": 8, "meta": 2}
+    ]
+  },
+  {
+    "name": "btx:cauldron/lightblue_wool_from_white_wool",
+    "type": "btx:cauldron",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/dye", "meta": 12}},
+      {"stack": {"id": "minecraft:block/wool", "amount": 8, "meta": 0}}
+    ],
+    "outputs": [
+      {"id": "minecraft:block/wool", "amount": 8, "meta": 3}
+    ]
+  },
+  {
+    "name": "btx:cauldron/yellow_wool_from_white_wool",
+    "type": "btx:cauldron",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/dye", "meta": 11}},
+      {"stack": {"id": "minecraft:block/wool", "amount": 8, "meta": 0}}
+    ],
+    "outputs": [
+      {"id": "minecraft:block/wool", "amount": 8, "meta": 4}
+    ]
+  },
+  {
+    "name": "btx:cauldron/lime_wool_from_white_wool",
+    "type": "btx:cauldron",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/dye", "meta": 10}},
+      {"stack": {"id": "minecraft:block/wool", "amount": 8, "meta": 0}}
+    ],
+    "outputs": [
+      {"id": "minecraft:block/wool", "amount": 8, "meta": 5}
+    ]
+  },
+  {
+    "name": "btx:cauldron/pink_wool_from_white_wool",
+    "type": "btx:cauldron",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/dye", "meta": 9}},
+      {"stack": {"id": "minecraft:block/wool", "amount": 8, "meta": 0}}
+    ],
+    "outputs": [
+      {"id": "minecraft:block/wool", "amount": 8, "meta": 6}
+    ]
+  },
+  {
+    "name": "btx:cauldron/gray_wool_from_white_wool",
+    "type": "btx:cauldron",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/dye", "meta": 8}},
+      {"stack": {"id": "minecraft:block/wool", "amount": 8, "meta": 0}}
+    ],
+    "outputs": [
+      {"id": "minecraft:block/wool", "amount": 8, "meta": 7}
+    ]
+  },
+  {
+    "name": "btx:cauldron/silver_wool_from_white_wool",
+    "type": "btx:cauldron",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/dye", "meta": 7}},
+      {"stack": {"id": "minecraft:block/wool", "amount": 8, "meta": 0}}
+    ],
+    "outputs": [
+      {"id": "minecraft:block/wool", "amount": 8, "meta": 8}
+    ]
+  },
+  {
+    "name": "btx:cauldron/cyan_wool_from_white_wool",
+    "type": "btx:cauldron",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/dye", "meta": 6}},
+      {"stack": {"id": "minecraft:block/wool", "amount": 8, "meta": 0}}
+    ],
+    "outputs": [
+      {"id": "minecraft:block/wool", "amount": 8, "meta": 9}
+    ]
+  },
+  {
+    "name": "btx:cauldron/purple_wool_from_white_wool",
+    "type": "btx:cauldron",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/dye", "meta": 5}},
+      {"stack": {"id": "minecraft:block/wool", "amount": 8, "meta": 0}}
+    ],
+    "outputs": [
+      {"id": "minecraft:block/wool", "amount": 8, "meta": 10}
+    ]
+  },
+  {
+    "name": "btx:cauldron/blue_wool_from_white_wool",
+    "type": "btx:cauldron",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/dye", "meta": 4}},
+      {"stack": {"id": "minecraft:block/wool", "amount": 8, "meta": 0}}
+    ],
+    "outputs": [
+      {"id": "minecraft:block/wool", "amount": 8, "meta": 11}
+    ]
+  },
+  {
+    "name": "btx:cauldron/brown_wool_from_white_wool",
+    "type": "btx:cauldron",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/dye", "meta": 3}},
+      {"stack": {"id": "minecraft:block/wool", "amount": 8, "meta": 0}}
+    ],
+    "outputs": [
+      {"id": "minecraft:block/wool", "amount": 8, "meta": 12}
+    ]
+  },
+  {
+    "name": "btx:cauldron/green_wool_from_white_wool",
+    "type": "btx:cauldron",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/dye", "meta": 2}},
+      {"stack": {"id": "minecraft:block/wool", "amount": 8, "meta": 0}}
+    ],
+    "outputs": [
+      {"id": "minecraft:block/wool", "amount": 8, "meta": 13}
+    ]
+  },
+  {
+    "name": "btx:cauldron/red_wool_from_white_wool",
+    "type": "btx:cauldron",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/dye", "meta": 1}},
+      {"stack": {"id": "minecraft:block/wool", "amount": 8, "meta": 0}}
+    ],
+    "outputs": [
+      {"id": "minecraft:block/wool", "amount": 8, "meta": 14}
+    ]
+  },
+  {
+    "name": "btx:cauldron/black_wool_from_white_wool",
+    "type": "btx:cauldron",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/dye", "meta": 0}},
+      {"stack": {"id": "minecraft:block/wool", "amount": 8, "meta": 0}}
+    ],
+    "outputs": [
+      {"id": "minecraft:block/wool", "amount": 8, "meta": 15}
+    ]
+  },
+  {
+    "name": "btx:cauldron/brown_wool_from_dung",
+    "type": "btx:cauldron",
+    "inputs": [
+      {"stack": {"id": "btx:item/dung"}},
+      {"stack": {"id": "minecraft:block/wool", "amount": 8, "meta": 0}}
+    ],
+    "outputs": [
+      {"id": "minecraft:block/wool", "amount": 8, "meta": 12}
+    ]
+  },
+  {
+    "name": "btx:cauldron/tnt_from_sand_and_gunpowder",
+    "type": "btx:cauldron",
+    "inputs": [
+      {"stack": {"id": "minecraft:block/sand", "amount": 4}},
+      {"stack": {"id": "minecraft:item/gunpowder", "amount": 5}}
+    ],
+    "outputs": [
+      {"id": "minecraft:block/tnt"}
+    ]
+  },
+  {
+    "name": "btx:cauldron/wool_from_string",
+    "type": "btx:cauldron",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/string", "amount": 4}}
+    ],
+    "outputs": [
+      {"id": "minecraft:block/wool"}
+    ]
+  },
+  {
+    "name": "btx:cauldron/green_dye_from_cactus",
+    "type": "btx:cauldron",
+    "inputs": [
+      {"stack": {"id": "minecraft:block/cactus"}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/dye", "meta": 2}
+    ]
+  },
+  {
+    "name": "btx:cauldron/food_porkchop_cooked_from_food_porkchop_raw",
+    "type": "btx:cauldron",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/food_porkchop_raw"}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/food_porkchop_cooked"}
+    ]
+  },
+  {
+    "name": "btx:cauldron/food_venison_cooked_from_food_venison_raw",
+    "type": "btx:cauldron",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/food_venison_raw"}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/food_venison_cooked"}
+    ]
+  },
+  {
+    "name": "btx:cauldron/food_fish_cooked_from_food_fish_raw",
+    "type": "btx:cauldron",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/food_fish_raw"}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/food_fish_cooked"}
+    ]
+  }
+]

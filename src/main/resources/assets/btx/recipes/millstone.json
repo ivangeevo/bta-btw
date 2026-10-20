@@ -50,5 +50,33 @@
       "id": "minecraft:item/dust_sugar",
       "amount": 1
     }
+  },
+  {
+    "name": "btx:millstone/coal_dust_from_coal",
+    "type": "btx:millstone",
+    "input": {
+      "stack": {
+        "id": "minecraft:item/coal",
+        "meta": 0
+      }
+    },
+    "output": {
+      "id": "btx:item/coal_dust",
+      "amount": 1
+    }
+  },
+  {
+    "name": "btx:millstone/coal_dust_from_charcoal",
+    "type": "btx:millstone",
+    "input": {
+      "stack": {
+        "id": "minecraft:item/coal",
+        "meta": 1
+      }
+    },
+    "output": {
+      "id": "btx:item/coal_dust",
+      "amount": 1
+    }
   }
 ]

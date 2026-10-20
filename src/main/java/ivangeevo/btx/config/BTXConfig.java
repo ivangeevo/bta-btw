@@ -18,6 +18,9 @@ public class BTXConfig {
 	private static int NET_ENTITY_TYPE_STARTING_FROM = 100;
 
 	public static int MILLSTONE_SCREEN_ID = 44;
+	public static int CRUCIBLE_SCREEN_ID = 45;
+	public static int CAULDRON_SCREEN_ID = 46;
+	public static int HOPPER_SCREEN_ID = 47;
 
 	private static int currentBlockID;
 	private static int currentItemID;

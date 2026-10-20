@@ -1,5 +1,6 @@
 package ivangeevo.btx.block.blocks;
 
+import ivangeevo.btx.BTXGlobals;
 import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.block.blocks.util.FireInteraction;
 import ivangeevo.btx.mixin.BlockLogicFireAccessor;
@@ -8,13 +9,21 @@ import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockLogicFire;
 import net.minecraft.core.block.BlockLogicSupplier;
 import net.minecraft.core.block.Blocks;
+import net.minecraft.core.block.tag.BlockTags;
 import net.minecraft.core.data.gamerule.GameRules;
+import net.minecraft.core.entity.player.Player;
+import net.minecraft.core.item.Item;
 import net.minecraft.core.sound.BlockSounds;
 import net.minecraft.core.util.helper.Direction;
+import net.minecraft.core.util.helper.Side;
+import net.minecraft.core.util.phys.HitResult;
 import net.minecraft.core.world.World;
+import net.minecraft.core.world.biome.Biome;
 import net.minecraft.core.world.pos.TilePos;
 import net.minecraft.core.world.pos.TilePosc;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3dc;
 
 import java.util.Random;
 
@@ -29,8 +38,9 @@ public class BlockLogicStokedFire extends BlockLogicFire implements FireInteract
         return block -> new BlockLogicStokedFire(
             block
                 .withSound(BlockSounds.WOOD)
-                .withHardness(0F)
-            // TODO: light value 1.0 (BTW setLightValue(1F)), use whatever your other light-emitting blocks use
+                .withSetUnbreakable()
+                .withLightEmission(1F)
+                .withTags(BlockTags.BROKEN_BY_FLUIDS, BlockTags.PLACE_OVERWRITES, BlockTags.NOT_IN_CREATIVE_MENU)
         );
     }
 
@@ -40,13 +50,28 @@ public class BlockLogicStokedFire extends BlockLogicFire implements FireInteract
         setFlammable(this.block, 60, 0);
     }
 
-    // BTW: tickRate
+    @Override
+    public HitResult collisionRayTrace(@NotNull World world, @NotNull TilePosc tilePos, @NotNull Vector3dc start, @NotNull Vector3dc end, boolean useSelectionBounds) {
+        if (!BTXGlobals.localPlayerInstantBreaks.getAsBoolean()) return null;
+
+        return super.collisionRayTrace(world, tilePos, start, end, useSelectionBounds);
+    }
+
+    @Override
+    public void onDestroyedByPlayer(@NotNull World world, @NotNull TilePosc tilePos, @NotNull Side side, int data, @NotNull Player player, @Nullable Item item) {
+        super.onDestroyedByPlayer(world, tilePos, side, data, player, item);
+
+        TilePos above = tilePos.up(new TilePos());
+        if (world.getBlockType(above) == Blocks.FIRE) {
+            world.setBlockTypeNotify(above, Blocks.AIR);
+        }
+    }
+
     @Override
     public int tickDelay() {
         return TICK_RATE;
     }
 
-    // BTW: onBlockAdded. Override to make burn time more consistent (no portal check).
     @Override
     public void onPlacedByWorld(@NotNull World world, @NotNull TilePosc tilePos) {
         world.scheduleBlockUpdate(tilePos, this.block, this.tickDelay());
@@ -95,8 +120,6 @@ public class BlockLogicStokedFire extends BlockLogicFire implements FireInteract
         } else {
             world.scheduleBlockUpdate(tilePos, this.block, this.tickDelay() + world.rand.nextInt(10));
         }
-
-        // TODO: AchievementEventDispatcher.triggerEventForNearbyPlayers(StokeFireEvent, ...) (no BTA equivalent seen)
     }
 
     @Override
@@ -109,9 +132,6 @@ public class BlockLogicStokedFire extends BlockLogicFire implements FireInteract
 		return Blocks.FIRE;
 	}
 
-	//------------- Class Specific Methods ------------//
-
-    /** Return true if the Stoked fire block still remains. */
     public boolean validateState(World world, TilePosc tilePos) {
         TilePos below = new TilePos(tilePos.x(), tilePos.y() - 1, tilePos.z());
 
@@ -133,8 +153,6 @@ public class BlockLogicStokedFire extends BlockLogicFire implements FireInteract
         return true;
     }
 
-    // ---- BTW BlockFire helpers that BTA's BlockLogicFire doesn't have ----
-
     public void tryToDestroyBlockWithFire(World world, int x, int y, int z, int chanceToDestroy, Random random, int sourceMetadata) {
         TilePos pos = new TilePos(x, y, z);
         int abilityToCatchFire = BlockLogicFireAccessor.btx$getBurnChance()[world.getBlockType(pos).id()];
@@ -146,7 +164,6 @@ public class BlockLogicStokedFire extends BlockLogicFire implements FireInteract
         }
     }
 
-    /** BTW's default Block.onDestroyedByFire behaviour (from the pre-FCMOD tryToCatchBlockOnFire). */
     protected void onBlockDestroyedByFire(World world, TilePosc pos, int fireAge, Random random) {
         Block<?> target = world.getBlockType(pos);
         boolean isTNT = target == Blocks.TNT;
@@ -164,8 +181,15 @@ public class BlockLogicStokedFire extends BlockLogicFire implements FireInteract
         }
     }
 
+    private static boolean isHighHumidity(World world, TilePosc pos) {
+        Biome biome = world.getBlockBiome(pos);
+        return biome.defaultHumidity > 0.85F;
+    }
+
     public void checkForFireSpreadFromLocation(World world, TilePosc pos, Random rand, int sourceFireAge) {
         if (!world.getGameRuleValue(GameRules.DO_FIRE_BURN)) return;
+
+        boolean highHumidity = isHighHumidity(world, pos);
 
         for (int i = pos.x() - 1; i <= pos.x() + 1; ++i) {
             for (int k = pos.z() - 1; k <= pos.z() + 1; ++k) {
@@ -175,34 +199,36 @@ public class BlockLogicStokedFire extends BlockLogicFire implements FireInteract
                         if (j > pos.y() + 1) {
                             spreadTopBound += (j - (pos.y() + 1)) * 100;
                         }
-                        checkForFireSpreadToOneBlockLocation(world, new TilePos(i, j, k), rand, sourceFireAge, spreadTopBound);
+                        checkForFireSpreadToOneBlockLocation(world, new TilePos(i, j, k), rand, sourceFireAge, highHumidity, spreadTopBound);
                     }
                 }
             }
         }
     }
 
-    private void checkForFireSpreadToOneBlockLocation(World world, TilePos pos, Random rand, int sourceFireAge, int spreadTopBound) {
+    private void checkForFireSpreadToOneBlockLocation(World world, TilePos pos, Random rand, int sourceFireAge, boolean highHumidity, int spreadTopBound) {
         int neighborChance = getChanceOfNeighborsEncouragingFireCustom(world, pos);
         if (neighborChance <= 0) return;
 
-        int spreadChance = (neighborChance + 61) / (sourceFireAge + 30); // BTW formula
-        // TODO: halve when high humidity (BTW isBlockHighHumidity), if BTA has an equivalent
+        int spreadChance = (neighborChance + 61) / (sourceFireAge + 30);
 
-        TilePos q = new TilePos();
+        if (highHumidity) {
+            spreadChance /= 2;
+        }
+
+        TilePos queryPos = new TilePos();
         if (spreadChance > 0 && rand.nextInt(spreadTopBound) <= spreadChance
             && !world.isBlockBeingRainedOn(pos)
-            && !world.isBlockBeingRainedOn(pos.west(q))
-            && !world.isBlockBeingRainedOn(pos.east(q))
-            && !world.isBlockBeingRainedOn(pos.north(q))
-            && !world.isBlockBeingRainedOn(pos.south(q))) {
+            && !world.isBlockBeingRainedOn(pos.west(queryPos))
+            && !world.isBlockBeingRainedOn(pos.east(queryPos))
+            && !world.isBlockBeingRainedOn(pos.north(queryPos))
+            && !world.isBlockBeingRainedOn(pos.south(queryPos))) {
             int startMetadata = Math.min(sourceFireAge + rand.nextInt(5) / 4, 15);
             world.setBlockTypeDataNotify(pos, this.getSpreadFireBlock(), startMetadata);
         }
     }
 
     protected int getChanceOfNeighborsEncouragingFireCustom(World world, TilePosc pos) {
-        // BTW also has a setOnFireDirectly branch for non-replaceable blocks, not ported
         if (!world.isAirBlock(pos)) return 0;
 
         int chance = 0;

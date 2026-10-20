@@ -224,7 +224,7 @@ public class BlockLogicKiln extends BlockLogic {
                     double xPos = tilePos.x() + rand.nextDouble();
                     double yPos = tilePos.y() + 1D + (rand.nextDouble() * 0.75D);
                     double zPos = tilePos.z() + rand.nextDouble();
-                    world.spawnParticle("fcwhitesmoke", xPos, yPos, zPos, 0.0, 0.0, 0.0, 0, false);
+                    world.spawnParticle("whitesmoke", xPos, yPos, zPos, 0.0, 0.0, 0.0, 0, false);
                 }
             } else {
                 for (int tempFacing = 2; tempFacing < 6; tempFacing++) {
@@ -249,7 +249,7 @@ public class BlockLogicKiln extends BlockLogic {
                         zPos += horizontalOffset;
                     }
 
-                    world.spawnParticle("fcwhitesmoke", xPos, yPos, zPos, 0.0, 0.0, 0.0, 0, false);
+                    world.spawnParticle("whitesmoke", xPos, yPos, zPos, 0.0, 0.0, 0.0, 0, false);
                 }
             }
         }

@@ -54,11 +54,20 @@ public final class BTXCreativeContents {
 		REG.register(BTXItems.BELT, inCategory(CreativeInventoryCategory.ORGANIC));
 		REG.register(BTXItems.WOOD_BLADE, inCategory(CreativeInventoryCategory.MISCELLANEOUS));
 		REG.register(BTXItems.CONCENTRATED_HELLFIRE, inCategory(CreativeInventoryCategory.MISCELLANEOUS));
-
+		REG.register(BTXItems.HELLFIRE_DUST, inCategory(CreativeInventoryCategory.MISCELLANEOUS));
+		REG.register(BTXItems.GROUND_NETHERRACK, inCategory(CreativeInventoryCategory.MISCELLANEOUS));
+		REG.register(BTXItems.FOUL_FOOD, inCategory(CreativeInventoryCategory.MISCELLANEOUS));
+		REG.register(BTXItems.COAL_DUST, inCategory(CreativeInventoryCategory.MISCELLANEOUS));
 
 		// Blocks
 		// TODO: The blocks we add probably should be in their own category for machines/mech devices
 		REG.register(BTXBlocks.MILLSTONE, inCategory(CreativeInventoryCategory.WORKBENCHES));
+		REG.register(BTXBlocks.HOPPER, inCategory(CreativeInventoryCategory.WORKBENCHES));
+		REG.register(BTXBlocks.GRATE, inCategory(CreativeInventoryCategory.WOOD));
+		REG.register(BTXBlocks.SLATS, inCategory(CreativeInventoryCategory.WOOD));
+		REG.register(BTXBlocks.WICKER_PANE, inCategory(CreativeInventoryCategory.WOOD));
+		REG.register(BTXBlocks.WICKER_BLOCK, inCategory(CreativeInventoryCategory.WOOD));
+		REG.register(BTXBlocks.WICKER_SLAB, inCategory(CreativeInventoryCategory.WOOD));
 		REG.register(BTXBlocks.HAND_CRANK, inCategory(CreativeInventoryCategory.WORKBENCHES));
 		REG.register(BTXBlocks.AXLE, inCategory(CreativeInventoryCategory.WORKBENCHES));
 		REG.register(BTXBlocks.AXLE_POWER_SOURCE, inCategory(CreativeInventoryCategory.WORKBENCHES));
@@ -73,6 +82,25 @@ public final class BTXCreativeContents {
 		REG.register(BTXBlocks.HIBACHI, inCategory(CreativeInventoryCategory.WORKBENCHES));
 		REG.register(BTXBlocks.BELLOWS, inCategory(CreativeInventoryCategory.WORKBENCHES));
 		REG.register(BTXBlocks.TURNTABLE, inCategory(CreativeInventoryCategory.WORKBENCHES));
+		REG.register(BTXBlocks.UNFIRED_CRUCIBLE, inCategory(CreativeInventoryCategory.ORGANIC));
+		REG.register(BTXBlocks.UNFIRED_PLANTER, inCategory(CreativeInventoryCategory.ORGANIC));
+		REG.register(BTXBlocks.UNFIRED_VASE, inCategory(CreativeInventoryCategory.ORGANIC));
+		REG.register(BTXBlocks.VASE, inCategory(CreativeInventoryCategory.ORGANIC));
+		REG.register(BTXBlocks.VASE_PAINTED, inCategory(CreativeInventoryCategory.ORGANIC).setCustomSupplier(() -> allColorsExcept(BTXBlocks.VASE_PAINTED, DyeColor.WHITE)));
+		REG.register(BTXBlocks.CAULDRON, inCategory(CreativeInventoryCategory.WORKBENCHES));
+		REG.register(BTXBlocks.CRUCIBLE, inCategory(CreativeInventoryCategory.WORKBENCHES));
+		REG.register(BTXBlocks.PLANTER, inCategory(CreativeInventoryCategory.ORGANIC));
+		REG.register(BTXBlocks.PLANTER_SOIL, inCategory(CreativeInventoryCategory.ORGANIC));
+		REG.register(BTXBlocks.PLANTER_GRASS, inCategory(CreativeInventoryCategory.ORGANIC));
+		REG.register(BTXBlocks.PLANTER_GRASS_RETRO, inCategory(CreativeInventoryCategory.ORGANIC));
+		REG.register(BTXBlocks.PLANTER_GRASS_SCORCHED, inCategory(CreativeInventoryCategory.ORGANIC));
+	}
+
+	private static List<ItemStack> allColorsExcept(Block<?> block, DyeColor excluded) {
+		List<ItemStack> list = allColors(block);
+		int excludedMeta = painted(block).toMetadata(excluded);
+		list.removeIf(stack -> stack.getMetadata() == excludedMeta);
+		return list;
 	}
 
 	private static List<ItemStack> allColors(Block<?> block) {

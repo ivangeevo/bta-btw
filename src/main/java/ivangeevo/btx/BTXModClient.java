@@ -2,17 +2,24 @@ package ivangeevo.btx;
 
 import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.block.render.*;
+import ivangeevo.btx.particle.ParticleWhiteSmoke;
 import ivangeevo.btx.entity.entities.WaterWheelEntity;
 import ivangeevo.btx.entity.entities.WaterWheelEntityRenderer;
 import ivangeevo.btx.entity.entities.WindMillEntity;
 import ivangeevo.btx.entity.entities.WindMillEntityRenderer;
 import ivangeevo.btx.item.BTXItems;
 import net.fabricmc.api.ClientModInitializer;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.render.EntityRendererDispatcher;
+import net.minecraft.client.render.block.color.BlockColorCustom;
+import net.minecraft.client.render.block.color.BlockColorDispatcher;
 import net.minecraft.client.render.block.model.BlockModelDispatcher;
 import net.minecraft.client.render.block.model.generic.BlockModelGeneric;
+import net.minecraft.client.render.block.model.generic.BlockModelGenericSlab;
+import net.minecraft.client.render.colorizer.Colorizers;
 import net.minecraft.client.render.item.model.ItemModelDispatcher;
 import net.minecraft.client.render.item.model.ItemModelStandard;
+import net.minecraft.client.render.particle.ParticleDispatcher;
 import net.minecraft.client.render.texture.stitcher.AtlasStitcher;
 import net.minecraft.client.render.texture.stitcher.TextureRegistry;
 import turniplabs.halplibe.event.defs.ClientEvents;
@@ -25,14 +32,26 @@ public class BTXModClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		ClientEvents.BEFORE_CLIENT_START.listen(Key.of(BTXMod.MOD_ID), BTXModClient::beforeClientStart);
+		ClientEvents.AFTER_CLIENT_START.listen(Key.of(BTXMod.MOD_ID), BTXModClient::afterClientStart);
 		ClientEvents.BLOCK_MODEL_RELOAD.listen(Key.of(BTXMod.MOD_ID), BTXModClient::initBlockModels);
 		ClientEvents.ITEM_MODEL_RELOAD.listen(Key.of(BTXMod.MOD_ID), BTXModClient::initItemModels);
 		ClientEvents.ENTITY_RENDERER_RELOAD.listen(Key.of(BTXMod.MOD_ID), BTXModClient::initEntityRenderers);
+		ClientEvents.BLOCK_COLOR_RELOAD.listen(Key.of(BTXMod.MOD_ID), BTXModClient::initBlockColors);
+		BTXGlobals.localPlayerInstantBreaks = () -> {
+			Minecraft mc = Minecraft.getMinecraft();
+			return mc.thePlayer != null && !mc.thePlayer.getGamemode().hasBlockBreakingAnimation();
+		};
 		BTXGlobals.LOGGER.info("Better Than [X] client initialized.");
 	}
 
 	public static void beforeClientStart() {
 		BTXModClient.registerTextures();
+	}
+
+	// after start: ParticleDispatcher grabs the Minecraft instance when it's first created
+	public static void afterClientStart() {
+		ParticleDispatcher.getInstance().addDispatch("whitesmoke",
+			(world, x, y, z, motionX, motionY, motionZ, data) -> new ParticleWhiteSmoke(world, x, y, z, motionX, motionY, motionZ));
 	}
 
 	public static void initItemModels(ItemModelDispatcher dispatcher) {
@@ -48,6 +67,16 @@ public class BTXModClient implements ClientModInitializer {
 		dispatcher.addDispatch(new ItemModelStandard(BTXItems.WINDMILL).setIcon(icon("windmill")));
 		dispatcher.addDispatch(new ItemModelStandard(BTXItems.FABRIC).setIcon(icon("fabric")));
 		dispatcher.addDispatch(new ItemModelStandard(BTXItems.WOOD_BLADE).setIcon(icon("wood_blade")));
+		dispatcher.addDispatch(new ItemModelStandard(BTXItems.FOUL_FOOD).setIcon(icon("foul_food")));
+		dispatcher.addDispatch(new ItemModelStandard(BTXItems.COAL_DUST).setIcon(icon("coal_dust")));
+		dispatcher.addDispatch(new ItemModelStandard(BTXItems.GROUND_NETHERRACK).setIcon(icon("ground_netherrack")));
+		dispatcher.addDispatch(new ItemModelStandard(BTXItems.HELLFIRE_DUST).setIcon(icon("hellfire_dust")));
+		dispatcher.addDispatch(new ItemModelStandard(BTXItems.CONCENTRATED_HELLFIRE).setIcon(icon("concentrated_hellfire")));
+		dispatcher.addDispatch(new ItemModelStandard(BTXItems.WICKER).setIcon(icon("wicker")));
+		// panes show their flat icon instead of a 3D block, like CE
+		dispatcher.addDispatch(new ItemModelStandard(BTXBlocks.GRATE.asItem()).setIcon(icon("grate")));
+		dispatcher.addDispatch(new ItemModelStandard(BTXBlocks.SLATS.asItem()).setIcon(icon("slats")));
+		dispatcher.addDispatch(new ItemModelStandard(BTXBlocks.WICKER_PANE.asItem()).setIcon(icon("wicker_pane")));
 	}
 
 	public static void initBlockModels(BlockModelDispatcher dispatcher) {
@@ -65,14 +94,36 @@ public class BTXModClient implements ClientModInitializer {
 		dispatcher.addDispatch(new BlockModelGenericCornerPainted<>(BTXBlocks.CORNER_OAK_PAINTED));
 		dispatcher.addDispatch(new BlockModelGeneric<>(BTXBlocks.HIBACHI, loadDataModel(block("hibachi"))));
 		dispatcher.addDispatch(new BlockModelStokedFire<>(BTXBlocks.STOKED_FIRE));
-		dispatcher.addDispatch(new BlockModelGenericBellows<>(
-			BTXBlocks.BELLOWS,
-			loadDataModel(block("bellows/bellows_off")),
-			loadDataModel(block("bellows/bellows_on")))
-		);
+		dispatcher.addDispatch(new BlockModelGenericBellows<>(BTXBlocks.BELLOWS));
 		dispatcher.addDispatch(new BlockModelGenericTurntable(BTXBlocks.TURNTABLE));
-
+		dispatcher.addDispatch(new BlockModelGeneric<>(BTXBlocks.UNFIRED_CRUCIBLE, loadDataModel(block("pottery/unfired_crucible"))));
+		dispatcher.addDispatch(new BlockModelGeneric<>(BTXBlocks.UNFIRED_PLANTER, loadDataModel(block("pottery/unfired_planter"))));
+		dispatcher.addDispatch(new BlockModelGeneric<>(BTXBlocks.UNFIRED_VASE, loadDataModel(block("pottery/unfired_vase"))));
+		dispatcher.addDispatch(new BlockModelGeneric<>(BTXBlocks.VASE, loadDataModel(block("vase/vase"))));
+		dispatcher.addDispatch(new BlockModelGenericVasePainted<>(BTXBlocks.VASE_PAINTED));
 		dispatcher.addDispatch(new BlockModelGeneric<>(BTXBlocks.KILN, loadDataModel(block("kiln"))));
+		dispatcher.addDispatch(new BlockModelGenericCrucible<>(BTXBlocks.CRUCIBLE));
+		dispatcher.addDispatch(new BlockModelGenericCauldron<>(BTXBlocks.CAULDRON));
+		dispatcher.addDispatch(new BlockModelGenericHopper<>(BTXBlocks.HOPPER));
+		dispatcher.addDispatch(new BlockModelGenericPane<>(BTXBlocks.GRATE, block("grate/grate_half")));
+		dispatcher.addDispatch(new BlockModelGenericPane<>(BTXBlocks.SLATS, block("slats/slats_half")));
+		dispatcher.addDispatch(new BlockModelGenericPane<>(BTXBlocks.WICKER_PANE, block("wicker_pane/wicker_pane_half")));
+		dispatcher.addDispatch(new BlockModelGeneric<>(BTXBlocks.WICKER_BLOCK, loadDataModel(block("wicker/wicker_block"))));
+		dispatcher.addDispatch(new BlockModelGenericSlab<>(BTXBlocks.WICKER_SLAB,
+			loadDataModel(block("wicker/wicker_slab_lower")),
+			loadDataModel(block("wicker/wicker_slab_upper")),
+			loadDataModel(block("wicker/wicker_slab_full")))
+		);
+		dispatcher.addDispatch(new BlockModelGeneric<>(BTXBlocks.PLANTER, loadDataModel(block("planter/planter"))));
+		dispatcher.addDispatch(new BlockModelGenericPlanterSoil<>(BTXBlocks.PLANTER_SOIL));
+		dispatcher.addDispatch(new BlockModelGeneric<>(BTXBlocks.PLANTER_GRASS, loadDataModel(block("planter/planter_grass"))));
+		dispatcher.addDispatch(new BlockModelGeneric<>(BTXBlocks.PLANTER_GRASS_RETRO, loadDataModel(block("planter/planter_grass_retro"))));
+		dispatcher.addDispatch(new BlockModelGeneric<>(BTXBlocks.PLANTER_GRASS_SCORCHED, loadDataModel(block("planter/planter_grass_scorched"))));
+	}
+
+	// grass planter top is tinted by biome, the same as BTA grass
+	public static void initBlockColors(BlockColorDispatcher dispatcher) {
+		dispatcher.addDispatch(BTXBlocks.PLANTER_GRASS, new BlockColorCustom(Colorizers.grass));
 	}
 
 	public static void initEntityRenderers(EntityRendererDispatcher dispatcher) {
