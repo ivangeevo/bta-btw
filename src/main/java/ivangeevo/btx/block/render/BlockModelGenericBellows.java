@@ -16,7 +16,7 @@ import static net.minecraft.client.render.block.model.BlockModelDispatcher.loadD
 
 public class BlockModelGenericBellows<T extends BlockLogicBellows> extends BlockModelGeneric<T> {
 
-	private static final int[] TURNS_BY_FACING = {0, 0, 2, 0, 1, 3};
+	private static final int[] TURNS_BY_FACING = {0, 0, 0, 2, 3, 1};
 
 	private final StaticBlockModel onModel;
 
@@ -41,7 +41,7 @@ public class BlockModelGenericBellows<T extends BlockLogicBellows> extends Block
 
 	@Override
 	public void renderStandalone(@NotNull TessellatorGeneral t, int metadata, byte lightIndex) {
-		getModelFromData(0).renderStandalone(this, t, 0.0, 0.0, 0.0, metadata, lightIndex,
+		this.onModel.renderStandalone(this, t, 0.0, 0.0, 0.0, metadata, lightIndex,
 			BlockColorDispatcher.getInstance().getDispatch(this.block));
 	}
 }
