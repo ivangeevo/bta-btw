@@ -180,6 +180,18 @@
     ]
   },
   {
+    "name": "btx:hopper_filter/thin_steel",
+    "type": "btx:hopper_filter",
+    "input": {
+      "stack": {
+        "id": "minecraft:block/trapdoor_steel"
+      }
+    },
+    "includes": [
+      "btx:hopper_filter/thin"
+    ]
+  },
+  {
     "name": "btx:hopper_filter/small",
     "type": "btx:hopper_filter",
     "input": {
@@ -414,30 +426,6 @@
     "input": {
       "stack": {
         "id": "minecraft:block/trapdoor_iron"
-      }
-    },
-    "includes": [
-      "btx:hopper_filter/narrow"
-    ]
-  },
-  {
-    "name": "btx:hopper_filter/narrow_glass",
-    "type": "btx:hopper_filter",
-    "input": {
-      "stack": {
-        "id": "minecraft:block/trapdoor_glass"
-      }
-    },
-    "includes": [
-      "btx:hopper_filter/narrow"
-    ]
-  },
-  {
-    "name": "btx:hopper_filter/narrow_steel",
-    "type": "btx:hopper_filter",
-    "input": {
-      "stack": {
-        "id": "minecraft:block/trapdoor_steel"
       }
     },
     "includes": [
