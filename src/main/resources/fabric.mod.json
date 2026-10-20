@@ -2,8 +2,8 @@
 	"schemaVersion": 1,
 	"id": "btx",
 	"version": "${version}",
-	"name": "Better Than X",
-	"description": "Better Than Wolves 2.94 addon for Better Than Adventure",
+	"name": "Better Than [X]",
+	"description": "A classic Better Than Wolves addon for Better Than Adventure",
 	"authors": [
 		"ivangeevo"
 	],
