@@ -106,25 +106,17 @@ public class BlockLogicAxle extends BlockLogic implements MechanicalDevice {
 	}
 
 	@Override
-	public @NotNull AABBdc getSelectionAABB(@NotNull WorldSource source, @NotNull TilePosc tilePos) {
+	public @NotNull AABBdc getBoundsFromState(@NotNull WorldSource source, @NotNull TilePosc tilePos) {
 		int axis = getAxisAlignment(source, tilePos);
-		double x = tilePos.x();
-		double y = tilePos.y();
-		double z = tilePos.z();
 
 		return switch (axis) {
-			case 0 -> new AABBd(x + 0.5D - AXLE_HALF_WIDTH, y, z + 0.5D - AXLE_HALF_WIDTH,
-				x + 0.5D + AXLE_HALF_WIDTH, y + 1D, z + 0.5D + AXLE_HALF_WIDTH);
-			case 1 -> new AABBd(x + 0.5D - AXLE_HALF_WIDTH, y + 0.5D - AXLE_HALF_WIDTH, z,
-				x + 0.5D + AXLE_HALF_WIDTH, y + 0.5D + AXLE_HALF_WIDTH, z + 1D);
-			default -> new AABBd(x, y + 0.5D - AXLE_HALF_WIDTH, z + 0.5D - AXLE_HALF_WIDTH,
-				x + 1D, y + 0.5D + AXLE_HALF_WIDTH, z + 0.5D + AXLE_HALF_WIDTH);
+			case 0 -> new AABBd(0.5D - AXLE_HALF_WIDTH, 0D, 0.5D - AXLE_HALF_WIDTH,
+				0.5D + AXLE_HALF_WIDTH, 1D, 0.5D + AXLE_HALF_WIDTH);
+			case 1 -> new AABBd(0.5D - AXLE_HALF_WIDTH, 0.5D - AXLE_HALF_WIDTH, 0D,
+				0.5D + AXLE_HALF_WIDTH, 0.5D + AXLE_HALF_WIDTH, 1D);
+			default -> new AABBd(0D, 0.5D - AXLE_HALF_WIDTH, 0.5D - AXLE_HALF_WIDTH,
+				1D, 0.5D + AXLE_HALF_WIDTH, 0.5D + AXLE_HALF_WIDTH);
 		};
-	}
-
-	@Override
-	public @Nullable AABBdc getCollisionAABB(@NotNull WorldSource source, @NotNull TilePosc tilePos) {
-		return this.getSelectionAABB(source, tilePos);
 	}
 
 	@Override
