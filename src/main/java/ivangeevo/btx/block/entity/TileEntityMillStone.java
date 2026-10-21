@@ -32,6 +32,8 @@ public class TileEntityMillStone extends TileEntity implements Container {
 	private static final int STACK_SIZE_LIMIT = 64;
 	private static final double MAX_PLAYER_INTERACTION_DIST = 64.0;
 	private static final int TIME_TO_GRIND = 200;
+	private static final int GRIND_SOUND_CHANCE = 30;
+	private static final int IDLE_SOUND_CHANCE = 60;
 	public static final int CRANK_PROGRESS = 20;
 
 	private final Random random = new Random();
@@ -137,10 +139,20 @@ public class TileEntityMillStone extends TileEntity implements Container {
 
 		if (this.findGrindableSlot() < 0) {
 			this.grindCounter = 0;
+
+			if (this.isPowered() && this.worldObj.rand.nextInt(IDLE_SOUND_CHANCE) == 0) {
+				SoundUtils.playAtTileCenter(this.worldObj, this.tilePos, SoundCategory.WORLD_SOUNDS, BTXSoundTypes.MILLSTONE_IDLE,
+					1.0F, 0.5F + this.worldObj.rand.nextFloat() * 0.1F);
+			}
 			return;
 		}
 
 		if (this.isPowered()) {
+			if (this.worldObj.rand.nextInt(GRIND_SOUND_CHANCE) == 0) {
+				SoundUtils.playAtTileCenter(this.worldObj, this.tilePos, SoundCategory.WORLD_SOUNDS, BTXSoundTypes.MILLSTONE_GRIND,
+					1.0F, 0.75F + this.worldObj.rand.nextFloat() * 0.1F);
+			}
+
 			if (this.isWholeCompanionCubeNextToBeProcessed() && this.worldObj.rand.nextInt(10) == 0) {
 				BlockLogicCompanionCube.playHurt(this.worldObj, this.tilePos, 2.0F);
 			} else if (this.isNetherrackNextToBeProcessed() && this.worldObj.rand.nextInt(10) == 0) {

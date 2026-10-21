@@ -235,7 +235,7 @@ public class BlockLogicHopper
 		MiscUtils.ejectSingleItemWithRandomOffset(world, tilePos, BTXItems.GEAR.id, 0);
 
 		world.playSoundEffect(null, SoundCategory.WORLD_SOUNDS,
-			tilePos.x() + 0.5, tilePos.y() + 0.5, tilePos.z() + 0.5, BTXSoundTypes.MECHANICAL_BREAK, 1.0F, 1.25F);
+			tilePos.x() + 0.5, tilePos.y() + 0.5, tilePos.z() + 0.5, BTXSoundTypes.MECHANICAL_BREAK, 0.5F, 0.6F + world.rand.nextFloat() * 0.25F);
 
 		world.setBlockTypeNotify(tilePos, Blocks.AIR);
 	}

@@ -14,19 +14,13 @@
   "mechanical.break": {
     "subtitle": "subtitles.btx.mechanical.break",
     "sounds": [
-      {
-        "name": "random.explode",
-        "type": "event"
-      }
+      "mechanical/woodbreak.ogg"
     ]
   },
   "gearbox.engage": {
     "subtitle": "subtitles.btx.gearbox.engage",
     "sounds": [
-      {
-        "name": "random.explode",
-        "type": "event"
-      }
+      "mechanical/creak_open.ogg"
     ]
   },
   "gearbox.toggle": {
@@ -36,6 +30,18 @@
         "name": "step.wood",
         "type": "event"
       }
+    ]
+  },
+  "gearbox.overpowered": {
+    "subtitle": "subtitles.btx.gearbox.overpowered",
+    "sounds": [
+      "mechanical/creak_close.ogg"
+    ]
+  },
+  "axle.creak": {
+    "subtitle": "subtitles.btx.axle.creak",
+    "sounds": [
+      "mechanical/creak_open.ogg"
     ]
   },
   "hand_crank.crank": {
@@ -50,10 +56,13 @@
   "millstone.grind": {
     "subtitle": "subtitles.btx.millstone.grind",
     "sounds": [
-      {
-        "name": "random.explode",
-        "type": "event"
-      }
+      "mechanical/whirr.ogg"
+    ]
+  },
+  "millstone.idle": {
+    "subtitle": "subtitles.btx.millstone.idle",
+    "sounds": [
+      "mechanical/whirr.ogg"
     ]
   },
   "millstone.netherrack": {
@@ -310,25 +319,25 @@
   "saw.power_on": {
     "subtitle": "subtitles.btx.saw.power_on",
     "sounds": [
-      "saw/whirr.ogg"
+      "mechanical/whirr.ogg"
     ]
   },
   "saw.power_off": {
     "subtitle": "subtitles.btx.saw.power_off",
     "sounds": [
-      "saw/whirr.ogg"
+      "mechanical/whirr.ogg"
     ]
   },
   "saw.cut": {
     "subtitle": "subtitles.btx.saw.cut",
     "sounds": [
-      "saw/whirr.ogg"
+      "mechanical/whirr.ogg"
     ]
   },
   "saw.hurt": {
     "subtitle": "subtitles.btx.saw.hurt",
     "sounds": [
-      "saw/whirr.ogg"
+      "mechanical/whirr.ogg"
     ]
   }
 }

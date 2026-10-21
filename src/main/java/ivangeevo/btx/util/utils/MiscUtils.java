@@ -30,4 +30,12 @@ public class MiscUtils {
 		ItemStack itemStack = new ItemStack(itemId, 1, iDamage);
 		ejectStackWithRandomOffset(world, tilePos, itemStack);
 	}
+
+	public static void ejectItemsIndividually(World world, TilePosc tilePos, int itemId, int count, float chanceOfDrop) {
+		for (int i = 0; i < count; i++) {
+			if (world.rand.nextFloat() <= chanceOfDrop) {
+				ejectSingleItemWithRandomOffset(world, tilePos, itemId, 0);
+			}
+		}
+	}
 }

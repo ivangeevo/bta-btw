@@ -1,13 +1,12 @@
 package ivangeevo.btx.block.blocks;
 
-import com.mojang.logging.LogUtils;
 import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.block.entity.TileEntityMillStone;
 import ivangeevo.btx.gui.BTXScreens;
 import ivangeevo.btx.sound.BTXSoundTypes;
 import ivangeevo.btx.world.TickPersistence;
 import ivangeevo.btx.util.utils.MechPowerUtils;
-import ivangeevo.btx.util.utils.SoundUtils;
+import ivangeevo.btx.util.utils.MiscUtils;
 import net.minecraft.core.block.*;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Materials;
@@ -15,6 +14,7 @@ import net.minecraft.core.block.tag.BlockTags;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.enums.EnumDropCause;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.item.Items;
 import net.minecraft.core.sound.BlockSounds;
 import net.minecraft.core.sound.SoundCategory;
 import net.minecraft.core.util.helper.Direction;
@@ -23,7 +23,6 @@ import net.minecraft.core.world.World;
 import net.minecraft.core.world.pos.TilePosc;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.slf4j.Logger;
 
 import java.util.Random;
 
@@ -113,7 +112,7 @@ public class BlockLogicMillStone extends BlockLogic implements MechanicalDevice 
 						BlockLogicCompanionCube.playHurt(world, tilePos, 5.0F);
 					}
 
-					world.playSoundEffect(null, SoundCategory.WORLD_SOUNDS, tilePos.x() + 0.5, tilePos.y() + 0.5, tilePos.z() + 0.5, BTXSoundTypes.MILLSTONE_GRIND, 0.2F, 1.25F);
+					world.playSoundEffect(null, SoundCategory.WORLD_SOUNDS, tilePos.x() + 0.5, tilePos.y() + 0.5, tilePos.z() + 0.5, BTXSoundTypes.MILLSTONE_IDLE, 1.0F, 0.5F + rand.nextFloat() * 0.1F);
 					this.emitMillingParticles(world, tilePos, rand);
 					this.setActive(world, tilePos, true);
 				}
@@ -125,11 +124,6 @@ public class BlockLogicMillStone extends BlockLogic implements MechanicalDevice 
 	public void animationTick(@NotNull World world, @NotNull TilePosc tilePos, @NotNull Random rand) {
 		if (this.isActive(world, tilePos)) {
 			this.emitMillingParticles(world, tilePos, rand);
-
-			if (rand.nextInt(5) == 0) {
-				SoundUtils.playAtTileCenter(world, tilePos, SoundCategory.WORLD_SOUNDS, BTXSoundTypes.MILLSTONE_GRIND,
-					0.1F + rand.nextFloat() * 0.1F, 1.25F + rand.nextFloat() * 0.1F);
-			}
 		}
 	}
 
@@ -178,6 +172,19 @@ public class BlockLogicMillStone extends BlockLogic implements MechanicalDevice 
 	@Override
 	public boolean isOutputtingMechanicalPower(World world, TilePosc tilePos) {
 		return false;
+	}
+
+	@Override
+	public void overpower(World world, TilePosc tilePos) {
+		breakMillStone(world, tilePos);
+	}
+
+	private void breakMillStone(World world, TilePosc tilePos) {
+		MiscUtils.ejectItemsIndividually(world, tilePos, Items.AMMO_PEBBLE.id, 16, 0.75F);
+
+		world.playSoundEffect(null, SoundCategory.WORLD_SOUNDS,
+			tilePos.x() + 0.5, tilePos.y() + 0.5, tilePos.z() + 0.5, BTXSoundTypes.MECHANICAL_BREAK, 0.5F, 0.6F + world.rand.nextFloat() * 0.25F);
+		world.setBlockTypeNotify(tilePos, Blocks.AIR);
 	}
 
 	public boolean isCurrentStateValid(World world, TilePosc tilePos) {

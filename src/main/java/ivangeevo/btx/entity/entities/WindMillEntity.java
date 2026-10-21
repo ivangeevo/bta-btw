@@ -4,6 +4,7 @@ import com.mojang.nbt.tags.CompoundTag;
 import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.block.blocks.BlockLogicAxle;
 import ivangeevo.btx.item.BTXItems;
+import ivangeevo.btx.sound.BTXSoundTypes;
 import ivangeevo.btx.util.utils.MechPowerUtils;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.data.gamerule.GameRules;
@@ -11,6 +12,7 @@ import net.minecraft.core.entity.EntityLightning;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.Items;
+import net.minecraft.core.sound.SoundCategory;
 import net.minecraft.core.util.helper.Direction;
 import net.minecraft.core.util.helper.DyeColor;
 import net.minecraft.core.util.helper.MathHelper;
@@ -225,7 +227,7 @@ public class WindMillEntity extends MechanicalPowerSourceEntityHorizonal {
 	}
 
 	@Override
-	protected void onClientRotationOctantChange() {
+	protected void onRotationOctantChange() {
 		//float speed = getRotationSpeed();
 		float speed = getDisplayedRotationSpeed();
 
@@ -237,13 +239,13 @@ public class WindMillEntity extends MechanicalPowerSourceEntityHorizonal {
 			if (targetBlock == BTXBlocks.AXLE_POWER_SOURCE && targetBlock.getLogic() instanceof BlockLogicAxle axle) {
 				int axleAlignment = axle.getAxisAlignment(world, targetPos);
 
-				clientNotifyGearboxOfOverpoweredOctantChangeInDirection(targetPos, axleAlignment << 1);
-				clientNotifyGearboxOfOverpoweredOctantChangeInDirection(targetPos, (axleAlignment << 1 ) + 1);
+				notifyGearboxOfOverpoweredOctantChangeInDirection(targetPos, axleAlignment << 1);
+				notifyGearboxOfOverpoweredOctantChangeInDirection(targetPos, (axleAlignment << 1 ) + 1);
 			}
 		}
 	}
 
-	protected void clientNotifyGearboxOfOverpoweredOctantChangeInDirection(TilePosc tilePos, int facing) {
+	protected void notifyGearboxOfOverpoweredOctantChangeInDirection(TilePosc tilePos, int facing) {
 		TilePos tempPos = new TilePos(tilePos);
 
 		// just to prevent running on indefinitely
@@ -257,7 +259,8 @@ public class WindMillEntity extends MechanicalPowerSourceEntityHorizonal {
 					continue;
 				}
 			} else if (MechPowerUtils.isPoweredGearBox(world, tempPos)) {
-				// TODO:  play sound
+				world.playSoundEffect(null, SoundCategory.WORLD_SOUNDS, tempPos.x + 0.5, tempPos.y + 0.5, tempPos.z + 0.5,
+					BTXSoundTypes.GEARBOX_OVERPOWERED, 1.5F, world.rand.nextFloat() * 0.1F + 0.5F);
 			}
 
 			break;

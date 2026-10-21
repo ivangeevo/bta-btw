@@ -1336,18 +1336,6 @@
     "blood": true
   },
   {
-    "name": "btx:saw/companion_slabs_from_double_companion_slab",
-    "type": "btx:saw",
-    "input": {"stack": {"id": "btx:block/companion_slab"}},
-    "outputs": [
-      {"id": "btx:block/companion_slab", "amount": 2}
-    ],
-    "facing": "vertical",
-    "data": 1,
-    "data_mask": 3,
-    "note": "btx.guidebook.saw.double_slab"
-  },
-  {
     "name": "btx:saw/companion_slab_from_companion_slab",
     "type": "btx:saw",
     "input": {"stack": {"id": "btx:block/companion_slab"}},

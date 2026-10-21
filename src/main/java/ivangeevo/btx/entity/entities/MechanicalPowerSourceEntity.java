@@ -142,19 +142,15 @@ public abstract class MechanicalPowerSourceEntity extends Entity implements ICol
 				fullUpdateTickCount = getTicksPerFullUpdate();
 				onFullUpdateServer();
 			}
+		}
 
-			updateRotationAndDamageState();
-		} else {
-			float prevRotation = rotation;
+		float prevRotation = rotation;
 
-			updateRotationAndDamageState();
+		updateRotationAndDamageState();
 
-			int newOctant = (int)(rotation / 45F);
-			int oldOctant = (int)(prevRotation / 45F);
-
-			if (oldOctant != newOctant) {
-				onClientRotationOctantChange();
-			}
+		// server side, since singleplayer has no client world and the server broadcasts the sounds in multiplayer
+		if (!world.isClientSide && (int)(rotation / 45F) != (int)(prevRotation / 45F)) {
+			onRotationOctantChange();
 		}
 	}
 
@@ -223,7 +219,7 @@ public abstract class MechanicalPowerSourceEntity extends Entity implements ICol
 		return Math.max(current - step, target);
 	}
 
-	protected void onClientRotationOctantChange() {}
+	protected void onRotationOctantChange() {}
 
 	public boolean isClearOfBlockingEntities() {
 		return world.checkIfAABBIsClear(getDeviceBounds());

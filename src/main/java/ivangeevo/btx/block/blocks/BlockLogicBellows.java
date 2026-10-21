@@ -2,7 +2,9 @@ package ivangeevo.btx.block.blocks;
 
 import ivangeevo.btx.sound.BTXSoundTypes;
 import ivangeevo.btx.block.BTXBlocks;
+import ivangeevo.btx.item.BTXItems;
 import ivangeevo.btx.util.utils.MechPowerUtils;
+import ivangeevo.btx.util.utils.MiscUtils;
 import ivangeevo.btx.util.utils.SoundUtils;
 import ivangeevo.btx.util.utils.WorldUtils;
 import net.minecraft.core.block.Block;
@@ -17,6 +19,7 @@ import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.enums.EnumDropCause;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.item.Items;
 import net.minecraft.core.sound.BlockSounds;
 import net.minecraft.core.sound.SoundCategory;
 import net.minecraft.core.util.helper.Direction;
@@ -188,6 +191,21 @@ public class BlockLogicBellows extends BlockLogic implements MechanicalDevice {
 	@Override
 	public boolean isOutputtingMechanicalPower(World world, TilePosc tilePos) {
 		return false;
+	}
+
+	@Override
+	public void overpower(World world, TilePosc tilePos) {
+		breakBellows(world, tilePos);
+	}
+
+	private void breakBellows(World world, TilePosc tilePos) {
+		MiscUtils.ejectItemsIndividually(world, tilePos, Items.STICK.id, 2, 1.0F);
+		MiscUtils.ejectItemsIndividually(world, tilePos, BTXItems.TANNED_LEATHER.id, 2, 1.0F);
+		MiscUtils.ejectItemsIndividually(world, tilePos, BTXItems.STRAP.id, 2, 1.0F);
+
+		world.playSoundEffect(null, SoundCategory.WORLD_SOUNDS,
+			tilePos.x() + 0.5, tilePos.y() + 0.5, tilePos.z() + 0.5, BTXSoundTypes.MECHANICAL_BREAK, 0.5F, 0.6F + world.rand.nextFloat() * 0.25F);
+		world.setBlockTypeNotify(tilePos, Blocks.AIR);
 	}
 
 	//------------- Class Specific Methods -------------//

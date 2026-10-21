@@ -97,6 +97,11 @@ public class BlockLogicAxle extends BlockLogic implements MechanicalDevice {
 	public void animationTick(@NotNull World world, @NotNull TilePosc tilePos, @NotNull Random rand) {
 		if (clientCheckIfPowered(world, tilePos)) {
 			emitAxleParticles(world, tilePos, rand);
+
+			if (rand.nextInt(200) == 0) {
+				world.playSoundEffect(null, SoundCategory.WORLD_SOUNDS, tilePos.x() + 0.5, tilePos.y() + 0.5, tilePos.z() + 0.5,
+					BTXSoundTypes.AXLE_CREAK, 0.075F, rand.nextFloat() * 0.1F + 0.5F);
+			}
 		}
 	}
 
@@ -253,7 +258,7 @@ public class BlockLogicAxle extends BlockLogic implements MechanicalDevice {
 		if (world.getBlockType(tilePos) == this.block) {
 			dropComponentItemsOnBadBreak(world, tilePos, world.getBlockData(tilePos), 1F);
 			world.playSoundEffect(null, SoundCategory.WORLD_SOUNDS,
-				tilePos.x() + 0.5, tilePos.y() + 0.5, tilePos.z() + 0.5, BTXSoundTypes.MECHANICAL_BREAK, 0.2F, 1.25F);
+				tilePos.x() + 0.5, tilePos.y() + 0.5, tilePos.z() + 0.5, BTXSoundTypes.MECHANICAL_BREAK, 0.5F, 0.6F + world.rand.nextFloat() * 0.25F);
 			world.setBlockTypeNotify(tilePos, Blocks.AIR);
 			markNearbyForRenderUpdate(world, tilePos); // harmless if onRemoved also does it
 		}

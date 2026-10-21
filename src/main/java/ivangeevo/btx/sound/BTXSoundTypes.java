@@ -9,8 +9,11 @@ public class BTXSoundTypes {
 	public static final String MECHANICAL_BREAK = create("mechanical.break");
 	public static final String GEARBOX_ENGAGE = create("gearbox.engage");
 	public static final String GEARBOX_TOGGLE = create("gearbox.toggle");
+	public static final String GEARBOX_OVERPOWERED = create("gearbox.overpowered");
+	public static final String AXLE_CREAK = create("axle.creak");
 	public static final String HAND_CRANK_CRANK = create("hand_crank.crank");
 	public static final String MILLSTONE_GRIND = create("millstone.grind");
+	public static final String MILLSTONE_IDLE = create("millstone.idle");
 	public static final String MILLSTONE_NETHERRACK = create("millstone.netherrack");
 	public static final String TURNTABLE_ROTATE = create("turntable.rotate");
 	public static final String TURNTABLE_ADJUST = create("turntable.adjust");

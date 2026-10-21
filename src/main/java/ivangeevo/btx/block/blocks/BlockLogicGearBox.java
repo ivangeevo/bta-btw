@@ -246,7 +246,7 @@ public class BlockLogicGearBox extends BlockLogicRotatable implements Mechanical
 			if (shouldBePowered) {
 				// BTW played this client side in clientNotificationOfMetadataChange
 				world.playSoundEffectAtTile(null, SoundCategory.WORLD_SOUNDS, tilePos,
-					BTXSoundTypes.GEARBOX_ENGAGE, 0.05F, 1.0F);
+					BTXSoundTypes.GEARBOX_ENGAGE, 0.25F, world.rand.nextFloat() * 0.25F + 0.25F);
 			}
 		}
 	}
@@ -281,8 +281,7 @@ public class BlockLogicGearBox extends BlockLogicRotatable implements Mechanical
 
 	public void breakGearBox(World world, TilePosc tilePos) {
 		dropComponentItemsOnBadBreak(world, tilePos, world.getBlockData(tilePos), 1F);
-		world.playSoundEffect(null, SoundCategory.WORLD_SOUNDS,
-			tilePos.x() + 0.5, tilePos.y() + 0.5, tilePos.z() + 0.5, BTXSoundTypes.MECHANICAL_BREAK, 0.2F, 1.25F);
+		SoundUtils.playAtTileCenter(world, tilePos, SoundCategory.WORLD_SOUNDS, BTXSoundTypes.MECHANICAL_BREAK, 0.5F, 0.6F + world.rand.nextFloat() * 0.25F);
 		world.setBlockTypeNotify(tilePos, Blocks.AIR);
 		markRangeForRenderUpdate(world, tilePos, 3);
 	}

@@ -207,7 +207,7 @@ public class BlockLogicHandCrank extends BlockLogic implements MechanicalDevice,
 		MiscUtils.ejectSingleItemWithRandomOffset(world, tilePos, Blocks.COBBLE_STONE.asItem().id, 0);
 		MiscUtils.ejectSingleItemWithRandomOffset(world, tilePos, Blocks.COBBLE_STONE.asItem().id, 0);
 		MiscUtils.ejectSingleItemWithRandomOffset(world, tilePos, BTXItems.GEAR.id, 0);
-		SoundUtils.playAtTileCenter(world, tilePos, SoundCategory.WORLD_SOUNDS, BTXSoundTypes.MECHANICAL_BREAK, 0.2F, 1.25F);
+		SoundUtils.playAtTileCenter(world, tilePos, SoundCategory.WORLD_SOUNDS, BTXSoundTypes.MECHANICAL_BREAK, 0.5F, 0.6F + world.rand.nextFloat() * 0.25F);
 		world.setBlockType(tilePos, Blocks.AIR);
 	}
 

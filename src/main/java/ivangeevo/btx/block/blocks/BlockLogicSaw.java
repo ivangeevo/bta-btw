@@ -236,7 +236,7 @@ public class BlockLogicSaw extends BlockLogic implements MechanicalDevice, Turnt
 		ejectItems(world, tilePos, Items.INGOT_IRON.id, 2);
 		ejectItems(world, tilePos, BTXItems.BELT.id, 1);
 
-		SoundUtils.playAtTileCenter(world, tilePos, SoundCategory.WORLD_SOUNDS, BTXSoundTypes.MECHANICAL_BREAK, 0.2F, 1.25F);
+		SoundUtils.playAtTileCenter(world, tilePos, SoundCategory.WORLD_SOUNDS, BTXSoundTypes.MECHANICAL_BREAK, 0.5F, 0.6F + world.rand.nextFloat() * 0.25F);
 		world.spawnParticle("explode", tilePos.x() + 0.5, tilePos.y() + 0.5, tilePos.z() + 0.5, 0.0, 0.0, 0.0, 0, false);
 		world.setBlockTypeNotify(tilePos, Blocks.AIR);
 	}
