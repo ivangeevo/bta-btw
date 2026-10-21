@@ -74,12 +74,20 @@ public abstract class GuidebookSectionBTX<T extends RecipeEntryBase<?, ?, ?>> ex
 	}
 
 	private List<GuidebookPage> paginate(List<T> recipes) {
-		int perPage = getRecipesPerPage();
 		List<GuidebookPage> result = new ArrayList<>();
-		for (int i = 0; i < recipes.size(); i += perPage) {
-			result.add(createPage(new ArrayList<>(recipes.subList(i, Math.min(i + perPage, recipes.size())))));
+		for (List<T> page : splitIntoPages(recipes)) {
+			result.add(createPage(page));
 		}
 		return result;
+	}
+
+	protected List<List<T>> splitIntoPages(List<T> recipes) {
+		int perPage = getRecipesPerPage();
+		List<List<T>> pages = new ArrayList<>();
+		for (int i = 0; i < recipes.size(); i += perPage) {
+			pages.add(new ArrayList<>(recipes.subList(i, Math.min(i + perPage, recipes.size()))));
+		}
+		return pages;
 	}
 
 	protected static boolean matchesStack(ItemStack stack, SearchQuery query) {

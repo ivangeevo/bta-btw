@@ -18,6 +18,7 @@ import java.util.regex.Pattern;
 @Environment(EnvType.CLIENT)
 public class GuidebookSectionSaw extends GuidebookSectionBTX<RecipeEntrySawDisplay> {
 	private static final Pattern COLOR_TOKEN = buildColorPattern();
+	private static final String DOUBLE_SLAB_NOTE = "btx.guidebook.saw.double_slab";
 
 	private int cachedRecipeCount = -1;
 	private List<RecipeEntrySawDisplay> displays = new ArrayList<>();
@@ -50,6 +51,10 @@ public class GuidebookSectionSaw extends GuidebookSectionBTX<RecipeEntrySawDispl
 
 			Map<String, List<RecipeEntrySaw>> families = new LinkedHashMap<>();
 			for (RecipeEntrySaw cut : cuts) {
+				if (cut.getOutput().isEmpty() || DOUBLE_SLAB_NOTE.equals(cut.getNote())) {
+					continue;
+				}
+
 				String family = COLOR_TOKEN.matcher(String.valueOf(cut)).replaceFirst("_*_");
 				families.computeIfAbsent(family, key -> new ArrayList<>()).add(cut);
 			}
@@ -103,7 +108,30 @@ public class GuidebookSectionSaw extends GuidebookSectionBTX<RecipeEntrySawDispl
 
 	@Override
 	protected int getRecipesPerPage() {
-		return RecipePageSaw.RECIPES_PER_PAGE;
+		return RecipePageSaw.MAX_RECIPES_PER_PAGE;
+	}
+
+	@Override
+	protected List<List<RecipeEntrySawDisplay>> splitIntoPages(List<RecipeEntrySawDisplay> recipes) {
+		List<List<RecipeEntrySawDisplay>> pages = new ArrayList<>();
+		List<RecipeEntrySawDisplay> page = new ArrayList<>();
+		int top = RecipePageSaw.FIRST_RECIPE_Y;
+
+		for (RecipeEntrySawDisplay recipe : recipes) {
+			if (!page.isEmpty() && (page.size() >= getRecipesPerPage() || !RecipePageSaw.fits(top, recipe))) {
+				pages.add(page);
+				page = new ArrayList<>();
+				top = RecipePageSaw.FIRST_RECIPE_Y;
+			}
+
+			page.add(recipe);
+			top += RecipePageSaw.blockHeight(recipe);
+		}
+
+		if (!page.isEmpty()) {
+			pages.add(page);
+		}
+		return pages;
 	}
 
 	@Override

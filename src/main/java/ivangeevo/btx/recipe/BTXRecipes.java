@@ -188,22 +188,23 @@ public class BTXRecipes {
 			.addInput('Y', Items.STICK)
 			.create("hand_crank", new ItemStack(BTXBlocks.HAND_CRANK, 1));
 
-		// TODO: Add moulding recipe for axles
 		RecipeBuilderShaped axle = new RecipeBuilderShaped(BTXMod.MOD_ID, "#", "X", "#");
 		axle
-			.addInput('#', Blocks.PLANKS_OAK)
+			.addInput('#', "minecraft:planks")
 			.addInput('X', Items.ROPE)
 			.create("axle", new ItemStack(BTXBlocks.AXLE, 1));
+		axle
+			.addInput('#', BTXItemGroups.MOULDINGS_PLANKS)
+			.addInput('X', Items.ROPE)
+			.create("axle_from_mouldings", new ItemStack(BTXBlocks.AXLE, 1));
 
 		RecipeBuilderShaped gearBox = new RecipeBuilderShaped(BTXMod.MOD_ID, "#X#", "XYX", "#X#");
 		gearBox
-			.addInput('#', Blocks.PLANKS_OAK)
+			.addInput('#', "minecraft:planks")
 			.addInput('X', BTXItems.GEAR)
 			.addInput('Y', Items.DUST_REDSTONE)
 			.create("gearbox", new ItemStack(BTXBlocks.GEARBOX, 1));
-
-		RecipeBuilderShaped gearBoxFromSidings = new RecipeBuilderShaped(BTXMod.MOD_ID, "#X#", "XYX", "#X#");
-		gearBoxFromSidings
+		gearBox
 			.addInput('#', BTXItemGroups.SIDINGS_PLANKS)
 			.addInput('X', BTXItems.GEAR)
 			.addInput('Y', Items.DUST_REDSTONE)
@@ -232,11 +233,9 @@ public class BTXRecipes {
 		RecipeBuilderShaped sail = new RecipeBuilderShaped(BTXMod.MOD_ID, "###", "###", "XXX");
 		sail
 			.addInput('#', BTXItems.FABRIC)
-			.addInput('X', Blocks.PLANKS_OAK)
+			.addInput('X', "minecraft:planks")
 			.create("sail", new ItemStack(BTXItems.SAIL, 1));
-
-		RecipeBuilderShaped sailFromMouldings = new RecipeBuilderShaped(BTXMod.MOD_ID, "###", "###", "XXX");
-		sailFromMouldings
+		sail
 			.addInput('#', BTXItems.FABRIC)
 			.addInput('X', BTXItemGroups.MOULDINGS_PLANKS)
 			.create("sail_from_mouldings", new ItemStack(BTXItems.SAIL, 1));
@@ -245,6 +244,17 @@ public class BTXRecipes {
 		windMill
 			.addInput('#', BTXItems.SAIL)
 			.create("windmill", new ItemStack(BTXItems.WINDMILL, 1));
+
+		RecipeBuilderShaped gear = new RecipeBuilderShaped(BTXMod.MOD_ID, " X ", "X#X", " X ");
+		gear
+			.addInput('#', "minecraft:planks")
+			.addInput('X', Items.STICK)
+			.create("gear", new ItemStack(BTXItems.GEAR, 2));
+
+		RecipeBuilderShaped waterWheel = new RecipeBuilderShaped(BTXMod.MOD_ID, "###", "# #", "###");
+		waterWheel
+			.addInput('#', BTXItems.WOOD_BLADE)
+			.create("waterwheel", new ItemStack(BTXItems.WATERWHEEL, 1));
 
 		RecipeBuilderShaped hibachi = new RecipeBuilderShaped(BTXMod.MOD_ID, "XXX", "#Z#", "#Y#");
 		hibachi
@@ -387,14 +397,12 @@ public class BTXRecipes {
 
 	public static void modifyVanillaRecipes() {
 		RecipeBuilder.ModifyWorkbench("minecraft").removeRecipe("rope");
-
 		RecipeBuilderShaped rope = new RecipeBuilderShaped("btx","##", "##", "##");
 		rope
 			.addInput('#', BTXItems.HEMP_FIBERS)
 			.create("rope", new ItemStack(Items.ROPE, 1));
 
 		RecipeBuilder.ModifyWorkbench("minecraft").removeRecipe("dough");
-
 		RecipeBuilderShapeless dough = new RecipeBuilderShapeless(BTXMod.MOD_ID);
 		dough
 			.addInput(BTXItems.FLOUR)
