@@ -11,6 +11,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class RecipeEntryMillstone extends RecipeEntryBTX implements HasJsonAdapter {
 	private List<ItemStack> outputs = Collections.emptyList();
@@ -33,12 +34,21 @@ public class RecipeEntryMillstone extends RecipeEntryBTX implements HasJsonAdapt
 	}
 
 	@Override
+	public boolean matchesRecipe(@NotNull SearchQuery query) {
+		if (query.query.getLeft() == SearchQuery.QueryType.GROUP && !Objects.equals(query.query.getRight(), "")) {
+			List<ItemStack> stacks = new RecipeSymbol(query.query.getRight()).resolve();
+			return stacks != null && this.getOutputs().stream().anyMatch(stacks::contains);
+		}
+
+		return this.getOutputs().stream().anyMatch(output -> this.matchesName(output, query));
+	}
+
+	@Override
 	public RecipeJsonAdapter<?> getAdapter() {
 		return new JsonAdapter();
 	}
 
 	public static class JsonAdapter implements RecipeJsonAdapter<RecipeEntryMillstone> {
-
 		@Override
 		public RecipeEntryMillstone deserialize(@NotNull JsonElement json, Type typeOfT, @NotNull JsonDeserializationContext context) throws JsonParseException
 		{

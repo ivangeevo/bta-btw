@@ -13,18 +13,19 @@ public class RecipeGroupBulk extends RecipeGroup<RecipeEntryBulk> {
 	}
 
 	public RecipeEntryBulk findRecipe(Container inventory) {
+		RecipeEntryBulk best = null;
 		for (RecipeEntryBulk recipe : getAllRecipes()) {
-			if (recipe.doesInventoryContainIngredients(inventory)) {
-				return recipe;
+			if (recipe.doesInventoryContainIngredients(inventory)
+				&& (best == null || recipe.getInput().size() > best.getInput().size())) {
+				best = recipe;
 			}
 		}
 
-		return null;
+		return best;
 	}
 
 	public List<ItemStack> getCraftingResult(Container inventory) {
 		RecipeEntryBulk recipe = findRecipe(inventory);
-
 		return recipe == null ? null : recipe.getCraftingOutputList();
 	}
 

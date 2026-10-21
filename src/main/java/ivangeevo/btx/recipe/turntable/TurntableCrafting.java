@@ -1,6 +1,7 @@
 package ivangeevo.btx.recipe.turntable;
 
 import ivangeevo.btx.recipe.BTXRecipes;
+import ivangeevo.btx.sound.BTXSoundTypes;
 import ivangeevo.btx.util.utils.MiscUtils;
 import ivangeevo.btx.util.utils.SoundUtils;
 import net.minecraft.core.block.Blocks;
@@ -36,7 +37,7 @@ public final class TurntableCrafting {
 			world,
 			pos,
 			SoundCategory.WORLD_SOUNDS,
-			sound.getBreakSoundName(),
+			BTXSoundTypes.TURNTABLE_SHAPE,
 			(sound.getVolume() + 1.0F) / 2.0F,
 			sound.getPitch() * 0.8F
 		);
@@ -45,7 +46,6 @@ public final class TurntableCrafting {
 	private static void transform(World world, TilePosc pos, RecipeEntryTurntable recipe) {
 		ItemStack out = recipe.getOutput();
 
-		// see note 2: turning an ItemStack back into a block + data
 		if (out.getItem() instanceof ItemBlock<?> ib) {
 			world.setBlockTypeDataNotify(pos, ib.getBlock(), out.getMetadata());
 		} else {

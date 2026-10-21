@@ -1,10 +1,334 @@
 {
   "bellows.blow": {
-    "subtitle": "subtitles.bellows.blow",
-    "sounds": ["bellows/blow.ogg"]
+    "subtitle": "subtitles.btx.bellows.blow",
+    "sounds": [
+      "bellows/blow.ogg"
+    ]
   },
   "bellows.retract": {
-    "subtitle": "subtitles.bellows.retract",
-    "sounds": ["bellows/retract.ogg"]
+    "subtitle": "subtitles.btx.bellows.retract",
+    "sounds": [
+      "bellows/retract.ogg"
+    ]
+  },
+  "mechanical.break": {
+    "subtitle": "subtitles.btx.mechanical.break",
+    "sounds": [
+      {
+        "name": "random.explode",
+        "type": "event"
+      }
+    ]
+  },
+  "gearbox.engage": {
+    "subtitle": "subtitles.btx.gearbox.engage",
+    "sounds": [
+      {
+        "name": "random.explode",
+        "type": "event"
+      }
+    ]
+  },
+  "gearbox.toggle": {
+    "subtitle": "subtitles.btx.gearbox.toggle",
+    "sounds": [
+      {
+        "name": "step.wood",
+        "type": "event"
+      }
+    ]
+  },
+  "hand_crank.crank": {
+    "subtitle": "subtitles.btx.hand_crank.crank",
+    "sounds": [
+      {
+        "name": "random.click",
+        "type": "event"
+      }
+    ]
+  },
+  "millstone.grind": {
+    "subtitle": "subtitles.btx.millstone.grind",
+    "sounds": [
+      {
+        "name": "random.explode",
+        "type": "event"
+      }
+    ]
+  },
+  "millstone.netherrack": {
+    "subtitle": "subtitles.btx.millstone.netherrack",
+    "sounds": [
+      {
+        "name": "mob.ghast.scream",
+        "type": "event"
+      }
+    ]
+  },
+  "turntable.rotate": {
+    "subtitle": "subtitles.btx.turntable.rotate",
+    "sounds": [
+      {
+        "name": "random.click",
+        "type": "event"
+      }
+    ]
+  },
+  "turntable.adjust": {
+    "subtitle": "subtitles.btx.turntable.adjust",
+    "sounds": [
+      {
+        "name": "random.click",
+        "type": "event"
+      }
+    ]
+  },
+  "turntable.shape": {
+    "subtitle": "subtitles.btx.turntable.shape",
+    "sounds": [
+      {
+        "name": "step.gravel",
+        "type": "event"
+      }
+    ]
+  },
+  "vessel.tip": {
+    "subtitle": "subtitles.btx.vessel.tip",
+    "sounds": [
+      {
+        "name": "step.gravel",
+        "type": "event"
+      }
+    ]
+  },
+  "item.collect": {
+    "subtitle": "subtitles.btx.item.collect",
+    "sounds": [
+      {
+        "name": "random.pop",
+        "type": "event"
+      }
+    ]
+  },
+  "vase.fill": {
+    "subtitle": "subtitles.btx.vase.fill",
+    "sounds": [
+      {
+        "name": "random.pop",
+        "type": "event"
+      }
+    ]
+  },
+  "hibachi.ignite": {
+    "subtitle": "subtitles.btx.hibachi.ignite",
+    "sounds": [
+      {
+        "name": "mob.ghast.fireball",
+        "type": "event"
+      }
+    ]
+  },
+  "hibachi.extinguish": {
+    "subtitle": "subtitles.btx.hibachi.extinguish",
+    "sounds": [
+      {
+        "name": "random.fizz",
+        "type": "event"
+      }
+    ]
+  },
+  "hopper.soul_capture": {
+    "subtitle": "subtitles.btx.hopper.soul_capture",
+    "sounds": [
+      {
+        "name": "mob.ghast.moan",
+        "type": "event"
+      }
+    ]
+  },
+  "hopper.soul_overload": {
+    "subtitle": "subtitles.btx.hopper.soul_overload",
+    "sounds": [
+      {
+        "name": "mob.ghast.scream",
+        "type": "event"
+      }
+    ]
+  },
+  "companion_cube.whine": {
+    "subtitle": "subtitles.btx.companion_cube.whine",
+    "sounds": [
+      {
+        "name": "mob.wolf.whine",
+        "type": "event"
+      }
+    ]
+  },
+  "companion_cube.hurt": {
+    "subtitle": "subtitles.btx.companion_cube.hurt",
+    "sounds": [
+      {
+        "name": "mob.wolf.hurt",
+        "type": "event"
+      }
+    ]
+  },
+  "wolf.dung": {
+    "subtitle": "subtitles.btx.wolf.dung",
+    "sounds": [
+      {
+        "name": "random.explode",
+        "type": "event"
+      }
+    ]
+  },
+  "wolf.dung.growl": {
+    "sounds": [
+      {
+        "name": "mob.wolf.growl",
+        "type": "event"
+      }
+    ]
+  },
+  "wolf.turn_hostile": {
+    "subtitle": "subtitles.btx.wolf.turn_hostile",
+    "sounds": [
+      {
+        "name": "mob.wolf.growl",
+        "type": "event"
+      }
+    ]
+  },
+  "wolf.eat": {
+    "subtitle": "subtitles.btx.wolf.eat",
+    "sounds": [
+      {
+        "name": "random.pop",
+        "type": "event"
+      }
+    ]
+  },
+  "guidebook.switch_book": {
+    "subtitle": "subtitles.btx.guidebook.switch_book",
+    "sounds": [
+      {
+        "name": "random.page",
+        "type": "event"
+      }
+    ]
+  },
+  "soulforge.return_items": {
+    "subtitle": "subtitles.btx.soulforge.return_items",
+    "sounds": [
+      {
+        "name": "random.pop",
+        "type": "event"
+      }
+    ]
+  },
+  "soulforged.activate": {
+    "subtitle": "subtitles.btx.soulforged.activate",
+    "sounds": [
+      {
+        "name": "random.whoose.in",
+        "type": "event"
+      }
+    ]
+  },
+  "soulforged.activate.ignite": {
+    "sounds": [
+      {
+        "name": "fire.ignite",
+        "type": "event"
+      }
+    ]
+  },
+  "soulforged.activate.hum": {
+    "sounds": [
+      {
+        "name": "portal.trigger",
+        "type": "event"
+      }
+    ]
+  },
+  "soulforged.activate.moan": {
+    "sounds": [
+      {
+        "name": "mob.ghast.moan",
+        "type": "event"
+      }
+    ]
+  },
+  "soulforged.deactivate": {
+    "subtitle": "subtitles.btx.soulforged.deactivate",
+    "sounds": [
+      {
+        "name": "random.whoose.out",
+        "type": "event"
+      }
+    ]
+  },
+  "soulforged.deactivate.fizz": {
+    "sounds": [
+      {
+        "name": "random.fizz",
+        "type": "event"
+      }
+    ]
+  },
+  "soulforged.power_down": {
+    "subtitle": "subtitles.btx.soulforged.power_down",
+    "sounds": [
+      {
+        "name": "random.whoose.out",
+        "type": "event"
+      }
+    ]
+  },
+  "soulforged.power_down.fizz": {
+    "sounds": [
+      {
+        "name": "random.fizz",
+        "type": "event"
+      }
+    ]
+  },
+  "soulforged.power_down.moan": {
+    "sounds": [
+      {
+        "name": "mob.ghast.moan",
+        "type": "event"
+      }
+    ]
+  },
+  "soulforge.craft": {
+    "subtitle": "subtitles.btx.soulforge.craft",
+    "sounds": [
+      "soulforge/craft.ogg"
+    ]
+  },
+  "saw.power_on": {
+    "subtitle": "subtitles.btx.saw.power_on",
+    "sounds": [
+      "saw/whirr.ogg"
+    ]
+  },
+  "saw.power_off": {
+    "subtitle": "subtitles.btx.saw.power_off",
+    "sounds": [
+      "saw/whirr.ogg"
+    ]
+  },
+  "saw.cut": {
+    "subtitle": "subtitles.btx.saw.cut",
+    "sounds": [
+      "saw/whirr.ogg"
+    ]
+  },
+  "saw.hurt": {
+    "subtitle": "subtitles.btx.saw.hurt",
+    "sounds": [
+      "saw/whirr.ogg"
+    ]
   }
 }

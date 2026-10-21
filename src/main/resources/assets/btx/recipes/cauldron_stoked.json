@@ -10,5 +10,175 @@
     "outputs": [
       {"id": "btx:item/kibble", "amount": 2}
     ]
+  },
+  {
+    "name": "btx:cauldron_stoked/glue_from_leather",
+    "type": "btx:cauldron_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/leather"}}
+    ],
+    "outputs": [
+      {"id": "btx:item/glue"}
+    ]
+  },
+  {
+    "name": "btx:cauldron_stoked/glue_from_tanned_leather",
+    "type": "btx:cauldron_stoked",
+    "inputs": [
+      {"stack": {"id": "btx:item/tanned_leather"}}
+    ],
+    "outputs": [
+      {"id": "btx:item/glue"}
+    ]
+  },
+  {
+    "name": "btx:cauldron_stoked/glue_from_scoured_leather",
+    "type": "btx:cauldron_stoked",
+    "inputs": [
+      {"stack": {"id": "btx:item/scoured_leather"}}
+    ],
+    "outputs": [
+      {"id": "btx:item/glue"}
+    ]
+  },
+  {
+    "name": "btx:cauldron_stoked/glue_from_belts",
+    "type": "btx:cauldron_stoked",
+    "inputs": [
+      {"stack": {"id": "btx:item/belt", "amount": 2}}
+    ],
+    "outputs": [
+      {"id": "btx:item/glue"}
+    ]
+  },
+  {
+    "name": "btx:cauldron_stoked/glue_from_bones",
+    "type": "btx:cauldron_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/bone", "amount": 8}}
+    ],
+    "outputs": [
+      {"id": "btx:item/glue"}
+    ]
+  },
+  {
+    "name": "btx:cauldron_stoked/glue_from_bone_piles",
+    "type": "btx:cauldron_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:block/bone_pile", "amount": 4}}
+    ],
+    "outputs": [
+      {"id": "btx:item/glue"}
+    ]
+  },
+  {
+    "name": "btx:cauldron_stoked/glue_from_straps",
+    "type": "btx:cauldron_stoked",
+    "inputs": [
+      {"stack": {"id": "btx:item/strap", "amount": 8}}
+    ],
+    "outputs": [
+      {"id": "btx:item/glue"}
+    ]
+  },
+  {
+    "name": "btx:cauldron_stoked/glue_from_cloth",
+    "type": "btx:cauldron_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/cloth", "amount": 8}}
+    ],
+    "outputs": [
+      {"id": "btx:item/glue"}
+    ]
+  },
+  {
+    "name": "btx:cauldron_stoked/glue_from_wool",
+    "type": "btx:cauldron_stoked",
+    "inputs": [
+      {"group": "minecraft:wools", "amount": 16}
+    ],
+    "outputs": [
+      {"id": "btx:item/glue"}
+    ]
+  },
+  {
+    "name": "btx:cauldron_stoked/glue_from_feathers",
+    "type": "btx:cauldron_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/feather_chicken", "amount": 16}}
+    ],
+    "outputs": [
+      {"id": "btx:item/glue"}
+    ]
+  },
+  {
+    "name": "btx:cauldron_stoked/glue_from_string",
+    "type": "btx:cauldron_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/string", "amount": 64}}
+    ],
+    "outputs": [
+      {"id": "btx:item/glue"}
+    ]
+  },
+  {
+    "name": "btx:cauldron_stoked/glue_from_leather_helmet",
+    "type": "btx:cauldron_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/armor_helmet_leather", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "btx:item/glue", "amount": 5}
+    ]
+  },
+  {
+    "name": "btx:cauldron_stoked/glue_from_leather_chestplate",
+    "type": "btx:cauldron_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/armor_chestplate_leather", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "btx:item/glue", "amount": 8}
+    ]
+  },
+  {
+    "name": "btx:cauldron_stoked/glue_from_leather_leggings",
+    "type": "btx:cauldron_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/armor_leggings_leather", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "btx:item/glue", "amount": 7}
+    ]
+  },
+  {
+    "name": "btx:cauldron_stoked/glue_from_leather_boots",
+    "type": "btx:cauldron_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/armor_boots_leather", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "btx:item/glue", "amount": 4}
+    ]
+  },
+  {
+    "name": "btx:cauldron_stoked/glue_from_leather_wolf_armor",
+    "type": "btx:cauldron_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/armor_wolf_leather", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "btx:item/glue", "amount": 7}
+    ]
+  },
+  {
+    "name": "btx:cauldron_stoked/glue_from_saddle",
+    "type": "btx:cauldron_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/saddle", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "btx:item/glue", "amount": 4}
+    ]
   }
 ]

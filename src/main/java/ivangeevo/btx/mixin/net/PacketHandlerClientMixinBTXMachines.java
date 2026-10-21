@@ -12,6 +12,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.PlayerLocal;
 import net.minecraft.client.net.handler.PacketHandlerClient;
 import net.minecraft.core.net.packet.PacketContainerOpen;
+import net.minecraft.core.world.pos.TilePos;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -44,6 +45,9 @@ public abstract class PacketHandlerClientMixinBTXMachines {
         } else if (packetContainerOpen.inventoryType == BTXConfig.HOPPER_SCREEN_ID) {
             TileEntityHopper machine = new TileEntityHopper();
             playerScreen.btx$displayHopperScreen(machine);
+            playerLocal.containerMenu.containerId = packetContainerOpen.windowId;
+        } else if (packetContainerOpen.inventoryType == BTXConfig.SOULFORGE_SCREEN_ID) {
+            playerScreen.btx$displaySoulforgeScreen(new TilePos((int) Math.floor(playerLocal.x), (int) Math.floor(playerLocal.y), (int) Math.floor(playerLocal.z)));
             playerLocal.containerMenu.containerId = packetContainerOpen.windowId;
         }
     }

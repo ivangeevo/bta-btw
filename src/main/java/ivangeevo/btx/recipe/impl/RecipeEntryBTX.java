@@ -119,7 +119,7 @@ public abstract class RecipeEntryBTX extends RecipeEntryBase<RecipeSymbol, ItemS
 		return false;
 	}
 
-	private boolean matchesName(ItemStack stack, SearchQuery query) {
+	protected boolean matchesName(ItemStack stack, SearchQuery query) {
 		if (query.query.getLeft() != SearchQuery.QueryType.NAME) {
 			return false;
 		}

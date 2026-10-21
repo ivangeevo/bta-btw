@@ -60,6 +60,8 @@ public final class BTXBlocks {
 	public static Block<BlockLogicCompanionCube> COMPANION_CUBE;
 	public static Block<BlockLogicCompanionSlab> COMPANION_SLAB;
 	public static Block<BlockLogicConcentratedHellfire> CONCENTRATED_HELLFIRE_BLOCK;
+	public static Block<BlockLogicSoulforge> SOULFORGE;
+	public static Block<BlockLogicSaw> SAW;
 
 	private static <T extends BlockLogic> Block<T> registerBlock(String name, BlockLogicSupplier<T> logicSupplier) {
 		String namespaceId = BTXMod.MOD_ID + ":block/" + name;
@@ -106,6 +108,8 @@ public final class BTXBlocks {
 		COMPANION_CUBE = registerBlock("companion_cube", BlockLogicCompanionCube.properties());
 		COMPANION_SLAB = registerBlock("companion_slab", BlockLogicCompanionSlab.properties(COMPANION_CUBE));
 		CONCENTRATED_HELLFIRE_BLOCK = registerBlock("concentrated_hellfire_block", BlockLogicConcentratedHellfire.properties());
+		SOULFORGE = registerBlock("soulforge", BlockLogicSoulforge.properties());
+		SAW = registerBlock("saw", BlockLogicSaw.properties());
 
 		// BTW CE: Flammability.PLANKS (5, 20) and Flammability.WICKER (60, 100)
 		BlockLogicFire.setFlammable(GRATE, 5, 20);
@@ -115,5 +119,6 @@ public final class BTXBlocks {
 		BlockLogicFire.setFlammable(WICKER_SLAB, 60, 100);
 		BlockLogicFire.setFlammable(COMPANION_CUBE, 30, 60);
 		BlockLogicFire.setFlammable(COMPANION_SLAB, 30, 60);
+		BlockLogicFire.setFlammable(SAW, 5, 20);
 	}
 }

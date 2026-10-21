@@ -1,6 +1,7 @@
 package ivangeevo.btx.block.blocks;
 
 import ivangeevo.btx.block.BTXBlocks;
+import ivangeevo.btx.sound.BTXSoundTypes;
 import ivangeevo.btx.util.utils.FacingUtils;
 import ivangeevo.btx.util.utils.MechPowerUtils;
 import ivangeevo.btx.util.utils.SoundUtils;
@@ -76,7 +77,8 @@ public abstract class BlockLogicVessel extends BlockLogic implements MechanicalD
 		if (wasPowered != isPowered) {
 			float volume = 2.0F + (rand.nextFloat() * 0.1F);
 			float pitch = 0.5F + (rand.nextFloat() * 0.1F);
-			SoundUtils.playAtTileCenter(world, tilePos, SoundCategory.WORLD_SOUNDS, "step.gravel", volume, pitch);
+
+			SoundUtils.playAtTileCenter(world, tilePos, SoundCategory.WORLD_SOUNDS, BTXSoundTypes.VESSEL_TIP, volume, pitch);
 
 			setMechanicallyPoweredFlag(world, tilePos, isPowered);
 

@@ -88,6 +88,7 @@ public class BTW294ChunkConverter extends ChunkConverter {
 		// panel: bit 0 set = wood, facing in bits 1-3; stone panels have no BTX block yet and become air
 		addMapping(new MappingBitSplit(246, 1, 0, BTXBlocks.SIDING_OAK.id(), 1));
 		addMapping(new MappingSimple(248, BTXBlocks.GEARBOX.id()));
+		addMapping(new MappingSimple(226, BTXBlocks.SAW.id()));
 		// turntable: the switch setting is restored from the tile entity's m_iSwitchSetting
 		addMapping(new MappingMasked(249, BTXBlocks.TURNTABLE.id(), 3));
 		addMapping(new MappingMasked(250, BTXBlocks.BELLOWS.id(), 7));

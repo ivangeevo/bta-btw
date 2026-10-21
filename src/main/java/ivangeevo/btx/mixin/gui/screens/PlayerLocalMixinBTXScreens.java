@@ -8,6 +8,8 @@ import ivangeevo.btx.block.entity.TileEntityMillStone;
 import ivangeevo.btx.gui.BTXScreens;
 import ivangeevo.btx.gui.cookingvessel.ScreenCookingVessel;
 import ivangeevo.btx.gui.millstone.ScreenMillStone;
+import ivangeevo.btx.gui.soulforge.ScreenSoulforge;
+import net.minecraft.core.world.pos.TilePosc;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
@@ -44,5 +46,10 @@ public abstract class PlayerLocalMixinBTXScreens extends Player implements BTXSc
 	@Override
 	public void btx$displayHopperScreen(TileEntityHopper tileEntity) {
 		this.mc.displayScreen(new ScreenHopper(this.inventory, tileEntity));
+	}
+
+	@Override
+	public void btx$displaySoulforgeScreen(TilePosc tilePos) {
+		this.mc.displayScreen(new ScreenSoulforge(this.inventory, this.world, tilePos));
 	}
 }

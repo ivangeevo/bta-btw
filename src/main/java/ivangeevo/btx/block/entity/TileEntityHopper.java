@@ -5,6 +5,7 @@ import com.mojang.nbt.tags.ListTag;
 import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.block.blocks.BlockLogicHopper;
 import ivangeevo.btx.recipe.BTXRecipes;
+import ivangeevo.btx.sound.BTXSoundTypes;
 import ivangeevo.btx.util.utils.InventoryUtils;
 import ivangeevo.btx.util.utils.SoundUtils;
 import net.minecraft.core.block.Block;
@@ -134,7 +135,6 @@ public class TileEntityHopper extends TileEntity implements Container {
 
 	@Override
 	public void readAdditionalData(@NotNull CompoundTag compoundTag) {
-		// description packet (see getDescriptionPacket): only the render state
 		if (!compoundTag.containsKey("Items") && compoundTag.containsKey("s")) {
 			storageSlotsOccupied = compoundTag.getShort("s");
 			filterItemId = compoundTag.getInteger("f");
@@ -462,13 +462,13 @@ public class TileEntityHopper extends TileEntity implements Container {
 	}
 
 	private void playCollectionPop() {
-		SoundUtils.playAtTileCenter(worldObj, tilePos, SoundCategory.WORLD_SOUNDS, "random.pop", 0.25F,
+		SoundUtils.playAtTileCenter(worldObj, tilePos, SoundCategory.WORLD_SOUNDS, BTXSoundTypes.ITEM_COLLECT, 0.25F,
 			((worldObj.rand.nextFloat() - worldObj.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
 	}
 
 	private void hopperSoulOverload() {
 		if (spawnGhast()) {
-			SoundUtils.playAtTileCenter(worldObj, tilePos, SoundCategory.ENTITY_SOUNDS, "mob.ghast.scream", 1.0F,
+			SoundUtils.playAtTileCenter(worldObj, tilePos, SoundCategory.ENTITY_SOUNDS, BTXSoundTypes.HOPPER_SOUL_OVERLOAD, 1.0F,
 				worldObj.rand.nextFloat() * 0.4F + 0.8F);
 		}
 

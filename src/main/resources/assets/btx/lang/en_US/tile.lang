@@ -200,3 +200,7 @@ tile.btx.corner.oak.painted.red.name=Red Wooden Corner
 tile.btx.corner.oak.painted.red.desc=Wooden corner, stained red.
 tile.btx.corner.oak.painted.black.name=Black Wooden Corner
 tile.btx.corner.oak.painted.black.desc=Wooden corner, stained black.
+tile.btx.soulforge.name=Soulforge
+tile.btx.soulforge.desc=A forge-anvil for working soulforged steel on a 4x4 grid.
+tile.btx.saw.name=Saw
+tile.btx.saw.desc=Cuts the block in front of its blade when powered by an axle.

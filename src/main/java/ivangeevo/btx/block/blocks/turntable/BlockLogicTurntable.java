@@ -2,6 +2,7 @@ package ivangeevo.btx.block.blocks.turntable;
 
 import ivangeevo.btx.block.blocks.MechanicalDevice;
 import ivangeevo.btx.block.entity.TileEntityTurntable;
+import ivangeevo.btx.sound.BTXSoundTypes;
 import ivangeevo.btx.util.utils.MechPowerUtils;
 import ivangeevo.btx.util.utils.SoundUtils;
 import ivangeevo.btx.util.utils.WorldUtils;
@@ -64,18 +65,19 @@ public class BlockLogicTurntable extends BlockLogic implements MechanicalDevice,
 	@Override
 	public void updateTick(@NotNull World world, @NotNull TilePosc tilePos, @NotNull Random rand, boolean isRandomTick) {
 		boolean receivingMechanicalPower = isInputtingMechanicalPower(world, tilePos);
+
 		if (isBlockMechanicalOn(world, tilePos) != receivingMechanicalPower) {
 			emitTurntableParticles(world, tilePos, rand);
 			setBlockMechanicalOn(world, tilePos, receivingMechanicalPower);
 		}
 
 		boolean receivingRedstonePower = world.hasDirectSignal(tilePos);
+
 		if (isBlockRedstoneOn(world, tilePos) != receivingRedstonePower) {
 			setBlockRedstoneOn(world, tilePos, receivingRedstonePower);
 		}
 	}
 
-	// 2.94: use. Empty hand cycles the switch setting.
 	@Override
 	public boolean onInteracted(
 		@NotNull World world, @NotNull TilePosc tilePos, @NotNull Player player,
@@ -86,9 +88,11 @@ public class BlockLogicTurntable extends BlockLogic implements MechanicalDevice,
 		}
 		if (!world.isClientSide) {
 			int setting = getSwitchSetting(world, tilePos) + 1;
+
 			setSwitchSetting(world, tilePos, setting > 3 ? 0 : setting);
-			SoundUtils.playAtTileCenter(world, tilePos, SoundCategory.WORLD_SOUNDS, "random.click", 0.3F, 0.6F);
+			SoundUtils.playAtTileCenter(world, tilePos, SoundCategory.WORLD_SOUNDS, BTXSoundTypes.TURNTABLE_ADJUST, 0.3F, 0.6F);
 		}
+
 		return true;
 	}
 
@@ -116,7 +120,7 @@ public class BlockLogicTurntable extends BlockLogic implements MechanicalDevice,
 	@Override
 	public boolean canTransmitRotationVertically(WorldSource source, TilePosc pos) { return false; }
 
-	//------------- FCMechanicalDevice -------------//
+	//------------- MechanicalDevice -------------//
 
 	@Override
 	public boolean canOutputMechanicalPower() { return false; }
@@ -126,7 +130,6 @@ public class BlockLogicTurntable extends BlockLogic implements MechanicalDevice,
 
 	@Override
 	public boolean isInputtingMechanicalPower(World world, TilePosc tilePos) {
-		// 2.94: only a powered axle below, pointing at the turntable
 		return MechPowerUtils.isBlockPoweredByAxle(world, tilePos, this);
 	}
 

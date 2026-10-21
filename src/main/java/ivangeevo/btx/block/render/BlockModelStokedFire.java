@@ -1,6 +1,8 @@
 package ivangeevo.btx.block.render;
 
 import net.minecraft.client.render.block.model.BlockModelStandard;
+import net.minecraft.client.render.renderer.GLRenderer;
+import net.minecraft.client.render.renderer.State;
 import net.minecraft.client.render.tessellator.TessellatorGeneral;
 import net.minecraft.client.render.texture.stitcher.IconCoordinate;
 import net.minecraft.client.render.texture.stitcher.TextureRegistry;
@@ -42,6 +44,24 @@ public class BlockModelStokedFire<T extends BlockLogic> extends BlockModelStanda
 		drawOuterPlanes(t, tex1, tex2, x, y, z, top);
 
 		return true;
+	}
+
+	@Override
+	public void renderStandalone(@NotNull TessellatorGeneral t, int metadata, byte lightIndex) {
+		loadTextures();
+
+		t.offsetTranslation(-0.5, -0.5, -0.5);
+		t.startDrawingQuads();
+		t.setLightmapCoord1i(lightIndex);
+		t.setColor1i(0xFFFFFF);
+		drawInnerPlanes(t, base0, base1, 0, 0, 0, HEIGHT);
+		drawOuterPlanes(t, base0, base1, 0, 0, 0, HEIGHT);
+
+		// the planes are single quads seen from both sides, like in the world
+		GLRenderer.disableState(State.CULL_FACE);
+		t.draw();
+		GLRenderer.enableState(State.CULL_FACE);
+		t.offsetTranslation(0.5, 0.5, 0.5);
 	}
 
 	private void loadTextures() {

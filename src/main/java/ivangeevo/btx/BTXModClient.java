@@ -22,6 +22,7 @@ import net.minecraft.client.render.item.model.ItemModelStandard;
 import net.minecraft.client.render.particle.ParticleDispatcher;
 import net.minecraft.client.render.texture.stitcher.AtlasStitcher;
 import net.minecraft.client.render.texture.stitcher.TextureRegistry;
+import net.minecraft.core.item.Item;
 import turniplabs.halplibe.event.defs.ClientEvents;
 import turniplabs.halplibe.helper.TextureHelper;
 import turniplabs.halplibe.util.dependency.Key;
@@ -76,9 +77,28 @@ public class BTXModClient implements ClientModInitializer {
 		dispatcher.addDispatch(new ItemModelStandard(BTXItems.WICKER).setIcon(icon("wicker")));
 		dispatcher.addDispatch(new ItemModelStandard(BTXItems.FOOD_WOLF_CHOP_RAW).setIcon(icon("food_wolf_chop_raw")));
 		dispatcher.addDispatch(new ItemModelStandard(BTXItems.FOOD_WOLF_CHOP_COOKED).setIcon(icon("food_wolf_chop_cooked")));
+		dispatcher.addDispatch(new ItemModelStandard(BTXItems.DONUT).setIcon(icon("donut")));
+		dispatcher.addDispatch(new ItemModelStandard(BTXItems.SOULFORGED_STEEL_INGOT).setIcon(icon("soulforged_steel_ingot")));
+		dispatcher.addDispatch(new ItemModelStandard(BTXItems.STEEL_ARMOR_PLATE).setIcon(icon("steel_armor_plate")));
+		dispatcher.addDispatch(handheld(BTXItems.SOULFORGED_STEEL_PICKAXE, "soulforged_steel_pickaxe"));
+		dispatcher.addDispatch(handheld(BTXItems.SOULFORGED_STEEL_SHOVEL, "soulforged_steel_shovel"));
+		dispatcher.addDispatch(handheld(BTXItems.SOULFORGED_STEEL_MATTOCK, "soulforged_steel_mattock"));
+		dispatcher.addDispatch(handheld(BTXItems.SOULFORGED_STEEL_HOE, "soulforged_steel_hoe"));
+		dispatcher.addDispatch(handheld(BTXItems.SOULFORGED_STEEL_AXE, "soulforged_steel_axe"));
+		dispatcher.addDispatch(handheld(BTXItems.SOULFORGED_STEEL_BATTLEAXE, "soulforged_steel_battleaxe"));
+		dispatcher.addDispatch(handheld(BTXItems.SOULFORGED_STEEL_SWORD, "soulforged_steel_sword"));
+		dispatcher.addDispatch(new ItemModelStandard(BTXItems.SOULFORGED_STEEL_HELMET).setIcon(icon("soulforged_steel_helmet")));
+		dispatcher.addDispatch(new ItemModelStandard(BTXItems.SOULFORGED_STEEL_CHESTPLATE).setIcon(icon("soulforged_steel_chestplate")));
+		dispatcher.addDispatch(new ItemModelStandard(BTXItems.SOULFORGED_STEEL_LEGGINGS).setIcon(icon("soulforged_steel_leggings")));
+		dispatcher.addDispatch(new ItemModelStandard(BTXItems.SOULFORGED_STEEL_BOOTS).setIcon(icon("soulforged_steel_boots")));
 		dispatcher.addDispatch(new ItemModelStandard(BTXBlocks.GRATE.asItem()).setIcon(icon("grate")));
 		dispatcher.addDispatch(new ItemModelStandard(BTXBlocks.SLATS.asItem()).setIcon(icon("slats")));
 		dispatcher.addDispatch(new ItemModelStandard(BTXBlocks.WICKER_PANE.asItem()).setIcon(icon("wicker_pane")));
+		dispatcher.addDispatch(new ItemModelStandard(BTXItems.TANNED_LEATHER).setIcon(icon("tanned_leather")));
+		dispatcher.addDispatch(new ItemModelStandard(BTXItems.STRAP).setIcon(icon("strap")));
+		dispatcher.addDispatch(new ItemModelStandard(BTXItems.BELT).setIcon(icon("belt")));
+		dispatcher.addDispatch(new ItemModelStandard(BTXItems.GLUE).setIcon(icon("glue")));
+		dispatcher.addDispatch(new ItemModelStandard(BTXItems.HAFT).setIcon(icon("haft")));
 	}
 
 	public static void initBlockModels(BlockModelDispatcher dispatcher) {
@@ -112,6 +132,8 @@ public class BTXModClient implements ClientModInitializer {
 		dispatcher.addDispatch(new BlockModelGenericPane<>(BTXBlocks.WICKER_PANE, block("wicker_pane/wicker_pane_half")));
 		dispatcher.addDispatch(new BlockModelGeneric<>(BTXBlocks.WICKER_BLOCK, loadDataModel(block("wicker/wicker_block"))));
 		dispatcher.addDispatch(new BlockModelGeneric<>(BTXBlocks.CONCENTRATED_HELLFIRE_BLOCK, loadDataModel(block("concentrated_hellfire_block"))));
+		dispatcher.addDispatch(new BlockModelGenericSoulforge<>(BTXBlocks.SOULFORGE));
+		dispatcher.addDispatch(new BlockModelGenericSaw<>(BTXBlocks.SAW));
 		dispatcher.addDispatch(new BlockModelGenericSlab<>(BTXBlocks.WICKER_SLAB,
 			loadDataModel(block("wicker/wicker_slab_lower")),
 			loadDataModel(block("wicker/wicker_slab_upper")),
@@ -152,6 +174,14 @@ public class BTXModClient implements ClientModInitializer {
 
 	private static String block(String name) {
 		return BTXMod.MOD_ID + ":block/" + name;
+	}
+
+	private static ItemModelStandard handheld(Item item, String name) {
+		return new ItemModelStandard(item).setIcon(icon(name))
+			.setDisplayPos("firstperson_righthand", ItemModelDispatcher.HANDHELD_FIRST_PERSON_RIGHT_HAND)
+			.setDisplayPos("firstperson_lefthand", ItemModelDispatcher.HANDHELD_FIRST_PERSON_LEFT_HAND)
+			.setDisplayPos("thirdperson_righthand", ItemModelDispatcher.HANDHELD_THIRD_PERSON_RIGHT_HAND)
+			.setDisplayPos("thirdperson_lefthand", ItemModelDispatcher.HANDHELD_THIRD_PERSON_LEFT_HAND);
 	}
 
 	private static String icon(String name) {

@@ -1,5 +1,6 @@
 package ivangeevo.btx.mixin.client.render;
 
+import ivangeevo.btx.util.rendering.AreaMiningOutline;
 import ivangeevo.btx.util.rendering.PlacementOutline;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.render.RenderGlobal;
@@ -15,18 +16,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(RenderGlobal.class)
 public abstract class RenderGlobalMixin {
-
-	@Shadow
-	private WorldClient world;
-
-	@Shadow
-	@Final
-	private Minecraft mc;
+	@Shadow private WorldClient world;
+	@Shadow @Final private Minecraft mc;
 
 	@Inject(method = "drawTileSelectionBoxRaw", at = @At("TAIL"))
     private void btx$placementOutline(
 		ICamera camera, TilePosc targetPos, double ox, double oy, double oz, CallbackInfo ci
 	) {
-        PlacementOutline.draw(this.mc, this.world, (RenderGlobal) (Object) this, targetPos, ox, oy, oz);
+		RenderGlobal self = (RenderGlobal) (Object) this;
+
+        PlacementOutline.draw(this.mc, this.world, self, targetPos, ox, oy, oz);
+        AreaMiningOutline.draw(this.mc, this.world, self, targetPos, ox, oy, oz);
     }
 }

@@ -51,7 +51,6 @@ public final class BTXCreativeContents {
 		REG.register(BTXItems.SAIL, inCategory(CreativeInventoryCategory.MISCELLANEOUS));
 		REG.register(BTXItems.WINDMILL, inCategory(CreativeInventoryCategory.PLACEABLES));
 		REG.register(BTXItems.FABRIC, inCategory(CreativeInventoryCategory.ORGANIC));
-		REG.register(BTXItems.BELT, inCategory(CreativeInventoryCategory.ORGANIC));
 		REG.register(BTXItems.WOOD_BLADE, inCategory(CreativeInventoryCategory.MISCELLANEOUS));
 		REG.register(BTXItems.CONCENTRATED_HELLFIRE, inCategory(CreativeInventoryCategory.MISCELLANEOUS));
 		REG.register(BTXItems.HELLFIRE_DUST, inCategory(CreativeInventoryCategory.MISCELLANEOUS));
@@ -59,8 +58,27 @@ public final class BTXCreativeContents {
 		REG.register(BTXItems.FOUL_FOOD, inCategory(CreativeInventoryCategory.MISCELLANEOUS));
 		REG.register(BTXItems.FOOD_WOLF_CHOP_RAW, inCategory(CreativeInventoryCategory.ORGANIC));
 		REG.register(BTXItems.FOOD_WOLF_CHOP_COOKED, inCategory(CreativeInventoryCategory.ORGANIC));
+		REG.register(BTXItems.DONUT, inCategory(CreativeInventoryCategory.ORGANIC));
 		REG.register(BTXItems.KIBBLE, inCategory(CreativeInventoryCategory.ORGANIC));
+		REG.register(BTXItems.SOULFORGED_STEEL_INGOT, inCategory(CreativeInventoryCategory.ORE_PRODUCTS));
+		REG.register(BTXItems.STEEL_ARMOR_PLATE, inCategory(CreativeInventoryCategory.MISCELLANEOUS));
+		REG.register(BTXItems.SOULFORGED_STEEL_PICKAXE, inCategory(CreativeInventoryCategory.TOOLS));
+		REG.register(BTXItems.SOULFORGED_STEEL_SHOVEL, inCategory(CreativeInventoryCategory.TOOLS));
+		REG.register(BTXItems.SOULFORGED_STEEL_MATTOCK, inCategory(CreativeInventoryCategory.TOOLS));
+		REG.register(BTXItems.SOULFORGED_STEEL_AXE, inCategory(CreativeInventoryCategory.TOOLS));
+		REG.register(BTXItems.SOULFORGED_STEEL_HOE, inCategory(CreativeInventoryCategory.TOOLS));
+		REG.register(BTXItems.SOULFORGED_STEEL_SWORD, inCategory(CreativeInventoryCategory.TOOLS));
+		REG.register(BTXItems.SOULFORGED_STEEL_BATTLEAXE, inCategory(CreativeInventoryCategory.TOOLS));
+		REG.register(BTXItems.SOULFORGED_STEEL_HELMET, inCategory(CreativeInventoryCategory.ARMOR));
+		REG.register(BTXItems.SOULFORGED_STEEL_CHESTPLATE, inCategory(CreativeInventoryCategory.ARMOR));
+		REG.register(BTXItems.SOULFORGED_STEEL_LEGGINGS, inCategory(CreativeInventoryCategory.ARMOR));
+		REG.register(BTXItems.SOULFORGED_STEEL_BOOTS, inCategory(CreativeInventoryCategory.ARMOR));
 		REG.register(BTXItems.COAL_DUST, inCategory(CreativeInventoryCategory.MISCELLANEOUS));
+		REG.register(BTXItems.TANNED_LEATHER, inCategory(CreativeInventoryCategory.BASICS));
+		REG.register(BTXItems.STRAP, inCategory(CreativeInventoryCategory.BASICS));
+		REG.register(BTXItems.BELT, inCategory(CreativeInventoryCategory.BASICS));
+		REG.register(BTXItems.GLUE, inCategory(CreativeInventoryCategory.BASICS));
+		REG.register(BTXItems.HAFT, inCategory(CreativeInventoryCategory.BASICS));
 
 		// Blocks
 		// TODO: The blocks we add probably should be in their own category for machines/mech devices
@@ -71,6 +89,8 @@ public final class BTXCreativeContents {
 		REG.register(BTXBlocks.WICKER_PANE, inCategory(CreativeInventoryCategory.WOOD));
 		REG.register(BTXBlocks.WICKER_BLOCK, inCategory(CreativeInventoryCategory.WOOD));
 		REG.register(BTXBlocks.CONCENTRATED_HELLFIRE_BLOCK, inCategory(CreativeInventoryCategory.STORAGE));
+		REG.register(BTXBlocks.SOULFORGE, inCategory(CreativeInventoryCategory.WORKBENCHES));
+		REG.register(BTXBlocks.SAW, inCategory(CreativeInventoryCategory.WORKBENCHES));
 		REG.register(BTXBlocks.WICKER_SLAB, inCategory(CreativeInventoryCategory.WOOD));
 		REG.register(BTXBlocks.COMPANION_CUBE, inCategory(CreativeInventoryCategory.MISCELLANEOUS));
 		REG.register(BTXBlocks.COMPANION_SLAB, inCategory(CreativeInventoryCategory.MISCELLANEOUS));

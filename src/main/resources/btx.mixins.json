@@ -15,7 +15,11 @@
     "MixinItemToolHoe",
     "MixinProjectileArrow",
     "entity.EntityMixin",
+    "entity.MobDamageTrackedMixin",
     "entity.MobWolfMixin",
+    "entity.ItemStackSoulforgedArmorMixin",
+    "entity.MobSoulforgedArmorMixin",
+    "entity.PlayerSoulforgedArmorMixin",
     "entity.ProjectileArrowMixin",
     "gui.MenuInventoryCreativeMixin",
     "client.MinecraftMixin",
@@ -25,10 +29,16 @@
     "world.WorldMixin"
   ],
   "client": [
+    "client.HudComponentSubtitlesMixin",
     "client.render.BlockModelFireMixin",
     "client.render.MixinBlockModelGeneric",
     "client.render.MixinBlockModelGenericShifted",
     "client.render.RenderGlobalMixin",
+    "gui.GuidebookMixinInclude",
+    "gui.GuidebookPageManagerMixin",
+    "gui.GuidebookSectionsAccessor",
+    "gui.ScreenGuidebookAccessor",
+    "gui.ScreenGuidebookMixin",
     "gui.screens.PlayerLocalMixinBTXScreens",
     "net.PacketHandlerClientMixinBTXMachines"
   ],

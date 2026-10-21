@@ -6,6 +6,7 @@ import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.block.blocks.BlockLogicCompanionCube;
 import ivangeevo.btx.block.blocks.BlockLogicMillStone;
 import ivangeevo.btx.recipe.BTXRecipes;
+import ivangeevo.btx.sound.BTXSoundTypes;
 import ivangeevo.btx.util.utils.InventoryUtils;
 import ivangeevo.btx.util.utils.MiscUtils;
 import ivangeevo.btx.util.utils.SoundUtils;
@@ -31,8 +32,6 @@ public class TileEntityMillStone extends TileEntity implements Container {
 	private static final int STACK_SIZE_LIMIT = 64;
 	private static final double MAX_PLAYER_INTERACTION_DIST = 64.0;
 	private static final int TIME_TO_GRIND = 200;
-
-	/** Progress added per hand-crank use. 20 -> 10 cranks per item. */
 	public static final int CRANK_PROGRESS = 20;
 
 	private final Random random = new Random();
@@ -71,7 +70,7 @@ public class TileEntityMillStone extends TileEntity implements Container {
 
 	@Override
 	public int getMaxStackSize() {
-		return 64;
+		return STACK_SIZE_LIMIT;
 	}
 
 	@Override
@@ -145,7 +144,7 @@ public class TileEntityMillStone extends TileEntity implements Container {
 			if (this.isWholeCompanionCubeNextToBeProcessed() && this.worldObj.rand.nextInt(10) == 0) {
 				BlockLogicCompanionCube.playHurt(this.worldObj, this.tilePos, 2.0F);
 			} else if (this.isNetherrackNextToBeProcessed() && this.worldObj.rand.nextInt(10) == 0) {
-				SoundUtils.playAtTileCenter(this.worldObj, this.tilePos, SoundCategory.ENTITY_SOUNDS, "mob.ghast.scream",
+				SoundUtils.playAtTileCenter(this.worldObj, this.tilePos, SoundCategory.ENTITY_SOUNDS, BTXSoundTypes.MILLSTONE_NETHERRACK,
 					0.25F, this.worldObj.rand.nextFloat() * 0.4F + 0.8F);
 			}
 
@@ -238,7 +237,6 @@ public class TileEntityMillStone extends TileEntity implements Container {
 		return this.grindCounter;
 	}
 
-	/** Used by MenuMillStone.setData to sync progress to the client. */
 	public void setGrindCounter(int progress) {
 		this.grindCounter = progress;
 	}

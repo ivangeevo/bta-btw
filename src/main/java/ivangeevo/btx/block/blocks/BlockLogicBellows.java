@@ -1,6 +1,6 @@
 package ivangeevo.btx.block.blocks;
 
-import ivangeevo.btx.BTXSoundTypes;
+import ivangeevo.btx.sound.BTXSoundTypes;
 import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.util.utils.MechPowerUtils;
 import ivangeevo.btx.util.utils.SoundUtils;
@@ -69,7 +69,6 @@ public class BlockLogicBellows extends BlockLogic implements MechanicalDevice {
 
 	@Override
 	public @NotNull AABBdc getBoundsFromState(@NotNull WorldSource source, @NotNull TilePosc tilePos) {
-		// 2.94: updateShape
 		return new AABBd(0, 0, 0, 1, isBlockMechanicalOn(source, tilePos) ? BELLOWS_CONTRACTED_HEIGHT : 1.0D, 1);
 	}
 
@@ -100,14 +99,13 @@ public class BlockLogicBellows extends BlockLogic implements MechanicalDevice {
 		return setFacing(0, facing);
 	}
 
-	// 2.94: onAdded
 	@Override
 	public void onPlacedByWorld(@NotNull World world, @NotNull TilePosc tilePos) {
 		super.onPlacedByWorld(world, tilePos);
 		world.scheduleBlockUpdate(tilePos, this.block, this.tickDelay());
 	}
 
-	// 2.94: neighborChanged always schedules. The guard only avoids queueing while already valid or mid-tick.
+	// The guard only avoids queueing while already valid or mid-tick.
 	@Override
 	public void onNeighborChanged(@NotNull World world, @NotNull TilePosc tilePos, @NotNull Block<?> block) {
 		boolean updateScheduled = WorldUtils.isUpdateScheduled(world, tilePos, this.block);
@@ -133,6 +131,7 @@ public class BlockLogicBellows extends BlockLogic implements MechanicalDevice {
 				world.scheduleBlockUpdate(tilePos, this.block, this.tickDelay());
 				setContinuousMechanicalStateChange(world, tilePos, true);
 			}
+
 			return;
 		}
 
@@ -162,7 +161,7 @@ public class BlockLogicBellows extends BlockLogic implements MechanicalDevice {
 		}
 	}
 
-	//------------- FCMechanicalDevice -------------//
+	//------------- MechanicalDevice -------------//
 
 	@Override
 	public boolean canOutputMechanicalPower() {
@@ -176,7 +175,6 @@ public class BlockLogicBellows extends BlockLogic implements MechanicalDevice {
 
 	@Override
 	public boolean isInputtingMechanicalPower(World world, TilePosc tilePos) {
-		// 2.94: hand crank on the 4 sides, axle on every face except the front and the top
 		return MechPowerUtils.isBlockPoweredByAxle(world, tilePos, this) ||
 			   MechPowerUtils.isBlockPoweredByHandCrank(world, tilePos);
 	}
@@ -200,15 +198,16 @@ public class BlockLogicBellows extends BlockLogic implements MechanicalDevice {
 
 	public void setContinuousMechanicalStateChange(World world, TilePosc tilePos, boolean continuous) {
 		int data = world.getBlockData(tilePos) & ~8;
+
 		if (continuous) data |= 8;
+
 		world.setBlockData(tilePos, data);
 	}
 
-	/** The side the front is on, and the direction the bellows blows. Same as the stored facing (2.94). */
 	public Direction getFrontDirection(int metadata) {
 		return Direction.fromId(getFacing(metadata));
 	}
-	/** 2.94: GetFacing. Bits 0-1, values 2-5. */
+
 	public int getFacing(int metadata) {
 		return (metadata & 3) + 2;
 	}
@@ -228,6 +227,7 @@ public class BlockLogicBellows extends BlockLogic implements MechanicalDevice {
 		if (on) {
 			metadata |= 4;
 		}
+
 		world.setBlockDataNotify(tilePos, metadata);
 	}
 
@@ -245,6 +245,7 @@ public class BlockLogicBellows extends BlockLogic implements MechanicalDevice {
 
 		TilePos particlePos = new TilePos(tilePos);
 		particlePos.add(front);
+
 		emitBellowsParticles(world, particlePos, world.rand);
 
 		TilePos target = new TilePos(tilePos);
@@ -261,13 +262,16 @@ public class BlockLogicBellows extends BlockLogic implements MechanicalDevice {
 			TilePos sidePos1 = new TilePos(target);
 			sidePos1.add(side1);
 			Block<?> sideBlock1 = world.getBlockType(sidePos1);
+
 			if (sideBlock1 == Blocks.FIRE || sideBlock1 == BTXBlocks.STOKED_FIRE) {
 				stokeFire(world, sidePos1);
 			}
 
 			TilePos sidePos2 = new TilePos(target);
 			sidePos2.add(side2);
+
 			Block<?> sideBlock2 = world.getBlockType(sidePos2);
+
 			if (sideBlock2 == Blocks.FIRE || sideBlock2 == BTXBlocks.STOKED_FIRE) {
 				stokeFire(world, sidePos2);
 			}
@@ -304,7 +308,6 @@ public class BlockLogicBellows extends BlockLogic implements MechanicalDevice {
 			tilePos.x() + 1, tilePos.y() + 1, tilePos.z() + 1);
 		double extendedMaxY = tilePos.y() + 1;
 
-		// ASSUMPTION: this lookup name and signature, see notes
 		List<Entity> list = world.getEntitiesWithinAABBExcludingEntity(null, area);
 		for (Entity entity : list) {
 			if (!entity.removed && (entity.isPushable() || entity instanceof EntityItem)) {

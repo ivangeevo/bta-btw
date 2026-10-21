@@ -2,6 +2,7 @@ package ivangeevo.btx.block.blocks;
 
 import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.block.blocks.util.FireInteraction;
+import ivangeevo.btx.sound.BTXSoundTypes;
 import ivangeevo.btx.util.utils.FireUtils;
 import ivangeevo.btx.util.utils.SoundUtils;
 import ivangeevo.btx.util.utils.WorldUtils;
@@ -9,7 +10,6 @@ import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockLogic;
 import net.minecraft.core.block.BlockLogicSupplier;
 import net.minecraft.core.block.Blocks;
-import net.minecraft.core.block.material.Material;
 import net.minecraft.core.block.material.Materials;
 import net.minecraft.core.block.tag.BlockTags;
 import net.minecraft.core.sound.BlockSounds;
@@ -24,7 +24,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Random;
 
 public class BlockLogicHibachi extends BlockLogic implements FireInteraction {
-
 	private final static int TICK_RATE = 4;
 
 	public BlockLogicHibachi(@NotNull Block<?> block) {
@@ -85,7 +84,7 @@ public class BlockLogicHibachi extends BlockLogic implements FireInteraction {
 					if (shouldIgniteAbove(world, tilePos)) {
 						float pitch = world.rand.nextFloat() * 0.4F + 0.8F;
 						SoundUtils.playAtTileCenter(
-							world, tilePos, SoundCategory.WORLD_SOUNDS, "mob.ghast.fireball", 1F, pitch
+							world, tilePos, SoundCategory.WORLD_SOUNDS, BTXSoundTypes.HIBACHI_IGNITE, 1F, pitch
 						);
 
 						world.setBlockTypeNotify(posAbove, Blocks.FIRE);
@@ -163,7 +162,7 @@ public class BlockLogicHibachi extends BlockLogic implements FireInteraction {
 
 		float pitch = world.rand.nextFloat() * 0.4F + 1F;
 		SoundUtils.playAtTileCenter(
-			world, tilePos, SoundCategory.WORLD_SOUNDS, "mob.ghast.fireball", 1F, pitch
+			world, tilePos, SoundCategory.WORLD_SOUNDS, BTXSoundTypes.HIBACHI_IGNITE, 1F, pitch
 		);
 
 		if (shouldIgniteAbove(world, tilePos)) {
@@ -176,7 +175,7 @@ public class BlockLogicHibachi extends BlockLogic implements FireInteraction {
 
 		float pitch = 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F;
 		SoundUtils.playAtTileCenter(
-			world, tilePos, SoundCategory.WORLD_SOUNDS, "random.fizz", 0.5F, pitch
+			world, tilePos, SoundCategory.WORLD_SOUNDS, BTXSoundTypes.HIBACHI_EXTINGUISH, 0.5F, pitch
 		);
 
 		// check if there is an actual fire block above the BBQ

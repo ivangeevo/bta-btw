@@ -7,6 +7,7 @@ import ivangeevo.btx.gui.BTXScreens;
 import ivangeevo.btx.item.BTXItems;
 import ivangeevo.btx.recipe.BTXRecipes;
 import ivangeevo.btx.recipe.hopper.RecipeEntryHopper;
+import ivangeevo.btx.sound.BTXSoundTypes;
 import ivangeevo.btx.util.utils.InventoryUtils;
 import ivangeevo.btx.util.utils.MechPowerUtils;
 import ivangeevo.btx.util.utils.MiscUtils;
@@ -234,7 +235,7 @@ public class BlockLogicHopper
 		MiscUtils.ejectSingleItemWithRandomOffset(world, tilePos, BTXItems.GEAR.id, 0);
 
 		world.playSoundEffect(null, SoundCategory.WORLD_SOUNDS,
-			tilePos.x() + 0.5, tilePos.y() + 0.5, tilePos.z() + 0.5, "random.explode", 1.0F, 1.25F);
+			tilePos.x() + 0.5, tilePos.y() + 0.5, tilePos.z() + 0.5, BTXSoundTypes.MECHANICAL_BREAK, 1.0F, 1.25F);
 
 		world.setBlockTypeNotify(tilePos, Blocks.AIR);
 	}
@@ -360,7 +361,7 @@ public class BlockLogicHopper
 
 		hopper.incrementContainedSoulCount(count);
 
-		SoundUtils.playAtTileCenter(world, tilePos, SoundCategory.ENTITY_SOUNDS, "mob.ghast.moan", 0.5F,
+		SoundUtils.playAtTileCenter(world, tilePos, SoundCategory.ENTITY_SOUNDS, BTXSoundTypes.HOPPER_SOUL_CAPTURE, 0.5F,
 			2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 
 		entityItem.remove();
@@ -381,7 +382,7 @@ public class BlockLogicHopper
 	}
 
 	private static void playCollectionPop(World world, TilePosc tilePos) {
-		SoundUtils.playAtTileCenter(world, tilePos, SoundCategory.WORLD_SOUNDS, "random.pop", 0.25F,
+		SoundUtils.playAtTileCenter(world, tilePos, SoundCategory.WORLD_SOUNDS, BTXSoundTypes.ITEM_COLLECT, 0.25F,
 			((world.rand.nextFloat() - world.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
 	}
 }

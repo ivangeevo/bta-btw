@@ -2,6 +2,7 @@ package ivangeevo.btx.block.blocks;
 
 import ivangeevo.btx.block.blocks.util.ItemOnTopCollision;
 import ivangeevo.btx.block.entity.TileEntityCookingVessel;
+import ivangeevo.btx.sound.BTXSoundTypes;
 import ivangeevo.btx.util.utils.InventoryUtils;
 import ivangeevo.btx.util.utils.SoundUtils;
 import net.minecraft.core.block.Block;
@@ -24,7 +25,6 @@ import java.util.List;
 import java.util.Random;
 
 public abstract class BlockLogicCookingVessel extends BlockLogicVessel implements ItemOnTopCollision {
-
 	public BlockLogicCookingVessel(@NotNull Block<?> block, @NotNull Material material) {
 		super(block, material);
 	}
@@ -56,7 +56,7 @@ public abstract class BlockLogicCookingVessel extends BlockLogicVessel implement
 			for (EntityItem targetEntityItem : collisionList) {
 				if (targetEntityItem.isAlive()) {
 					if (InventoryUtils.addItemStackToInventory(inventoryEntity, targetEntityItem.item)) {
-						SoundUtils.playAtTileCenter(world, tilePos, SoundCategory.WORLD_SOUNDS, "random.pop", 0.25F,
+						SoundUtils.playAtTileCenter(world, tilePos, SoundCategory.WORLD_SOUNDS, BTXSoundTypes.ITEM_COLLECT, 0.25F,
 							((world.rand.nextFloat() - world.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
 
 						targetEntityItem.remove();

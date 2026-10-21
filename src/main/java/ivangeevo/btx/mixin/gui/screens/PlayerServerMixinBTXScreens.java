@@ -9,6 +9,8 @@ import ivangeevo.btx.config.BTXConfig;
 import ivangeevo.btx.gui.BTXScreens;
 import ivangeevo.btx.gui.cookingvessel.MenuCookingVessel;
 import ivangeevo.btx.gui.millstone.MenuMillStone;
+import ivangeevo.btx.gui.soulforge.MenuSoulforge;
+import net.minecraft.core.world.pos.TilePosc;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.core.net.packet.PacketContainerOpen;
@@ -63,6 +65,17 @@ public abstract class PlayerServerMixinBTXScreens implements BTXScreens {
         playerServer.playerNetServerHandler.sendPacket(new PacketContainerOpen(this.currentWindowId, BTXConfig.HOPPER_SCREEN_ID, tileEntity.getNameTranslationKey(), tileEntity.getContainerSize()));
         playerServer.containerMenu.onCraftGuiClosed(playerServer);
         playerServer.containerMenu = new MenuHopper(playerServer.inventory, tileEntity);
+        playerServer.containerMenu.containerId = this.currentWindowId;
+        playerServer.containerMenu.addSlotListener(playerServer);
+    }
+
+    @Override
+    public void btx$displaySoulforgeScreen(@NotNull TilePosc tilePos) {
+        this.getNextWindowId();
+        PlayerServer playerServer = (PlayerServer) (Object) this;
+        playerServer.playerNetServerHandler.sendPacket(new PacketContainerOpen(this.currentWindowId, BTXConfig.SOULFORGE_SCREEN_ID, "btx.gui.soulforge.title", 16));
+        playerServer.containerMenu.onCraftGuiClosed(playerServer);
+        playerServer.containerMenu = new MenuSoulforge(playerServer.inventory, playerServer.world, tilePos);
         playerServer.containerMenu.containerId = this.currentWindowId;
         playerServer.containerMenu.addSlotListener(playerServer);
     }

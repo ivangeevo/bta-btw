@@ -1,12 +1,677 @@
 [
   {
-    "name": "btx:crucible_stoked/gold_ingots_from_gold_pickaxe",
+    "name": "btx:crucible_stoked/soulforged_steel_ingot",
     "type": "btx:crucible_stoked",
     "inputs": [
-      { "stack": { "id": "minecraft:item/tool_pickaxe_gold", "amount": 1 } }
+      { "stack": { "id": "minecraft:item/ingot_steel", "amount": 3 } },
+      { "stack": { "id": "btx:item/concentrated_hellfire", "amount": 3 } },
+      { "stack": { "id": "btx:item/coal_dust", "amount": 3 } }
     ],
     "outputs": [
-      { "id": "minecraft:item/ingot_gold", "amount": 2 }
+      { "id": "btx:item/soulforged_steel_ingot", "amount": 1 }
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_iron_from_tool_pickaxe_iron",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/tool_pickaxe_iron", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_iron", "amount": 2}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_iron_from_tool_axe_iron",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/tool_axe_iron", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_iron", "amount": 2}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_iron_from_tool_sword_iron",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/tool_sword_iron", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_iron"}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_iron_from_tool_hoe_iron",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/tool_hoe_iron", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_iron"}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_iron_from_tool_shovel_iron",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/tool_shovel_iron", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_iron"}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_iron_from_armor_helmet_iron",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/armor_helmet_iron", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_iron", "amount": 3}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_iron_from_armor_chestplate_iron",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/armor_chestplate_iron", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_iron", "amount": 5}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_iron_from_armor_leggings_iron",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/armor_leggings_iron", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_iron", "amount": 5}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_iron_from_armor_boots_iron",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/armor_boots_iron", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_iron", "amount": 3}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_iron_from_armor_wolf_iron",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/armor_wolf_iron", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_iron", "amount": 5}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_iron_from_bucket_iron",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/bucket_iron", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_iron", "amount": 2}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_iron_from_tool_compass",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/tool_compass", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_iron", "amount": 3}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_iron_from_tool_firestriker_iron",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/tool_firestriker_iron", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_iron"}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_iron_from_tool_shears",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/tool_shears", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_iron"}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_iron_from_paintbrush",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/paintbrush", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_iron"}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_iron_from_minecart",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/minecart", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_iron", "amount": 3}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_iron_from_minecart_chest",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/minecart_chest", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_iron", "amount": 3}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_iron_from_minecart_furnace",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/minecart_furnace", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_iron", "amount": 3}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_iron_from_door_iron",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/door_iron", "amount": 2, "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_iron", "amount": 4}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_iron_from_trapdoor_iron",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:block/trapdoor_iron", "amount": 6, "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_iron", "amount": 4}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_iron_from_rail",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:block/rail", "amount": 16, "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_iron", "amount": 4}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_iron_from_rail_detector",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:block/rail_detector", "amount": 8, "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_iron", "amount": 4}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_iron_from_mesh",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:block/mesh", "amount": 8, "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_iron", "amount": 5}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_iron_from_brick_iron",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:block/brick_iron", "amount": 4, "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_iron", "amount": 3}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_iron_from_fence_chainlink",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:block/fence_chainlink", "amount": 8, "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_iron", "amount": 3}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_iron_from_spikes",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:block/spikes", "amount": 4, "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_iron", "amount": 2}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_iron_from_brazier_inactive",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:block/brazier_inactive", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_iron", "amount": 3}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_iron_from_piston_base",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:block/piston_base", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_iron"}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_iron_from_furnace_blast_idle",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:block/furnace_blast_idle", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_iron", "amount": 5}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_gold_from_tool_pickaxe_gold",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/tool_pickaxe_gold", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_gold", "amount": 2}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_gold_from_tool_axe_gold",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/tool_axe_gold", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_gold", "amount": 2}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_gold_from_tool_sword_gold",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/tool_sword_gold", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_gold"}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_gold_from_tool_hoe_gold",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/tool_hoe_gold", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_gold"}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_gold_from_tool_shovel_gold",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/tool_shovel_gold", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_gold"}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_gold_from_armor_helmet_gold",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/armor_helmet_gold", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_gold", "amount": 3}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_gold_from_armor_chestplate_gold",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/armor_chestplate_gold", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_gold", "amount": 5}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_gold_from_armor_leggings_gold",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/armor_leggings_gold", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_gold", "amount": 5}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_gold_from_armor_boots_gold",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/armor_boots_gold", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_gold", "amount": 3}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_gold_from_armor_wolf_gold",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/armor_wolf_gold", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_gold", "amount": 5}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_gold_from_tool_clock",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/tool_clock", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_gold", "amount": 3}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_gold_from_rail_powered",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:block/rail_powered", "amount": 8, "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_gold", "amount": 4}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_gold_from_mesh_gold",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:block/mesh_gold", "amount": 8, "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_gold", "amount": 5}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_gold_from_brick_gold",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:block/brick_gold", "amount": 4, "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_gold", "amount": 3}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_gold_from_ammo_arrow_gold",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/ammo_arrow_gold", "amount": 4, "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_gold"}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_gold_from_food_apple_gold",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/food_apple_gold", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_gold", "amount": 5}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_steel_from_tool_pickaxe_steel",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/tool_pickaxe_steel", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_steel", "amount": 3}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_steel_from_tool_axe_steel",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/tool_axe_steel", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_steel", "amount": 3}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_steel_from_tool_sword_steel",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/tool_sword_steel", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_steel", "amount": 2}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_steel_from_tool_hoe_steel",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/tool_hoe_steel", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_steel", "amount": 2}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_steel_from_tool_shovel_steel",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/tool_shovel_steel", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_steel"}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_steel_from_armor_helmet_steel",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/armor_helmet_steel", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_steel", "amount": 5}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_steel_from_armor_chestplate_steel",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/armor_chestplate_steel", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_steel", "amount": 8}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_steel_from_armor_leggings_steel",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/armor_leggings_steel", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_steel", "amount": 7}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_steel_from_armor_boots_steel",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/armor_boots_steel", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_steel", "amount": 4}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_steel_from_armor_wolf_steel",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/armor_wolf_steel", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_steel", "amount": 7}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_steel_from_tool_shears_steel",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/tool_shears_steel", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_steel", "amount": 2}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_steel_from_tool_firestriker_steel",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/tool_firestriker_steel", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_steel"}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_steel_from_handcannon_unloaded",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/handcannon_unloaded", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_steel", "amount": 2}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_steel_from_handcannon_loaded",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/handcannon_loaded", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_steel", "amount": 2}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_steel_and_ingot_steel_crude_from_bucket_steel",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/bucket_steel", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_steel", "amount": 3},
+      {"id": "minecraft:item/ingot_steel_crude", "amount": 2}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_steel_and_ingot_steel_crude_from_piston_base_steel",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:block/piston_base_steel", "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_steel"},
+      {"id": "minecraft:item/ingot_steel_crude", "amount": 3}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_steel_and_ingot_steel_crude_from_fence_steel",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:block/fence_steel", "amount": 16, "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_steel", "amount": 4},
+      {"id": "minecraft:item/ingot_steel_crude", "amount": 2}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_steel_crude_from_door_steel",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/door_steel", "amount": 2, "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_steel_crude", "amount": 6}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_steel_crude_from_trapdoor_steel",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:block/trapdoor_steel", "amount": 6, "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_steel_crude", "amount": 6}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_steel_crude_from_brick_steel",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:block/brick_steel", "amount": 4, "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_steel_crude", "amount": 4}
+    ]
+  },
+  {
+    "name": "btx:crucible_stoked/ingot_steel_crude_from_glass_steel",
+    "type": "btx:crucible_stoked",
+    "inputs": [
+      {"stack": {"id": "minecraft:block/glass_steel", "amount": 4, "meta": -1}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/ingot_steel_crude", "amount": 2}
     ]
   }
 ]

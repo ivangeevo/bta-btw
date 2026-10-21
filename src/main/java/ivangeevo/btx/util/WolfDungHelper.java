@@ -3,6 +3,7 @@ package ivangeevo.btx.util;
 import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.entity.FeedableWolf;
 import ivangeevo.btx.item.BTXItems;
+import ivangeevo.btx.sound.BTXSoundTypes;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.Blocks;
 import net.minecraft.core.block.material.Material;
@@ -33,11 +34,13 @@ public class WolfDungHelper {
 
 	public static <T> List<T> withoutDung(List<T> entities) {
 		List<T> filtered = new ArrayList<>(entities.size());
+
 		for (T entity : entities) {
 			if (!isDung(entity)) {
 				filtered.add(entity);
 			}
 		}
+
 		return filtered;
 	}
 
@@ -64,8 +67,8 @@ public class WolfDungHelper {
 		entityItem.pickupDelay = 10;
 
 		world.entityJoinedWorld(entityItem);
-		world.playSoundAtEntity(null, wolf, "random.explode", 0.2F, 1.25F);
-		world.playSoundAtEntity(null, wolf, "mob.wolf.growl", ((FeedableWolf) wolf).btx$getSoundVolume(),
+		world.playSoundAtEntity(null, wolf, BTXSoundTypes.WOLF_DUNG, 0.2F, 1.25F);
+		world.playSoundAtEntity(null, wolf, BTXSoundTypes.WOLF_DUNG_GROWL, ((FeedableWolf) wolf).btx$getSoundVolume(),
 			(world.rand.nextFloat() - world.rand.nextFloat()) * 0.2F + 1.0F);
 
 		for (int counter = 0; counter < 5; counter++) {
@@ -94,11 +97,13 @@ public class WolfDungHelper {
 
 	private static boolean isBlockOpenToDung(World world, int x, int y, int z) {
 		Block<?> block = world.getBlockType(new TilePos(x, y, z));
+
 		if (block == Blocks.AIR || block == Blocks.FIRE || block == BTXBlocks.STOKED_FIRE) {
 			return true;
 		}
 
 		Material material = block.getMaterial();
+
 		return material.isLiquid() || material.isReplaceable();
 	}
 

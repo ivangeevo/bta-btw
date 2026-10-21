@@ -10,6 +10,8 @@ import ivangeevo.btx.networking.NetEntryWaterWheel;
 import ivangeevo.btx.networking.NetEntryWindMill;
 import ivangeevo.btx.recipe.BTXRecipes;
 import ivangeevo.btx.recipe.cooking.CrucibleIncineration;
+import ivangeevo.btx.sound.BTXSoundTypes;
+import ivangeevo.btx.util.BTXDamageSources;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.core.net.entity.NetEntityHandler;
 import turniplabs.halplibe.HalpLibe;
@@ -29,6 +31,8 @@ public class BTXMod implements ModInitializer {
 		CommonEvents.AFTER_ITEM_INIT.listen(Key.of(MOD_ID), BTXItems::afterItemInit);
 		CommonEvents.RECIPES_NAMESPACE_INIT.listen(Key.of(MOD_ID), recipes::initNamespaces);
 		CommonEvents.RECIPES_READY.listen(Key.of(MOD_ID), recipes::onRecipesReady);
+
+		BTXDamageSources.init(MOD_ID);
 
 		BTXGlobals.LOGGER.info("Better Than [X] initialized.");
 	}

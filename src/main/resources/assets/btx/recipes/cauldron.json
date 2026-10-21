@@ -1,5 +1,16 @@
 [
   {
+    "name": "btx:cauldron/nethercoal_from_hellfire_dust_and_coal_dust",
+    "type": "btx:cauldron",
+    "inputs": [
+      {"stack": {"id": "btx:item/hellfire_dust", "amount": 16}},
+      {"stack": {"id": "btx:item/coal_dust"}}
+    ],
+    "outputs": [
+      {"id": "minecraft:item/nethercoal"}
+    ]
+  },
+  {
     "name": "btx:cauldron/concentrated_hellfire_from_hellfire_dust",
     "type": "btx:cauldron",
     "inputs": [
@@ -265,6 +276,16 @@
     ],
     "outputs": [
       {"id": "minecraft:item/food_fish_cooked"}
+    ]
+  },
+  {
+    "name": "btx:cauldron/donuts_from_dough",
+    "type": "btx:cauldron",
+    "inputs": [
+      {"stack": {"id": "minecraft:item/dough"}}
+    ],
+    "outputs": [
+      {"id": "btx:item/donut", "amount": 4}
     ]
   }
 ]

@@ -1,0 +1,76 @@
+{
+  "parent": "block/block",
+  "textures": {
+    "particle": "btx:block/soulforge",
+    "all": "btx:block/soulforge"
+  },
+  "elements": [
+    {
+      "from": [3, 0, 1],
+      "to": [13, 4, 15],
+      "faces": {
+        "north": { "texture": "#all" },
+        "east":  { "texture": "#all" },
+        "south": { "texture": "#all" },
+        "west":  { "texture": "#all" },
+        "up":    { "texture": "#all" },
+        "down":  { "texture": "#all", "cullface": "down" }
+      }
+    },
+    {
+      "from": [4, 4, 3],
+      "to": [12, 6, 13],
+      "faces": {
+        "north": { "texture": "#all" },
+        "east":  { "texture": "#all" },
+        "south": { "texture": "#all" },
+        "west":  { "texture": "#all" },
+        "up":    { "texture": "#all" }
+      }
+    },
+    {
+      "from": [6, 6, 5],
+      "to": [10, 10, 11],
+      "faces": {
+        "north": { "texture": "#all" },
+        "east":  { "texture": "#all" },
+        "south": { "texture": "#all" },
+        "west":  { "texture": "#all" }
+      }
+    },
+    {
+      "from": [3, 10, 3],
+      "to": [13, 16, 13],
+      "faces": {
+        "north": { "texture": "#all" },
+        "east":  { "texture": "#all" },
+        "south": { "texture": "#all" },
+        "west":  { "texture": "#all" },
+        "up":    { "texture": "#all", "cullface": "up" },
+        "down":  { "texture": "#all" }
+      }
+    },
+    {
+      "from": [5, 13, 13],
+      "to": [11, 16, 16],
+      "faces": {
+        "east":  { "texture": "#all" },
+        "south": { "texture": "#all" },
+        "west":  { "texture": "#all" },
+        "up":    { "texture": "#all", "cullface": "up" },
+        "down":  { "texture": "#all" }
+      }
+    },
+    {
+      "from": [3, 14, 0],
+      "to": [13, 16, 3],
+      "faces": {
+        "north": { "texture": "#all" },
+        "east":  { "texture": "#all" },
+        "west":  { "texture": "#all" },
+        "up":    { "texture": "#all", "cullface": "up" },
+        "down":  { "texture": "#all" }
+      }
+    }
+  ]
+}

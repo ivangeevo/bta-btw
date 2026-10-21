@@ -2,3 +2,7 @@ messages.windmill.placement.obstructed=Wind Mill placement is obstructed by some
 messages.windmill.not.enough.room=Not enough room to place Wind Mill (They are friggin HUGE!)
 messages.waterwheel.placement.obstructed=Water Wheel placement is obstructed by something, or by you
 messages.waterwheel.not.enough.room=Not enough room to place Water Wheel
+messages.area.mining.on=Area mining: on
+messages.area.mining.off=Area mining: off
+messages.death.player.btx.saw=%s rests in pieces.
+messages.death.mob.btx.saw=%s was sawn in half.

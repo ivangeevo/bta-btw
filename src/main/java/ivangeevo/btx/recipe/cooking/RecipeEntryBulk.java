@@ -59,7 +59,7 @@ public abstract class RecipeEntryBulk extends RecipeEntryBase<List<RecipeSymbol>
 		for (ItemStack resolved : symbol.resolve()) {
 			int count = InventoryUtils.countItemsInInventory(inventory, resolved.itemID, resolvedMetadata(resolved));
 
-			if (count >= symbol.getAmount()) {
+			if (count >= requiredAmount(symbol)) {
 				return true;
 			}
 		}
@@ -72,12 +72,18 @@ public abstract class RecipeEntryBulk extends RecipeEntryBase<List<RecipeSymbol>
 			int metadata = resolvedMetadata(resolved);
 			int count = InventoryUtils.countItemsInInventory(inventory, resolved.itemID, metadata);
 
-			if (count >= symbol.getAmount()) {
-				return InventoryUtils.consumeItemsInInventory(inventory, resolved.itemID, metadata, symbol.getAmount());
+			if (count >= requiredAmount(symbol)) {
+				return InventoryUtils.consumeItemsInInventory(inventory, resolved.itemID, metadata, requiredAmount(symbol));
 			}
 		}
 
 		return false;
+	}
+
+	private static int requiredAmount(RecipeSymbol symbol) {
+		ItemStack stack = symbol.getStack();
+		int stackSize = stack != null && symbol.getItemGroup() == null ? Math.max(1, stack.stackSize) : 1;
+		return stackSize * symbol.getAmount();
 	}
 
 	private static int resolvedMetadata(ItemStack resolved) {

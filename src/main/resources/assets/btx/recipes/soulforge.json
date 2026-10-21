@@ -1,0 +1,298 @@
+[
+  {
+    "name": "btx:soulforge/soulforged_steel_sword",
+    "type": "btx:soulforge",
+    "pattern": [
+      "#",
+      "#",
+      "#",
+      "X"
+    ],
+    "symbols": [
+      {
+        "symbol": "#",
+        "stack": {
+          "id": "btx:item/soulforged_steel_ingot"
+        }
+      },
+      {
+        "symbol": "X",
+        "stack": {
+          "id": "btx:item/haft"
+        }
+      }
+    ],
+    "result": {
+      "id": "btx:item/soulforged_steel_sword"
+    }
+  },
+  {
+    "name": "btx:soulforge/soulforged_steel_shovel",
+    "type": "btx:soulforge",
+    "pattern": [
+      "#",
+      "X",
+      "X",
+      "X"
+    ],
+    "symbols": [
+      {
+        "symbol": "#",
+        "stack": {
+          "id": "btx:item/soulforged_steel_ingot"
+        }
+      },
+      {
+        "symbol": "X",
+        "stack": {
+          "id": "btx:item/haft"
+        }
+      }
+    ],
+    "result": {
+      "id": "btx:item/soulforged_steel_shovel"
+    }
+  },
+  {
+    "name": "btx:soulforge/soulforged_steel_pickaxe",
+    "type": "btx:soulforge",
+    "pattern": [
+      "###",
+      " X ",
+      " X ",
+      " X "
+    ],
+    "symbols": [
+      {
+        "symbol": "#",
+        "stack": {
+          "id": "btx:item/soulforged_steel_ingot"
+        }
+      },
+      {
+        "symbol": "X",
+        "stack": {
+          "id": "btx:item/haft"
+        }
+      }
+    ],
+    "result": {
+      "id": "btx:item/soulforged_steel_pickaxe"
+    }
+  },
+  {
+    "name": "btx:soulforge/soulforged_steel_mattock",
+    "type": "btx:soulforge",
+    "pattern": [
+      " ###",
+      "# X ",
+      "  X ",
+      "  X "
+    ],
+    "symbols": [
+      {
+        "symbol": "#",
+        "stack": {
+          "id": "btx:item/soulforged_steel_ingot"
+        }
+      },
+      {
+        "symbol": "X",
+        "stack": {
+          "id": "btx:item/haft"
+        }
+      }
+    ],
+    "result": {
+      "id": "btx:item/soulforged_steel_mattock"
+    }
+  },
+  {
+    "name": "btx:soulforge/soulforged_steel_hoe",
+    "type": "btx:soulforge",
+    "pattern": [
+      "##",
+      " X",
+      " X",
+      " X"
+    ],
+    "symbols": [
+      {
+        "symbol": "#",
+        "stack": {
+          "id": "btx:item/soulforged_steel_ingot"
+        }
+      },
+      {
+        "symbol": "X",
+        "stack": {
+          "id": "btx:item/haft"
+        }
+      }
+    ],
+    "result": {
+      "id": "btx:item/soulforged_steel_hoe"
+    }
+  },
+  {
+    "name": "btx:soulforge/soulforged_steel_battleaxe",
+    "type": "btx:soulforge",
+    "pattern": [
+      "###",
+      "#X#",
+      " X ",
+      " X "
+    ],
+    "symbols": [
+      {
+        "symbol": "#",
+        "stack": {
+          "id": "btx:item/soulforged_steel_ingot"
+        }
+      },
+      {
+        "symbol": "X",
+        "stack": {
+          "id": "btx:item/haft"
+        }
+      }
+    ],
+    "result": {
+      "id": "btx:item/soulforged_steel_battleaxe"
+    }
+  },
+  {
+    "name": "btx:soulforge/soulforged_steel_axe",
+    "type": "btx:soulforge",
+    "pattern": [
+      "##",
+      "#X",
+      " X",
+      " X"
+    ],
+    "symbols": [
+      {
+        "symbol": "#",
+        "stack": {
+          "id": "btx:item/soulforged_steel_ingot"
+        }
+      },
+      {
+        "symbol": "X",
+        "stack": {
+          "id": "btx:item/haft"
+        }
+      }
+    ],
+    "result": {
+      "id": "btx:item/soulforged_steel_axe"
+    }
+  },
+  {
+    "name": "btx:soulforge/soulforged_steel_helmet",
+    "type": "btx:soulforge",
+    "pattern": [
+      "####",
+      "#  #",
+      "#  #",
+      " XX "
+    ],
+    "symbols": [
+      {
+        "symbol": "#",
+        "stack": {
+          "id": "btx:item/soulforged_steel_ingot"
+        }
+      },
+      {
+        "symbol": "X",
+        "stack": {
+          "id": "btx:item/steel_armor_plate"
+        }
+      }
+    ],
+    "result": {
+      "id": "btx:item/soulforged_steel_helmet"
+    }
+  },
+  {
+    "name": "btx:soulforge/soulforged_steel_chestplate",
+    "type": "btx:soulforge",
+    "pattern": [
+      "X  X",
+      "####",
+      "####",
+      "####"
+    ],
+    "symbols": [
+      {
+        "symbol": "#",
+        "stack": {
+          "id": "btx:item/soulforged_steel_ingot"
+        }
+      },
+      {
+        "symbol": "X",
+        "stack": {
+          "id": "btx:item/steel_armor_plate"
+        }
+      }
+    ],
+    "result": {
+      "id": "btx:item/soulforged_steel_chestplate"
+    }
+  },
+  {
+    "name": "btx:soulforge/soulforged_steel_leggings",
+    "type": "btx:soulforge",
+    "pattern": [
+      "####",
+      "X##X",
+      "X  X",
+      "X  X"
+    ],
+    "symbols": [
+      {
+        "symbol": "#",
+        "stack": {
+          "id": "btx:item/soulforged_steel_ingot"
+        }
+      },
+      {
+        "symbol": "X",
+        "stack": {
+          "id": "btx:item/steel_armor_plate"
+        }
+      }
+    ],
+    "result": {
+      "id": "btx:item/soulforged_steel_leggings"
+    }
+  },
+  {
+    "name": "btx:soulforge/soulforged_steel_boots",
+    "type": "btx:soulforge",
+    "pattern": [
+      " ## ",
+      " ## ",
+      "#XX#"
+    ],
+    "symbols": [
+      {
+        "symbol": "#",
+        "stack": {
+          "id": "btx:item/soulforged_steel_ingot"
+        }
+      },
+      {
+        "symbol": "X",
+        "stack": {
+          "id": "btx:item/steel_armor_plate"
+        }
+      }
+    ],
+    "result": {
+      "id": "btx:item/soulforged_steel_boots"
+    }
+  }
+]

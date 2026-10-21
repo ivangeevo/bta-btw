@@ -2,6 +2,7 @@ package ivangeevo.btx.block.blocks.pottery;
 
 import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.block.entity.TileEntityVase;
+import ivangeevo.btx.sound.BTXSoundTypes;
 import ivangeevo.btx.util.utils.MiscUtils;
 import ivangeevo.btx.util.utils.SoundUtils;
 import net.minecraft.core.block.Block;
@@ -78,11 +79,12 @@ public class BlockLogicVase extends BlockLogic implements IPaintable {
 		if (!(world.getTileEntity(tilePos) instanceof TileEntityVase vase) || !vase.isEmpty()) return false;
 
 		ItemStack single = held.copy();
+
 		single.stackSize = 1;
 		vase.setContents(single);
 		held.consumeItem(player);
 
-		SoundUtils.playAtTileCenter(world, tilePos, SoundCategory.WORLD_SOUNDS, "random.pop", 0.25F,
+		SoundUtils.playAtTileCenter(world, tilePos, SoundCategory.WORLD_SOUNDS, BTXSoundTypes.VASE_FILL, 0.25F,
 			((world.rand.nextFloat() - world.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
 		return true;
 	}

@@ -2,6 +2,7 @@ package ivangeevo.btx.block.blocks;
 
 import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.item.BTXItems;
+import ivangeevo.btx.sound.BTXSoundTypes;
 import ivangeevo.btx.util.utils.FacingUtils;
 import ivangeevo.btx.util.utils.MechPowerUtils;
 import ivangeevo.btx.util.utils.MiscUtils;
@@ -88,7 +89,6 @@ public class BlockLogicAxle extends BlockLogic implements MechanicalDevice {
 	public void updateTick(@NotNull World world, @NotNull TilePosc tilePos, @NotNull Random rand, boolean isRandomTick) {
 		// Should only be called when the block is first added, to force it to validate
 		// its power level for the first time. All following changes are instantaneous
-
 		setPowerLevel(world, tilePos, 0);
 		validatePowerLevel(world, tilePos);
 	}
@@ -156,6 +156,7 @@ public class BlockLogicAxle extends BlockLogic implements MechanicalDevice {
 		if ((FacingUtils.facingFromDirection(facing) >> 1) == getAxisAlignment(world, tilePos)) {
 			return getPowerLevel(world, tilePos);
 		}
+
 		return 0;
 	}
 
@@ -171,7 +172,7 @@ public class BlockLogicAxle extends BlockLogic implements MechanicalDevice {
 		setPowerLevel(world, tilePos, 0);
 		validatePowerLevel(world, tilePos);
 
-		// Re-send final data to clients (matches original markBlockForUpdate).
+		// Re-send final data to clients
 		world.markBlocksDirty(tilePos, tilePos);
 		return true;
 	}
@@ -252,7 +253,7 @@ public class BlockLogicAxle extends BlockLogic implements MechanicalDevice {
 		if (world.getBlockType(tilePos) == this.block) {
 			dropComponentItemsOnBadBreak(world, tilePos, world.getBlockData(tilePos), 1F);
 			world.playSoundEffect(null, SoundCategory.WORLD_SOUNDS,
-				tilePos.x() + 0.5, tilePos.y() + 0.5, tilePos.z() + 0.5, "random.explode", 0.2F, 1.25F);
+				tilePos.x() + 0.5, tilePos.y() + 0.5, tilePos.z() + 0.5, BTXSoundTypes.MECHANICAL_BREAK, 0.2F, 1.25F);
 			world.setBlockTypeNotify(tilePos, Blocks.AIR);
 			markNearbyForRenderUpdate(world, tilePos); // harmless if onRemoved also does it
 		}
@@ -330,7 +331,6 @@ public class BlockLogicAxle extends BlockLogic implements MechanicalDevice {
 			float smokeX = (float)tilePos.x() + random.nextFloat();
 			float smokeY = (float)tilePos.y() + random.nextFloat() * 0.5F + 0.625F;
 			float smokeZ = (float)tilePos.z() + random.nextFloat();
-
 			world.spawnParticle("smoke", smokeX, smokeY, smokeZ, 0.0F, 0.0F, 0.0F, 0, false);
 		}
 	}

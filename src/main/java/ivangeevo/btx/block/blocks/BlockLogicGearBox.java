@@ -3,6 +3,7 @@ package ivangeevo.btx.block.blocks;
 import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.config.BTXConfig;
 import ivangeevo.btx.item.BTXItems;
+import ivangeevo.btx.sound.BTXSoundTypes;
 import ivangeevo.btx.util.utils.FacingUtils;
 import ivangeevo.btx.util.utils.MechPowerUtils;
 import ivangeevo.btx.util.utils.MiscUtils;
@@ -80,7 +81,7 @@ public class BlockLogicGearBox extends BlockLogicRotatable implements Mechanical
 		if (player.getHeldItem() == null && !MechPowerUtils.isBlockPoweredByAxle(world, tilePos, this)) {
 			if (!world.isClientSide) {
 				toggleFacing(world, tilePos, false);
-				SoundUtils.playAtTileCenter(world, tilePos, SoundCategory.WORLD_SOUNDS, this.block.getSound().getBreakSoundName(), 1.0F, 0.8f);
+				SoundUtils.playAtTileCenter(world, tilePos, SoundCategory.WORLD_SOUNDS, BTXSoundTypes.GEARBOX_TOGGLE, 1.0F, 0.8f);
 			}
 
 			return true;
@@ -95,8 +96,10 @@ public class BlockLogicGearBox extends BlockLogicRotatable implements Mechanical
 			if (!isCurrentStateValid(world, tilePos)) {
 				world.scheduleBlockUpdate(tilePos, this.block, getTickRate());
 			}
+
 			return;
 		}
+
 		updateMechPoweredState(world, tilePos, shouldBeOn(world, tilePos));
 	}
 
@@ -222,6 +225,7 @@ public class BlockLogicGearBox extends BlockLogicRotatable implements Mechanical
 		if (isGearBoxOn(world, tilePos) && getFacing(world, tilePos) != FacingUtils.facingFromDirection(facing)) {
 			return 4;
 		}
+
 		return 0;
 	}
 
@@ -242,7 +246,7 @@ public class BlockLogicGearBox extends BlockLogicRotatable implements Mechanical
 			if (shouldBePowered) {
 				// BTW played this client side in clientNotificationOfMetadataChange
 				world.playSoundEffectAtTile(null, SoundCategory.WORLD_SOUNDS, tilePos,
-					"random.explode", 0.05F, 1.0F);
+					BTXSoundTypes.GEARBOX_ENGAGE, 0.05F, 1.0F);
 			}
 		}
 	}
@@ -278,7 +282,7 @@ public class BlockLogicGearBox extends BlockLogicRotatable implements Mechanical
 	public void breakGearBox(World world, TilePosc tilePos) {
 		dropComponentItemsOnBadBreak(world, tilePos, world.getBlockData(tilePos), 1F);
 		world.playSoundEffect(null, SoundCategory.WORLD_SOUNDS,
-			tilePos.x() + 0.5, tilePos.y() + 0.5, tilePos.z() + 0.5, "random.explode", 0.2F, 1.25F);
+			tilePos.x() + 0.5, tilePos.y() + 0.5, tilePos.z() + 0.5, BTXSoundTypes.MECHANICAL_BREAK, 0.2F, 1.25F);
 		world.setBlockTypeNotify(tilePos, Blocks.AIR);
 		markRangeForRenderUpdate(world, tilePos, 3);
 	}

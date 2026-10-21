@@ -1,0 +1,1633 @@
+[
+  {
+    "name": "btx:saw/planks_from_log",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/log_oak"}},
+    "outputs": [
+      {"id": "minecraft:block/planks_oak", "amount": 4}
+    ]
+  },
+  {
+    "name": "btx:saw/planks_painted_white_from_log",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/log_birch"}},
+    "outputs": [
+      {"id": "minecraft:block/planks_oak_painted", "amount": 4, "meta": 0}
+    ]
+  },
+  {
+    "name": "btx:saw/planks_painted_orange_from_log",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/log_eucalyptus"}},
+    "outputs": [
+      {"id": "minecraft:block/planks_oak_painted", "amount": 4, "meta": 1}
+    ]
+  },
+  {
+    "name": "btx:saw/planks_painted_yellow_from_log",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/log_palm"}},
+    "outputs": [
+      {"id": "minecraft:block/planks_oak_painted", "amount": 4, "meta": 4}
+    ]
+  },
+  {
+    "name": "btx:saw/planks_painted_pink_from_log",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/log_cherry"}},
+    "outputs": [
+      {"id": "minecraft:block/planks_oak_painted", "amount": 4, "meta": 6}
+    ]
+  },
+  {
+    "name": "btx:saw/planks_painted_brown_from_log",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/log_pine"}},
+    "outputs": [
+      {"id": "minecraft:block/planks_oak_painted", "amount": 4, "meta": 12}
+    ]
+  },
+  {
+    "name": "btx:saw/planks_painted_green_from_log",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/log_oak_mossy"}},
+    "outputs": [
+      {"id": "minecraft:block/planks_oak_painted", "amount": 4, "meta": 13}
+    ]
+  },
+  {
+    "name": "btx:saw/planks_painted_red_from_log",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/log_thorn"}},
+    "outputs": [
+      {"id": "minecraft:block/planks_oak_painted", "amount": 4, "meta": 14}
+    ]
+  },
+  {
+    "name": "btx:saw/planks_painted_black_from_log",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/log_scorched"}},
+    "outputs": [
+      {"id": "minecraft:block/planks_oak_painted", "amount": 4, "meta": 15}
+    ]
+  },
+  {
+    "name": "btx:saw/siding_from_planks",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/planks_oak"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak", "amount": 2}
+    ]
+  },
+  {
+    "name": "btx:saw/siding_painted_white_from_planks",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "amount": 2, "meta": 0}
+    ],
+    "data": 0,
+    "data_mask": 15,
+    "display_meta": 0
+  },
+  {
+    "name": "btx:saw/siding_painted_orange_from_planks",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "amount": 2, "meta": 16}
+    ],
+    "data": 1,
+    "data_mask": 15,
+    "display_meta": 1
+  },
+  {
+    "name": "btx:saw/siding_painted_magenta_from_planks",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "amount": 2, "meta": 32}
+    ],
+    "data": 2,
+    "data_mask": 15,
+    "display_meta": 2
+  },
+  {
+    "name": "btx:saw/siding_painted_lightblue_from_planks",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "amount": 2, "meta": 48}
+    ],
+    "data": 3,
+    "data_mask": 15,
+    "display_meta": 3
+  },
+  {
+    "name": "btx:saw/siding_painted_yellow_from_planks",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "amount": 2, "meta": 64}
+    ],
+    "data": 4,
+    "data_mask": 15,
+    "display_meta": 4
+  },
+  {
+    "name": "btx:saw/siding_painted_lime_from_planks",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "amount": 2, "meta": 80}
+    ],
+    "data": 5,
+    "data_mask": 15,
+    "display_meta": 5
+  },
+  {
+    "name": "btx:saw/siding_painted_pink_from_planks",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "amount": 2, "meta": 96}
+    ],
+    "data": 6,
+    "data_mask": 15,
+    "display_meta": 6
+  },
+  {
+    "name": "btx:saw/siding_painted_gray_from_planks",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "amount": 2, "meta": 112}
+    ],
+    "data": 7,
+    "data_mask": 15,
+    "display_meta": 7
+  },
+  {
+    "name": "btx:saw/siding_painted_silver_from_planks",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "amount": 2, "meta": 128}
+    ],
+    "data": 8,
+    "data_mask": 15,
+    "display_meta": 8
+  },
+  {
+    "name": "btx:saw/siding_painted_cyan_from_planks",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "amount": 2, "meta": 144}
+    ],
+    "data": 9,
+    "data_mask": 15,
+    "display_meta": 9
+  },
+  {
+    "name": "btx:saw/siding_painted_purple_from_planks",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "amount": 2, "meta": 160}
+    ],
+    "data": 10,
+    "data_mask": 15,
+    "display_meta": 10
+  },
+  {
+    "name": "btx:saw/siding_painted_blue_from_planks",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "amount": 2, "meta": 176}
+    ],
+    "data": 11,
+    "data_mask": 15,
+    "display_meta": 11
+  },
+  {
+    "name": "btx:saw/siding_painted_brown_from_planks",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "amount": 2, "meta": 192}
+    ],
+    "data": 12,
+    "data_mask": 15,
+    "display_meta": 12
+  },
+  {
+    "name": "btx:saw/siding_painted_green_from_planks",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "amount": 2, "meta": 208}
+    ],
+    "data": 13,
+    "data_mask": 15,
+    "display_meta": 13
+  },
+  {
+    "name": "btx:saw/siding_painted_red_from_planks",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "amount": 2, "meta": 224}
+    ],
+    "data": 14,
+    "data_mask": 15,
+    "display_meta": 14
+  },
+  {
+    "name": "btx:saw/siding_painted_black_from_planks",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "amount": 2, "meta": 240}
+    ],
+    "data": 15,
+    "data_mask": 15,
+    "display_meta": 15
+  },
+  {
+    "name": "btx:saw/moulding_from_siding",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/siding_oak"}},
+    "outputs": [
+      {"id": "btx:block/moulding_oak", "amount": 2}
+    ]
+  },
+  {
+    "name": "btx:saw/moulding_painted_white_from_siding",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/siding_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/moulding_oak_painted", "amount": 2, "meta": 0}
+    ],
+    "data": 0,
+    "data_mask": 240,
+    "display_meta": 0
+  },
+  {
+    "name": "btx:saw/moulding_painted_orange_from_siding",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/siding_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/moulding_oak_painted", "amount": 2, "meta": 16}
+    ],
+    "data": 16,
+    "data_mask": 240,
+    "display_meta": 16
+  },
+  {
+    "name": "btx:saw/moulding_painted_magenta_from_siding",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/siding_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/moulding_oak_painted", "amount": 2, "meta": 32}
+    ],
+    "data": 32,
+    "data_mask": 240,
+    "display_meta": 32
+  },
+  {
+    "name": "btx:saw/moulding_painted_lightblue_from_siding",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/siding_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/moulding_oak_painted", "amount": 2, "meta": 48}
+    ],
+    "data": 48,
+    "data_mask": 240,
+    "display_meta": 48
+  },
+  {
+    "name": "btx:saw/moulding_painted_yellow_from_siding",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/siding_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/moulding_oak_painted", "amount": 2, "meta": 64}
+    ],
+    "data": 64,
+    "data_mask": 240,
+    "display_meta": 64
+  },
+  {
+    "name": "btx:saw/moulding_painted_lime_from_siding",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/siding_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/moulding_oak_painted", "amount": 2, "meta": 80}
+    ],
+    "data": 80,
+    "data_mask": 240,
+    "display_meta": 80
+  },
+  {
+    "name": "btx:saw/moulding_painted_pink_from_siding",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/siding_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/moulding_oak_painted", "amount": 2, "meta": 96}
+    ],
+    "data": 96,
+    "data_mask": 240,
+    "display_meta": 96
+  },
+  {
+    "name": "btx:saw/moulding_painted_gray_from_siding",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/siding_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/moulding_oak_painted", "amount": 2, "meta": 112}
+    ],
+    "data": 112,
+    "data_mask": 240,
+    "display_meta": 112
+  },
+  {
+    "name": "btx:saw/moulding_painted_silver_from_siding",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/siding_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/moulding_oak_painted", "amount": 2, "meta": 128}
+    ],
+    "data": 128,
+    "data_mask": 240,
+    "display_meta": 128
+  },
+  {
+    "name": "btx:saw/moulding_painted_cyan_from_siding",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/siding_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/moulding_oak_painted", "amount": 2, "meta": 144}
+    ],
+    "data": 144,
+    "data_mask": 240,
+    "display_meta": 144
+  },
+  {
+    "name": "btx:saw/moulding_painted_purple_from_siding",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/siding_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/moulding_oak_painted", "amount": 2, "meta": 160}
+    ],
+    "data": 160,
+    "data_mask": 240,
+    "display_meta": 160
+  },
+  {
+    "name": "btx:saw/moulding_painted_blue_from_siding",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/siding_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/moulding_oak_painted", "amount": 2, "meta": 176}
+    ],
+    "data": 176,
+    "data_mask": 240,
+    "display_meta": 176
+  },
+  {
+    "name": "btx:saw/moulding_painted_brown_from_siding",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/siding_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/moulding_oak_painted", "amount": 2, "meta": 192}
+    ],
+    "data": 192,
+    "data_mask": 240,
+    "display_meta": 192
+  },
+  {
+    "name": "btx:saw/moulding_painted_green_from_siding",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/siding_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/moulding_oak_painted", "amount": 2, "meta": 208}
+    ],
+    "data": 208,
+    "data_mask": 240,
+    "display_meta": 208
+  },
+  {
+    "name": "btx:saw/moulding_painted_red_from_siding",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/siding_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/moulding_oak_painted", "amount": 2, "meta": 224}
+    ],
+    "data": 224,
+    "data_mask": 240,
+    "display_meta": 224
+  },
+  {
+    "name": "btx:saw/moulding_painted_black_from_siding",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/siding_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/moulding_oak_painted", "amount": 2, "meta": 240}
+    ],
+    "data": 240,
+    "data_mask": 240,
+    "display_meta": 240
+  },
+  {
+    "name": "btx:saw/corner_from_moulding",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/moulding_oak"}},
+    "outputs": [
+      {"id": "btx:block/corner_oak", "amount": 2}
+    ]
+  },
+  {
+    "name": "btx:saw/corner_painted_white_from_moulding",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/moulding_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/corner_oak_painted", "amount": 2, "meta": 0}
+    ],
+    "data": 0,
+    "data_mask": 240,
+    "display_meta": 0
+  },
+  {
+    "name": "btx:saw/corner_painted_orange_from_moulding",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/moulding_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/corner_oak_painted", "amount": 2, "meta": 16}
+    ],
+    "data": 16,
+    "data_mask": 240,
+    "display_meta": 16
+  },
+  {
+    "name": "btx:saw/corner_painted_magenta_from_moulding",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/moulding_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/corner_oak_painted", "amount": 2, "meta": 32}
+    ],
+    "data": 32,
+    "data_mask": 240,
+    "display_meta": 32
+  },
+  {
+    "name": "btx:saw/corner_painted_lightblue_from_moulding",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/moulding_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/corner_oak_painted", "amount": 2, "meta": 48}
+    ],
+    "data": 48,
+    "data_mask": 240,
+    "display_meta": 48
+  },
+  {
+    "name": "btx:saw/corner_painted_yellow_from_moulding",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/moulding_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/corner_oak_painted", "amount": 2, "meta": 64}
+    ],
+    "data": 64,
+    "data_mask": 240,
+    "display_meta": 64
+  },
+  {
+    "name": "btx:saw/corner_painted_lime_from_moulding",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/moulding_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/corner_oak_painted", "amount": 2, "meta": 80}
+    ],
+    "data": 80,
+    "data_mask": 240,
+    "display_meta": 80
+  },
+  {
+    "name": "btx:saw/corner_painted_pink_from_moulding",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/moulding_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/corner_oak_painted", "amount": 2, "meta": 96}
+    ],
+    "data": 96,
+    "data_mask": 240,
+    "display_meta": 96
+  },
+  {
+    "name": "btx:saw/corner_painted_gray_from_moulding",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/moulding_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/corner_oak_painted", "amount": 2, "meta": 112}
+    ],
+    "data": 112,
+    "data_mask": 240,
+    "display_meta": 112
+  },
+  {
+    "name": "btx:saw/corner_painted_silver_from_moulding",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/moulding_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/corner_oak_painted", "amount": 2, "meta": 128}
+    ],
+    "data": 128,
+    "data_mask": 240,
+    "display_meta": 128
+  },
+  {
+    "name": "btx:saw/corner_painted_cyan_from_moulding",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/moulding_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/corner_oak_painted", "amount": 2, "meta": 144}
+    ],
+    "data": 144,
+    "data_mask": 240,
+    "display_meta": 144
+  },
+  {
+    "name": "btx:saw/corner_painted_purple_from_moulding",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/moulding_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/corner_oak_painted", "amount": 2, "meta": 160}
+    ],
+    "data": 160,
+    "data_mask": 240,
+    "display_meta": 160
+  },
+  {
+    "name": "btx:saw/corner_painted_blue_from_moulding",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/moulding_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/corner_oak_painted", "amount": 2, "meta": 176}
+    ],
+    "data": 176,
+    "data_mask": 240,
+    "display_meta": 176
+  },
+  {
+    "name": "btx:saw/corner_painted_brown_from_moulding",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/moulding_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/corner_oak_painted", "amount": 2, "meta": 192}
+    ],
+    "data": 192,
+    "data_mask": 240,
+    "display_meta": 192
+  },
+  {
+    "name": "btx:saw/corner_painted_green_from_moulding",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/moulding_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/corner_oak_painted", "amount": 2, "meta": 208}
+    ],
+    "data": 208,
+    "data_mask": 240,
+    "display_meta": 208
+  },
+  {
+    "name": "btx:saw/corner_painted_red_from_moulding",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/moulding_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/corner_oak_painted", "amount": 2, "meta": 224}
+    ],
+    "data": 224,
+    "data_mask": 240,
+    "display_meta": 224
+  },
+  {
+    "name": "btx:saw/corner_painted_black_from_moulding",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/moulding_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/corner_oak_painted", "amount": 2, "meta": 240}
+    ],
+    "data": 240,
+    "data_mask": 240,
+    "display_meta": 240
+  },
+  {
+    "name": "btx:saw/gears_from_corner",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/corner_oak"}},
+    "outputs": [
+      {"id": "btx:item/gear", "amount": 2}
+    ]
+  },
+  {
+    "name": "btx:saw/gears_from_corner_painted",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/corner_oak_painted"}},
+    "outputs": [
+      {"id": "btx:item/gear", "amount": 2}
+    ]
+  },
+  {
+    "name": "btx:saw/siding_from_double_slab",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/slab_planks_oak"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak", "amount": 2}
+    ],
+    "data": 1,
+    "data_mask": 3,
+    "note": "btx.guidebook.saw.double_slab"
+  },
+  {
+    "name": "btx:saw/moulding_from_slab",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/slab_planks_oak"}},
+    "outputs": [
+      {"id": "btx:block/moulding_oak", "amount": 2}
+    ]
+  },
+  {
+    "name": "btx:saw/siding_painted_white_from_double_slab",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/slab_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "amount": 2, "meta": 0}
+    ],
+    "data": 1,
+    "data_mask": 243,
+    "display_meta": 0,
+    "note": "btx.guidebook.saw.double_slab"
+  },
+  {
+    "name": "btx:saw/moulding_painted_white_from_slab",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/slab_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/moulding_oak_painted", "amount": 2, "meta": 0}
+    ],
+    "data": 0,
+    "data_mask": 240,
+    "display_meta": 0
+  },
+  {
+    "name": "btx:saw/siding_painted_orange_from_double_slab",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/slab_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "amount": 2, "meta": 16}
+    ],
+    "data": 17,
+    "data_mask": 243,
+    "display_meta": 16,
+    "note": "btx.guidebook.saw.double_slab"
+  },
+  {
+    "name": "btx:saw/moulding_painted_orange_from_slab",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/slab_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/moulding_oak_painted", "amount": 2, "meta": 16}
+    ],
+    "data": 16,
+    "data_mask": 240,
+    "display_meta": 16
+  },
+  {
+    "name": "btx:saw/siding_painted_magenta_from_double_slab",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/slab_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "amount": 2, "meta": 32}
+    ],
+    "data": 33,
+    "data_mask": 243,
+    "display_meta": 32,
+    "note": "btx.guidebook.saw.double_slab"
+  },
+  {
+    "name": "btx:saw/moulding_painted_magenta_from_slab",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/slab_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/moulding_oak_painted", "amount": 2, "meta": 32}
+    ],
+    "data": 32,
+    "data_mask": 240,
+    "display_meta": 32
+  },
+  {
+    "name": "btx:saw/siding_painted_lightblue_from_double_slab",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/slab_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "amount": 2, "meta": 48}
+    ],
+    "data": 49,
+    "data_mask": 243,
+    "display_meta": 48,
+    "note": "btx.guidebook.saw.double_slab"
+  },
+  {
+    "name": "btx:saw/moulding_painted_lightblue_from_slab",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/slab_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/moulding_oak_painted", "amount": 2, "meta": 48}
+    ],
+    "data": 48,
+    "data_mask": 240,
+    "display_meta": 48
+  },
+  {
+    "name": "btx:saw/siding_painted_yellow_from_double_slab",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/slab_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "amount": 2, "meta": 64}
+    ],
+    "data": 65,
+    "data_mask": 243,
+    "display_meta": 64,
+    "note": "btx.guidebook.saw.double_slab"
+  },
+  {
+    "name": "btx:saw/moulding_painted_yellow_from_slab",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/slab_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/moulding_oak_painted", "amount": 2, "meta": 64}
+    ],
+    "data": 64,
+    "data_mask": 240,
+    "display_meta": 64
+  },
+  {
+    "name": "btx:saw/siding_painted_lime_from_double_slab",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/slab_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "amount": 2, "meta": 80}
+    ],
+    "data": 81,
+    "data_mask": 243,
+    "display_meta": 80,
+    "note": "btx.guidebook.saw.double_slab"
+  },
+  {
+    "name": "btx:saw/moulding_painted_lime_from_slab",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/slab_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/moulding_oak_painted", "amount": 2, "meta": 80}
+    ],
+    "data": 80,
+    "data_mask": 240,
+    "display_meta": 80
+  },
+  {
+    "name": "btx:saw/siding_painted_pink_from_double_slab",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/slab_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "amount": 2, "meta": 96}
+    ],
+    "data": 97,
+    "data_mask": 243,
+    "display_meta": 96,
+    "note": "btx.guidebook.saw.double_slab"
+  },
+  {
+    "name": "btx:saw/moulding_painted_pink_from_slab",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/slab_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/moulding_oak_painted", "amount": 2, "meta": 96}
+    ],
+    "data": 96,
+    "data_mask": 240,
+    "display_meta": 96
+  },
+  {
+    "name": "btx:saw/siding_painted_gray_from_double_slab",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/slab_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "amount": 2, "meta": 112}
+    ],
+    "data": 113,
+    "data_mask": 243,
+    "display_meta": 112,
+    "note": "btx.guidebook.saw.double_slab"
+  },
+  {
+    "name": "btx:saw/moulding_painted_gray_from_slab",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/slab_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/moulding_oak_painted", "amount": 2, "meta": 112}
+    ],
+    "data": 112,
+    "data_mask": 240,
+    "display_meta": 112
+  },
+  {
+    "name": "btx:saw/siding_painted_silver_from_double_slab",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/slab_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "amount": 2, "meta": 128}
+    ],
+    "data": 129,
+    "data_mask": 243,
+    "display_meta": 128,
+    "note": "btx.guidebook.saw.double_slab"
+  },
+  {
+    "name": "btx:saw/moulding_painted_silver_from_slab",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/slab_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/moulding_oak_painted", "amount": 2, "meta": 128}
+    ],
+    "data": 128,
+    "data_mask": 240,
+    "display_meta": 128
+  },
+  {
+    "name": "btx:saw/siding_painted_cyan_from_double_slab",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/slab_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "amount": 2, "meta": 144}
+    ],
+    "data": 145,
+    "data_mask": 243,
+    "display_meta": 144,
+    "note": "btx.guidebook.saw.double_slab"
+  },
+  {
+    "name": "btx:saw/moulding_painted_cyan_from_slab",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/slab_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/moulding_oak_painted", "amount": 2, "meta": 144}
+    ],
+    "data": 144,
+    "data_mask": 240,
+    "display_meta": 144
+  },
+  {
+    "name": "btx:saw/siding_painted_purple_from_double_slab",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/slab_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "amount": 2, "meta": 160}
+    ],
+    "data": 161,
+    "data_mask": 243,
+    "display_meta": 160,
+    "note": "btx.guidebook.saw.double_slab"
+  },
+  {
+    "name": "btx:saw/moulding_painted_purple_from_slab",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/slab_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/moulding_oak_painted", "amount": 2, "meta": 160}
+    ],
+    "data": 160,
+    "data_mask": 240,
+    "display_meta": 160
+  },
+  {
+    "name": "btx:saw/siding_painted_blue_from_double_slab",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/slab_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "amount": 2, "meta": 176}
+    ],
+    "data": 177,
+    "data_mask": 243,
+    "display_meta": 176,
+    "note": "btx.guidebook.saw.double_slab"
+  },
+  {
+    "name": "btx:saw/moulding_painted_blue_from_slab",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/slab_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/moulding_oak_painted", "amount": 2, "meta": 176}
+    ],
+    "data": 176,
+    "data_mask": 240,
+    "display_meta": 176
+  },
+  {
+    "name": "btx:saw/siding_painted_brown_from_double_slab",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/slab_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "amount": 2, "meta": 192}
+    ],
+    "data": 193,
+    "data_mask": 243,
+    "display_meta": 192,
+    "note": "btx.guidebook.saw.double_slab"
+  },
+  {
+    "name": "btx:saw/moulding_painted_brown_from_slab",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/slab_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/moulding_oak_painted", "amount": 2, "meta": 192}
+    ],
+    "data": 192,
+    "data_mask": 240,
+    "display_meta": 192
+  },
+  {
+    "name": "btx:saw/siding_painted_green_from_double_slab",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/slab_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "amount": 2, "meta": 208}
+    ],
+    "data": 209,
+    "data_mask": 243,
+    "display_meta": 208,
+    "note": "btx.guidebook.saw.double_slab"
+  },
+  {
+    "name": "btx:saw/moulding_painted_green_from_slab",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/slab_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/moulding_oak_painted", "amount": 2, "meta": 208}
+    ],
+    "data": 208,
+    "data_mask": 240,
+    "display_meta": 208
+  },
+  {
+    "name": "btx:saw/siding_painted_red_from_double_slab",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/slab_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "amount": 2, "meta": 224}
+    ],
+    "data": 225,
+    "data_mask": 243,
+    "display_meta": 224,
+    "note": "btx.guidebook.saw.double_slab"
+  },
+  {
+    "name": "btx:saw/moulding_painted_red_from_slab",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/slab_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/moulding_oak_painted", "amount": 2, "meta": 224}
+    ],
+    "data": 224,
+    "data_mask": 240,
+    "display_meta": 224
+  },
+  {
+    "name": "btx:saw/siding_painted_black_from_double_slab",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/slab_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "amount": 2, "meta": 240}
+    ],
+    "data": 241,
+    "data_mask": 243,
+    "display_meta": 240,
+    "note": "btx.guidebook.saw.double_slab"
+  },
+  {
+    "name": "btx:saw/moulding_painted_black_from_slab",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/slab_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/moulding_oak_painted", "amount": 2, "meta": 240}
+    ],
+    "data": 240,
+    "data_mask": 240,
+    "display_meta": 240
+  },
+  {
+    "name": "btx:saw/siding_and_moulding_from_stairs",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/stairs_planks_oak"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak"},
+      {"id": "btx:block/moulding_oak"}
+    ]
+  },
+  {
+    "name": "btx:saw/siding_and_moulding_painted_white_from_stairs",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/stairs_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "meta": 0},
+      {"id": "btx:block/moulding_oak_painted", "meta": 0}
+    ],
+    "data": 0,
+    "data_mask": 240,
+    "display_meta": 0
+  },
+  {
+    "name": "btx:saw/siding_and_moulding_painted_orange_from_stairs",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/stairs_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "meta": 16},
+      {"id": "btx:block/moulding_oak_painted", "meta": 16}
+    ],
+    "data": 16,
+    "data_mask": 240,
+    "display_meta": 16
+  },
+  {
+    "name": "btx:saw/siding_and_moulding_painted_magenta_from_stairs",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/stairs_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "meta": 32},
+      {"id": "btx:block/moulding_oak_painted", "meta": 32}
+    ],
+    "data": 32,
+    "data_mask": 240,
+    "display_meta": 32
+  },
+  {
+    "name": "btx:saw/siding_and_moulding_painted_lightblue_from_stairs",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/stairs_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "meta": 48},
+      {"id": "btx:block/moulding_oak_painted", "meta": 48}
+    ],
+    "data": 48,
+    "data_mask": 240,
+    "display_meta": 48
+  },
+  {
+    "name": "btx:saw/siding_and_moulding_painted_yellow_from_stairs",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/stairs_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "meta": 64},
+      {"id": "btx:block/moulding_oak_painted", "meta": 64}
+    ],
+    "data": 64,
+    "data_mask": 240,
+    "display_meta": 64
+  },
+  {
+    "name": "btx:saw/siding_and_moulding_painted_lime_from_stairs",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/stairs_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "meta": 80},
+      {"id": "btx:block/moulding_oak_painted", "meta": 80}
+    ],
+    "data": 80,
+    "data_mask": 240,
+    "display_meta": 80
+  },
+  {
+    "name": "btx:saw/siding_and_moulding_painted_pink_from_stairs",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/stairs_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "meta": 96},
+      {"id": "btx:block/moulding_oak_painted", "meta": 96}
+    ],
+    "data": 96,
+    "data_mask": 240,
+    "display_meta": 96
+  },
+  {
+    "name": "btx:saw/siding_and_moulding_painted_gray_from_stairs",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/stairs_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "meta": 112},
+      {"id": "btx:block/moulding_oak_painted", "meta": 112}
+    ],
+    "data": 112,
+    "data_mask": 240,
+    "display_meta": 112
+  },
+  {
+    "name": "btx:saw/siding_and_moulding_painted_silver_from_stairs",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/stairs_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "meta": 128},
+      {"id": "btx:block/moulding_oak_painted", "meta": 128}
+    ],
+    "data": 128,
+    "data_mask": 240,
+    "display_meta": 128
+  },
+  {
+    "name": "btx:saw/siding_and_moulding_painted_cyan_from_stairs",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/stairs_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "meta": 144},
+      {"id": "btx:block/moulding_oak_painted", "meta": 144}
+    ],
+    "data": 144,
+    "data_mask": 240,
+    "display_meta": 144
+  },
+  {
+    "name": "btx:saw/siding_and_moulding_painted_purple_from_stairs",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/stairs_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "meta": 160},
+      {"id": "btx:block/moulding_oak_painted", "meta": 160}
+    ],
+    "data": 160,
+    "data_mask": 240,
+    "display_meta": 160
+  },
+  {
+    "name": "btx:saw/siding_and_moulding_painted_blue_from_stairs",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/stairs_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "meta": 176},
+      {"id": "btx:block/moulding_oak_painted", "meta": 176}
+    ],
+    "data": 176,
+    "data_mask": 240,
+    "display_meta": 176
+  },
+  {
+    "name": "btx:saw/siding_and_moulding_painted_brown_from_stairs",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/stairs_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "meta": 192},
+      {"id": "btx:block/moulding_oak_painted", "meta": 192}
+    ],
+    "data": 192,
+    "data_mask": 240,
+    "display_meta": 192
+  },
+  {
+    "name": "btx:saw/siding_and_moulding_painted_green_from_stairs",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/stairs_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "meta": 208},
+      {"id": "btx:block/moulding_oak_painted", "meta": 208}
+    ],
+    "data": 208,
+    "data_mask": 240,
+    "display_meta": 208
+  },
+  {
+    "name": "btx:saw/siding_and_moulding_painted_red_from_stairs",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/stairs_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "meta": 224},
+      {"id": "btx:block/moulding_oak_painted", "meta": 224}
+    ],
+    "data": 224,
+    "data_mask": 240,
+    "display_meta": 224
+  },
+  {
+    "name": "btx:saw/siding_and_moulding_painted_black_from_stairs",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/stairs_planks_oak_painted"}},
+    "outputs": [
+      {"id": "btx:block/siding_oak_painted", "meta": 240},
+      {"id": "btx:block/moulding_oak_painted", "meta": 240}
+    ],
+    "data": 240,
+    "data_mask": 240,
+    "display_meta": 240
+  },
+  {
+    "name": "btx:saw/drops_from_leaves",
+    "type": "btx:saw",
+    "input": {"group": "minecraft:leaves"},
+    "drops": true
+  },
+  {
+    "name": "btx:saw/drops_from_leaves_palm",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/leaves_palm"}},
+    "drops": true
+  },
+  {
+    "name": "btx:saw/drops_from_leaves_thorn",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/leaves_thorn"}},
+    "drops": true
+  },
+  {
+    "name": "btx:saw/drops_from_leaves_cacao",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/leaves_cacao"}},
+    "drops": true
+  },
+  {
+    "name": "btx:saw/drops_from_leaves_cherry_flowering",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/leaves_cherry_flowering"}},
+    "drops": true
+  },
+  {
+    "name": "btx:saw/drops_from_sugarcane",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/sugarcane"}},
+    "drops": true
+  },
+  {
+    "name": "btx:saw/drops_from_wheat",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/crops_wheat"}},
+    "drops": true
+  },
+  {
+    "name": "btx:saw/drops_from_hemp",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/hemp"}},
+    "drops": true
+  },
+  {
+    "name": "btx:saw/wicker_slabs_from_double_wicker_slab",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/wicker_slab"}},
+    "outputs": [
+      {"id": "btx:block/wicker_slab", "amount": 2}
+    ],
+    "data": 1,
+    "data_mask": 3,
+    "note": "btx.guidebook.saw.double_slab"
+  },
+  {
+    "name": "btx:saw/wicker_panes_from_wicker_slab",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/wicker_slab"}},
+    "outputs": [
+      {"id": "btx:block/wicker_pane", "amount": 2}
+    ]
+  },
+  {
+    "name": "btx:saw/wicker_slabs_from_wicker_block",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/wicker_block"}},
+    "outputs": [
+      {"id": "btx:block/wicker_slab", "amount": 2}
+    ]
+  },
+  {
+    "name": "btx:saw/bones_from_bone_pile",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "minecraft:block/bone_pile"}},
+    "outputs": [
+      {"id": "minecraft:item/bone", "amount": 2}
+    ]
+  },
+  {
+    "name": "btx:saw/companion_slabs_from_companion_cube",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/companion_cube"}},
+    "outputs": [
+      {"id": "btx:block/companion_slab", "amount": 2}
+    ],
+    "facing": "vertical",
+    "sound": "btx:companion_cube.hurt",
+    "sound_volume": 5.0,
+    "blood": true
+  },
+  {
+    "name": "btx:saw/companion_slab_from_companion_cube",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/companion_cube"}},
+    "outputs": [
+      {"id": "btx:block/companion_slab"}
+    ],
+    "facing": "horizontal",
+    "leaves": {"id": "btx:block/companion_slab", "meta": 0},
+    "sound": "btx:companion_cube.hurt",
+    "sound_volume": 5.0,
+    "blood": true
+  },
+  {
+    "name": "btx:saw/companion_slabs_from_double_companion_slab",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/companion_slab"}},
+    "outputs": [
+      {"id": "btx:block/companion_slab", "amount": 2}
+    ],
+    "facing": "vertical",
+    "data": 1,
+    "data_mask": 3,
+    "note": "btx.guidebook.saw.double_slab"
+  },
+  {
+    "name": "btx:saw/companion_slab_from_companion_slab",
+    "type": "btx:saw",
+    "input": {"stack": {"id": "btx:block/companion_slab"}},
+    "outputs": [
+      {"id": "btx:block/companion_slab"}
+    ],
+    "facing": "vertical"
+  },
+  {
+    "name": "btx:saw/breaks_on_stone",
+    "type": "btx:saw_breaks",
+    "inputs": [
+      {"stack": {"id": "minecraft:block/basalt"}},
+      {"stack": {"id": "minecraft:block/basalt_carved"}},
+      {"stack": {"id": "minecraft:block/basalt_polished"}},
+      {"stack": {"id": "minecraft:block/bedrock"}},
+      {"stack": {"id": "minecraft:block/block_olivine"}},
+      {"stack": {"id": "minecraft:block/block_quartz"}},
+      {"stack": {"id": "minecraft:block/boneshale"}},
+      {"stack": {"id": "minecraft:block/boulder_magmatic"}},
+      {"stack": {"id": "minecraft:block/boulder_sulfuric"}},
+      {"stack": {"id": "minecraft:block/brick_basalt"}},
+      {"stack": {"id": "minecraft:block/brick_brimstone"}},
+      {"stack": {"id": "minecraft:block/brick_clay"}},
+      {"stack": {"id": "minecraft:block/brick_gloomstone"}},
+      {"stack": {"id": "minecraft:block/brick_granite"}},
+      {"stack": {"id": "minecraft:block/brick_limestone"}},
+      {"stack": {"id": "minecraft:block/brick_marble"}},
+      {"stack": {"id": "minecraft:block/brick_netherrack"}},
+      {"stack": {"id": "minecraft:block/brick_olivine"}},
+      {"stack": {"id": "minecraft:block/brick_permafrost"}},
+      {"stack": {"id": "minecraft:block/brick_quartz"}},
+      {"stack": {"id": "minecraft:block/brick_sandstone"}},
+      {"stack": {"id": "minecraft:block/brick_slate"}},
+      {"stack": {"id": "minecraft:block/brick_stone"}},
+      {"stack": {"id": "minecraft:block/brick_stone_polished"}},
+      {"stack": {"id": "minecraft:block/brick_stone_polished_mossy"}},
+      {"stack": {"id": "minecraft:block/brimstone"}},
+      {"stack": {"id": "minecraft:block/capstone_marble"}},
+      {"stack": {"id": "minecraft:block/cobble_basalt"}},
+      {"stack": {"id": "minecraft:block/cobble_basalt_mossy"}},
+      {"stack": {"id": "minecraft:block/cobble_gloomstone"}},
+      {"stack": {"id": "minecraft:block/cobble_granite"}},
+      {"stack": {"id": "minecraft:block/cobble_granite_mossy"}},
+      {"stack": {"id": "minecraft:block/cobble_limestone"}},
+      {"stack": {"id": "minecraft:block/cobble_limestone_mossy"}},
+      {"stack": {"id": "minecraft:block/cobble_netherrack"}},
+      {"stack": {"id": "minecraft:block/cobble_netherrack_mossy"}},
+      {"stack": {"id": "minecraft:block/cobble_permafrost"}},
+      {"stack": {"id": "minecraft:block/cobble_stone"}},
+      {"stack": {"id": "minecraft:block/cobble_stone_mossy"}},
+      {"stack": {"id": "minecraft:block/gloomstone"}},
+      {"stack": {"id": "minecraft:block/gloomstone_carved"}},
+      {"stack": {"id": "minecraft:block/gloomstone_polished"}},
+      {"stack": {"id": "minecraft:block/granite"}},
+      {"stack": {"id": "minecraft:block/granite_carved"}},
+      {"stack": {"id": "minecraft:block/granite_polished"}},
+      {"stack": {"id": "minecraft:block/limestone"}},
+      {"stack": {"id": "minecraft:block/limestone_carved"}},
+      {"stack": {"id": "minecraft:block/limestone_polished"}},
+      {"stack": {"id": "minecraft:block/magma"}},
+      {"stack": {"id": "minecraft:block/marble"}},
+      {"stack": {"id": "minecraft:block/moss_basalt"}},
+      {"stack": {"id": "minecraft:block/moss_granite"}},
+      {"stack": {"id": "minecraft:block/moss_limestone"}},
+      {"stack": {"id": "minecraft:block/moss_stone"}},
+      {"stack": {"id": "minecraft:block/netherrack"}},
+      {"stack": {"id": "minecraft:block/netherrack_carved"}},
+      {"stack": {"id": "minecraft:block/netherrack_polished"}},
+      {"stack": {"id": "minecraft:block/permafrost"}},
+      {"stack": {"id": "minecraft:block/permafrost_carved"}},
+      {"stack": {"id": "minecraft:block/permafrost_polished"}},
+      {"stack": {"id": "minecraft:block/pillar_marble"}},
+      {"stack": {"id": "minecraft:block/pumice_dry"}},
+      {"stack": {"id": "minecraft:block/pumice_wet"}},
+      {"stack": {"id": "minecraft:block/sandstone"}},
+      {"stack": {"id": "minecraft:block/slab_basalt_carved"}},
+      {"stack": {"id": "minecraft:block/slab_brick_basalt"}},
+      {"stack": {"id": "minecraft:block/slab_brick_brimstone"}},
+      {"stack": {"id": "minecraft:block/slab_brick_clay"}},
+      {"stack": {"id": "minecraft:block/slab_brick_gloomstone"}},
+      {"stack": {"id": "minecraft:block/slab_brick_granite"}},
+      {"stack": {"id": "minecraft:block/slab_brick_limestone"}},
+      {"stack": {"id": "minecraft:block/slab_brick_marble"}},
+      {"stack": {"id": "minecraft:block/slab_brick_netherrack"}},
+      {"stack": {"id": "minecraft:block/slab_brick_olivine"}},
+      {"stack": {"id": "minecraft:block/slab_brick_permafrost"}},
+      {"stack": {"id": "minecraft:block/slab_brick_quartz"}},
+      {"stack": {"id": "minecraft:block/slab_brick_sandstone"}},
+      {"stack": {"id": "minecraft:block/slab_brick_slate"}},
+      {"stack": {"id": "minecraft:block/slab_brick_stone"}},
+      {"stack": {"id": "minecraft:block/slab_brick_stone_polished"}},
+      {"stack": {"id": "minecraft:block/slab_brimstone"}},
+      {"stack": {"id": "minecraft:block/slab_capstone_marble"}},
+      {"stack": {"id": "minecraft:block/slab_cobble_basalt"}},
+      {"stack": {"id": "minecraft:block/slab_cobble_gloomstone"}},
+      {"stack": {"id": "minecraft:block/slab_cobble_granite"}},
+      {"stack": {"id": "minecraft:block/slab_cobble_limestone"}},
+      {"stack": {"id": "minecraft:block/slab_cobble_netherrack"}},
+      {"stack": {"id": "minecraft:block/slab_cobble_permafrost"}},
+      {"stack": {"id": "minecraft:block/slab_cobble_stone"}},
+      {"stack": {"id": "minecraft:block/slab_gloomstone_carved"}},
+      {"stack": {"id": "minecraft:block/slab_granite_carved"}},
+      {"stack": {"id": "minecraft:block/slab_limestone_carved"}},
+      {"stack": {"id": "minecraft:block/slab_netherrack_carved"}},
+      {"stack": {"id": "minecraft:block/slab_permafrost_carved"}},
+      {"stack": {"id": "minecraft:block/slab_sandstone"}},
+      {"stack": {"id": "minecraft:block/slab_slate_carved"}},
+      {"stack": {"id": "minecraft:block/slab_stone_carved"}},
+      {"stack": {"id": "minecraft:block/slate"}},
+      {"stack": {"id": "minecraft:block/slate_carved"}},
+      {"stack": {"id": "minecraft:block/slate_polished"}},
+      {"stack": {"id": "minecraft:block/soulschist"}},
+      {"stack": {"id": "minecraft:block/stairs_brick_basalt"}},
+      {"stack": {"id": "minecraft:block/stairs_brick_brimstone"}},
+      {"stack": {"id": "minecraft:block/stairs_brick_clay"}},
+      {"stack": {"id": "minecraft:block/stairs_brick_gloomstone"}},
+      {"stack": {"id": "minecraft:block/stairs_brick_granite"}},
+      {"stack": {"id": "minecraft:block/stairs_brick_limestone"}},
+      {"stack": {"id": "minecraft:block/stairs_brick_marble"}},
+      {"stack": {"id": "minecraft:block/stairs_brick_netherrack"}},
+      {"stack": {"id": "minecraft:block/stairs_brick_olivine"}},
+      {"stack": {"id": "minecraft:block/stairs_brick_permafrost"}},
+      {"stack": {"id": "minecraft:block/stairs_brick_quartz"}},
+      {"stack": {"id": "minecraft:block/stairs_brick_sandstone"}},
+      {"stack": {"id": "minecraft:block/stairs_brick_slate"}},
+      {"stack": {"id": "minecraft:block/stairs_brick_stone"}},
+      {"stack": {"id": "minecraft:block/stairs_brick_stone_polished"}},
+      {"stack": {"id": "minecraft:block/stairs_brimstone"}},
+      {"stack": {"id": "minecraft:block/stairs_cobble_basalt"}},
+      {"stack": {"id": "minecraft:block/stairs_cobble_gloomstone"}},
+      {"stack": {"id": "minecraft:block/stairs_cobble_granite"}},
+      {"stack": {"id": "minecraft:block/stairs_cobble_limestone"}},
+      {"stack": {"id": "minecraft:block/stairs_cobble_netherrack"}},
+      {"stack": {"id": "minecraft:block/stairs_cobble_permafrost"}},
+      {"stack": {"id": "minecraft:block/stairs_cobble_stone"}},
+      {"stack": {"id": "minecraft:block/stairs_sandstone"}},
+      {"stack": {"id": "minecraft:block/statue_basalt_lower"}},
+      {"stack": {"id": "minecraft:block/statue_basalt_upper"}},
+      {"stack": {"id": "minecraft:block/statue_gloomstone_lower"}},
+      {"stack": {"id": "minecraft:block/statue_gloomstone_upper"}},
+      {"stack": {"id": "minecraft:block/statue_granite_lower"}},
+      {"stack": {"id": "minecraft:block/statue_granite_upper"}},
+      {"stack": {"id": "minecraft:block/statue_limestone_lower"}},
+      {"stack": {"id": "minecraft:block/statue_limestone_upper"}},
+      {"stack": {"id": "minecraft:block/statue_marble_lower"}},
+      {"stack": {"id": "minecraft:block/statue_marble_upper"}},
+      {"stack": {"id": "minecraft:block/statue_netherrack_lower"}},
+      {"stack": {"id": "minecraft:block/statue_netherrack_upper"}},
+      {"stack": {"id": "minecraft:block/statue_permafrost_lower"}},
+      {"stack": {"id": "minecraft:block/statue_permafrost_upper"}},
+      {"stack": {"id": "minecraft:block/statue_pigman_lower"}},
+      {"stack": {"id": "minecraft:block/statue_pigman_upper"}},
+      {"stack": {"id": "minecraft:block/statue_slate_lower"}},
+      {"stack": {"id": "minecraft:block/statue_slate_upper"}},
+      {"stack": {"id": "minecraft:block/statue_stone_lower"}},
+      {"stack": {"id": "minecraft:block/statue_stone_upper"}},
+      {"stack": {"id": "minecraft:block/stone"}},
+      {"stack": {"id": "minecraft:block/stone_carved"}},
+      {"stack": {"id": "minecraft:block/stone_polished"}}
+    ]
+  },
+  {
+    "name": "btx:saw/breaks_on_ores_and_metals",
+    "type": "btx:saw_breaks",
+    "inputs": [
+      {"stack": {"id": "minecraft:block/block_diamond"}},
+      {"stack": {"id": "minecraft:block/block_gold"}},
+      {"stack": {"id": "minecraft:block/block_iron"}},
+      {"stack": {"id": "minecraft:block/block_lapis"}},
+      {"stack": {"id": "minecraft:block/block_redstone"}},
+      {"stack": {"id": "minecraft:block/block_steel"}},
+      {"stack": {"id": "minecraft:block/brick_diamond"}},
+      {"stack": {"id": "minecraft:block/brick_gold"}},
+      {"stack": {"id": "minecraft:block/brick_iron"}},
+      {"stack": {"id": "minecraft:block/brick_lapis"}},
+      {"stack": {"id": "minecraft:block/brick_steel"}},
+      {"stack": {"id": "minecraft:block/fence_chainlink"}},
+      {"stack": {"id": "minecraft:block/fence_steel"}},
+      {"stack": {"id": "minecraft:block/mesh"}},
+      {"stack": {"id": "minecraft:block/mesh_gold"}},
+      {"stack": {"id": "minecraft:block/ore_coal_basalt"}},
+      {"stack": {"id": "minecraft:block/ore_coal_granite"}},
+      {"stack": {"id": "minecraft:block/ore_coal_limestone"}},
+      {"stack": {"id": "minecraft:block/ore_coal_permafrost"}},
+      {"stack": {"id": "minecraft:block/ore_coal_stone"}},
+      {"stack": {"id": "minecraft:block/ore_diamond_basalt"}},
+      {"stack": {"id": "minecraft:block/ore_diamond_granite"}},
+      {"stack": {"id": "minecraft:block/ore_diamond_limestone"}},
+      {"stack": {"id": "minecraft:block/ore_diamond_permafrost"}},
+      {"stack": {"id": "minecraft:block/ore_diamond_stone"}},
+      {"stack": {"id": "minecraft:block/ore_gold_basalt"}},
+      {"stack": {"id": "minecraft:block/ore_gold_granite"}},
+      {"stack": {"id": "minecraft:block/ore_gold_limestone"}},
+      {"stack": {"id": "minecraft:block/ore_gold_permafrost"}},
+      {"stack": {"id": "minecraft:block/ore_gold_stone"}},
+      {"stack": {"id": "minecraft:block/ore_iron_basalt"}},
+      {"stack": {"id": "minecraft:block/ore_iron_granite"}},
+      {"stack": {"id": "minecraft:block/ore_iron_limestone"}},
+      {"stack": {"id": "minecraft:block/ore_iron_permafrost"}},
+      {"stack": {"id": "minecraft:block/ore_iron_stone"}},
+      {"stack": {"id": "minecraft:block/ore_lapis_basalt"}},
+      {"stack": {"id": "minecraft:block/ore_lapis_granite"}},
+      {"stack": {"id": "minecraft:block/ore_lapis_limestone"}},
+      {"stack": {"id": "minecraft:block/ore_lapis_permafrost"}},
+      {"stack": {"id": "minecraft:block/ore_lapis_stone"}},
+      {"stack": {"id": "minecraft:block/ore_nethercoal_basalt"}},
+      {"stack": {"id": "minecraft:block/ore_nethercoal_gloomstone"}},
+      {"stack": {"id": "minecraft:block/ore_nethercoal_netherrack"}},
+      {"stack": {"id": "minecraft:block/ore_redstone_basalt"}},
+      {"stack": {"id": "minecraft:block/ore_redstone_glowing_basalt"}},
+      {"stack": {"id": "minecraft:block/ore_redstone_glowing_granite"}},
+      {"stack": {"id": "minecraft:block/ore_redstone_glowing_limestone"}},
+      {"stack": {"id": "minecraft:block/ore_redstone_glowing_permafrost"}},
+      {"stack": {"id": "minecraft:block/ore_redstone_glowing_stone"}},
+      {"stack": {"id": "minecraft:block/ore_redstone_granite"}},
+      {"stack": {"id": "minecraft:block/ore_redstone_limestone"}},
+      {"stack": {"id": "minecraft:block/ore_redstone_permafrost"}},
+      {"stack": {"id": "minecraft:block/ore_redstone_stone"}},
+      {"stack": {"id": "minecraft:block/slab_brick_diamond"}},
+      {"stack": {"id": "minecraft:block/slab_brick_gold"}},
+      {"stack": {"id": "minecraft:block/slab_brick_iron"}},
+      {"stack": {"id": "minecraft:block/slab_brick_lapis"}},
+      {"stack": {"id": "minecraft:block/slab_brick_steel"}},
+      {"stack": {"id": "minecraft:block/spikes"}},
+      {"stack": {"id": "minecraft:block/stairs_brick_diamond"}},
+      {"stack": {"id": "minecraft:block/stairs_brick_gold"}},
+      {"stack": {"id": "minecraft:block/stairs_brick_iron"}},
+      {"stack": {"id": "minecraft:block/stairs_brick_lapis"}},
+      {"stack": {"id": "minecraft:block/stairs_brick_steel"}},
+      {"stack": {"id": "minecraft:block/trapdoor_iron"}},
+      {"stack": {"id": "minecraft:block/trapdoor_steel"}}
+    ]
+  },
+  {
+    "name": "btx:saw/breaks_on_glass_ice_and_obsidian",
+    "type": "btx:saw_breaks",
+    "inputs": [
+      {"stack": {"id": "minecraft:block/glass"}},
+      {"stack": {"id": "minecraft:block/glass_steel"}},
+      {"stack": {"id": "minecraft:block/glass_tinted"}},
+      {"stack": {"id": "minecraft:block/trapdoor_glass"}},
+      {"stack": {"id": "minecraft:block/jar_glass"}},
+      {"stack": {"id": "minecraft:block/ice"}},
+      {"stack": {"id": "minecraft:block/permaice"}},
+      {"stack": {"id": "minecraft:block/obsidian"}},
+      {"stack": {"id": "minecraft:block/rubyglass_block"}},
+      {"stack": {"id": "minecraft:block/rubyglass_brick"}},
+      {"stack": {"id": "minecraft:block/rubyglass_column"}},
+      {"stack": {"id": "minecraft:block/rubyglass_crystal"}},
+      {"stack": {"id": "minecraft:block/rubyglass_node"}},
+      {"stack": {"id": "minecraft:block/slab_brick_rubyglass"}},
+      {"stack": {"id": "minecraft:block/stairs_brick_rubyglass"}}
+    ]
+  },
+  {
+    "name": "btx:saw/breaks_on_machines",
+    "type": "btx:saw_breaks",
+    "inputs": [
+      {"stack": {"id": "minecraft:block/furnace_stone_idle"}},
+      {"stack": {"id": "minecraft:block/furnace_stone_active"}},
+      {"stack": {"id": "minecraft:block/furnace_blast_idle"}},
+      {"stack": {"id": "minecraft:block/furnace_blast_active"}},
+      {"stack": {"id": "minecraft:block/brazier_inactive"}},
+      {"stack": {"id": "minecraft:block/brazier_active"}},
+      {"stack": {"id": "minecraft:block/dispenser_cobble_stone"}},
+      {"stack": {"id": "minecraft:block/activator_cobble_netherrack"}},
+      {"stack": {"id": "minecraft:block/trommel_idle"}},
+      {"stack": {"id": "minecraft:block/trommel_active"}},
+      {"stack": {"id": "minecraft:block/mobspawner"}},
+      {"stack": {"id": "minecraft:block/mobspawner_deactivated"}},
+      {"stack": {"id": "minecraft:block/piston_base"}},
+      {"stack": {"id": "minecraft:block/piston_base_sticky"}},
+      {"stack": {"id": "minecraft:block/piston_base_steel"}},
+      {"stack": {"id": "btx:block/soulforge"}},
+      {"stack": {"id": "btx:block/cauldron"}},
+      {"stack": {"id": "btx:block/crucible"}},
+      {"stack": {"id": "btx:block/millstone"}},
+      {"stack": {"id": "btx:block/hibachi"}},
+      {"stack": {"id": "btx:block/kiln"}}
+    ]
+  }
+]

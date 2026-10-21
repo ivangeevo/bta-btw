@@ -6,6 +6,7 @@ import net.minecraft.core.block.Block;
 import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.data.registry.recipe.HasJsonAdapter;
 import net.minecraft.core.data.registry.recipe.RecipeSymbol;
+import net.minecraft.core.data.registry.recipe.SearchQuery;
 import net.minecraft.core.data.registry.recipe.adapter.RecipeJsonAdapter;
 import net.minecraft.core.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -13,17 +14,17 @@ import org.jetbrains.annotations.NotNull;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-/** input = block above the turntable, output = what it becomes, after `rotations` full turns. */
 public class RecipeEntryTurntable extends RecipeEntryBTX implements HasJsonAdapter {
 	public static final int DEFAULT_ROTATIONS = 8;
 
 	private int rotations = DEFAULT_ROTATIONS;
 	private List<ItemStack> extraOutputs = new ArrayList<>();
 
-	private List<Integer> inputData = new ArrayList<>(); // empty = any data (CE: IGNORE_METADATA)
-	private String effectSound;            // optional, played on each rotation of progress
-	private String completionSound;        // optional, falls back to effectSound
+	private List<Integer> inputData = new ArrayList<>();
+	private String effectSound;
+	private String completionSound;
 
 	public RecipeEntryTurntable(RecipeSymbol input, ItemStack output, int rotations, List<ItemStack> extraOutputs) {
 		super(input, output);
@@ -33,7 +34,6 @@ public class RecipeEntryTurntable extends RecipeEntryBTX implements HasJsonAdapt
 
 	public RecipeEntryTurntable() { super(); }
 
-	/** CE: matchesInputs(block, metadata). */
 	public boolean matchesBlock(Block<?> block, int data) {
 		boolean sameBlock = false;
 		List<ItemStack> stacks = getInput().resolve();
@@ -51,6 +51,16 @@ public class RecipeEntryTurntable extends RecipeEntryBTX implements HasJsonAdapt
 
 	public List<ItemStack> getExtraOutputs() { return extraOutputs; }
 
+	@Override
+	public boolean matchesRecipe(@NotNull SearchQuery query) {
+		if (super.matchesRecipe(query)) return true;
+		if (query.query.getLeft() == SearchQuery.QueryType.GROUP && !Objects.equals(query.query.getRight(), "")) {
+			List<ItemStack> stacks = new RecipeSymbol(query.query.getRight()).resolve();
+			return stacks != null && extraOutputs.stream().anyMatch(stacks::contains);
+		}
+		return extraOutputs.stream().anyMatch(extra -> matchesName(extra, query));
+	}
+
 	public String getCompletionSound() { return completionSound != null ? completionSound : effectSound; }
 	public String getEffectSound() { return effectSound; }
 
@@ -63,19 +73,22 @@ public class RecipeEntryTurntable extends RecipeEntryBTX implements HasJsonAdapt
 			JsonObject o = json.getAsJsonObject();
 
 			List<Integer> data = new ArrayList<>();
-			if (o.has("input_data")) for (JsonElement e : o.getAsJsonArray("input_data")) data.add(e.getAsInt());
-			String sound = o.has("effect_sound") ? o.get("effect_sound").getAsString() : null;
-			String doneSound = o.has("completion_sound") ? o.get("completion_sound").getAsString() : null;
+
+			if (o.has("input_data"))  {
+				for (JsonElement e : o.getAsJsonArray("input_data")) data.add(e.getAsInt());
+			}
 
 			RecipeSymbol input = ctx.deserialize(o.get("input"), RecipeSymbol.class);
 			ItemStack output = ctx.deserialize(o.get("output"), ItemStack.class);
 			int rotations = o.has("rotations") ? o.get("rotations").getAsInt() : DEFAULT_ROTATIONS;
 			List<ItemStack> extras = new ArrayList<>();
+
 			if (o.has("extra_outputs")) {
 				for (JsonElement e : o.getAsJsonArray("extra_outputs")) {
 					extras.add(ctx.deserialize(e, ItemStack.class));
 				}
 			}
+
 			return new RecipeEntryTurntable(input, output, rotations, extras);
 		}
 
@@ -88,15 +101,22 @@ public class RecipeEntryTurntable extends RecipeEntryBTX implements HasJsonAdapt
 			o.add("output", ctx.serialize(r.getOutput(), ItemStack.class));
 			o.addProperty("rotations", r.getRotations());
 
-			if (!r.inputData.isEmpty()) { JsonArray a = new JsonArray(); r.inputData.forEach(a::add); o.add("input_data", a); }
-			if (r.effectSound != null) o.addProperty("effect_sound", r.effectSound);
-			if (r.completionSound != null) o.addProperty("completion_sound", r.completionSound);
+			if (!r.inputData.isEmpty()) {
+				JsonArray a = new JsonArray(); r.inputData.forEach(a::add); o.add("input_data", a);
+			}
+			if (r.effectSound != null) {
+				o.addProperty("effect_sound", r.effectSound);
+			}
+			if (r.completionSound != null) {
+				o.addProperty("completion_sound", r.completionSound);
+			}
 
 			if (!r.getExtraOutputs().isEmpty()) {
 				JsonArray arr = new JsonArray();
 				for (ItemStack s : r.getExtraOutputs()) arr.add(ctx.serialize(s, ItemStack.class));
 				o.add("extra_outputs", arr);
 			}
+
 			return o;
 		}
 	}

@@ -5,6 +5,7 @@ import ivangeevo.btx.recipe.impl.RecipeEntryBTX;
 import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.data.registry.recipe.HasJsonAdapter;
 import net.minecraft.core.data.registry.recipe.RecipeSymbol;
+import net.minecraft.core.data.registry.recipe.SearchQuery;
 import net.minecraft.core.data.registry.recipe.adapter.RecipeJsonAdapter;
 import net.minecraft.core.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -12,8 +13,8 @@ import org.jetbrains.annotations.NotNull;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-/** A block the kiln can cook: input = the block above the kiln, output = what it becomes. */
 public class RecipeEntryKiln extends RecipeEntryBTX implements HasJsonAdapter {
 	private int cookTimeMultiplier = 1;
 	private List<ItemStack> extraOutputs = new ArrayList<>();
@@ -32,7 +33,6 @@ public class RecipeEntryKiln extends RecipeEntryBTX implements HasJsonAdapter {
 		super();
 	}
 
-	/** Primary output first, then any extras. */
 	public List<ItemStack> getOutputs() {
 		List<ItemStack> all = new ArrayList<>();
 		all.add(getOutput());
@@ -40,9 +40,17 @@ public class RecipeEntryKiln extends RecipeEntryBTX implements HasJsonAdapter {
 		return all;
 	}
 
-	/** BTW: getCookTimeMultiplierInKiLn. Multiplies the tick delay between cook steps. */
 	public int getCookTimeMultiplier() {
 		return cookTimeMultiplier;
+	}
+
+	@Override
+	public boolean matchesRecipe(@NotNull SearchQuery query) {
+		if (query.query.getLeft() == SearchQuery.QueryType.GROUP && !Objects.equals(query.query.getRight(), "")) {
+			List<ItemStack> stacks = new RecipeSymbol(query.query.getRight()).resolve();
+			return stacks != null && getOutputs().stream().anyMatch(stacks::contains);
+		}
+		return getOutputs().stream().anyMatch(output -> matchesName(output, query));
 	}
 
 	@Override

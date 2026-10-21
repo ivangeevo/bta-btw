@@ -1,6 +1,7 @@
 package ivangeevo.btx.block.blocks;
 
 import ivangeevo.btx.item.BTXItems;
+import ivangeevo.btx.sound.BTXSoundTypes;
 import ivangeevo.btx.util.utils.MiscUtils;
 import ivangeevo.btx.util.utils.SoundUtils;
 import ivangeevo.btx.util.utils.WorldUtils;
@@ -206,7 +207,7 @@ public class BlockLogicHandCrank extends BlockLogic implements MechanicalDevice,
 		MiscUtils.ejectSingleItemWithRandomOffset(world, tilePos, Blocks.COBBLE_STONE.asItem().id, 0);
 		MiscUtils.ejectSingleItemWithRandomOffset(world, tilePos, Blocks.COBBLE_STONE.asItem().id, 0);
 		MiscUtils.ejectSingleItemWithRandomOffset(world, tilePos, BTXItems.GEAR.id, 0);
-		SoundUtils.playAtTileCenter(world, tilePos, SoundCategory.WORLD_SOUNDS, "random.explode", 0.2F, 1.25F);
+		SoundUtils.playAtTileCenter(world, tilePos, SoundCategory.WORLD_SOUNDS, BTXSoundTypes.MECHANICAL_BREAK, 0.2F, 1.25F);
 		world.setBlockType(tilePos, Blocks.AIR);
 	}
 
@@ -218,7 +219,6 @@ public class BlockLogicHandCrank extends BlockLogic implements MechanicalDevice,
 			volume = 0.3F; pitch = 0.7F;
 		}
 
-		SoundUtils.playAtTileCenter(world, tilePos, SoundCategory.WORLD_SOUNDS, "random.click", volume, pitch);
+		SoundUtils.playAtTileCenter(world, tilePos, SoundCategory.WORLD_SOUNDS, BTXSoundTypes.HAND_CRANK_CRANK, volume, pitch);
 	}
-
 }

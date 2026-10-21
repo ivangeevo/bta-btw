@@ -7,6 +7,7 @@ import ivangeevo.btx.block.blocks.turntable.TurntableAttachments;
 import ivangeevo.btx.block.blocks.turntable.TurntableInteraction;
 import ivangeevo.btx.recipe.BTXRecipes;
 import ivangeevo.btx.recipe.turntable.TurntableCrafting;
+import ivangeevo.btx.sound.BTXSoundTypes;
 import ivangeevo.btx.util.utils.MiscUtils;
 import ivangeevo.btx.util.utils.SoundUtils;
 import net.minecraft.core.block.Block;
@@ -87,7 +88,7 @@ public class TileEntityTurntable extends TileEntity {
 	}
 
 	private void rotateTurntable(BlockLogicTurntable turntable) {
-		SoundUtils.playAtTileCenter(worldObj, tilePos, SoundCategory.WORLD_SOUNDS, "random.click", 0.05F, 1.0F);
+		SoundUtils.playAtTileCenter(worldObj, tilePos, SoundCategory.WORLD_SOUNDS, BTXSoundTypes.TURNTABLE_ROTATE, 0.05F, 1.0F);
 
 		boolean reverse = turntable.isBlockRedstoneOn(worldObj, tilePos);
 		int craftingCounter = this.craftingRotationCount;
@@ -201,7 +202,6 @@ public class TileEntityTurntable extends TileEntity {
 	}
 
 	private boolean isReplaceable(TilePosc pos) {
-		// ASSUMPTION: BTA exposes replaceability on the material. Replace if your port has a helper (BTW: WorldUtils.isReplaceableBlock).
 		return worldObj.isAirBlock(pos) || worldObj.getBlockType(pos).getMaterial().isReplaceable();
 	}
 }

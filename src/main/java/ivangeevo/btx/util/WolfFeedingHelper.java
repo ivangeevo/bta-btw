@@ -3,6 +3,7 @@ package ivangeevo.btx.util;
 import com.mojang.nbt.tags.CompoundTag;
 import ivangeevo.btx.entity.FeedableWolf;
 import ivangeevo.btx.item.BTXItems;
+import ivangeevo.btx.sound.BTXSoundTypes;
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.animal.MobWolf;
 import net.minecraft.core.entity.player.Player;
@@ -41,11 +42,13 @@ public class WolfFeedingHelper {
 
 	public static void updateFedState(MobWolf wolf) {
 		World world = wolf.world;
+
 		if (world.isClientSide || !wolf.isAlive()) {
 			return;
 		}
 
 		FeedableWolf feedable = (FeedableWolf) wolf;
+
 		if (feedable.btx$getFedCountdown() < 0) {
 			resetFedCountdown(wolf);
 		}
@@ -88,11 +91,12 @@ public class WolfFeedingHelper {
 
 	private static void turnHostile(MobWolf wolf, Player player) {
 		World world = wolf.world;
+
 		if (world.isClientSide) {
 			return;
 		}
 
-		world.playSoundAtEntity(null, wolf, "mob.wolf.growl", ((FeedableWolf) wolf).btx$getSoundVolume(),
+		world.playSoundAtEntity(null, wolf, BTXSoundTypes.WOLF_TURN_HOSTILE, ((FeedableWolf) wolf).btx$getSoundVolume(),
 			(world.rand.nextFloat() - world.rand.nextFloat()) * 0.2F + 1.0F);
 
 		wolf.setWolfAngry(true);
@@ -124,11 +128,13 @@ public class WolfFeedingHelper {
 		}
 
 		eat(wolf, healAmount);
+
 		return true;
 	}
 
 	private static boolean eatHeldFood(MobWolf wolf) {
 		ItemStack held = wolf.getHeldItem();
+
 		if (held == null || held.stackSize <= 0 || !isWolfFood(held)) {
 			return false;
 		}
@@ -141,6 +147,7 @@ public class WolfFeedingHelper {
 		}
 
 		eat(wolf, healAmount);
+
 		return true;
 	}
 
@@ -156,11 +163,13 @@ public class WolfFeedingHelper {
 				int healAmount = ((ItemFood) stack.getItem()).getHealAmount(stack);
 
 				--stack.stackSize;
+
 				if (stack.stackSize <= 0) {
 					entityItem.remove();
 				}
 
 				eat(wolf, healAmount);
+
 				return;
 			}
 		}
@@ -172,7 +181,7 @@ public class WolfFeedingHelper {
 		wolf.heal(healAmount);
 		resetFedCountdown(wolf);
 
-		world.playSoundAtEntity(null, wolf, "random.pop", 0.25F,
+		world.playSoundAtEntity(null, wolf, BTXSoundTypes.WOLF_EAT, 0.25F,
 			((world.rand.nextFloat() - world.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
 	}
 

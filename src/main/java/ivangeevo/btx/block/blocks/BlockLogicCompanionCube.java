@@ -1,15 +1,13 @@
 package ivangeevo.btx.block.blocks;
 
-import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.block.blocks.turntable.TurntableInteraction;
 import ivangeevo.btx.block.blocks.util.FireInteraction;
+import ivangeevo.btx.sound.BTXSoundTypes;
 import ivangeevo.btx.util.utils.FacingUtils;
-import ivangeevo.btx.util.utils.MiscUtils;
 import ivangeevo.btx.util.utils.SoundUtils;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockLogicRotatable;
 import net.minecraft.core.block.BlockLogicSupplier;
-import net.minecraft.core.block.Blocks;
 import net.minecraft.core.block.material.Materials;
 import net.minecraft.core.entity.Mob;
 import net.minecraft.core.sound.BlockSounds;
@@ -133,6 +131,7 @@ public class BlockLogicCompanionCube extends BlockLogicRotatable implements Turn
 				index = i;
 			}
 		}
+
 		return (data & ~MASK_SPIN) | (index << SPIN_SHIFT);
 	}
 
@@ -152,14 +151,14 @@ public class BlockLogicCompanionCube extends BlockLogicRotatable implements Turn
 
 	public static void playWhine(World world, TilePosc pos) {
 		if (!world.isClientSide) {
-			SoundUtils.playAtTileCenter(world, pos, SoundCategory.ENTITY_SOUNDS, "mob.wolf.whine",
+			SoundUtils.playAtTileCenter(world, pos, SoundCategory.ENTITY_SOUNDS, BTXSoundTypes.COMPANION_CUBE_WHINE,
 				0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 		}
 	}
 
 	public static void playHurt(World world, TilePosc pos, float volume) {
 		if (!world.isClientSide) {
-			SoundUtils.playAtTileCenter(world, pos, SoundCategory.ENTITY_SOUNDS, "mob.wolf.hurt",
+			SoundUtils.playAtTileCenter(world, pos, SoundCategory.ENTITY_SOUNDS, BTXSoundTypes.COMPANION_CUBE_HURT,
 				volume, (world.rand.nextFloat() - world.rand.nextFloat()) * 0.2F + 1.0F);
 		}
 	}
@@ -167,35 +166,6 @@ public class BlockLogicCompanionCube extends BlockLogicRotatable implements Turn
 	public static void playDeathEffect(World world, TilePosc pos) {
 		spawnHearts(world, pos);
 		playWhine(world, pos);
-	}
-
-	// TODO: call from the Saw once it's ported
-	public static boolean onSawed(World world, TilePosc pos, Direction sawFacing) {
-		Block<?> target = world.getBlockType(pos);
-		boolean vertical = sawFacing == Direction.UP || sawFacing == Direction.DOWN;
-
-		if (target == BTXBlocks.COMPANION_CUBE) {
-			if (vertical) {
-				for (int count = 0; count < 2; count++) {
-					MiscUtils.ejectSingleItemWithRandomOffset(world, pos, BTXBlocks.COMPANION_SLAB.id(), 0);
-				}
-				world.setBlockTypeNotify(pos, Blocks.AIR);
-			} else {
-				MiscUtils.ejectSingleItemWithRandomOffset(world, pos, BTXBlocks.COMPANION_SLAB.id(), 0);
-				world.setBlockTypeDataNotify(pos, BTXBlocks.COMPANION_SLAB, 0);
-			}
-
-			playHurt(world, pos, 5.0F);
-			return true;
-		}
-
-		if (target == BTXBlocks.COMPANION_SLAB && vertical) {
-			MiscUtils.ejectSingleItemWithRandomOffset(world, pos, BTXBlocks.COMPANION_SLAB.id(), 0);
-			world.setBlockTypeNotify(pos, Blocks.AIR);
-			return true;
-		}
-
-		return false;
 	}
 
 	// TODO: move into the Block Dispenser's entity consume logic once it's ported
