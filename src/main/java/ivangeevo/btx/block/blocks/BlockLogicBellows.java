@@ -1,5 +1,7 @@
 package ivangeevo.btx.block.blocks;
 
+import ivangeevo.btx.achievement.BTXAchievementTriggers;
+import ivangeevo.btx.achievement.BTXAchievements;
 import ivangeevo.btx.sound.BTXSoundTypes;
 import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.item.BTXItems;
@@ -306,8 +308,8 @@ public class BlockLogicBellows extends BlockLogic implements MechanicalDevice {
 				world.setBlockData(pos, 0);
 			} else {
 				world.setBlockTypeNotify(pos, BTXBlocks.STOKED_FIRE);
-				// BTA may not call onPlacedByWorld for setBlockTypeNotify, so make sure it ticks
 				world.scheduleBlockUpdate(pos, BTXBlocks.STOKED_FIRE, BTXBlocks.STOKED_FIRE.getLogic().tickDelay());
+				BTXAchievementTriggers.awardNearby(world, pos, BTXAchievements.STOKE_FIRE);
 			}
 
 			// put regular fire above the stoked

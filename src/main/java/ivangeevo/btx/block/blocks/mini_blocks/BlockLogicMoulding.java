@@ -4,6 +4,7 @@ import ivangeevo.btx.block.BTXBlocks;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockLogicSupplier;
 import net.minecraft.core.block.IPaintable;
+import net.minecraft.core.block.material.Material;
 import net.minecraft.core.block.tag.BlockTags;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
@@ -21,6 +22,10 @@ public class BlockLogicMoulding extends BlockLogicMouldingBase implements IPaint
 
 	public BlockLogicMoulding(@NotNull Block<?> block, Supplier<Block<?>> matchingCorner) {
 		super(block, matchingCorner);
+	}
+
+	protected BlockLogicMoulding(@NotNull Block<?> block, Supplier<Block<?>> matchingCorner, @NotNull Material material) {
+		super(block, matchingCorner, material);
 	}
 
 	public static BlockLogicSupplier<BlockLogicMoulding> properties() {

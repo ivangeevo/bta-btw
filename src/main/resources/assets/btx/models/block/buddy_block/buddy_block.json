@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable_with_bottom",
+  "textures": {
+    "top": "btx:block/buddy_block/side",
+    "bottom": "btx:block/buddy_block/side",
+    "front": "btx:block/buddy_block/front",
+    "side": "btx:block/buddy_block/side"
+  }
+}

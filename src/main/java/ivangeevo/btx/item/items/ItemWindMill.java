@@ -1,5 +1,7 @@
 package ivangeevo.btx.item.items;
 
+import ivangeevo.btx.achievement.BTXAchievementTriggers;
+import ivangeevo.btx.achievement.BTXAchievements;
 import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.block.blocks.BlockLogicAxle;
 import ivangeevo.btx.entity.entities.WindMillEntity;
@@ -14,7 +16,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class ItemWindMill extends Item {
-
 	public ItemWindMill(@NotNull String translationKey, @NotNull String namespaceId, int id) {
 		super(translationKey, namespaceId, id);
 	}
@@ -42,6 +43,7 @@ public class ItemWindMill extends Item {
 						if (!world.isClientSide) {
 							windMill.setRotationSpeed(windMill.computeRotation());
 							world.entityJoinedWorld(windMill);
+							BTXAchievementTriggers.award(player, BTXAchievements.WINDMILL);
 						}
 
 						selfStack.stackSize--;
@@ -60,5 +62,4 @@ public class ItemWindMill extends Item {
 
 		return super.onUseOnBlock(selfStack, world, player, blockPos, side, xHit, yHit);
 	}
-
 }

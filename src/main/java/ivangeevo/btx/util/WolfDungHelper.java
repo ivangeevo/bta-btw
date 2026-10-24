@@ -96,9 +96,10 @@ public class WolfDungHelper {
 	}
 
 	private static boolean isBlockOpenToDung(World world, int x, int y, int z) {
-		Block<?> block = world.getBlockType(new TilePos(x, y, z));
+		TilePos pos = new TilePos(x, y, z);
+		Block<?> block = world.getBlockType(pos);
 
-		if (block == Blocks.AIR || block == Blocks.FIRE || block == BTXBlocks.STOKED_FIRE) {
+		if (world.isAirBlock(pos) || block == Blocks.FIRE || block == BTXBlocks.STOKED_FIRE) {
 			return true;
 		}
 

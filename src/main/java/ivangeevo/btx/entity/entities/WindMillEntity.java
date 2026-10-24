@@ -1,6 +1,8 @@
 package ivangeevo.btx.entity.entities;
 
 import com.mojang.nbt.tags.CompoundTag;
+import ivangeevo.btx.achievement.BTXAchievementTriggers;
+import ivangeevo.btx.achievement.BTXAchievements;
 import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.block.blocks.BlockLogicAxle;
 import ivangeevo.btx.item.BTXItems;
@@ -24,7 +26,6 @@ import net.minecraft.core.world.weather.Weathers;
 import org.jetbrains.annotations.NotNull;
 
 public class WindMillEntity extends MechanicalPowerSourceEntityHorizonal {
-
 	public static final float HEIGHT = 12.8F;
 	public static final float WIDTH = 12.8F;
 	public static final float DEPTH = 0.8F;
@@ -163,14 +164,11 @@ public class WindMillEntity extends MechanicalPowerSourceEntityHorizonal {
 			}
 
 			if (overpowerTimer <= 0) {
-				int centerX = MathHelper.floor(x);
-				int centerY = MathHelper.floor(y);
-				int centerZ = MathHelper.floor(z);
-
 				TilePos tilePos = getCenterPos();
 
 				// destroy any gearboxes attached to the windmill by overpowering the axle
 				if (BTXBlocks.AXLE.getLogic() instanceof BlockLogicAxle axle) {
+					BTXAchievementTriggers.awardNearby(world, tilePos, BTXAchievementTriggers.WIDE_RADIUS, BTXAchievements.WINDMILL_STORM);
 					axle.overpower(world, tilePos);
 				}
 			}
@@ -228,7 +226,6 @@ public class WindMillEntity extends MechanicalPowerSourceEntityHorizonal {
 
 	@Override
 	protected void onRotationOctantChange() {
-		//float speed = getRotationSpeed();
 		float speed = getDisplayedRotationSpeed();
 
 		if (speed < ROTATION_PER_TICK) {
@@ -299,5 +296,4 @@ public class WindMillEntity extends MechanicalPowerSourceEntityHorizonal {
 	public static boolean isValidBlockForWindMillToOccupy(World world, int x, int y, int z) {
 		return world.isAirBlock(new TilePos(x, y, z));
 	}
-
 }

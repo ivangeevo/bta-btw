@@ -1,9 +1,10 @@
 package ivangeevo.btx.item.items;
 
+import ivangeevo.btx.achievement.BTXAchievementTriggers;
+import ivangeevo.btx.achievement.BTXAchievements;
 import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.block.blocks.BlockLogicAxle;
 import ivangeevo.btx.entity.entities.WaterWheelEntity;
-import ivangeevo.btx.entity.entities.WindMillEntity;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.Item;
@@ -15,7 +16,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class ItemWaterWheel extends Item {
-
 	public ItemWaterWheel(@NotNull String translationKey, @NotNull String namespaceId, int id) {
 		super(translationKey, namespaceId, id);
 	}
@@ -43,6 +43,7 @@ public class ItemWaterWheel extends Item {
 						if (!world.isClientSide) {
 							waterWheel.setRotationSpeed(waterWheel.computeRotation());
 							world.entityJoinedWorld(waterWheel);
+							BTXAchievementTriggers.award(player, BTXAchievements.WATERWHEEL);
 						}
 
 						selfStack.stackSize--;
@@ -61,5 +62,4 @@ public class ItemWaterWheel extends Item {
 
 		return super.onUseOnBlock(selfStack, world, player, blockPos, side, xHit, yHit);
 	}
-
 }

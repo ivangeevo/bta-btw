@@ -22,6 +22,8 @@ public class BTXConfig {
 	public static int CAULDRON_SCREEN_ID = 46;
 	public static int HOPPER_SCREEN_ID = 47;
 	public static int SOULFORGE_SCREEN_ID = 48;
+	public static int BLOCK_DISPENSER_SCREEN_ID = 49;
+	public static int PULLEY_SCREEN_ID = 50;
 
 	private static int currentBlockID;
 	private static int currentItemID;

@@ -1,14 +1,18 @@
 package ivangeevo.btx.world.save.conversion.twoninefour;
 
 import ivangeevo.btx.block.entity.*;
+import ivangeevo.btx.block.entity.TileEntityCement;
+import ivangeevo.btx.block.entity.TileEntityPulley;
+import ivangeevo.btx.entity.entities.EntityBroadheadArrow;
 import ivangeevo.btx.entity.entities.WaterWheelEntity;
 import ivangeevo.btx.entity.entities.WindMillEntity;
+import ivangeevo.btx.entity.entities.lift.BlockLiftedByPlatformEntity;
+import ivangeevo.btx.entity.entities.lift.MovingAnchorEntity;
+import ivangeevo.btx.entity.entities.lift.MovingPlatformEntity;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.entity.TileEntityDispatcher;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.EntityDispatcher;
-import net.minecraft.core.entity.factories.EntityFactory;
-import net.minecraft.core.util.collection.NamespaceID;
 
 /**
  * <h2>Why no conversion step is needed</h2>
@@ -69,14 +73,17 @@ public final class BTW294LegacyRegistration {
         // tile(BtwUnfiredPotteryEntity.class,  "unfired_pottery",  "UnfiredPottery");
         // tile(BtwVaseEntity.class,            "vase",             "Vase");
         // tile(BtwCrucibleEntity.class,        "crucible",         "Crucible");
-		legacyTile(TileEntityCauldron.class,"Cauldron");
-		legacyTile(TileEntityMillStone.class,"MillStone");
-		legacyTile(TileEntityHopper.class, "Hopper");
-		legacyTile(TileEntityTurntable.class, "Turntable");
-		legacyTile(TileEntityVase.class, "Vase");
+		tile(TileEntityCauldron.class,"Cauldron");
+		tile(TileEntityMillStone.class,"MillStone");
+		tile(TileEntityHopper.class, "Hopper");
+		tile(TileEntityBlockDispenser.class, "BlockDispenser");
+		tile(TileEntityPulley.class, "Pulley");
+		tile(TileEntityCement.class, "Cement");
+		tile(TileEntityTurntable.class, "Turntable");
+		tile(TileEntityVase.class, "Vase");
 		// "UnfiredPottery" is left unmapped on purpose: it only held 2.94's in-kiln cook timer, and BTX's unfired
 		// pottery has no tile entity (BlockLogicKiln does the cooking), so the block converts and the timer is dropped.
-		legacyTile(TileEntityCrucible.class, "Crucible");
+		tile(TileEntityCrucible.class, "Crucible");
 
         // Entities: (class, modern key, factory, BTW saved name, BTW tracker id)
         // entity(BtwWaterWheel.class,       "water_wheel",             BtwWaterWheel::new,       "WaterWheel",            222);
@@ -85,29 +92,19 @@ public final class BTW294LegacyRegistration {
         // entity(BtwMovingPlatform.class,   "moving_platform",         BtwMovingPlatform::new,   "MovingPlatform",        225);
         // entity(BtwLiftedBlock.class,      "block_lifted_by_platform",BtwLiftedBlock::new,      "BlockLiftedByPlatform", 226);
         // entity(BtwBroadheadArrow.class,   "broadhead_arrow",         BtwBroadheadArrow::new,   "BroadheadArrow",        227);
-		legacyEntity(WaterWheelEntity.class, "WaterWheel", 222);
-		legacyEntity(WindMillEntity.class, "WindMill", 223);
+		entity(WaterWheelEntity.class, "WaterWheel", 222);
+		entity(WindMillEntity.class, "WindMill", 223);
+		entity(MovingAnchorEntity.class, "MovingAnchor", 224);
+		entity(MovingPlatformEntity.class, "MovingPlatform", 225);
+		entity(BlockLiftedByPlatformEntity.class, "BlockLiftedByPlatform", 226);
+		entity(EntityBroadheadArrow.class, "BroadheadArrow", 227);
 	}
 
-    private static void tile(Class<? extends TileEntity> clazz, String key, String legacyName) {
-		TileEntityDispatcher.addMapping(clazz, NamespaceID.fromPool("btx", key));
-		TileEntityDispatcher.Legacy.addMapping(clazz, legacyName);
-    }
-
-	private static void legacyTile(Class<? extends TileEntity> clazz, String legacyName) {
+	private static void tile(Class<? extends TileEntity> clazz, String legacyName) {
 		TileEntityDispatcher.Legacy.addMapping(clazz, legacyName);
 	}
 
-    private static <T extends Entity> void entity(Class<T> clazz, String key, EntityFactory<T> factory,
-                                                  String legacyName, int legacyId) {
-		EntityDispatcher.getInstance().addMapping(clazz, NamespaceID.fromPool("btx", key), factory);
-
-		EntityDispatcher.Legacy.addMapping(clazz, legacyName, legacyId);
-    }
-
-	private static <T extends Entity> void legacyEntity(Class<T> clazz, String legacyName, int legacyId) {
+	private static <T extends Entity> void entity(Class<T> clazz, String legacyName, int legacyId) {
 		EntityDispatcher.Legacy.addMapping(clazz, legacyName, legacyId);
 	}
-
-
 }

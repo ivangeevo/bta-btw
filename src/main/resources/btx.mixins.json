@@ -7,6 +7,11 @@
   },
   "mixins": [
     "BlockLogicFireAccessor",
+    "achievement.AchievementsMixin",
+    "achievement.PlayerAchievementMixin",
+    "item.ItemBucketCementMixin",
+    "block.BlockLogicRopeAnchorMixin",
+    "block.ItemRopeAnchorMixin",
     "MixinBlockLogicFire",
     "MixinBlockLogicCropsPumpkin",
     "MixinBlockLogicCropsWheat",
@@ -21,16 +26,19 @@
     "entity.MobSoulforgedArmorMixin",
     "entity.PlayerSoulforgedArmorMixin",
     "entity.ProjectileArrowMixin",
-    "gui.MenuInventoryCreativeMixin",
+    "entity.PlayerLiftMixin",
     "client.MinecraftMixin",
     "gui.screens.PlayerMixinBTXScreens",
     "world.ChunkLoaderLegacyMixin",
     "world.ChunkLoaderRegionAsyncMixin",
-    "world.WorldMixin"
+    "world.WorldMixin",
+    "world.WorldLiftInterpolationMixin",
+    "world.WorldDetectorLogicAirMixin"
   ],
   "client": [
-    "client.HudComponentSubtitlesMixin",
+    "achievement.AchievementPagesMixin",
     "client.render.BlockModelFireMixin",
+    "client.render.BlockModelGenericRopeMixin",
     "client.render.MixinBlockModelGeneric",
     "client.render.MixinBlockModelGenericShifted",
     "client.render.RenderGlobalMixin",
@@ -40,9 +48,11 @@
     "gui.ScreenGuidebookAccessor",
     "gui.ScreenGuidebookMixin",
     "gui.screens.PlayerLocalMixinBTXScreens",
+    "net.NetEntryArrowBroadheadMixin",
     "net.PacketHandlerClientMixinBTXMachines"
   ],
   "server": [
-    "gui.screens.PlayerServerMixinBTXScreens"
+    "gui.screens.PlayerServerMixinBTXScreens",
+    "entity.PlayerServerLiftMixin"
   ]
 }

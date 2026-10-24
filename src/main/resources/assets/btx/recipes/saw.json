@@ -1495,7 +1495,28 @@
       {"stack": {"id": "minecraft:block/statue_stone_upper"}},
       {"stack": {"id": "minecraft:block/stone"}},
       {"stack": {"id": "minecraft:block/stone_carved"}},
-      {"stack": {"id": "minecraft:block/stone_polished"}}
+      {"stack": {"id": "minecraft:block/stone_polished"}},
+      {"stack": {"id": "btx:block/siding_stone"}},
+      {"stack": {"id": "btx:block/moulding_stone"}},
+      {"stack": {"id": "btx:block/corner_stone"}},
+      {"stack": {"id": "btx:block/siding_basalt"}},
+      {"stack": {"id": "btx:block/moulding_basalt"}},
+      {"stack": {"id": "btx:block/corner_basalt"}},
+      {"stack": {"id": "btx:block/siding_limestone"}},
+      {"stack": {"id": "btx:block/moulding_limestone"}},
+      {"stack": {"id": "btx:block/corner_limestone"}},
+      {"stack": {"id": "btx:block/siding_granite"}},
+      {"stack": {"id": "btx:block/moulding_granite"}},
+      {"stack": {"id": "btx:block/corner_granite"}},
+      {"stack": {"id": "btx:block/siding_marble"}},
+      {"stack": {"id": "btx:block/moulding_marble"}},
+      {"stack": {"id": "btx:block/corner_marble"}},
+      {"stack": {"id": "btx:block/siding_slate"}},
+      {"stack": {"id": "btx:block/moulding_slate"}},
+      {"stack": {"id": "btx:block/corner_slate"}},
+      {"stack": {"id": "btx:block/siding_permafrost"}},
+      {"stack": {"id": "btx:block/moulding_permafrost"}},
+      {"stack": {"id": "btx:block/corner_permafrost"}}
     ]
   },
   {
@@ -1615,7 +1636,8 @@
       {"stack": {"id": "btx:block/crucible"}},
       {"stack": {"id": "btx:block/millstone"}},
       {"stack": {"id": "btx:block/hibachi"}},
-      {"stack": {"id": "btx:block/kiln"}}
+      {"stack": {"id": "btx:block/kiln"}},
+      {"stack": {"id": "btx:block/block_dispenser"}}
     ]
   }
 ]

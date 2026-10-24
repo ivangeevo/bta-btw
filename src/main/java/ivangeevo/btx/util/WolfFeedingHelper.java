@@ -1,6 +1,8 @@
 package ivangeevo.btx.util;
 
 import com.mojang.nbt.tags.CompoundTag;
+import ivangeevo.btx.achievement.BTXAchievementTriggers;
+import ivangeevo.btx.achievement.BTXAchievements;
 import ivangeevo.btx.entity.FeedableWolf;
 import ivangeevo.btx.item.BTXItems;
 import ivangeevo.btx.sound.BTXSoundTypes;
@@ -105,6 +107,8 @@ public class WolfFeedingHelper {
 		wolf.setWolfSitting(false);
 		wolf.setPathToEntity(null);
 		wolf.setTarget(player);
+
+		BTXAchievementTriggers.award(player, BTXAchievements.WOLF_BETRAYAL);
 	}
 
 	private static boolean tryHandFeed(MobWolf wolf, Player player, ItemStack stack) {
@@ -119,6 +123,7 @@ public class WolfFeedingHelper {
 		}
 
 		int healAmount = ((ItemFood) stack.getItem()).getHealAmount(stack);
+		boolean kibble = stack.getItem() == BTXItems.KIBBLE;
 
 		if (player.getGamemode().hasBlockConsumption()) {
 			--stack.stackSize;
@@ -128,6 +133,12 @@ public class WolfFeedingHelper {
 		}
 
 		eat(wolf, healAmount);
+
+		BTXAchievementTriggers.award(player, BTXAchievements.WOLF_FED);
+
+		if (kibble) {
+			BTXAchievementTriggers.award(player, BTXAchievements.KIBBLE);
+		}
 
 		return true;
 	}

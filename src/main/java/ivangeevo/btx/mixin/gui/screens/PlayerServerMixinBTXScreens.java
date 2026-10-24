@@ -1,14 +1,18 @@
 package ivangeevo.btx.mixin.gui.screens;
 
+import ivangeevo.btx.block.entity.TileEntityBlockDispenser;
 import ivangeevo.btx.block.entity.TileEntityCauldron;
 import ivangeevo.btx.block.entity.TileEntityCrucible;
 import ivangeevo.btx.block.entity.TileEntityHopper;
+import ivangeevo.btx.block.entity.TileEntityPulley;
 import ivangeevo.btx.gui.hopper.MenuHopper;
 import ivangeevo.btx.block.entity.TileEntityMillStone;
 import ivangeevo.btx.config.BTXConfig;
 import ivangeevo.btx.gui.BTXScreens;
+import ivangeevo.btx.gui.blockdispenser.MenuBlockDispenser;
 import ivangeevo.btx.gui.cookingvessel.MenuCookingVessel;
 import ivangeevo.btx.gui.millstone.MenuMillStone;
+import ivangeevo.btx.gui.pulley.MenuPulley;
 import ivangeevo.btx.gui.soulforge.MenuSoulforge;
 import net.minecraft.core.world.pos.TilePosc;
 import net.fabricmc.api.EnvType;
@@ -76,6 +80,28 @@ public abstract class PlayerServerMixinBTXScreens implements BTXScreens {
         playerServer.playerNetServerHandler.sendPacket(new PacketContainerOpen(this.currentWindowId, BTXConfig.SOULFORGE_SCREEN_ID, "btx.gui.soulforge.title", 16));
         playerServer.containerMenu.onCraftGuiClosed(playerServer);
         playerServer.containerMenu = new MenuSoulforge(playerServer.inventory, playerServer.world, tilePos);
+        playerServer.containerMenu.containerId = this.currentWindowId;
+        playerServer.containerMenu.addSlotListener(playerServer);
+    }
+
+    @Override
+    public void btx$displayBlockDispenserScreen(@NotNull TileEntityBlockDispenser tileEntity) {
+        this.getNextWindowId();
+        PlayerServer playerServer = (PlayerServer) (Object) this;
+        playerServer.playerNetServerHandler.sendPacket(new PacketContainerOpen(this.currentWindowId, BTXConfig.BLOCK_DISPENSER_SCREEN_ID, tileEntity.getNameTranslationKey(), tileEntity.getContainerSize()));
+        playerServer.containerMenu.onCraftGuiClosed(playerServer);
+        playerServer.containerMenu = new MenuBlockDispenser(playerServer.inventory, tileEntity);
+        playerServer.containerMenu.containerId = this.currentWindowId;
+        playerServer.containerMenu.addSlotListener(playerServer);
+    }
+
+    @Override
+    public void btx$displayPulleyScreen(@NotNull TileEntityPulley tileEntity) {
+        this.getNextWindowId();
+        PlayerServer playerServer = (PlayerServer) (Object) this;
+        playerServer.playerNetServerHandler.sendPacket(new PacketContainerOpen(this.currentWindowId, BTXConfig.PULLEY_SCREEN_ID, tileEntity.getNameTranslationKey(), tileEntity.getContainerSize()));
+        playerServer.containerMenu.onCraftGuiClosed(playerServer);
+        playerServer.containerMenu = new MenuPulley(playerServer.inventory, tileEntity);
         playerServer.containerMenu.containerId = this.currentWindowId;
         playerServer.containerMenu.addSlotListener(playerServer);
     }

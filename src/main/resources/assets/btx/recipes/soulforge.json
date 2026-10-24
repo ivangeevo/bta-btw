@@ -294,5 +294,528 @@
     "result": {
       "id": "btx:item/soulforged_steel_boots"
     }
+  },
+  {
+    "name": "btx:soulforge/siding_stone",
+    "type": "btx:soulforge",
+    "pattern": [
+      "####"
+    ],
+    "symbols": [
+      {
+        "symbol": "#",
+        "stack": {
+          "id": "minecraft:block/stone"
+        }
+      }
+    ],
+    "result": {
+      "id": "btx:block/siding_stone",
+      "amount": 8
+    }
+  },
+  {
+    "name": "btx:soulforge/moulding_stone",
+    "type": "btx:soulforge",
+    "pattern": [
+      "####"
+    ],
+    "symbols": [
+      {
+        "symbol": "#",
+        "stack": {
+          "id": "btx:block/siding_stone"
+        }
+      }
+    ],
+    "result": {
+      "id": "btx:block/moulding_stone",
+      "amount": 8
+    }
+  },
+  {
+    "name": "btx:soulforge/corner_stone",
+    "type": "btx:soulforge",
+    "pattern": [
+      "####"
+    ],
+    "symbols": [
+      {
+        "symbol": "#",
+        "stack": {
+          "id": "btx:block/moulding_stone"
+        }
+      }
+    ],
+    "result": {
+      "id": "btx:block/corner_stone",
+      "amount": 8
+    }
+  },
+  {
+    "name": "btx:soulforge/siding_basalt",
+    "type": "btx:soulforge",
+    "pattern": [
+      "####"
+    ],
+    "symbols": [
+      {
+        "symbol": "#",
+        "stack": {
+          "id": "minecraft:block/basalt"
+        }
+      }
+    ],
+    "result": {
+      "id": "btx:block/siding_basalt",
+      "amount": 8
+    }
+  },
+  {
+    "name": "btx:soulforge/moulding_basalt",
+    "type": "btx:soulforge",
+    "pattern": [
+      "####"
+    ],
+    "symbols": [
+      {
+        "symbol": "#",
+        "stack": {
+          "id": "btx:block/siding_basalt"
+        }
+      }
+    ],
+    "result": {
+      "id": "btx:block/moulding_basalt",
+      "amount": 8
+    }
+  },
+  {
+    "name": "btx:soulforge/corner_basalt",
+    "type": "btx:soulforge",
+    "pattern": [
+      "####"
+    ],
+    "symbols": [
+      {
+        "symbol": "#",
+        "stack": {
+          "id": "btx:block/moulding_basalt"
+        }
+      }
+    ],
+    "result": {
+      "id": "btx:block/corner_basalt",
+      "amount": 8
+    }
+  },
+  {
+    "name": "btx:soulforge/siding_limestone",
+    "type": "btx:soulforge",
+    "pattern": [
+      "####"
+    ],
+    "symbols": [
+      {
+        "symbol": "#",
+        "stack": {
+          "id": "minecraft:block/limestone"
+        }
+      }
+    ],
+    "result": {
+      "id": "btx:block/siding_limestone",
+      "amount": 8
+    }
+  },
+  {
+    "name": "btx:soulforge/moulding_limestone",
+    "type": "btx:soulforge",
+    "pattern": [
+      "####"
+    ],
+    "symbols": [
+      {
+        "symbol": "#",
+        "stack": {
+          "id": "btx:block/siding_limestone"
+        }
+      }
+    ],
+    "result": {
+      "id": "btx:block/moulding_limestone",
+      "amount": 8
+    }
+  },
+  {
+    "name": "btx:soulforge/corner_limestone",
+    "type": "btx:soulforge",
+    "pattern": [
+      "####"
+    ],
+    "symbols": [
+      {
+        "symbol": "#",
+        "stack": {
+          "id": "btx:block/moulding_limestone"
+        }
+      }
+    ],
+    "result": {
+      "id": "btx:block/corner_limestone",
+      "amount": 8
+    }
+  },
+  {
+    "name": "btx:soulforge/siding_granite",
+    "type": "btx:soulforge",
+    "pattern": [
+      "####"
+    ],
+    "symbols": [
+      {
+        "symbol": "#",
+        "stack": {
+          "id": "minecraft:block/granite"
+        }
+      }
+    ],
+    "result": {
+      "id": "btx:block/siding_granite",
+      "amount": 8
+    }
+  },
+  {
+    "name": "btx:soulforge/moulding_granite",
+    "type": "btx:soulforge",
+    "pattern": [
+      "####"
+    ],
+    "symbols": [
+      {
+        "symbol": "#",
+        "stack": {
+          "id": "btx:block/siding_granite"
+        }
+      }
+    ],
+    "result": {
+      "id": "btx:block/moulding_granite",
+      "amount": 8
+    }
+  },
+  {
+    "name": "btx:soulforge/corner_granite",
+    "type": "btx:soulforge",
+    "pattern": [
+      "####"
+    ],
+    "symbols": [
+      {
+        "symbol": "#",
+        "stack": {
+          "id": "btx:block/moulding_granite"
+        }
+      }
+    ],
+    "result": {
+      "id": "btx:block/corner_granite",
+      "amount": 8
+    }
+  },
+  {
+    "name": "btx:soulforge/siding_marble",
+    "type": "btx:soulforge",
+    "pattern": [
+      "####"
+    ],
+    "symbols": [
+      {
+        "symbol": "#",
+        "stack": {
+          "id": "minecraft:block/marble"
+        }
+      }
+    ],
+    "result": {
+      "id": "btx:block/siding_marble",
+      "amount": 8
+    }
+  },
+  {
+    "name": "btx:soulforge/moulding_marble",
+    "type": "btx:soulforge",
+    "pattern": [
+      "####"
+    ],
+    "symbols": [
+      {
+        "symbol": "#",
+        "stack": {
+          "id": "btx:block/siding_marble"
+        }
+      }
+    ],
+    "result": {
+      "id": "btx:block/moulding_marble",
+      "amount": 8
+    }
+  },
+  {
+    "name": "btx:soulforge/corner_marble",
+    "type": "btx:soulforge",
+    "pattern": [
+      "####"
+    ],
+    "symbols": [
+      {
+        "symbol": "#",
+        "stack": {
+          "id": "btx:block/moulding_marble"
+        }
+      }
+    ],
+    "result": {
+      "id": "btx:block/corner_marble",
+      "amount": 8
+    }
+  },
+  {
+    "name": "btx:soulforge/siding_slate",
+    "type": "btx:soulforge",
+    "pattern": [
+      "####"
+    ],
+    "symbols": [
+      {
+        "symbol": "#",
+        "stack": {
+          "id": "minecraft:block/slate"
+        }
+      }
+    ],
+    "result": {
+      "id": "btx:block/siding_slate",
+      "amount": 8
+    }
+  },
+  {
+    "name": "btx:soulforge/moulding_slate",
+    "type": "btx:soulforge",
+    "pattern": [
+      "####"
+    ],
+    "symbols": [
+      {
+        "symbol": "#",
+        "stack": {
+          "id": "btx:block/siding_slate"
+        }
+      }
+    ],
+    "result": {
+      "id": "btx:block/moulding_slate",
+      "amount": 8
+    }
+  },
+  {
+    "name": "btx:soulforge/corner_slate",
+    "type": "btx:soulforge",
+    "pattern": [
+      "####"
+    ],
+    "symbols": [
+      {
+        "symbol": "#",
+        "stack": {
+          "id": "btx:block/moulding_slate"
+        }
+      }
+    ],
+    "result": {
+      "id": "btx:block/corner_slate",
+      "amount": 8
+    }
+  },
+  {
+    "name": "btx:soulforge/siding_permafrost",
+    "type": "btx:soulforge",
+    "pattern": [
+      "####"
+    ],
+    "symbols": [
+      {
+        "symbol": "#",
+        "stack": {
+          "id": "minecraft:block/permafrost"
+        }
+      }
+    ],
+    "result": {
+      "id": "btx:block/siding_permafrost",
+      "amount": 8
+    }
+  },
+  {
+    "name": "btx:soulforge/moulding_permafrost",
+    "type": "btx:soulforge",
+    "pattern": [
+      "####"
+    ],
+    "symbols": [
+      {
+        "symbol": "#",
+        "stack": {
+          "id": "btx:block/siding_permafrost"
+        }
+      }
+    ],
+    "result": {
+      "id": "btx:block/moulding_permafrost",
+      "amount": 8
+    }
+  },
+  {
+    "name": "btx:soulforge/corner_permafrost",
+    "type": "btx:soulforge",
+    "pattern": [
+      "####"
+    ],
+    "symbols": [
+      {
+        "symbol": "#",
+        "stack": {
+          "id": "btx:block/moulding_permafrost"
+        }
+      }
+    ],
+    "result": {
+      "id": "btx:block/corner_permafrost",
+      "amount": 8
+    }
+  },
+  {
+    "name": "btx:soulforge/block_dispenser",
+    "type": "btx:soulforge",
+    "pattern": [
+      "####",
+      "#ZZ#",
+      "YTTY",
+      "YXXY"
+    ],
+    "symbols": [
+      {
+        "symbol": "#",
+        "stack": {
+          "id": "minecraft:block/cobble_stone_mossy"
+        }
+      },
+      {
+        "symbol": "Z",
+        "stack": {
+          "id": "btx:item/concentrated_hellfire"
+        }
+      },
+      {
+        "symbol": "Y",
+        "stack": {
+          "id": "minecraft:block/stone"
+        }
+      },
+      {
+        "symbol": "T",
+        "stack": {
+          "id": "minecraft:block/torch_redstone_active"
+        }
+      },
+      {
+        "symbol": "X",
+        "stack": {
+          "id": "minecraft:item/dust_redstone"
+        }
+      }
+    ],
+    "result": {
+      "id": "btx:block/block_dispenser"
+    }
+  },
+  {
+    "name": "btx:soulforge/buddy_block",
+    "type": "btx:soulforge",
+    "pattern": [
+      "##X#",
+      "XYY#",
+      "#YYX",
+      "#X##"
+    ],
+    "symbols": [
+      {
+        "symbol": "#",
+        "stack": {
+          "id": "minecraft:block/stone"
+        }
+      },
+      {
+        "symbol": "X",
+        "stack": {
+          "id": "minecraft:item/dye",
+          "meta": 4
+        }
+      },
+      {
+        "symbol": "Y",
+        "stack": {
+          "id": "minecraft:block/torch_redstone_active"
+        }
+      }
+    ],
+    "result": {
+      "id": "btx:block/buddy_block"
+    }
+  },
+  {
+    "name": "btx:soulforge/pressure_plate_soulforged_steel",
+    "type": "btx:soulforge",
+    "pattern": [
+      "####",
+      " rr "
+    ],
+    "symbols": [
+      {
+        "symbol": "#",
+        "stack": {
+          "id": "btx:item/soulforged_steel_ingot"
+        }
+      },
+      {
+        "symbol": "r",
+        "stack": {
+          "id": "minecraft:item/dust_redstone"
+        }
+      }
+    ],
+    "result": {
+      "id": "btx:block/pressure_plate_soulforged_steel",
+      "amount": 2
+    }
+  },
+  {
+    "name": "btx:soulforge/broadhead",
+    "type": "btx:soulforge",
+    "pattern": [
+      "#"
+    ],
+    "symbols": [
+      {
+        "symbol": "#",
+        "stack": {
+          "id": "btx:item/soulforged_steel_ingot"
+        }
+      }
+    ],
+    "result": {
+      "id": "btx:item/broadhead",
+      "amount": 4
+    }
   }
 ]

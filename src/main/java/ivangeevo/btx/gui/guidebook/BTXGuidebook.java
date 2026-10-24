@@ -10,6 +10,8 @@ import net.minecraft.client.gui.guidebook.GuidebookPage;
 import net.minecraft.client.gui.guidebook.GuidebookPageManager;
 import net.minecraft.client.gui.guidebook.GuidebookSection;
 import net.minecraft.client.gui.guidebook.ScreenGuidebook;
+import net.minecraft.client.gui.guidebook.SearchableGuidebookSection;
+import net.minecraft.core.data.registry.recipe.SearchQuery;
 import net.minecraft.core.sound.SoundCategory;
 
 import java.util.ArrayList;
@@ -40,6 +42,7 @@ public final class BTXGuidebook {
 	private static final List<GuidebookSection> btxSections = new ArrayList<>();
 	private static final Map<Book, Integer> savedPages = new EnumMap<>(Book.class);
 	private static Book active = Book.BTA;
+	private static boolean switching = false;
 
 	private BTXGuidebook() {
 	}
@@ -65,10 +68,50 @@ public final class BTXGuidebook {
 		GuidebookPageManager pageManager = ScreenGuidebook.getPageManager();
 		savedPages.put(active, getCurrentPage(pageManager));
 		active = book;
-		pageManager.updatePages();
-		pageManager.setCurrentPage(savedPages.getOrDefault(book, 0), false);
+		switching = true;
+		try {
+			pageManager.updatePages();
+			pageManager.setCurrentPage(savedPages.getOrDefault(book, 0), false);
+		} finally {
+			switching = false;
+		}
 		((ScreenGuidebookAccessor) screen).btx$initTabList();
 		Minecraft.getMinecraft().sndManager.playSound(BTXSoundTypes.GUIDEBOOK_SWITCH_BOOK, SoundCategory.GUI_SOUNDS, 0.8F, 1.0F);
+	}
+
+	public static boolean owns(Book book, GuidebookPage page) {
+		SearchQuery query = GuidebookPageManager.searchQuery;
+		for (GuidebookSection section : getSections(book)) {
+			List<GuidebookPage> pages = query != null && section instanceof SearchableGuidebookSection searchable
+				? searchable.searchPages(query)
+				: section.getPages();
+			if (pages != null && pages.contains(page)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static void followPage(GuidebookPageManager pageManager, GuidebookPage page) {
+		Book other = active.other();
+		if (switching || page == null || owns(active, page) || !owns(other, page)) {
+			return;
+		}
+		savedPages.put(active, getCurrentPage(pageManager));
+		active = other;
+		switching = true;
+		try {
+			pageManager.updatePages();
+			int index = pageManager.getPageIndex(page);
+			if (index >= 0) {
+				pageManager.setCurrentPage(index, false);
+			}
+		} finally {
+			switching = false;
+		}
+		if (Minecraft.getMinecraft().currentScreen instanceof ScreenGuidebook screen) {
+			((ScreenGuidebookAccessor) screen).btx$initTabList();
+		}
 	}
 
 	private static int getCurrentPage(GuidebookPageManager pageManager) {

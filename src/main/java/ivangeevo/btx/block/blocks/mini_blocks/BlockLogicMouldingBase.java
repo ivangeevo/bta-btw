@@ -4,6 +4,7 @@ import ivangeevo.btx.util.IExactHitPlacement;
 import ivangeevo.btx.util.rendering.PlacementBounds;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockLogic;
+import net.minecraft.core.block.material.Material;
 import net.minecraft.core.util.helper.Direction;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.util.phys.HitResult;
@@ -58,6 +59,11 @@ public abstract class BlockLogicMouldingBase extends BlockLogicWoodPiece
 		this.matchingCorner = matchingCorner;
 	}
 
+	protected BlockLogicMouldingBase(@NotNull Block<?> block, Supplier<Block<?>> matchingCorner, @NotNull Material material) {
+		super(block, material);
+		this.matchingCorner = matchingCorner;
+	}
+
 	//------------- Bounds -------------//
 
 	@Override
@@ -91,7 +97,6 @@ public abstract class BlockLogicMouldingBase extends BlockLogicWoodPiece
 
 	@Override
 	public @NotNull AABBdc getSelectionAABB(@NotNull WorldSource source, @NotNull TilePosc tilePos) {
-		// BTW getSelectedBoundingBoxFromPool: base box expanded to include every connection box
 		AABBd box = getBoundsForAlignment(getMouldingAlignment(source, tilePos));
 
 		for (int axis = 0; axis < 3; axis++) {
@@ -144,7 +149,6 @@ public abstract class BlockLogicMouldingBase extends BlockLogicWoodPiece
 		return alignmentFromClick(side.id, c[0], c[1], c[2]);
 	}
 
-	/** Port of BTW MouldingBlock.onBlockPlaced. cx/cy/cz are block-local click coordinates (0-1). */
 	protected static int alignmentFromClick(int facing, double cx, double cy, double cz) {
 		double dx = Math.abs(cx - 0.5), dy = Math.abs(cy - 0.5), dz = Math.abs(cz - 0.5);
 		return switch (facing) {

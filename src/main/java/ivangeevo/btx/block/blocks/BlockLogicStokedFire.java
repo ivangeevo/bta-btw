@@ -18,6 +18,7 @@ import net.minecraft.core.util.helper.Direction;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.util.phys.HitResult;
 import net.minecraft.core.world.World;
+import net.minecraft.core.world.WorldSource;
 import net.minecraft.core.world.biome.Biome;
 import net.minecraft.core.world.pos.TilePos;
 import net.minecraft.core.world.pos.TilePosc;
@@ -128,6 +129,11 @@ public class BlockLogicStokedFire extends BlockLogicFire implements FireInteract
     }
 
 	@Override
+	public boolean canFireCling(WorldSource source, TilePosc pos) {
+		return true;
+	}
+
+	@Override
 	protected Block<?> getSpreadFireBlock() {
 		return Blocks.FIRE;
 	}
@@ -174,6 +180,7 @@ public class BlockLogicStokedFire extends BlockLogicFire implements FireInteract
         } else {
             this.setBurnResult(world, pos);
         }
+
         this.onBlockBurnt(world, pos, random);
 
         if (isTNT) {
@@ -196,9 +203,11 @@ public class BlockLogicStokedFire extends BlockLogicFire implements FireInteract
                 for (int j = pos.y() - 1; j <= pos.y() + 4; ++j) {
                     if (i != pos.x() || j != pos.y() || k != pos.z()) {
                         int spreadTopBound = 100;
+
                         if (j > pos.y() + 1) {
                             spreadTopBound += (j - (pos.y() + 1)) * 100;
                         }
+
                         checkForFireSpreadToOneBlockLocation(world, new TilePos(i, j, k), rand, sourceFireAge, highHumidity, spreadTopBound);
                     }
                 }
@@ -222,7 +231,8 @@ public class BlockLogicStokedFire extends BlockLogicFire implements FireInteract
             && !world.isBlockBeingRainedOn(pos.west(queryPos))
             && !world.isBlockBeingRainedOn(pos.east(queryPos))
             && !world.isBlockBeingRainedOn(pos.north(queryPos))
-            && !world.isBlockBeingRainedOn(pos.south(queryPos))) {
+            && !world.isBlockBeingRainedOn(pos.south(queryPos))
+		) {
             int startMetadata = Math.min(sourceFireAge + rand.nextInt(5) / 4, 15);
             world.setBlockTypeDataNotify(pos, this.getSpreadFireBlock(), startMetadata);
         }
@@ -239,6 +249,7 @@ public class BlockLogicStokedFire extends BlockLogicFire implements FireInteract
         chance = getFlammability(world, pos.up(q), chance);
         chance = getFlammability(world, pos.north(q), chance);
         chance = getFlammability(world, pos.south(q), chance);
+
         return chance;
     }
 }

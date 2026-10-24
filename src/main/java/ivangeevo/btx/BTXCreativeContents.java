@@ -62,6 +62,9 @@ public final class BTXCreativeContents {
 		REG.register(BTXItems.KIBBLE, inCategory(CreativeInventoryCategory.ORGANIC));
 		REG.register(BTXItems.SOULFORGED_STEEL_INGOT, inCategory(CreativeInventoryCategory.ORE_PRODUCTS));
 		REG.register(BTXItems.STEEL_ARMOR_PLATE, inCategory(CreativeInventoryCategory.MISCELLANEOUS));
+		REG.register(BTXItems.COMPOSITE_BOW, inCategory(CreativeInventoryCategory.TOOLS));
+		REG.register(BTXItems.BROADHEAD_ARROW, inCategory(CreativeInventoryCategory.TOOLS));
+		REG.register(BTXItems.BROADHEAD, inCategory(CreativeInventoryCategory.MISCELLANEOUS));
 		REG.register(BTXItems.SOULFORGED_STEEL_PICKAXE, inCategory(CreativeInventoryCategory.TOOLS));
 		REG.register(BTXItems.SOULFORGED_STEEL_SHOVEL, inCategory(CreativeInventoryCategory.TOOLS));
 		REG.register(BTXItems.SOULFORGED_STEEL_MATTOCK, inCategory(CreativeInventoryCategory.TOOLS));
@@ -91,6 +94,17 @@ public final class BTXCreativeContents {
 		REG.register(BTXBlocks.CONCENTRATED_HELLFIRE_BLOCK, inCategory(CreativeInventoryCategory.STORAGE));
 		REG.register(BTXBlocks.SOULFORGE, inCategory(CreativeInventoryCategory.WORKBENCHES));
 		REG.register(BTXBlocks.SAW, inCategory(CreativeInventoryCategory.WORKBENCHES));
+		REG.register(BTXBlocks.BLOCK_DISPENSER, inCategory(CreativeInventoryCategory.REDSTONE));
+		REG.register(BTXBlocks.DETECTOR_BLOCK, inCategory(CreativeInventoryCategory.REDSTONE));
+		REG.register(BTXBlocks.LENS, inCategory(CreativeInventoryCategory.REDSTONE));
+		REG.register(BTXBlocks.LIGHT_BULB, inCategory(CreativeInventoryCategory.REDSTONE));
+		REG.register(BTXBlocks.BUDDY_BLOCK, inCategory(CreativeInventoryCategory.REDSTONE));
+		REG.register(BTXBlocks.SOULFORGED_STEEL_PRESSURE_PLATE, inCategory(CreativeInventoryCategory.REDSTONE));
+		REG.register(BTXBlocks.DETECTOR_RAIL_STONE, inCategory(CreativeInventoryCategory.REDSTONE));
+		REG.register(BTXBlocks.DETECTOR_RAIL_SOULFORGED_STEEL, inCategory(CreativeInventoryCategory.REDSTONE));
+		REG.register(BTXBlocks.ANCHOR, inCategory(CreativeInventoryCategory.WORKBENCHES));
+		REG.register(BTXBlocks.PULLEY, inCategory(CreativeInventoryCategory.WORKBENCHES));
+		REG.register(BTXBlocks.PLATFORM, inCategory(CreativeInventoryCategory.WORKBENCHES));
 		REG.register(BTXBlocks.WICKER_SLAB, inCategory(CreativeInventoryCategory.WOOD));
 		REG.register(BTXBlocks.COMPANION_CUBE, inCategory(CreativeInventoryCategory.MISCELLANEOUS));
 		REG.register(BTXBlocks.COMPANION_SLAB, inCategory(CreativeInventoryCategory.MISCELLANEOUS));
@@ -99,6 +113,11 @@ public final class BTXCreativeContents {
 		REG.register(BTXBlocks.AXLE_POWER_SOURCE, inCategory(CreativeInventoryCategory.WORKBENCHES));
 		REG.register(BTXBlocks.GEARBOX, inCategory(CreativeInventoryCategory.WORKBENCHES));
 		REG.register(BTXBlocks.SIDING_OAK, inCategory(CreativeInventoryCategory.WOOD));
+		for (BTXBlocks.StonePieces pieces : BTXBlocks.STONE_PIECES) {
+			REG.register(pieces.siding(), inCategory(CreativeInventoryCategory.STONE));
+			REG.register(pieces.moulding(), inCategory(CreativeInventoryCategory.STONE));
+			REG.register(pieces.corner(), inCategory(CreativeInventoryCategory.STONE));
+		}
 		REG.register(BTXBlocks.MOULDING_OAK, inCategory(CreativeInventoryCategory.WOOD));
 		REG.register(BTXBlocks.CORNER_OAK, inCategory(CreativeInventoryCategory.WOOD));
 		REG.register(BTXBlocks.SIDING_OAK_PAINTED, inCategory(CreativeInventoryCategory.WOOD).setCustomSupplier(() -> allColors(BTXBlocks.SIDING_OAK_PAINTED)));

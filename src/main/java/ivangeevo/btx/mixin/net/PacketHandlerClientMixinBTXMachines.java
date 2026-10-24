@@ -1,9 +1,11 @@
 package ivangeevo.btx.mixin.net;
 
+import ivangeevo.btx.block.entity.TileEntityBlockDispenser;
 import ivangeevo.btx.block.entity.TileEntityCauldron;
 import ivangeevo.btx.block.entity.TileEntityCrucible;
 import ivangeevo.btx.block.entity.TileEntityHopper;
 import ivangeevo.btx.block.entity.TileEntityMillStone;
+import ivangeevo.btx.block.entity.TileEntityPulley;
 import ivangeevo.btx.config.BTXConfig;
 import ivangeevo.btx.gui.BTXScreens;
 import net.fabricmc.api.EnvType;
@@ -45,6 +47,14 @@ public abstract class PacketHandlerClientMixinBTXMachines {
         } else if (packetContainerOpen.inventoryType == BTXConfig.HOPPER_SCREEN_ID) {
             TileEntityHopper machine = new TileEntityHopper();
             playerScreen.btx$displayHopperScreen(machine);
+            playerLocal.containerMenu.containerId = packetContainerOpen.windowId;
+        } else if (packetContainerOpen.inventoryType == BTXConfig.BLOCK_DISPENSER_SCREEN_ID) {
+            TileEntityBlockDispenser machine = new TileEntityBlockDispenser();
+            playerScreen.btx$displayBlockDispenserScreen(machine);
+            playerLocal.containerMenu.containerId = packetContainerOpen.windowId;
+        } else if (packetContainerOpen.inventoryType == BTXConfig.PULLEY_SCREEN_ID) {
+            TileEntityPulley machine = new TileEntityPulley();
+            playerScreen.btx$displayPulleyScreen(machine);
             playerLocal.containerMenu.containerId = packetContainerOpen.windowId;
         } else if (packetContainerOpen.inventoryType == BTXConfig.SOULFORGE_SCREEN_ID) {
             playerScreen.btx$displaySoulforgeScreen(new TilePos((int) Math.floor(playerLocal.x), (int) Math.floor(playerLocal.y), (int) Math.floor(playerLocal.z)));

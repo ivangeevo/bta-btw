@@ -1,17 +1,20 @@
 package ivangeevo.btx;
 
+import ivangeevo.btx.achievement.BTXAchievements;
 import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.block.blocks.turntable.TurntableAttachments;
 import ivangeevo.btx.config.BTXConfig;
 import ivangeevo.btx.entity.BTXEntities;
 import ivangeevo.btx.item.BTXItems;
 import ivangeevo.btx.item.HoeDrops;
+import ivangeevo.btx.networking.NetEntryLift;
 import ivangeevo.btx.networking.NetEntryWaterWheel;
 import ivangeevo.btx.networking.NetEntryWindMill;
 import ivangeevo.btx.recipe.BTXRecipes;
 import ivangeevo.btx.recipe.cooking.CrucibleIncineration;
 import ivangeevo.btx.sound.BTXSoundTypes;
 import ivangeevo.btx.util.BTXDamageSources;
+import ivangeevo.btx.world.save.conversion.BTXLegacyConversion;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.core.net.entity.NetEntityHandler;
 import turniplabs.halplibe.HalpLibe;
@@ -43,6 +46,9 @@ public class BTXMod implements ModInitializer {
 		BTXEntities.init();
 		NetEntityHandler.registerNetworkEntry(new NetEntryWindMill(), BTXConfig.netEntityTypeID());
 		NetEntityHandler.registerNetworkEntry(new NetEntryWaterWheel(), BTXConfig.netEntityTypeID());
+		NetEntityHandler.registerNetworkEntry(new NetEntryLift.MovingAnchor(), BTXConfig.netEntityTypeID());
+		NetEntityHandler.registerNetworkEntry(new NetEntryLift.MovingPlatform(), BTXConfig.netEntityTypeID());
+		NetEntityHandler.registerNetworkEntry(new NetEntryLift.BlockLiftedByPlatform(), BTXConfig.netEntityTypeID());
 	}
 
 	public void afterGameStart() {
@@ -51,6 +57,7 @@ public class BTXMod implements ModInitializer {
 		TurntableAttachments.registerDefaults();
 		HoeDrops.registerDefaults();
 		CrucibleIncineration.registerDefaults();
-		//BTXLegacyConversion.init();
+		BTXLegacyConversion.init();
+		BTXAchievements.init();
 	}
 }

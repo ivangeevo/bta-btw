@@ -1,5 +1,7 @@
 package ivangeevo.btx.block.blocks;
 
+import ivangeevo.btx.achievement.BTXAchievementTriggers;
+import ivangeevo.btx.achievement.BTXAchievements;
 import ivangeevo.btx.item.BTXItems;
 import ivangeevo.btx.sound.BTXSoundTypes;
 import ivangeevo.btx.util.utils.MiscUtils;
@@ -103,6 +105,7 @@ public class BlockLogicHandCrank extends BlockLogic implements MechanicalDevice,
 				world.notifyBlockChange(tilePos, this.block);
 				world.scheduleBlockUpdate(tilePos, this.block, this.tickDelay());
 			} else {
+				BTXAchievementTriggers.award(player, BTXAchievements.CRANK_OVERPOWER);
 				this.breakCrankWithDrop(world, tilePos);
 			}
 		}

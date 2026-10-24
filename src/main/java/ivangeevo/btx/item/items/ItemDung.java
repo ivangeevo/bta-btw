@@ -1,5 +1,7 @@
 package ivangeevo.btx.item.items;
 
+import ivangeevo.btx.achievement.BTXAchievementTriggers;
+import ivangeevo.btx.achievement.BTXAchievements;
 import net.minecraft.core.entity.Mob;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemDye;
@@ -26,6 +28,7 @@ public class ItemDung extends ItemDye {
 	public boolean useOnEntity(@NotNull ItemStack selfStack, @NotNull Player player, @NotNull Mob mob) {
 		ItemStack brown = brownCopy();
 		boolean used = super.useOnEntity(brown, player, mob);
+		if (used) BTXAchievementTriggers.award(player, BTXAchievements.DUNG_DYE);
 		if (used && brown.stackSize < 1) selfStack.consumeItem(player);
 		return used;
 	}
@@ -39,6 +42,10 @@ public class ItemDung extends ItemDye {
 
 		if (used && brown.stackSize < 1) {
 			selfStack.stackSize--;
+		}
+
+		if (used) {
+			BTXAchievementTriggers.award(player, BTXAchievements.DUNG_DYE);
 		}
 
 		return used;

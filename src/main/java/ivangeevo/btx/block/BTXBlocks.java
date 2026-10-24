@@ -16,8 +16,17 @@ import ivangeevo.btx.config.BTXConfig;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockLogic;
 import net.minecraft.core.block.BlockLogicFire;
+import net.minecraft.core.block.BlockLogicPressurePlate;
 import net.minecraft.core.block.BlockLogicSupplier;
 import net.minecraft.core.block.Blocks;
+import net.minecraft.core.block.material.Materials;
+import net.minecraft.core.block.tag.BlockTags;
+import net.minecraft.core.entity.player.Player;
+import net.minecraft.core.sound.BlockSounds;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public final class BTXBlocks {
 	private BTXBlocks() {}
@@ -62,11 +71,45 @@ public final class BTXBlocks {
 	public static Block<BlockLogicConcentratedHellfire> CONCENTRATED_HELLFIRE_BLOCK;
 	public static Block<BlockLogicSoulforge> SOULFORGE;
 	public static Block<BlockLogicSaw> SAW;
+	public static Block<BlockLogicSidingStone> SIDING_STONE;
+	public static Block<BlockLogicBlockDispenser> BLOCK_DISPENSER;
+	public static Block<BlockLogicAnchor> ANCHOR;
+	public static Block<BlockLogicPulley> PULLEY;
+	public static Block<BlockLogicPlatform> PLATFORM;
+	public static Block<BlockLogicDetector> DETECTOR_BLOCK;
+	public static Block<BlockLogicDetectorLogic> DETECTOR_LOGIC;
+	public static Block<BlockLogicDetectorLogicGlowing> DETECTOR_LOGIC_GLOWING;
+	public static Block<BlockLogicLens> LENS;
+	public static Block<BlockLogicLightBulb> LIGHT_BULB;
+	public static Block<BlockLogicLightBulb> LIGHT_BULB_ON;
+	public static Block<BlockLogicCement> CEMENT;
+	public static Block<BlockLogicBuddy> BUDDY_BLOCK;
+	public static Block<BlockLogicPressurePlate<Player>> SOULFORGED_STEEL_PRESSURE_PLATE;
+	public static Block<BlockLogicRailDetectorTiered> DETECTOR_RAIL_STONE;
+	public static Block<BlockLogicRailDetectorTiered> DETECTOR_RAIL_SOULFORGED_STEEL;
+
+	public record StonePieces(String type, Block<?> source, Block<BlockLogicSidingStone> siding,
+							  Block<BlockLogicMouldingStone> moulding, Block<BlockLogicCornerStone> corner) {
+	}
+
+	public static final List<StonePieces> STONE_PIECES = new ArrayList<>();
 
 	private static <T extends BlockLogic> Block<T> registerBlock(String name, BlockLogicSupplier<T> logicSupplier) {
 		String namespaceId = BTXMod.MOD_ID + ":block/" + name;
 		String key = BTXMod.MOD_ID + "." + name.replace("_", ".");
 		return Blocks.register(key, namespaceId, BTXConfig.blockID(), logicSupplier);
+	}
+
+	private static void registerStonePieces(String type, Block<?> source, @Nullable Block<BlockLogicSidingStone> siding) {
+		if (siding == null) {
+			siding = registerBlock("siding_" + type, BlockLogicSidingStone.stoneProperties(source));
+		}
+
+		List<Block<BlockLogicCornerStone>> corner = new ArrayList<>(1);
+		Block<BlockLogicMouldingStone> moulding = registerBlock("moulding_" + type, BlockLogicMouldingStone.stoneProperties(source, () -> corner.get(0)));
+		corner.add(registerBlock("corner_" + type, BlockLogicCornerStone.stoneProperties(source)));
+
+		STONE_PIECES.add(new StonePieces(type, source, siding, moulding, corner.get(0)));
 	}
 
 	public static void afterBlockInit() {
@@ -110,6 +153,35 @@ public final class BTXBlocks {
 		CONCENTRATED_HELLFIRE_BLOCK = registerBlock("concentrated_hellfire_block", BlockLogicConcentratedHellfire.properties());
 		SOULFORGE = registerBlock("soulforge", BlockLogicSoulforge.properties());
 		SAW = registerBlock("saw", BlockLogicSaw.properties());
+		SIDING_STONE = registerBlock("siding_stone", BlockLogicSidingStone.stoneProperties(Blocks.STONE));
+		registerStonePieces("stone", Blocks.STONE, SIDING_STONE);
+		registerStonePieces("basalt", Blocks.BASALT, null);
+		registerStonePieces("limestone", Blocks.LIMESTONE, null);
+		registerStonePieces("granite", Blocks.GRANITE, null);
+		registerStonePieces("marble", Blocks.MARBLE, null);
+		registerStonePieces("slate", Blocks.SLATE, null);
+		registerStonePieces("permafrost", Blocks.PERMAFROST, null);
+		BLOCK_DISPENSER = registerBlock("block_dispenser", BlockLogicBlockDispenser.properties());
+		ANCHOR = registerBlock("anchor", BlockLogicAnchor.properties());
+		PULLEY = registerBlock("pulley", BlockLogicPulley.properties());
+		PLATFORM = registerBlock("platform", BlockLogicPlatform.properties());
+		DETECTOR_BLOCK = registerBlock("detector_block", BlockLogicDetector.properties());
+		DETECTOR_LOGIC = registerBlock("detector_logic", BlockLogicDetectorLogic.properties());
+		DETECTOR_LOGIC_GLOWING = registerBlock("detector_logic_glowing", BlockLogicDetectorLogicGlowing.glowingProperties());
+		LENS = registerBlock("lens", BlockLogicLens.properties());
+		LIGHT_BULB = registerBlock("light_bulb", BlockLogicLightBulb.properties(false));
+		LIGHT_BULB_ON = registerBlock("light_bulb_on", BlockLogicLightBulb.properties(true));
+		CEMENT = registerBlock("cement", BlockLogicCement.properties());
+		BUDDY_BLOCK = registerBlock("buddy_block", BlockLogicBuddy.properties());
+		SOULFORGED_STEEL_PRESSURE_PLATE = registerBlock("pressure_plate_soulforged_steel", block -> new BlockLogicPressurePlate<>(
+			block
+				.withSound(BlockSounds.METAL)
+				.withHardness(1.0F)
+				.withBlastResistance(2000.0F)
+				.withTags(BlockTags.MINEABLE_BY_PICKAXE, BlockTags.PREVENT_MOB_SPAWNS),
+			Player.class, Materials.METAL));
+		DETECTOR_RAIL_STONE = registerBlock("detector_rail_stone", BlockLogicRailDetectorTiered.properties(BlockLogicRailDetectorTiered.Tier.STONE));
+		DETECTOR_RAIL_SOULFORGED_STEEL = registerBlock("detector_rail_soulforged_steel", BlockLogicRailDetectorTiered.properties(BlockLogicRailDetectorTiered.Tier.SOULFORGED_STEEL));
 
 		// BTW CE: Flammability.PLANKS (5, 20) and Flammability.WICKER (60, 100)
 		BlockLogicFire.setFlammable(GRATE, 5, 20);
@@ -120,5 +192,7 @@ public final class BTXBlocks {
 		BlockLogicFire.setFlammable(COMPANION_CUBE, 30, 60);
 		BlockLogicFire.setFlammable(COMPANION_SLAB, 30, 60);
 		BlockLogicFire.setFlammable(SAW, 5, 20);
+		BlockLogicFire.setFlammable(PULLEY, 5, 20);
+		BlockLogicFire.setFlammable(PLATFORM, 60, 100);
 	}
 }

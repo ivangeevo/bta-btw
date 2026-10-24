@@ -1,6 +1,7 @@
 package ivangeevo.btx.block.blocks;
 
 import ivangeevo.btx.block.BTXBlocks;
+import ivangeevo.btx.particle.BTXParticles;
 import ivangeevo.btx.sound.BTXSoundTypes;
 import ivangeevo.btx.util.utils.FacingUtils;
 import ivangeevo.btx.util.utils.MechPowerUtils;
@@ -109,7 +110,7 @@ public abstract class BlockLogicVessel extends BlockLogic implements MechanicalD
 			double smokeY = tilePos.y() + rand.nextFloat() * 0.5F + 1.0F;
 			double smokeZ = tilePos.z() + rand.nextFloat();
 
-			world.spawnParticle("whitesmoke", smokeX, smokeY, smokeZ, 0.0, 0.0, 0.0, 0, false);
+			world.spawnParticle(BTXParticles.WHITE_SMOKE, smokeX, smokeY, smokeZ, 0.0, 0.0, 0.0, 0, false);
 		}
 	}
 
@@ -231,7 +232,6 @@ public abstract class BlockLogicVessel extends BlockLogic implements MechanicalD
 		int facing = getFacing(world, tilePos);
 		TilePos targetPos = new TilePos(tilePos);
 		targetPos.add(Direction.fromId(facing));
-
 		return world.isBlockNormalCube(targetPos);
 	}
 }

@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/orientable_with_sides",
+  "textures": {
+    "front": "btx:block/lens/output",
+    "back": "btx:block/lens/input",
+    "top": "btx:block/lens/side",
+    "bottom": "btx:block/lens/side",
+    "right": "btx:block/lens/side",
+    "left": "btx:block/lens/side"
+  }
+}

@@ -8,7 +8,15 @@ import net.minecraft.core.item.Items;
 
 public final class BTXLegacyConversion {
     public static void init() {
-        // 1. item rules (needs BTXItems / BTXBlocks populated)
+        // 1. item rules
+
+		// Cement needs data passed
+        BTW294SaveConverter.BtwItems.simple(222, Items.BUCKET_IRON.id);
+        BTW294SaveConverter.BtwItems.data(222, data -> {
+            data.putString("State", BTXItems.CEMENT_BUCKET_STATE.toString());
+            data.putInt("Charges", 1);
+        });
+
         BTW294SaveConverter.BtwItems.simple(223, BTXItems.FOOD_WOLF_CHOP_RAW.id);
         BTW294SaveConverter.BtwItems.simple(224, BTXItems.FOOD_WOLF_CHOP_COOKED.id);
         BTW294SaveConverter.BtwItems.simple(225, Items.NETHERCOAL.id);
@@ -47,6 +55,9 @@ public final class BTXLegacyConversion {
         BTW294SaveConverter.BtwItems.simple(261, BTXItems.SOULFORGED_STEEL_CHESTPLATE.id);
         BTW294SaveConverter.BtwItems.simple(262, BTXItems.SOULFORGED_STEEL_LEGGINGS.id);
         BTW294SaveConverter.BtwItems.simple(263, BTXItems.SOULFORGED_STEEL_BOOTS.id);
+        BTW294SaveConverter.BtwItems.simple(264, BTXItems.COMPOSITE_BOW.id);
+        BTW294SaveConverter.BtwItems.simple(265, BTXItems.BROADHEAD.id);
+        BTW294SaveConverter.BtwItems.simple(266, BTXItems.BROADHEAD_ARROW.id);
 
         // 2.94's grate, rollers and wicker were items only; they become the CE pane blocks
         BTW294SaveConverter.BtwItems.simple(240, BTXBlocks.GRATE.id());

@@ -1,0 +1,8 @@
+{
+  "parent": "btx:block/corner/corner_template",
+  "textures": {
+    "side": "minecraft:block/slate_side",
+    "top": "minecraft:block/slate_top",
+    "bottom": "minecraft:block/slate_top"
+  }
+}

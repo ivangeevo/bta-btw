@@ -1,12 +1,12 @@
 package ivangeevo.btx.block.blocks.mini_blocks;
 
 import ivangeevo.btx.block.BTXBlocks;
-import ivangeevo.btx.block.blocks.BlockLogicGearBox;
 import ivangeevo.btx.util.rendering.PlacementBounds;
 import ivangeevo.btx.util.utils.FacingUtils;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockLogicSupplier;
 import net.minecraft.core.block.IPaintable;
+import net.minecraft.core.block.material.Material;
 import net.minecraft.core.block.tag.BlockTags;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
@@ -26,6 +26,10 @@ public class BlockLogicSiding extends BlockLogicWoodPiece implements IPaintable,
 
 	public BlockLogicSiding(@NotNull Block<?> block) {
 		super(block);
+	}
+
+	protected BlockLogicSiding(@NotNull Block<?> block, @NotNull Material material) {
+		super(block, material);
 	}
 
 	public static BlockLogicSupplier<BlockLogicSiding> properties() {

@@ -64,8 +64,8 @@ public abstract class MixinBlockLogicFire {
 			return;
 		}
 
-		// fire with a floor under it sits on that block, not on the stoked fire's side
-		if (world.isBlockNormalCube(below) || BlockLogicFire.canBurn(world, below)) return;
+		// fire with a floor under it sits on that block, unless it prefers the side of a cling block
+		if ((world.isBlockNormalCube(below) && !FireUtils.prefersSideDisplay(world, tilePos)) || BlockLogicFire.canBurn(world, below)) return;
 
 		// it clings to every burnable side/top neighbour (BlockLogicFire.getShapeMask); only hide it
 		// when all of those are stoked fire, so fire also burning on e.g. a log stays clickable

@@ -1,10 +1,9 @@
-package ivangeevo.btx.world.save.conversion.twoninefour; // TODO: rename
+package ivangeevo.btx.world.save.conversion.twoninefour;
 
-import com.mojang.logging.LogUtils;
 import com.mojang.nbt.NbtIo;
 import com.mojang.nbt.tags.CompoundTag;
 import com.mojang.nbt.tags.ListTag;
-import com.mojang.nbt.tags.ShortTag; // ASSUMPTION: class exists in this package (DoubleTag/ListTag/CompoundTag do)
+import com.mojang.nbt.tags.ShortTag;
 import com.mojang.nbt.tags.Tag;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -19,8 +18,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Consumer;
 
 import ivangeevo.btx.BTXGlobals;
+import ivangeevo.btx.world.save.conversion.BTAVanillaSaveFixes;
 import net.minecraft.core.world.Dimension;
 import net.minecraft.core.world.ProgressListener;
 import net.minecraft.core.world.save.ISaveConverter;
@@ -83,6 +84,7 @@ public class BTW294SaveConverter implements ISaveConverter {
 	private static final Logger LOGGER = BTXGlobals.LOGGER;
 	private static final int FROM = 19132;
 	private static final int TO = 19133;
+	private static final int NETHER_Y_SHIFT = 64;
 
 	/** b1.7.3 stores an item's ID as 256 + the constructor ID used in the BTW source. */
 	public static final int ITEM_ID_OFFSET = 256;
@@ -119,6 +121,7 @@ public class BTW294SaveConverter implements ISaveConverter {
 	public void convertSave(@NotNull CompoundTag levelData, @NotNull File savesDir, @NotNull String worldDirName,
 							@NotNull ProgressListener progress) {
 		LOGGER.info("[BTX] convertSave called for '{}'", worldDirName);
+		boolean detected = false;
 
 		ISaveFormat from = SaveFormats.createSaveFormat(FROM, savesDir);
 		if (from == null) {
@@ -129,18 +132,22 @@ public class BTW294SaveConverter implements ISaveConverter {
 			LOGGER.info("[BTX] found {} region files", regions.size());
 
 			boolean force = Boolean.getBoolean("btw.forceConvert");
-			boolean detected = force || hasBtwStack(levelData) || isBtwWorld(regions);
+			detected = force || hasBtwStack(levelData) || isBtwWorld(regions);
 			LOGGER.info("[BTX] force={}, detected={}", force, detected);
 
 			// -Dbtw.forceConvert=true skips detection (useful for testing with a hand-edited world)
 			if (detected) {
 				LOGGER.info("BTW world detected: converting BTW items/entities for '{}'", worldDirName);
-				rewriteRegions(regions);
+				File netherRegionDir = new File(from.getDimensionRootDir(worldDirName, Dimension.NETHER), "region");
+				rewriteRegions(regions, netherRegionDir);
 				walk(levelData); // Player tag inside level.dat, if present (the caller saves this tag afterwards)
+				BTAVanillaSaveFixes.fixArmorSlots(levelData.getCompound("Player"));
 				rewritePlayerFiles(new File(new File(savesDir, worldDirName), "players")); // ASSUMPTION: location
 			}
 		}
-		new SaveConverter19132To19133().convertSave(levelData, savesDir, worldDirName, progress);
+
+		BTAVanillaSaveFixes.runWithChunkFixes(detected,
+			() -> new SaveConverter19132To19133().convertSave(levelData, savesDir, worldDirName, progress));
 	}
 
 	// ---------------------------------------------------------------- detection
@@ -203,8 +210,9 @@ public class BTW294SaveConverter implements ISaveConverter {
 	}
 
 	// ---------------------------------------------------------------- rewriting
-	private static void rewriteRegions(List<File> regions) {
+	private static void rewriteRegions(List<File> regions, File netherRegionDir) {
 		for (File region : regions) {
+			int yShift = netherRegionDir.equals(region.getParentFile()) ? NETHER_Y_SHIFT : 0;
 			RegionFile rf = new RegionFile(region);
 			for (int x = 0; x < 32; x++) {
 				for (int z = 0; z < 32; z++) {
@@ -222,7 +230,7 @@ public class BTW294SaveConverter implements ISaveConverter {
 						if (entities != null) {
 							for (Tag<?> t : entities) {
 								if (t instanceof CompoundTag e) {
-									fixEntity(e);
+									fixEntity(e, yShift);
 								}
 							}
 						}
@@ -250,6 +258,7 @@ public class BTW294SaveConverter implements ISaveConverter {
 					tag = NbtIo.readCompressed(in);
 				}
 				walk(tag);
+				BTAVanillaSaveFixes.fixArmorSlots(tag);
 				try (OutputStream out = Files.newOutputStream(f.toPath())) {
 					NbtIo.writeCompressed(tag, out);
 				}
@@ -260,15 +269,33 @@ public class BTW294SaveConverter implements ISaveConverter {
 	}
 
 	/** Entities that embed block IDs. Their NBT keys come from the scan. */
-	private static void fixEntity(CompoundTag e) {
-		if ("BlockLiftedByPlatform".equals(e.getString("id"))) {
-			int[] c = BTW294ChunkConverter.convertOne(e.getInteger("m_iBlockID"), e.getInteger("m_iBlockMetaData"));
-			e.putInt("m_iBlockID", c[0]);
-			e.putInt("m_iBlockMetaData", c[1]);
+	private static void fixEntity(CompoundTag e, int yShift) {
+		switch (e.getString("id")) {
+			case "BlockLiftedByPlatform" -> {
+				int[] c = BTW294ChunkConverter.convertOne(e.getInteger("m_iBlockID"), e.getInteger("m_iBlockMetaData"));
+				e.putInt("m_iBlockID", c[0]);
+				e.putInt("m_iBlockMetaData", c[1]);
+			}
+			case "BroadheadArrow" -> {
+				if (e.containsKey("inTile")) {
+					int[] c = BTW294ChunkConverter.convertOne(e.getByte("inTile") & 0xFF, e.getByte("inData") & 0xFF);
+					e.putShort("inTile", (short) c[0]);
+					e.putByte("inData", (byte) c[1]);
+				}
+				// SaveConverter19134To19135 only shifts yTile for the stock arrow ids
+				e.putShort("yTile", (short) (e.getShort("yTile") - yShift));
+			}
+			case "MovingAnchor" -> {
+				e.putInt("associatedPulleyPosJ", e.getInteger("associatedPulleyPosJ") - yShift);
+				if (e.containsKey("m_iOldBottomJ")) {
+					e.putInt("m_iOldBottomJ", e.getInteger("m_iOldBottomJ") - yShift);
+				}
+			}
+			case "MovingPlatform" ->
+				e.putDouble("m_AssociatedAnchorLastKnownYPos", e.getDouble("m_AssociatedAnchorLastKnownYPos") - yShift);
+			default -> {
+			}
 		}
-		// TODO BroadheadArrow: "inTile" is a BYTE (read it as unsigned) + "inData"; decide how your arrow stores the block.
-		// TODO Nether only: 19134->19135 shifts Pos and TileEntity y, but not BTW's embedded Y values
-		//      (associatedPulleyPosJ, m_AssociatedAnchorLastKnownYPos).
 	}
 
 	/** Visit every compound/list; anything that looks like an ItemStack (short "id" + "Count") gets rewritten. */
@@ -315,6 +342,7 @@ public class BTW294SaveConverter implements ISaveConverter {
 		}
 
 		private static final Map<Integer, Rule> RULES = new HashMap<>();
+		private static final Map<Integer, Consumer<CompoundTag>> DATA_WRITERS = new HashMap<>();
 
 		private BtwItems() {}
 
@@ -324,6 +352,11 @@ public class BTW294SaveConverter implements ISaveConverter {
 		}
 		public static void rule(int btwSourceId, Rule rule) {
 			RULES.put(btwSourceId + ITEM_ID_OFFSET, rule);
+		}
+
+		/** Writes the converted stack's item data (its "Data" compound), e.g. a bucket's contents. Same ID convention as simple(...). */
+		public static void data(int btwSourceId, Consumer<CompoundTag> writer) {
+			DATA_WRITERS.put(btwSourceId + ITEM_ID_OFFSET, writer);
 		}
 
 		/** Block items (221-255): stored with the raw block ID, no offset. */
@@ -365,6 +398,12 @@ public class BTW294SaveConverter implements ISaveConverter {
 			}
 			stack.putShort("id", (short) r[0]);
 			stack.putShort("Damage", (short) r[1]);
+			Consumer<CompoundTag> dataWriter = DATA_WRITERS.get(id);
+			if (dataWriter != null) {
+				CompoundTag data = stack.containsKey("Data") ? stack.getCompound("Data") : new CompoundTag();
+				dataWriter.accept(data);
+				stack.putCompound("Data", data);
+			}
 			stack.putByte("Expanded", (byte) 1);
 			stack.putInt("Version", 19135);
 			LOGGER.info("BTW item {}:{} -> {}:{}", id, damage, r[0], r[1]);

@@ -1,0 +1,18 @@
+{
+  "parent": "block/block",
+  "renderlayer": 1,
+  "ambientocclusion": false,
+  "textures": {
+    "particle": "btx:block/lens/spotlight",
+    "spotlight": "btx:block/lens/spotlight"
+  },
+  "elements": [
+    {
+      "from": [0, 0, 15.84],
+      "to": [16, 16, 16],
+      "faces": {
+        "north": {"texture": "#spotlight"}
+      }
+    }
+  ]
+}

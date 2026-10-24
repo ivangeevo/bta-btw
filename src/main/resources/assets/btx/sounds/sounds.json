@@ -339,5 +339,68 @@
     "sounds": [
       "mechanical/whirr.ogg"
     ]
+  },
+  "block_dispenser.click": {
+    "subtitle": "subtitles.btx.block_dispenser.click",
+    "sounds": [
+      {
+        "name": "random.click",
+        "type": "event"
+      }
+    ]
+  },
+  "block_dispenser.eat_wolf": {
+    "subtitle": "subtitles.btx.block_dispenser.eat_wolf",
+    "sounds": [
+      {
+        "name": "mob.wolf.hurt",
+        "type": "event"
+      }
+    ]
+  },
+  "block_dispenser.eat_chicken": {
+    "subtitle": "subtitles.btx.block_dispenser.eat_chicken",
+    "sounds": [
+      {
+        "name": "mob.chickenhurt",
+        "type": "event"
+      }
+    ]
+  },
+  "cement.pour": {
+    "subtitle": "subtitles.btx.cement.pour",
+    "sounds": [
+      {
+        "name": "mob.ghast.moan",
+        "type": "event"
+      }
+    ]
+  },
+  "cement.moan": {
+    "subtitle": "subtitles.btx.cement.moan",
+    "sounds": [
+      {
+        "name": "mob.ghast.moan",
+        "type": "event"
+      }
+    ]
+  },
+  "cement.scream": {
+    "subtitle": "subtitles.btx.cement.scream",
+    "sounds": [
+      {
+        "name": "mob.ghast.scream",
+        "type": "event"
+      }
+    ]
+  },
+  "hopper.toggle": {
+    "subtitle": "subtitles.btx.hopper.toggle",
+    "sounds": [
+      "hopper/toggle1.ogg",
+      "hopper/toggle2.ogg",
+      "hopper/toggle3.ogg",
+      "hopper/toggle4.ogg"
+    ]
   }
 }

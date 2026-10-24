@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "btx:block/pulley/pulley",
+    "up": "btx:block/pulley/pulley_top",
+    "down": "btx:block/pulley/pulley_bottom",
+    "south": "btx:block/pulley/pulley",
+    "north": "btx:block/pulley/pulley",
+    "west": "btx:block/pulley/pulley",
+    "east": "btx:block/pulley/pulley"
+  }
+}

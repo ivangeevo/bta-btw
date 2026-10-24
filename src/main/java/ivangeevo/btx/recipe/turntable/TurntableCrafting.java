@@ -1,5 +1,7 @@
 package ivangeevo.btx.recipe.turntable;
 
+import ivangeevo.btx.achievement.BTXAchievementTriggers;
+import ivangeevo.btx.achievement.BTXAchievements;
 import ivangeevo.btx.recipe.BTXRecipes;
 import ivangeevo.btx.sound.BTXSoundTypes;
 import ivangeevo.btx.util.utils.MiscUtils;
@@ -44,6 +46,8 @@ public final class TurntableCrafting {
 	}
 
 	private static void transform(World world, TilePosc pos, RecipeEntryTurntable recipe) {
+		BTXAchievementTriggers.awardNearby(world, pos, BTXAchievements.TURNTABLE_SPIN);
+
 		ItemStack out = recipe.getOutput();
 
 		if (out.getItem() instanceof ItemBlock<?> ib) {

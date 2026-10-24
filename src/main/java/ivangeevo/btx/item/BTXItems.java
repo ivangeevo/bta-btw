@@ -2,7 +2,9 @@ package ivangeevo.btx.item;
 
 import ivangeevo.btx.BTXMod;
 import ivangeevo.btx.block.BTXBlocks;
+import ivangeevo.btx.block.blocks.BlockLogicCement;
 import ivangeevo.btx.item.items.ItemArmorSoulforged;
+import ivangeevo.btx.item.items.ItemBowComposite;
 import ivangeevo.btx.item.items.ItemDung;
 import ivangeevo.btx.item.items.ItemFoulFood;
 import ivangeevo.btx.item.items.ItemKibble;
@@ -20,6 +22,7 @@ import net.minecraft.core.item.ItemSeeds;
 import net.minecraft.core.item.material.ArmorMaterial;
 import net.minecraft.core.item.material.ToolMaterial;
 import net.minecraft.core.item.tag.ItemTags;
+import net.minecraft.core.util.collection.NamespaceID;
 import net.minecraft.core.item.tool.ItemToolAxe;
 import net.minecraft.core.item.tool.ItemToolHoe;
 import net.minecraft.core.item.tool.ItemToolSword;
@@ -30,8 +33,7 @@ import java.util.function.UnaryOperator;
 import static ivangeevo.btx.config.BTXConfig.itemID;
 
 public final class BTXItems {
-
-	public static Item CEMENT_BUCKET;
+	public static NamespaceID CEMENT_BUCKET_STATE;
 	public static Item HEMP_SEEDS;
 	public static Item HEMP;
 	public static Item GEAR;
@@ -142,6 +144,12 @@ public final class BTXItems {
 		STRAP = registerItem("strap", Item::new);
 		GLUE = registerItem("glue", Item::new);
 		HAFT = registerItem("haft", Item::new);
+
+		COMPOSITE_BOW = registerItem("composite_bow", ItemBowComposite::new);
+		BROADHEAD = registerItem("broadhead", Item::new);
+		BROADHEAD_ARROW = registerItem("broadhead_arrow", Item::new);
+
+		CEMENT_BUCKET_STATE = BlockLogicCement.registerBucketState();
 	}
 
 	// No extra settings builder
@@ -162,5 +170,4 @@ public final class BTXItems {
 	public interface ItemFactory<T extends Item> {
 		T create(String key, String namespaceId, int id);
 	}
-
 }

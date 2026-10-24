@@ -2,6 +2,8 @@ package ivangeevo.btx.block.entity;
 
 import com.mojang.nbt.tags.CompoundTag;
 import com.mojang.nbt.tags.ListTag;
+import ivangeevo.btx.achievement.BTXAchievementTriggers;
+import ivangeevo.btx.achievement.BTXAchievements;
 import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.block.blocks.BlockLogicCookingVessel;
 import ivangeevo.btx.item.BTXItems;
@@ -388,6 +390,7 @@ public abstract class TileEntityCookingVessel extends TileEntity implements Cont
 
 				for (ItemStack output : outputList) {
 					ItemStack cookedStack = output.copy();
+					onCookedOutput(cookedStack);
 
 					if (!InventoryUtils.addItemStackToInventory(this, cookedStack)) {
 						MiscUtils.ejectStackWithRandomOffset(worldObj, tilePos.up(new TilePos()), cookedStack);
@@ -400,6 +403,8 @@ public abstract class TileEntityCookingVessel extends TileEntity implements Cont
 
 		return false;
 	}
+
+	protected void onCookedOutput(ItemStack output) {}
 
 	public int getCookProgressScaled(int scale) {
 		return (scaledCookCounter * scale) / 1000;
@@ -418,6 +423,8 @@ public abstract class TileEntityCookingVessel extends TileEntity implements Cont
 	}
 
 	private void blowUp() {
+		BTXAchievementTriggers.awardNearby(worldObj, tilePos, BTXAchievements.VESSEL_BOOM);
+
 		int hellfireCount = InventoryUtils.countItemsInInventory(this, BTXItems.HELLFIRE_DUST.id, -1);
 
 		float explosionSize = (hellfireCount * 10.0F) / 64.0F;

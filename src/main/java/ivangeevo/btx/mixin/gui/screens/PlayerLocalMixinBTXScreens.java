@@ -1,13 +1,17 @@
 package ivangeevo.btx.mixin.gui.screens;
 
+import ivangeevo.btx.block.entity.TileEntityBlockDispenser;
 import ivangeevo.btx.block.entity.TileEntityCauldron;
 import ivangeevo.btx.block.entity.TileEntityCrucible;
 import ivangeevo.btx.block.entity.TileEntityHopper;
+import ivangeevo.btx.block.entity.TileEntityPulley;
 import ivangeevo.btx.gui.hopper.ScreenHopper;
 import ivangeevo.btx.block.entity.TileEntityMillStone;
 import ivangeevo.btx.gui.BTXScreens;
+import ivangeevo.btx.gui.blockdispenser.ScreenBlockDispenser;
 import ivangeevo.btx.gui.cookingvessel.ScreenCookingVessel;
 import ivangeevo.btx.gui.millstone.ScreenMillStone;
+import ivangeevo.btx.gui.pulley.ScreenPulley;
 import ivangeevo.btx.gui.soulforge.ScreenSoulforge;
 import net.minecraft.core.world.pos.TilePosc;
 import net.fabricmc.api.EnvType;
@@ -51,5 +55,15 @@ public abstract class PlayerLocalMixinBTXScreens extends Player implements BTXSc
 	@Override
 	public void btx$displaySoulforgeScreen(TilePosc tilePos) {
 		this.mc.displayScreen(new ScreenSoulforge(this.inventory, this.world, tilePos));
+	}
+
+	@Override
+	public void btx$displayBlockDispenserScreen(TileEntityBlockDispenser tileEntity) {
+		this.mc.displayScreen(new ScreenBlockDispenser(this.inventory, tileEntity));
+	}
+
+	@Override
+	public void btx$displayPulleyScreen(TileEntityPulley tileEntity) {
+		this.mc.displayScreen(new ScreenPulley(this.inventory, tileEntity));
 	}
 }

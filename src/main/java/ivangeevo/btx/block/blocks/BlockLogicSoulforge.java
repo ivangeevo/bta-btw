@@ -66,12 +66,13 @@ public class BlockLogicSoulforge extends BlockLogic implements TurntableInteract
 		if (player != null) {
 			int placing = MathHelper.floor(player.yRot * 4.0F / 360.0F + 0.5D) & 3;
 			facing = switch (placing) {
-				case 0 -> 2;
+				case 0 -> 3;
 				case 1 -> 5;
-				case 2 -> 3;
+				case 2 -> 2;
 				default -> 4;
 			};
 		}
+
 		return facing;
 	}
 

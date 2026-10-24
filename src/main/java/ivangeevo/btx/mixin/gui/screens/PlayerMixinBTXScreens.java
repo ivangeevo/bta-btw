@@ -1,9 +1,11 @@
 package ivangeevo.btx.mixin.gui.screens;
 
+import ivangeevo.btx.block.entity.TileEntityBlockDispenser;
 import ivangeevo.btx.block.entity.TileEntityCauldron;
 import ivangeevo.btx.block.entity.TileEntityCrucible;
 import ivangeevo.btx.block.entity.TileEntityHopper;
 import ivangeevo.btx.block.entity.TileEntityMillStone;
+import ivangeevo.btx.block.entity.TileEntityPulley;
 import ivangeevo.btx.gui.BTXScreens;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.world.pos.TilePosc;
@@ -25,4 +27,10 @@ public abstract class PlayerMixinBTXScreens implements BTXScreens {
 
 	@Override
 	public void btx$displaySoulforgeScreen(TilePosc tilePos) {}
+
+	@Override
+	public void btx$displayBlockDispenserScreen(TileEntityBlockDispenser tileEntity) {}
+
+	@Override
+	public void btx$displayPulleyScreen(TileEntityPulley tileEntity) {}
 }

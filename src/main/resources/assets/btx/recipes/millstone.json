@@ -118,6 +118,19 @@
     }
   },
   {
+    "name": "btx:millstone/ground_netherrack_from_cobbled_netherrack",
+    "type": "btx:millstone",
+    "input": {
+      "stack": {
+        "id": "minecraft:block/cobble_netherrack"
+      }
+    },
+    "output": {
+      "id": "btx:item/ground_netherrack",
+      "amount": 1
+    }
+  },
+  {
     "name": "btx:millstone/ground_netherrack",
     "type": "btx:millstone",
     "input": {
@@ -128,6 +141,48 @@
     "output": {
       "id": "btx:item/ground_netherrack",
       "amount": 1
+    }
+  },
+  {
+    "name": "btx:millstone/bone_meal_from_bone",
+    "type": "btx:millstone",
+    "input": {
+      "stack": {
+        "id": "minecraft:item/bone"
+      }
+    },
+    "output": {
+      "id": "minecraft:item/dye",
+      "amount": 3,
+      "meta": 15
+    }
+  },
+  {
+    "name": "btx:millstone/red_dye_from_red_flower",
+    "type": "btx:millstone",
+    "input": {
+      "stack": {
+        "id": "minecraft:block/flower_red"
+      }
+    },
+    "output": {
+      "id": "minecraft:item/dye",
+      "amount": 2,
+      "meta": 1
+    }
+  },
+  {
+    "name": "btx:millstone/yellow_dye_from_yellow_flower",
+    "type": "btx:millstone",
+    "input": {
+      "stack": {
+        "id": "minecraft:block/flower_yellow"
+      }
+    },
+    "output": {
+      "id": "minecraft:item/dye",
+      "amount": 2,
+      "meta": 11
     }
   }
 ]

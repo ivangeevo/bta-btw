@@ -1,5 +1,7 @@
 package ivangeevo.btx.block.blocks;
 
+import ivangeevo.btx.achievement.BTXAchievementTriggers;
+import ivangeevo.btx.achievement.BTXAchievements;
 import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.item.BTXItems;
 import ivangeevo.btx.sound.BTXSoundTypes;
@@ -310,6 +312,7 @@ public class BlockLogicAxle extends BlockLogic implements MechanicalDevice {
 
 		// Power coming from both directions destroys the axle.
 		if (greaterPowerNeighbors >= 2) {
+			BTXAchievementTriggers.awardNearby(world, tilePos, BTXAchievements.AXLE_SNAP);
 			breakAxle(world, tilePos);
 			return;
 		}

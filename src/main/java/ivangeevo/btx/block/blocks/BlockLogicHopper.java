@@ -1,5 +1,7 @@
 package ivangeevo.btx.block.blocks;
 
+import ivangeevo.btx.achievement.BTXAchievementTriggers;
+import ivangeevo.btx.achievement.BTXAchievements;
 import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.block.blocks.util.ItemOnTopCollision;
 import ivangeevo.btx.block.entity.TileEntityHopper;
@@ -116,10 +118,7 @@ public class BlockLogicHopper
 		boolean receivingPower = isInputtingMechanicalPower(world, tilePos);
 
 		if (isBlockOn(world, tilePos) != receivingPower) {
-			// CE: HOPPER_CLOSE_EFFECT_ID is "mob.irongolem.walk", which BTA doesn't have
-			//TODO: Fix CE sound not present
-			//SoundUtils.playAtTileCenter(world, tilePos, SoundCategory.WORLD_SOUNDS, "random.chestclosed", 0.5F, 1.25F);
-
+			SoundUtils.playAtTileCenter(world, tilePos, SoundCategory.WORLD_SOUNDS, BTXSoundTypes.HOPPER_TOGGLE, 1.0F, 1.25F);
 			setBlockOn(world, tilePos, receivingPower);
 		}
 	}
@@ -361,8 +360,10 @@ public class BlockLogicHopper
 
 		hopper.incrementContainedSoulCount(count);
 
-		SoundUtils.playAtTileCenter(world, tilePos, SoundCategory.ENTITY_SOUNDS, BTXSoundTypes.HOPPER_SOUL_CAPTURE, 0.5F,
-			2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
+		BTXAchievementTriggers.awardNearby(world, tilePos, BTXAchievements.SOUL_FILTER);
+
+		float pitch = 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F;
+		SoundUtils.playAtTileCenter(world, tilePos, SoundCategory.ENTITY_SOUNDS, BTXSoundTypes.HOPPER_SOUL_CAPTURE, 0.5F, pitch);
 
 		entityItem.remove();
 	}

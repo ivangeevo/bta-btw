@@ -1,9 +1,14 @@
 package ivangeevo.btx.block.entity;
 
 import com.mojang.nbt.tags.CompoundTag;
+import ivangeevo.btx.achievement.BTXAchievementTriggers;
+import ivangeevo.btx.achievement.BTXAchievements;
 import ivangeevo.btx.recipe.BTXRecipes;
 import ivangeevo.btx.recipe.cooking.CrucibleIncineration;
 import ivangeevo.btx.recipe.cooking.RecipeGroupBulk;
+import net.minecraft.core.item.Item;
+import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.item.Items;
 import org.jetbrains.annotations.NotNull;
 
 public class TileEntityCrucible extends TileEntityCookingVessel {
@@ -75,11 +80,21 @@ public class TileEntityCrucible extends TileEntityCookingVessel {
 
 		if (burnableSlot >= 0) {
 			removeItem(burnableSlot, 1);
+			BTXAchievementTriggers.awardNearby(worldObj, tilePos, BTXAchievements.INCINERATE);
 
 			return true;
 		}
 
 		return super.attemptToCookStoked();
+	}
+
+	@Override
+	protected void onCookedOutput(ItemStack output) {
+		Item item = output.getItem();
+
+		if (item == Items.INGOT_IRON || item == Items.INGOT_GOLD || item == Items.INGOT_STEEL) {
+			BTXAchievementTriggers.awardNearby(worldObj, tilePos, BTXAchievements.RECLAIM);
+		}
 	}
 
 	private int getFirstStackThatContainsItemsDestroyedByStokedFire() {

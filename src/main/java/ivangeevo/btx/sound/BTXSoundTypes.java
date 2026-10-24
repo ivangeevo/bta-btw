@@ -25,6 +25,7 @@ public class BTXSoundTypes {
 	public static final String HIBACHI_EXTINGUISH = create("hibachi.extinguish");
 	public static final String HOPPER_SOUL_CAPTURE = create("hopper.soul_capture");
 	public static final String HOPPER_SOUL_OVERLOAD = create("hopper.soul_overload");
+	public static final String HOPPER_TOGGLE = create("hopper.toggle");
 	public static final String COMPANION_CUBE_WHINE = create("companion_cube.whine");
 	public static final String COMPANION_CUBE_HURT = create("companion_cube.hurt");
 	public static final String WOLF_DUNG = create("wolf.dung");
@@ -38,6 +39,12 @@ public class BTXSoundTypes {
 	public static final String SAW_POWER_OFF = create("saw.power_off");
 	public static final String SAW_CUT = create("saw.cut");
 	public static final String SAW_HURT = create("saw.hurt");
+	public static final String BLOCK_DISPENSER_CLICK = create("block_dispenser.click");
+	public static final String BLOCK_DISPENSER_EAT_WOLF = create("block_dispenser.eat_wolf");
+	public static final String BLOCK_DISPENSER_EAT_CHICKEN = create("block_dispenser.eat_chicken");
+	public static final String CEMENT_POUR = create("cement.pour");
+	public static final String CEMENT_MOAN = create("cement.moan");
+	public static final String CEMENT_SCREAM = create("cement.scream");
 	public static final String SOULFORGED_ACTIVATE = create("soulforged.activate");
 	public static final String SOULFORGED_ACTIVATE_IGNITE = create("soulforged.activate.ignite");
 	public static final String SOULFORGED_ACTIVATE_HUM = create("soulforged.activate.hum");

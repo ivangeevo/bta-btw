@@ -2,6 +2,8 @@ package ivangeevo.btx.block.entity;
 
 import com.mojang.nbt.tags.CompoundTag;
 import com.mojang.nbt.tags.ListTag;
+import ivangeevo.btx.achievement.BTXAchievementTriggers;
+import ivangeevo.btx.achievement.BTXAchievements;
 import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.block.blocks.BlockLogicCompanionCube;
 import ivangeevo.btx.block.blocks.BlockLogicMillStone;
@@ -15,6 +17,7 @@ import net.minecraft.core.block.Blocks;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.player.Player;
+import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.container.Container;
 import net.minecraft.core.sound.SoundCategory;
@@ -207,6 +210,7 @@ public class TileEntityMillStone extends TileEntity implements Container {
 		if (outputs != null) {
 			if (this.contents[slot].getItem() == BTXBlocks.COMPANION_CUBE.asItem()) {
 				BlockLogicCompanionCube.playDeathEffect(this.worldObj, this.tilePos);
+				BTXAchievementTriggers.awardNearby(this.worldObj, this.tilePos, BTXAchievements.COMPANION_GRIND);
 			}
 
 			this.removeItem(slot, 1);
@@ -233,7 +237,8 @@ public class TileEntityMillStone extends TileEntity implements Container {
 
 	public boolean isNetherrackNextToBeProcessed() {
 		int slot = this.findGrindableSlot();
-		return slot >= 0 && this.contents[slot].getItem().equals(Blocks.NETHERRACK.asItem());
+		Item item = this.contents[slot].getItem();
+		return slot >= 0 && item.equals(Blocks.NETHERRACK.asItem()) || item.equals(Blocks.COBBLE_NETHERRACK.asItem());
 	}
 
 	@Override

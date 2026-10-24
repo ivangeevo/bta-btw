@@ -1,5 +1,7 @@
 package ivangeevo.btx.block.blocks;
 
+import ivangeevo.btx.achievement.BTXAchievementTriggers;
+import ivangeevo.btx.achievement.BTXAchievements;
 import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.config.BTXConfig;
 import ivangeevo.btx.item.BTXItems;
@@ -244,7 +246,7 @@ public class BlockLogicGearBox extends BlockLogicRotatable implements Mechanical
 			setGearBoxOn(world, tilePos, shouldBePowered);
 
 			if (shouldBePowered) {
-				// BTW played this client side in clientNotificationOfMetadataChange
+				BTXAchievementTriggers.awardNearby(world, tilePos, BTXAchievements.AXLE_NETWORK);
 				world.playSoundEffectAtTile(null, SoundCategory.WORLD_SOUNDS, tilePos,
 					BTXSoundTypes.GEARBOX_ENGAGE, 0.25F, world.rand.nextFloat() * 0.25F + 0.25F);
 			}

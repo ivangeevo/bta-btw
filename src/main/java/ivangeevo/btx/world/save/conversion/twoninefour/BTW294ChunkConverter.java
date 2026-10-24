@@ -3,6 +3,9 @@ package ivangeevo.btx.world.save.conversion.twoninefour;
 import java.lang.reflect.Field;
 
 import ivangeevo.btx.block.BTXBlocks;
+import ivangeevo.btx.block.blocks.BlockLogicAnchor;
+import ivangeevo.btx.world.save.conversion.BTAVanillaSaveFixes;
+import net.minecraft.core.block.Blocks;
 import net.minecraft.core.world.save.conversion.ChunkConverter;
 
 /**
@@ -79,14 +82,29 @@ public class BTW294ChunkConverter extends ChunkConverter {
 		// hopper: keep bit 1 (on) and bit 8 (filter), drop 2.94's full (2) and redstone (4) bits
 		addMapping(new MappingMasked(225, BTXBlocks.HOPPER.id(), 1 | 8));
 		addMapping(new MappingCompanionCube(237, BTXBlocks.COMPANION_CUBE.id(), BTXBlocks.COMPANION_SLAB.id()));
+		addMapping(new MappingSimple(222, BTXBlocks.LIGHT_BULB.id()));
+		addMapping(new MappingSimple(223, BTXBlocks.LIGHT_BULB_ON.id()));
 		addMapping(new MappingSimple(224, BTXBlocks.HIBACHI.id()));
 		addMapping(new MappingSimple(231, BTXBlocks.MOULDING_OAK.id()));
 		addMapping(new MappingMasked(232, BTXBlocks.CORNER_OAK.id(), 7));
+		// anvil: meta is the BTW facing (2-5), the same layout the Soulforge uses
+		addMapping(new MappingMasked(221, BTXBlocks.SOULFORGE.id(), 7));
+		addMapping(new MappingMasked(233, BTXBlocks.BLOCK_DISPENSER.id(), 7));
+		addMapping(new MappingBitSplit(238, 1, BTXBlocks.DETECTOR_BLOCK.id(), BTXBlocks.DETECTOR_BLOCK.id(), 1));
 		addMapping(new MappingMasked(234, BTXBlocks.CAULDRON.id(), 0));
 		addMapping(new MappingSimple(241, BTXBlocks.HEMP.id()));
 		addMapping(new MappingSimple(242, BTXBlocks.HAND_CRANK.id()));
-		// panel: bit 0 set = wood, facing in bits 1-3; stone panels have no BTX block yet and become air
-		addMapping(new MappingBitSplit(246, 1, 0, BTXBlocks.SIDING_OAK.id(), 1));
+		addMapping(new MappingSimple(244, BTXBlocks.ANCHOR.id()));
+		addMapping(new MappingMasked(229, BTXBlocks.PULLEY.id(), 3));
+		addMapping(new MappingSimple(227, BTXBlocks.PLATFORM.id()));
+		addMapping(new MappingFixedMeta(230, BTXBlocks.SOULFORGED_STEEL_PRESSURE_PLATE.id(), 0));
+		addMapping(new MappingMasked(235, Blocks.RAIL_DETECTOR.id(), 7));
+		addMapping(new MappingMasked(236, BTXBlocks.DETECTOR_RAIL_SOULFORGED_STEEL.id(), 7));
+		addMapping(new MappingSimple(228, BTXBlocks.CEMENT.id()));
+		// rope only hung from anchors and pulleys in 2.94, so it all becomes anchored rope
+		addMapping(new MappingFixedMeta(245, Blocks.ROPE.id(), BlockLogicAnchor.MASK_ANCHORED_ROPE));
+		// panel: bit 0 set = wood, facing in bits 1-3
+		addMapping(new MappingBitSplit(246, 1, BTXBlocks.SIDING_STONE.id(), BTXBlocks.SIDING_OAK.id(), 1));
 		addMapping(new MappingSimple(248, BTXBlocks.GEARBOX.id()));
 		addMapping(new MappingSimple(226, BTXBlocks.SAW.id()));
 		// turntable: the switch setting is restored from the tile entity's m_iSwitchSetting
@@ -107,11 +125,16 @@ public class BTW294ChunkConverter extends ChunkConverter {
 
     @Override
     public void convertBlocksAndMetadata(short[] blocks, byte[] metadata) {
+        byte[] portalAxes = BTAVanillaSaveFixes.findPortalAxes(blocks);
+
         for (int i = 0; i < blocks.length; i++) {
             int raw = blocks[i];
             int id = raw < 0 ? raw & 0xFF : raw;   // undo sign extension from the byte->short copy
             if (id >= this.mappings.length) {
                 continue;                           // not a legacy ID (already converted)
+            }
+            if (BTAVanillaSaveFixes.convertBlock(blocks, metadata, i, id, portalAxes)) {
+                continue;
             }
             MappingBase mapping = this.mappings[id];
             if (mapping == null) {
@@ -157,6 +180,21 @@ public class BTW294ChunkConverter extends ChunkConverter {
         @Override
         public int[] getConversion(int meta) {
             return new int[]{this.newId, meta & this.mask};
+        }
+    }
+
+    protected static final class MappingFixedMeta extends MappingBase {
+        private final int newId, meta;
+
+        public MappingFixedMeta(int oldId, int newId, int meta) {
+            super(oldId);
+            this.newId = newId;
+            this.meta = meta;
+        }
+
+        @Override
+        public int[] getConversion(int meta) {
+            return new int[]{this.newId, this.meta};
         }
     }
 

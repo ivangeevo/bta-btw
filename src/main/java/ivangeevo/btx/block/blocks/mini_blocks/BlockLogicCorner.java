@@ -3,14 +3,13 @@ package ivangeevo.btx.block.blocks.mini_blocks;
 import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.util.IExactHitPlacement;
 import ivangeevo.btx.util.rendering.PlacementBounds;
-import ivangeevo.btx.util.utils.FacingUtils;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockLogicSupplier;
 import net.minecraft.core.block.IPaintable;
+import net.minecraft.core.block.material.Material;
 import net.minecraft.core.block.tag.BlockTags;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.item.block.ItemBlockPainted;
 import net.minecraft.core.sound.BlockSounds;
 import net.minecraft.core.util.helper.DyeColor;
 import net.minecraft.core.util.helper.Side;
@@ -30,6 +29,10 @@ public class BlockLogicCorner extends BlockLogicWoodPiece implements IExactHitPl
 
 	public BlockLogicCorner(@NotNull Block<?> block) {
 		super(block);
+	}
+
+	protected BlockLogicCorner(@NotNull Block<?> block, @NotNull Material material) {
+		super(block, material);
 	}
 
 	public static BlockLogicSupplier<BlockLogicCorner> properties() {
@@ -108,7 +111,6 @@ public class BlockLogicCorner extends BlockLogicWoodPiece implements IExactHitPl
 		return (x ? 4 : 0) | (y ? 2 : 0) | (z ? 1 : 0);
 	}
 
-	/** axis = 0 is x, 1 is y, 2 is z. Returns +1 if the corner sits on the positive half of that axis, else -1. */
 	public static int getCornerAlignmentOffsetAlongAxis(int cornerData, int axis) {
 		return (cornerData & (4 >> axis)) != 0 ? 1 : -1;
 	}

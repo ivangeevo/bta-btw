@@ -148,8 +148,7 @@ public class BlockLogicHibachi extends BlockLogic implements FireInteraction {
 	}
 
 	private boolean canIncinerateBlock(World world, TilePosc tilePos) {
-		Block<?> target = world.getBlockType(tilePos);
-		return target == Blocks.AIR || FireUtils.canBlockBeIncinerated(world, tilePos);
+		return world.isAirBlock(tilePos) || FireUtils.canBlockBeIncinerated(world, tilePos);
 	}
 
 	private boolean shouldIgniteAbove(World world, TilePosc pos) {

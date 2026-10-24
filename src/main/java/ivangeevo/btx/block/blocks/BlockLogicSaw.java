@@ -1,5 +1,7 @@
 package ivangeevo.btx.block.blocks;
 
+import ivangeevo.btx.achievement.BTXAchievementTriggers;
+import ivangeevo.btx.achievement.BTXAchievements;
 import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.block.blocks.turntable.TurntableInteraction;
 import ivangeevo.btx.item.BTXItems;
@@ -222,10 +224,12 @@ public class BlockLogicSaw extends BlockLogic implements MechanicalDevice, Turnt
 	protected void sawBlockToFront(World world, TilePosc tilePos, Random rand) {
 		RecipeEntrySawBase<?, ?> recipe = findRecipeToFront(world, tilePos);
 		if (recipe instanceof RecipeEntrySawBreaks) {
+			BTXAchievementTriggers.awardNearby(world, tilePos, BTXAchievements.SAW_BREAK);
 			breakSaw(world, tilePos);
 		} else if (recipe instanceof RecipeEntrySaw cut) {
 			TilePos target = getTargetPos(world, tilePos);
 			cut.apply(world, target, rand);
+			BTXAchievementTriggers.awardNearby(world, tilePos, BTXAchievements.SAW_CUT);
 			emitSawParticles(world, target, rand);
 		}
 	}
@@ -262,6 +266,10 @@ public class BlockLogicSaw extends BlockLogic implements MechanicalDevice, Turnt
 		blade.translate(tilePos.x(), tilePos.y(), tilePos.z());
 
 		if (blade.intersectsAABB(entity.bb) && BTXDamageSources.hurt(entity, BLADE_DAMAGE, DamageType.COMBAT, BTXDamageSources.SAW)) {
+			if (entity instanceof Player player) {
+				BTXAchievementTriggers.award(player, BTXAchievements.SAW_HURT);
+			}
+
 			Random rand = world.rand;
 
 			SoundUtils.playAtTileCenter(world, tilePos, SoundCategory.WORLD_SOUNDS, BTXSoundTypes.SAW_HURT,
@@ -270,8 +278,13 @@ public class BlockLogicSaw extends BlockLogic implements MechanicalDevice, Turnt
 			TilePos target = getTargetPos(world, tilePos);
 
 			for (int i = 0; i < 10; i++) {
-				world.spawnParticle("reddust", target.x() + rand.nextFloat(), target.y() + rand.nextFloat(), target.z() + rand.nextFloat(),
-					0.0, 0.0, 0.0, 0, false);
+				world.spawnParticle(
+					"reddust",
+					target.x() + rand.nextFloat(),
+					target.y() + rand.nextFloat(),
+					target.z() + rand.nextFloat(),
+					0.0, 0.0, 0.0, 0, false
+				);
 			}
 		}
 	}
@@ -309,11 +322,13 @@ public class BlockLogicSaw extends BlockLogic implements MechanicalDevice, Turnt
 		}
 
 		for (int i = 0; i < 5; i++) {
-			world.spawnParticle("smoke",
+			world.spawnParticle(
+				"smoke",
 				x + (rand.nextFloat() - 0.5) * extentX,
 				y + rand.nextFloat() * 0.1,
 				z + (rand.nextFloat() - 0.5) * extentZ,
-				0.0, 0.0, 0.0, 0, false);
+				0.0, 0.0, 0.0, 0, false
+			);
 		}
 	}
 

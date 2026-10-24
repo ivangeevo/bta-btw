@@ -1,6 +1,9 @@
 package ivangeevo.btx.block.blocks.kiln;
 
+import ivangeevo.btx.achievement.BTXAchievementTriggers;
+import ivangeevo.btx.achievement.BTXAchievements;
 import ivangeevo.btx.block.BTXBlocks;
+import ivangeevo.btx.particle.BTXParticles;
 import ivangeevo.btx.recipe.BTXRecipes;
 import ivangeevo.btx.recipe.kiln.RecipeEntryKiln;
 import ivangeevo.btx.util.utils.MiscUtils;
@@ -116,9 +119,6 @@ public class BlockLogicKiln extends BlockLogic {
         }
     }
 
-    // TODO: BTW hasMortar(blockAccess, i, j, k) returns true. Port it with whatever your
-    // siding/moulding/corner mortar logic uses.
-
     //------------- Class Specific Methods ------------//
 
     public int getCookCounter(int data) {
@@ -162,6 +162,8 @@ public class BlockLogicKiln extends BlockLogic {
 	private void cookBlock(World world, TilePosc pos) {
 		RecipeEntryKiln recipe = BTXRecipes.KILN.findRecipe(world, pos);
 		if (recipe == null) return;
+
+		BTXAchievementTriggers.awardNearby(world, pos, BTXAchievements.KILN);
 
 		world.setBlockTypeNotify(pos, Blocks.AIR);
 		for (ItemStack stack : recipe.getOutputs()) {
@@ -224,7 +226,7 @@ public class BlockLogicKiln extends BlockLogic {
                     double xPos = tilePos.x() + rand.nextDouble();
                     double yPos = tilePos.y() + 1D + (rand.nextDouble() * 0.75D);
                     double zPos = tilePos.z() + rand.nextDouble();
-                    world.spawnParticle("whitesmoke", xPos, yPos, zPos, 0.0, 0.0, 0.0, 0, false);
+                    world.spawnParticle(BTXParticles.WHITE_SMOKE, xPos, yPos, zPos, 0.0, 0.0, 0.0, 0, false);
                 }
             } else {
                 for (int tempFacing = 2; tempFacing < 6; tempFacing++) {
@@ -249,7 +251,7 @@ public class BlockLogicKiln extends BlockLogic {
                         zPos += horizontalOffset;
                     }
 
-                    world.spawnParticle("whitesmoke", xPos, yPos, zPos, 0.0, 0.0, 0.0, 0, false);
+                    world.spawnParticle(BTXParticles.WHITE_SMOKE, xPos, yPos, zPos, 0.0, 0.0, 0.0, 0, false);
                 }
             }
         }

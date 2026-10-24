@@ -1,5 +1,7 @@
 package ivangeevo.btx.util;
 
+import ivangeevo.btx.achievement.BTXAchievementTriggers;
+import ivangeevo.btx.achievement.BTXAchievements;
 import ivangeevo.btx.item.items.AreaMiningTool;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.Blocks;
@@ -35,6 +37,10 @@ public class AreaMiningHelper {
 				SoulforgedSounds.playSoulDeactivate(world, player);
 			}
 			player.sendStatusMessageTranslated(areaMode ? "messages.area.mining.on" : "messages.area.mining.off");
+
+			if (!areaMode) {
+				BTXAchievementTriggers.award(player, BTXAchievements.AREA_TOGGLE);
+			}
 		}
 	}
 
@@ -47,7 +53,13 @@ public class AreaMiningHelper {
 			return;
 		}
 
-		for (TilePos target : getExtraTargets(tool, stack, world, player, centerBlock.getHardness(), center, side)) {
+		List<TilePos> targets = getExtraTargets(tool, stack, world, player, centerBlock.getHardness(), center, side);
+
+		if (targets.size() == 8) {
+			BTXAchievementTriggers.award(player, BTXAchievements.AREA_MINE);
+		}
+
+		for (TilePos target : targets) {
 			breakBlock(stack, world, player, target, side);
 
 			stack.damageItem(1, player);

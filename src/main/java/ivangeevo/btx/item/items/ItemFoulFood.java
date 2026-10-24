@@ -1,5 +1,7 @@
 package ivangeevo.btx.item.items;
 
+import ivangeevo.btx.achievement.BTXAchievementTriggers;
+import ivangeevo.btx.achievement.BTXAchievements;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.IBonemealable;
 import net.minecraft.core.item.Item;
@@ -17,7 +19,13 @@ public class ItemFoulFood extends Item {
 	@Override
 	public boolean onUseOnBlock(@NotNull ItemStack selfStack, @NotNull World world, @NotNull Player player, @NotNull TilePosc tilePos, @NotNull Side side, double xHit, double yHit) {
 		if (world.getBlockType(tilePos).getLogic() instanceof IBonemealable bonemealable) {
-			return bonemealable.onBonemealUsed(selfStack, player, world, tilePos, side, xHit, yHit);
+			boolean used = bonemealable.onBonemealUsed(selfStack, player, world, tilePos, side, xHit, yHit);
+
+			if (used) {
+				BTXAchievementTriggers.award(player, BTXAchievements.FOUL_FOOD);
+			}
+
+			return used;
 		}
 
 		return false;

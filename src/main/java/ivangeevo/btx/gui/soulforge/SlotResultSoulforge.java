@@ -1,7 +1,10 @@
 package ivangeevo.btx.gui.soulforge;
 
+import ivangeevo.btx.achievement.BTXAchievementTriggers;
+import ivangeevo.btx.achievement.BTXAchievements;
 import ivangeevo.btx.recipe.BTXRecipes;
 import ivangeevo.btx.recipe.soulforge.RecipeEntrySoulforgeBase;
+import ivangeevo.btx.recipe.soulforge.RecipeEntrySoulforgeRepair;
 import ivangeevo.btx.sound.BTXSoundTypes;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
@@ -28,6 +31,10 @@ public class SlotResultSoulforge extends SlotResult {
 
 		if (recipe != null) {
 			recipe.onCraftResult(this.grid);
+
+			if (recipe instanceof RecipeEntrySoulforgeRepair) {
+				BTXAchievementTriggers.award(this.player, BTXAchievements.SF_REPAIR);
+			}
 		}
 
 		playCraftSound();

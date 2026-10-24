@@ -2,6 +2,8 @@ package ivangeevo.btx.block.entity;
 
 import com.mojang.nbt.tags.CompoundTag;
 import com.mojang.nbt.tags.ListTag;
+import ivangeevo.btx.achievement.BTXAchievementTriggers;
+import ivangeevo.btx.achievement.BTXAchievements;
 import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.block.blocks.BlockLogicHopper;
 import ivangeevo.btx.recipe.BTXRecipes;
@@ -467,6 +469,8 @@ public class TileEntityHopper extends TileEntity implements Container {
 	}
 
 	private void hopperSoulOverload() {
+		BTXAchievementTriggers.awardNearby(worldObj, tilePos, BTXAchievementTriggers.WIDE_RADIUS, BTXAchievements.SOUL_OVERLOAD);
+
 		if (spawnGhast()) {
 			SoundUtils.playAtTileCenter(worldObj, tilePos, SoundCategory.ENTITY_SOUNDS, BTXSoundTypes.HOPPER_SOUL_OVERLOAD, 1.0F,
 				worldObj.rand.nextFloat() * 0.4F + 0.8F);
