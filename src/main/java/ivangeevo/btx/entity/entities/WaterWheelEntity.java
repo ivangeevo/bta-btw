@@ -2,9 +2,14 @@ package ivangeevo.btx.entity.entities;
 
 import com.mojang.nbt.tags.CompoundTag;
 import ivangeevo.btx.item.BTXItems;
+import ivangeevo.btx.item.items.ItemWaterWheel;
 import ivangeevo.btx.util.WaterFlowHelper;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.Blocks;
+import net.minecraft.core.entity.player.Player;
+import net.minecraft.core.item.ItemPaintBrush;
+import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.util.helper.DyeColor;
 import net.minecraft.core.util.helper.MathHelper;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.pos.TilePos;
@@ -27,6 +32,9 @@ public class WaterWheelEntity extends MechanicalPowerSourceEntityHorizonal{
 	private static final int SIDE_OFFSET = 2;
 	private static final int WHEEL_RADIUS = 2;
 
+	private static final int DATA_COLOR_ID = 23;
+	public static final int UNPAINTED = -1;
+
 	public WaterWheelEntity(@NotNull World world) {
 		super(world);
 	}
@@ -38,6 +46,15 @@ public class WaterWheelEntity extends MechanicalPowerSourceEntityHorizonal{
 	@Override
 	protected void defineSynchedData() {
 		super.defineSynchedData();
+		entityData.define(DATA_COLOR_ID, UNPAINTED, Integer.class);
+	}
+
+	public int getColor() {
+		return entityData.getInt(DATA_COLOR_ID);
+	}
+
+	public void setColor(int color) {
+		entityData.set(DATA_COLOR_ID, color);
 	}
 
 	@Override
@@ -45,13 +62,35 @@ public class WaterWheelEntity extends MechanicalPowerSourceEntityHorizonal{
 		tag.putBoolean("bWaterWheelIAligned", alignedToX);
 		tag.putFloat("fRotation", rotation);
 		tag.putBoolean("bProvidingPower", providingPower);
+		tag.putInt("iColor", getColor());
 	}
 
 	@Override
 	public void readAdditionalSaveData(@NotNull CompoundTag tag) {
 		alignedToX = tag.getBoolean("bWaterWheelIAligned");
+		setBounds();
 		rotation = tag.getFloat("fRotation");
 		providingPower = tag.getBoolean("bProvidingPower");
+		setColor(tag.containsKey("iColor") ? tag.getInteger("iColor") : UNPAINTED);
+	}
+
+	@Override
+	public boolean interact(@NotNull Player player) {
+		ItemStack heldStack = player.getHeldItem();
+
+		if (heldStack == null || !(heldStack.getItem() instanceof ItemPaintBrush brush)) return super.interact(player);
+
+		DyeColor color = ItemPaintBrush.getColor(heldStack);
+
+		if (color == null || getColor() == color.ordinal()) return super.interact(player);
+
+		if (!world.isClientSide) {
+			setColor(color.ordinal());
+		}
+
+		brush.consumePaint(heldStack, player);
+
+		return true;
 	}
 
 	@Override
@@ -82,7 +121,7 @@ public class WaterWheelEntity extends MechanicalPowerSourceEntityHorizonal{
 	@Override
 	public void destroyWithDrop() {
 		if (!world.isClientSide && !removed) {
-			this.dropItem(BTXItems.WATERWHEEL.id, 1, 0.0F);
+			this.dropItem(new ItemStack(BTXItems.WATERWHEEL, 1, ItemWaterWheel.metaFromColor(getColor())), 0.0F);
 			this.remove();
 		}
 	}
@@ -200,5 +239,4 @@ public class WaterWheelEntity extends MechanicalPowerSourceEntityHorizonal{
 
 		return true;
 	}
-
 }

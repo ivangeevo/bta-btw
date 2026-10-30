@@ -76,6 +76,11 @@ public class BlockLogicHandCrank extends BlockLogic implements MechanicalDevice,
 	}
 
 	@Override
+	public @NotNull ISupport getSupport(@NotNull World world, @NotNull TilePosc tilePos, @NotNull Side side) {
+		return PartialSupport.INSTANCE;
+	}
+
+	@Override
 	public @Nullable AABBdc getCollisionAABB(@NotNull WorldSource source, @NotNull TilePosc tilePos) {
 		return new AABBd(tilePos.x(), tilePos.y(), tilePos.z(), tilePos.x() + 1.0F, tilePos.y() + BASE_HEIGHT, tilePos.z() + 1.0F);
 	}

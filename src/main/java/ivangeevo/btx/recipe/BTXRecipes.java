@@ -29,16 +29,15 @@ import net.minecraft.core.data.DataLoader;
 import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.data.registry.recipe.RecipeNamespace;
 import ivangeevo.btx.recipe.impl.RecipeEntryCraftingShapelessConsuming;
+import ivangeevo.btx.recipe.impl.RecipeEntryDyeingWaterWheel;
+import net.minecraft.core.data.registry.recipe.entry.RecipeEntryDyeing;
+import net.minecraft.core.data.registry.recipe.entry.RecipeEntryUndyeing;
 import net.minecraft.core.data.registry.recipe.RecipeGroup;
 import net.minecraft.core.data.registry.recipe.RecipeSymbol;
-import net.minecraft.core.item.ItemBucket;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.Items;
-import net.minecraft.core.util.helper.DyeColor;
 import turniplabs.halplibe.helper.RecipeBuilder;
-
-import java.util.ArrayList;
-import java.util.List;
+import turniplabs.halplibe.helper.recipeBuilders.RecipeBuilderBlastFurnace;
 import turniplabs.halplibe.helper.recipeBuilders.RecipeBuilderFurnace;
 import turniplabs.halplibe.helper.recipeBuilders.RecipeBuilderShaped;
 import turniplabs.halplibe.helper.recipeBuilders.RecipeBuilderShapeless;
@@ -76,511 +75,62 @@ public class BTXRecipes {
 		Registries.RECIPE_TYPES.register("btx:saw", RecipeEntrySaw.class);
 		Registries.RECIPE_TYPES.register("btx:saw_breaks", RecipeEntrySawBreaks.class);
 		Registries.RECIPE_TYPES.register("btx:crafting/shapeless_consuming", RecipeEntryCraftingShapelessConsuming.class);
+		Registries.RECIPE_TYPES.register("btx:crafting/dyeing_waterwheel", RecipeEntryDyeingWaterWheel.class);
 	}
 
-	@SuppressWarnings({"rawtypes", "unchecked"})
-	private static void registerCementBucket(String id, ItemStack waterBucket, ItemStack cementBucket, int charges) {
-		List<RecipeSymbol> inputs = new ArrayList<>();
-		inputs.add(new RecipeSymbol(waterBucket));
-
-		for (int i = 0; i < charges; i++) {
-			inputs.add(new RecipeSymbol(new ItemStack(Blocks.SOULSAND)));
-			inputs.add(new RecipeSymbol(new ItemStack(Blocks.GRAVEL)));
-		}
-
+	private static void registerWaterWheelDyeing() {
+		RecipeSymbol anyWaterWheel = new RecipeSymbol(new ItemStack(BTXItems.WATERWHEEL, 1, -1));
 		RecipeGroup workbench = RecipeBuilder.getRecipeGroup(BTXMod.MOD_ID, "workbench", new RecipeSymbol(Blocks.WORKBENCH.getDefaultStack()));
-		workbench.register(id, new RecipeEntryCraftingShapelessConsuming(inputs, cementBucket));
+		workbench.register("waterwheel_dyeing", new RecipeEntryDyeingWaterWheel(anyWaterWheel, new ItemStack(BTXItems.WATERWHEEL)));
+		workbench.register("waterwheel_undyeing", new RecipeEntryUndyeing(anyWaterWheel, new ItemStack(BTXItems.WATERWHEEL)));
+	}
+
+	private static void registerMechanicalDyeing() {
+		RecipeGroup workbench = RecipeBuilder.getRecipeGroup(BTXMod.MOD_ID, "workbench", new RecipeSymbol(Blocks.WORKBENCH.getDefaultStack()));
+		workbench.register("axle_dyeing", new RecipeEntryDyeing(new RecipeSymbol(BTXItemGroups.AXLES), new ItemStack(BTXBlocks.AXLE_PAINTED), true, false));
+		workbench.register("axle_undyeing", new RecipeEntryUndyeing(new RecipeSymbol(BTXItemGroups.AXLES), new ItemStack(BTXBlocks.AXLE)));
+		workbench.register("gearbox_dyeing", new RecipeEntryDyeing(new RecipeSymbol(BTXItemGroups.GEARBOXES), new ItemStack(BTXBlocks.GEARBOX_PAINTED), true, false));
+		workbench.register("gearbox_undyeing", new RecipeEntryUndyeing(new RecipeSymbol(BTXItemGroups.GEARBOXES), new ItemStack(BTXBlocks.GEARBOX)));
 	}
 
 	public void onRecipesReady() {
-		BTXRecipes.workbenchRecipes();
+		BTXWorkbenchRecipes.register();
+		BTXRecipes.furnaceRecipes();
 		BTXRecipes.modifyVanillaRecipes();
 		BTXRecipes.modCustomRecipes();
 	}
 
-	// TODO: Make some of these recipes handle tags(multiple types of item/block entries) instead of just single ones
-	public static void workbenchRecipes() {
-		// Blocks
+	public static void furnaceRecipes() {
 		RecipeBuilderFurnace wolfChopCooked = new RecipeBuilderFurnace(BTXMod.MOD_ID);
 		wolfChopCooked
 			.setInput(BTXItems.FOOD_WOLF_CHOP_RAW)
 			.create("food_wolf_chop_cooked", new ItemStack(BTXItems.FOOD_WOLF_CHOP_COOKED));
-
-		RecipeBuilderShaped millStone = new RecipeBuilderShaped(BTXMod.MOD_ID, "YYY", "YYY", "YXY");
-		millStone
-			.addInput('Y', Blocks.STONE)
-			.addInput('X', BTXItems.GEAR)
-			.create("millstone", new ItemStack(BTXBlocks.MILLSTONE, 1));
-
-		RecipeBuilderShaped anchor = new RecipeBuilderShaped(BTXMod.MOD_ID, " X ", "###");
-		anchor
-			.addInput('X', Items.INGOT_IRON)
-			.addInput('#', "minecraft:stones")
-			.create("anchor", new ItemStack(BTXBlocks.ANCHOR, 1));
-
-		RecipeBuilderShaped detectorBlock = new RecipeBuilderShaped(BTXMod.MOD_ID, "X#X", "###", "ZYZ");
-		detectorBlock
-			.addInput('X', Items.DYE, 4)
-			.addInput('#', Blocks.COBBLE_STONE)
-			.addInput('Y', Items.DUST_REDSTONE)
-			.addInput('Z', Blocks.STONE)
-			.create("detector_block", new ItemStack(BTXBlocks.DETECTOR_BLOCK, 1));
-
-		RecipeBuilderShaped lens = new RecipeBuilderShaped(BTXMod.MOD_ID, "GDG", "G G", "G#G");
-		lens
-			.addInput('G', Items.INGOT_GOLD)
-			.addInput('D', Items.DIAMOND)
-			.addInput('#', Blocks.GLASS)
-			.create("lens", new ItemStack(BTXBlocks.LENS, 1));
-
-		RecipeBuilderShaped lensFlipped = new RecipeBuilderShaped(BTXMod.MOD_ID, "G#G", "G G", "GDG");
-		lensFlipped
-			.addInput('G', Items.INGOT_GOLD)
-			.addInput('D', Items.DIAMOND)
-			.addInput('#', Blocks.GLASS)
-			.create("lens_flipped", new ItemStack(BTXBlocks.LENS, 1));
-
-		RecipeBuilderShaped lightBulb = new RecipeBuilderShaped(BTXMod.MOD_ID, " # ", "#X#", " Y ");
-		lightBulb
-			.addInput('#', Blocks.GLASS)
-			.addInput('X', Items.DUST_GLOWSTONE)
-			.addInput('Y', Items.DUST_REDSTONE)
-			.create("light_bulb", new ItemStack(BTXBlocks.LIGHT_BULB, 1));
-
-		registerCementBucket("cement_bucket", ItemBucket.createRecipeInput(Items.BUCKET_IRON, ItemBucket.STATE_WATER),
-			ItemBucket.createItemStack(Items.BUCKET_IRON, BTXItems.CEMENT_BUCKET_STATE, 1), 1);
-
-		for (int charges = 1; charges <= 3; charges++) {
-			registerCementBucket("cement_bucket_steel_" + charges, ItemBucket.createItemStack(Items.BUCKET_STEEL, ItemBucket.STATE_WATER, charges),
-				ItemBucket.createItemStack(Items.BUCKET_STEEL, BTXItems.CEMENT_BUCKET_STATE, charges), charges);
-		}
-
-		RecipeBuilderShaped detectorRailStone = new RecipeBuilderShaped(BTXMod.MOD_ID, "X X", "X#X", "XRX");
-		detectorRailStone
-			.addInput('X', Items.INGOT_IRON)
-			.addInput('#', Blocks.PRESSURE_PLATE_STONE)
-			.addInput('R', Items.DUST_REDSTONE)
-			.create("detector_rail_stone", new ItemStack(BTXBlocks.DETECTOR_RAIL_STONE, 6));
-
-		RecipeBuilderShaped detectorRailSoulforged = new RecipeBuilderShaped(BTXMod.MOD_ID, "X X", "X#X", "XRX");
-		detectorRailSoulforged
-			.addInput('X', Items.INGOT_IRON)
-			.addInput('#', BTXBlocks.SOULFORGED_STEEL_PRESSURE_PLATE)
-			.addInput('R', Items.DUST_REDSTONE)
-			.create("detector_rail_soulforged_steel", new ItemStack(BTXBlocks.DETECTOR_RAIL_SOULFORGED_STEEL, 6));
-
-		RecipeBuilderShaped broadheadArrow = new RecipeBuilderShaped(BTXMod.MOD_ID, "#", "X", "Y");
-		broadheadArrow
-			.addInput('#', BTXItems.BROADHEAD)
-			.addInput('X', BTXItemGroups.MOULDINGS_PLANKS)
-			.addInput('Y', Items.FEATHER_CHICKEN)
-			.create("broadhead_arrow", new ItemStack(BTXItems.BROADHEAD_ARROW, 4));
-
-		RecipeBuilderShaped compositeBowSlime = new RecipeBuilderShaped(BTXMod.MOD_ID, "X#Y", "ZX#", "X#Y");
-		compositeBowSlime
-			.addInput('X', Items.BONE)
-			.addInput('#', BTXItemGroups.MOULDINGS_PLANKS)
-			.addInput('Y', Items.SLIMEBALL)
-			.addInput('Z', Items.STRING)
-			.create("composite_bow", new ItemStack(BTXItems.COMPOSITE_BOW, 1));
-
-		RecipeBuilderShaped compositeBowGlue = new RecipeBuilderShaped(BTXMod.MOD_ID, "X#Y", "ZX#", "X#Y");
-		compositeBowGlue
-			.addInput('X', Items.BONE)
-			.addInput('#', BTXItemGroups.MOULDINGS_PLANKS)
-			.addInput('Y', BTXItems.GLUE)
-			.addInput('Z', Items.STRING)
-			.create("composite_bow_glue", new ItemStack(BTXItems.COMPOSITE_BOW, 1));
-
-		RecipeBuilderShaped pulley = new RecipeBuilderShaped(BTXMod.MOD_ID, "#Y#", "XZX", "#Y#");
-		pulley
-			.addInput('#', BTXBlocks.SIDING_OAK)
-			.addInput('X', BTXItems.GEAR)
-			.addInput('Y', Items.INGOT_IRON)
-			.addInput('Z', Items.DUST_REDSTONE)
-			.create("pulley", new ItemStack(BTXBlocks.PULLEY, 1));
-
-		RecipeBuilderShaped platform = new RecipeBuilderShaped(BTXMod.MOD_ID, "#X#", " # ", "#X#");
-		platform
-			.addInput('#', BTXBlocks.MOULDING_OAK)
-			.addInput('X', BTXBlocks.WICKER_PANE)
-			.create("platform", new ItemStack(BTXBlocks.PLATFORM, 1));
-
-		RecipeBuilderShaped hopper = new RecipeBuilderShaped(BTXMod.MOD_ID, "# #", "XYX", " Z ");
-		hopper
-			.addInput('#', BTXBlocks.SIDING_OAK)
-			.addInput('X', BTXItems.GEAR)
-			.addInput('Y', Blocks.PRESSURE_PLATE_PLANKS_OAK)
-			.addInput('Z', BTXBlocks.CORNER_OAK)
-			.create("hopper", new ItemStack(BTXBlocks.HOPPER, 1));
-
-		RecipeBuilderShaped grate = new RecipeBuilderShaped(BTXMod.MOD_ID, "S#S", "###", "S#S");
-		grate
-			.addInput('#', Items.STICK)
-			.addInput('S', Items.STRING)
-			.create("grate", new ItemStack(BTXBlocks.GRATE, 1));
-
-		RecipeBuilderShaped slats = new RecipeBuilderShaped(BTXMod.MOD_ID, "##", "##");
-		slats
-			.addInput('#', BTXBlocks.MOULDING_OAK)
-			.create("slats", new ItemStack(BTXBlocks.SLATS, 1));
-
-		RecipeBuilderShaped wicker = new RecipeBuilderShaped(BTXMod.MOD_ID, "##", "##");
-		wicker
-			.addInput('#', Items.SUGARCANE)
-			.create("wicker", new ItemStack(BTXItems.WICKER, 1));
-
-		RecipeBuilderShapeless wickerPane = new RecipeBuilderShapeless(BTXMod.MOD_ID);
-		wickerPane
-			.addInput(BTXBlocks.GRATE)
-			.addInput(BTXItems.WICKER)
-			.create("wicker_pane", new ItemStack(BTXBlocks.WICKER_PANE, 1));
-
-		RecipeBuilderShaped wickerBlock = new RecipeBuilderShaped(BTXMod.MOD_ID, "##", "##");
-		wickerBlock
-			.addInput('#', BTXBlocks.WICKER_PANE)
-			.create("wicker_block", new ItemStack(BTXBlocks.WICKER_BLOCK, 1));
-
-		RecipeBuilderShaped wickerSlabFromPanes = new RecipeBuilderShaped(BTXMod.MOD_ID, "##");
-		wickerSlabFromPanes
-			.addInput('#', BTXBlocks.WICKER_PANE)
-			.create("wicker_slab_from_panes", new ItemStack(BTXBlocks.WICKER_SLAB, 1));
-
-		RecipeBuilderShaped wickerSlabFromBlocks = new RecipeBuilderShaped(BTXMod.MOD_ID, "##");
-		wickerSlabFromBlocks
-			.addInput('#', BTXBlocks.WICKER_BLOCK)
-			.create("wicker_slab_from_blocks", new ItemStack(BTXBlocks.WICKER_SLAB, 4));
-
-		RecipeBuilderShapeless wickerPaneFromBlock = new RecipeBuilderShapeless(BTXMod.MOD_ID);
-		wickerPaneFromBlock
-			.addInput(BTXBlocks.WICKER_BLOCK)
-			.create("wicker_pane_from_block", new ItemStack(BTXBlocks.WICKER_PANE, 4));
-
-		RecipeBuilderShapeless wickerPaneFromSlab = new RecipeBuilderShapeless(BTXMod.MOD_ID);
-		wickerPaneFromSlab
-			.addInput(BTXBlocks.WICKER_SLAB)
-			.create("wicker_pane_from_slab", new ItemStack(BTXBlocks.WICKER_PANE, 2));
-
-		RecipeBuilderShapeless wickerBlockFromSlabs = new RecipeBuilderShapeless(BTXMod.MOD_ID);
-		wickerBlockFromSlabs
-			.addInput(BTXBlocks.WICKER_SLAB)
-			.addInput(BTXBlocks.WICKER_SLAB)
-			.create("wicker_block_from_slabs", new ItemStack(BTXBlocks.WICKER_BLOCK, 1));
-
-		RecipeBuilderShaped concentratedHellfireBlock = new RecipeBuilderShaped(BTXMod.MOD_ID, "###", "###", "###");
-		concentratedHellfireBlock
-			.addInput('#', BTXItems.CONCENTRATED_HELLFIRE)
-			.create("concentrated_hellfire_block", new ItemStack(BTXBlocks.CONCENTRATED_HELLFIRE_BLOCK, 1));
-
-		RecipeBuilderShapeless concentratedHellfireFromBlock = new RecipeBuilderShapeless(BTXMod.MOD_ID);
-		concentratedHellfireFromBlock
-			.addInput(BTXBlocks.CONCENTRATED_HELLFIRE_BLOCK)
-			.create("concentrated_hellfire_from_block", new ItemStack(BTXItems.CONCENTRATED_HELLFIRE, 9));
-
-		RecipeBuilderShaped steelArmorPlate = new RecipeBuilderShaped(BTXMod.MOD_ID, "SIS");
-		steelArmorPlate
-			.addInput('S', BTXItems.STRAP)
-			.addInput('I', BTXItems.SOULFORGED_STEEL_INGOT)
-			.create("steel_armor_plate", new ItemStack(BTXItems.STEEL_ARMOR_PLATE, 1));
-
-		RecipeBuilderShaped soulforge = new RecipeBuilderShaped(BTXMod.MOD_ID, "###", " I ", "III");
-		soulforge
-			.addInput('#', Blocks.BLOCK_STEEL)
-			.addInput('I', Items.INGOT_STEEL)
-			.create("soulforge", new ItemStack(BTXBlocks.SOULFORGE, 1));
-
-		RecipeBuilderShaped saw = new RecipeBuilderShaped(BTXMod.MOD_ID, "YYY", "XZX", "#X#");
-		saw
-			.addInput('Y', Items.INGOT_IRON)
-			.addInput('X', BTXItems.GEAR)
-			.addInput('Z', BTXItems.BELT)
-			.addInput('#', "minecraft:planks")
-			.create("saw", new ItemStack(BTXBlocks.SAW, 1));
-
-		RecipeBuilderShaped handCrank = new RecipeBuilderShaped(BTXMod.MOD_ID, "  Y", " Y ", "#X#");
-		handCrank
-			.addInput('#', Blocks.COBBLE_STONE)
-			.addInput('X', BTXItems.GEAR)
-			.addInput('Y', Items.STICK)
-			.create("hand_crank", new ItemStack(BTXBlocks.HAND_CRANK, 1));
-
-		RecipeBuilderShaped axle = new RecipeBuilderShaped(BTXMod.MOD_ID, "#", "X", "#");
-		axle
-			.addInput('#', "minecraft:planks")
-			.addInput('X', Items.ROPE)
-			.create("axle", new ItemStack(BTXBlocks.AXLE, 1));
-		axle
-			.addInput('#', BTXItemGroups.MOULDINGS_PLANKS)
-			.addInput('X', Items.ROPE)
-			.create("axle_from_mouldings", new ItemStack(BTXBlocks.AXLE, 1));
-
-		RecipeBuilderShaped gearBox = new RecipeBuilderShaped(BTXMod.MOD_ID, "#X#", "XYX", "#X#");
-		gearBox
-			.addInput('#', "minecraft:planks")
-			.addInput('X', BTXItems.GEAR)
-			.addInput('Y', Items.DUST_REDSTONE)
-			.create("gearbox", new ItemStack(BTXBlocks.GEARBOX, 1));
-		gearBox
-			.addInput('#', BTXItemGroups.SIDINGS_PLANKS)
-			.addInput('X', BTXItems.GEAR)
-			.addInput('Y', Items.DUST_REDSTONE)
-			.create("gearbox_from_sidings", new ItemStack(BTXBlocks.GEARBOX, 1));
-
-		RecipeBuilderShaped fabric = new RecipeBuilderShaped(BTXMod.MOD_ID, "###", "###", "###");
-		fabric
-			.addInput('#', BTXItems.HEMP_FIBERS)
-			.create("fabric", new ItemStack(BTXItems.FABRIC, 1));
-
-		RecipeBuilderShapeless hempFibersFromFabric = new RecipeBuilderShapeless(BTXMod.MOD_ID);
-		hempFibersFromFabric
-			.addInput(BTXItems.FABRIC)
-			.create("hemp_fibers_from_fabric", new ItemStack(BTXItems.HEMP_FIBERS, 9));
-
-		RecipeBuilderShapeless hempFibersFromRope = new RecipeBuilderShapeless(BTXMod.MOD_ID);
-		hempFibersFromRope
-			.addInput(Items.ROPE)
-			.create("hemp_fibers_from_rope", new ItemStack(BTXItems.HEMP_FIBERS, 6));
-
-		RecipeBuilderShapeless string = new RecipeBuilderShapeless(BTXMod.MOD_ID);
-		string
-			.addInput(BTXItems.HEMP_FIBERS).addInput(BTXItems.HEMP_FIBERS)
-			.create("string", new ItemStack(Items.STRING, 1));
-
-		RecipeBuilderShaped sail = new RecipeBuilderShaped(BTXMod.MOD_ID, "###", "###", "XXX");
-		sail
-			.addInput('#', BTXItems.FABRIC)
-			.addInput('X', "minecraft:planks")
-			.create("sail", new ItemStack(BTXItems.SAIL, 1));
-		sail
-			.addInput('#', BTXItems.FABRIC)
-			.addInput('X', BTXItemGroups.MOULDINGS_PLANKS)
-			.create("sail_from_mouldings", new ItemStack(BTXItems.SAIL, 1));
-
-		RecipeBuilderShaped windMill = new RecipeBuilderShaped(BTXMod.MOD_ID, " # ", "# #", " # ");
-		windMill
-			.addInput('#', BTXItems.SAIL)
-			.create("windmill", new ItemStack(BTXItems.WINDMILL, 1));
-
-		RecipeBuilderShaped gear = new RecipeBuilderShaped(BTXMod.MOD_ID, " X ", "X#X", " X ");
-		gear
-			.addInput('#', "minecraft:planks")
-			.addInput('X', Items.STICK)
-			.create("gear", new ItemStack(BTXItems.GEAR, 2));
-
-		RecipeBuilderShaped waterWheel = new RecipeBuilderShaped(BTXMod.MOD_ID, "###", "# #", "###");
-		waterWheel
-			.addInput('#', BTXItems.WOOD_BLADE)
-			.create("waterwheel", new ItemStack(BTXItems.WATERWHEEL, 1));
-
-		RecipeBuilderShaped hibachi = new RecipeBuilderShaped(BTXMod.MOD_ID, "XXX", "#Z#", "#Y#");
-		hibachi
-			.addInput('#', Blocks.STONE)
-			.addInput('X', BTXItems.CONCENTRATED_HELLFIRE)
-			.addInput('Y', Items.DUST_REDSTONE)
-			.addInput('Z', Items.DUST_GLOWSTONE)
-			.create("hibachi", new ItemStack(BTXBlocks.HIBACHI, 1));
-
-		RecipeBuilderShaped bellows = new RecipeBuilderShaped(BTXMod.MOD_ID, "###", "XXX", "YZY");
-		bellows
-			.addInput('#', BTXItemGroups.SIDINGS_PLANKS)
-			.addInput('X', BTXItems.TANNED_LEATHER)
-			.addInput('Y', BTXItems.GEAR)
-			.addInput('Z', BTXItems.BELT)
-			.create("bellows", new ItemStack(BTXBlocks.BELLOWS, 1));
-
-		RecipeBuilderShaped turntable = new RecipeBuilderShaped(BTXMod.MOD_ID, "###", "ZXZ", "ZYZ");
-		turntable
-			.addInput('#', BTXItemGroups.SIDINGS_PLANKS)
-			.addInput('X', Items.DUST_REDSTONE)
-			.addInput('Y', BTXItems.GEAR)
-			.addInput('Z', Blocks.STONE)
-			.create("turntable", new ItemStack(BTXBlocks.TURNTABLE, 1));
-
-		RecipeBuilderShaped cauldron = new RecipeBuilderShaped(BTXMod.MOD_ID, "#Y#", "#X#", "###");
-		cauldron
-			.addInput('#', Items.INGOT_IRON)
-			.addInput('X', Items.BONE)
-			.addInput('Y', "minecraft:water_buckets")
-			.create("cauldron", new ItemStack(BTXBlocks.CAULDRON, 1));
-
-		RecipeBuilderShaped planterSoil = new RecipeBuilderShaped(BTXMod.MOD_ID, "Y", "X", "#");
-		planterSoil
-			.addInput('#', BTXBlocks.PLANTER)
-			.addInput('X', "minecraft:water_buckets")
-			.addInput('Y', Blocks.DIRT)
-			.create("planter_soil", new ItemStack(BTXBlocks.PLANTER_SOIL, 1));
-
-		RecipeBuilderShaped planterGrass = new RecipeBuilderShaped(BTXMod.MOD_ID, "Y", "X", "#");
-		planterGrass
-			.addInput('#', BTXBlocks.PLANTER)
-			.addInput('X', "minecraft:water_buckets")
-			.addInput('Y', Blocks.GRASS)
-			.create("planter_grass", new ItemStack(BTXBlocks.PLANTER_GRASS, 1));
-
-		RecipeBuilderShaped planterGrassRetro = new RecipeBuilderShaped(BTXMod.MOD_ID, "Y", "X", "#");
-		planterGrassRetro
-			.addInput('#', BTXBlocks.PLANTER)
-			.addInput('X', "minecraft:water_buckets")
-			.addInput('Y', Blocks.GRASS_RETRO)
-			.create("planter_grass_retro", new ItemStack(BTXBlocks.PLANTER_GRASS_RETRO, 1));
-
-		RecipeBuilderShaped planterGrassScorched = new RecipeBuilderShaped(BTXMod.MOD_ID, "Y", "X", "#");
-		planterGrassScorched
-			.addInput('#', BTXBlocks.PLANTER)
-			.addInput('X', "minecraft:water_buckets")
-			.addInput('Y', Blocks.GRASS_SCORCHED)
-			.create("planter_grass_scorched", new ItemStack(BTXBlocks.PLANTER_GRASS_SCORCHED, 1));
-
-		// Two of a wood piece combine back into the next size up (BTW: siding -> planks, moulding -> siding, corner -> moulding)
-		RecipeBuilderShapeless planksFromSidings = new RecipeBuilderShapeless(BTXMod.MOD_ID);
-		planksFromSidings
-			.addInput(BTXBlocks.SIDING_OAK)
-			.addInput(BTXBlocks.SIDING_OAK)
-			.create("planks_from_sidings", new ItemStack(Blocks.PLANKS_OAK, 1));
-
-		for (BTXBlocks.StonePieces pieces : BTXBlocks.STONE_PIECES) {
-			RecipeBuilderShapeless stoneFromSidings = new RecipeBuilderShapeless(BTXMod.MOD_ID);
-			stoneFromSidings
-				.addInput(pieces.siding())
-				.addInput(pieces.siding())
-				.create(pieces.type() + "_from_sidings", new ItemStack(pieces.source(), 1));
-
-			RecipeBuilderShaped stoneSidingFromMouldings = new RecipeBuilderShaped(BTXMod.MOD_ID, "#", "#");
-			stoneSidingFromMouldings
-				.addInput('#', pieces.moulding())
-				.create("siding_" + pieces.type() + "_from_mouldings", new ItemStack(pieces.siding(), 1));
-
-			RecipeBuilderShapeless stoneMouldingFromCorners = new RecipeBuilderShapeless(BTXMod.MOD_ID);
-			stoneMouldingFromCorners
-				.addInput(pieces.corner())
-				.addInput(pieces.corner())
-				.create("moulding_" + pieces.type() + "_from_corners", new ItemStack(pieces.moulding(), 1));
-		}
-
-		RecipeBuilderShapeless sidingFromMouldings = new RecipeBuilderShapeless(BTXMod.MOD_ID);
-		sidingFromMouldings
-			.addInput(BTXBlocks.MOULDING_OAK)
-			.addInput(BTXBlocks.MOULDING_OAK)
-			.create("siding_from_mouldings", new ItemStack(BTXBlocks.SIDING_OAK, 1));
-
-		RecipeBuilderShapeless mouldingFromCorners = new RecipeBuilderShapeless(BTXMod.MOD_ID);
-		mouldingFromCorners
-			.addInput(BTXBlocks.CORNER_OAK)
-			.addInput(BTXBlocks.CORNER_OAK)
-			.create("moulding_from_corners", new ItemStack(BTXBlocks.MOULDING_OAK, 1));
-
-		RecipeBuilderShapeless strap = new RecipeBuilderShapeless(BTXMod.MOD_ID);
-		strap
-			.addInput(BTXItems.TANNED_LEATHER)
-			.create("strap", new ItemStack(BTXItems.STRAP, 8));
-
-		RecipeBuilderShaped belt = new RecipeBuilderShaped(BTXMod.MOD_ID, " # ", "# #", " # ");
-		belt
-			.addInput('#', BTXItems.STRAP)
-			.create("belt", new ItemStack(BTXItems.BELT));
-
-		RecipeBuilderShaped haft = new RecipeBuilderShaped(BTXMod.MOD_ID, "Y", "X", "#");
-		haft
-			.addInput('Y', BTXItems.STRAP)
-			.addInput('X', BTXItems.GLUE)
-			.addInput('#', BTXItemGroups.MOULDINGS_PLANKS)
-			.create("haft", new ItemStack(BTXItems.HAFT));
-
-		RecipeBuilderShaped haftFromSlimeball = new RecipeBuilderShaped(BTXMod.MOD_ID, "Y", "X", "#");
-		haftFromSlimeball
-			.addInput('Y', BTXItems.STRAP)
-			.addInput('X', Items.SLIMEBALL)
-			.addInput('#', BTXItemGroups.MOULDINGS_PLANKS)
-			.create("haft_from_slimeball", new ItemStack(BTXItems.HAFT));
-
-		RecipeBuilderShaped woodBlade = new RecipeBuilderShaped(BTXMod.MOD_ID, "#  ", "#X#", "#  ");
-		woodBlade
-			.addInput('#', BTXItemGroups.SIDINGS_PLANKS)
-			.addInput('X', BTXItems.GLUE)
-			.create("wood_blade", new ItemStack(BTXItems.WOOD_BLADE));
-
-		RecipeBuilderShapeless stickyPistonFromGlue = new RecipeBuilderShapeless(BTXMod.MOD_ID);
-		stickyPistonFromGlue
-			.addInput(BTXItems.GLUE)
-			.addInput(Blocks.PISTON_BASE)
-			.create("sticky_piston_from_glue", new ItemStack(Blocks.PISTON_BASE_STICKY));
-
-		RecipeBuilderShaped fencesFromMouldings = new RecipeBuilderShaped(BTXMod.MOD_ID, "###");
-		fencesFromMouldings
-			.addInput('#', BTXBlocks.MOULDING_OAK)
-			.create("fences_from_mouldings", new ItemStack(Blocks.FENCE_PLANKS_OAK, 2));
-
-		RecipeBuilderShaped stairsFromMouldings = new RecipeBuilderShaped(BTXMod.MOD_ID, "# ", "##");
-		stairsFromMouldings
-			.addInput('#', BTXBlocks.MOULDING_OAK)
-			.create("stairs_from_mouldings", new ItemStack(Blocks.STAIRS_PLANKS_OAK, 1));
-
-		RecipeBuilderShaped signsFromSidings = new RecipeBuilderShaped(BTXMod.MOD_ID, "###", "###", " X ");
-		signsFromSidings
-			.addInput('#', BTXBlocks.SIDING_OAK)
-			.addInput('X', Items.STICK)
-			.create("signs_from_sidings", new ItemStack(Items.SIGN, 2));
-
-		RecipeBuilderShaped doorFromSidings = new RecipeBuilderShaped(BTXMod.MOD_ID, "##", "##", "##");
-		doorFromSidings
-			.addInput('#', BTXBlocks.SIDING_OAK)
-			.create("door_from_sidings", new ItemStack(Items.DOOR_OAK, 1));
-
-		RecipeBuilderShaped trapdoorsFromSidings = new RecipeBuilderShaped(BTXMod.MOD_ID, "###", "###");
-		trapdoorsFromSidings
-			.addInput('#', BTXBlocks.SIDING_OAK)
-			.create("trapdoors_from_sidings", new ItemStack(Blocks.TRAPDOOR_PLANKS_OAK, 3));
-
-		RecipeBuilderShapeless brownWoolFromDung = new RecipeBuilderShapeless(BTXMod.MOD_ID);
-		brownWoolFromDung
-			.addInput(BTXItems.DUNG)
-			.addInput(new ItemStack(Blocks.WOOL, 1, DyeColor.WHITE.blockMeta))
-			.create("brown_wool_from_dung", new ItemStack(Blocks.WOOL, 1, DyeColor.BROWN.blockMeta));
-
-		RecipeBuilderShapeless brownVaseFromDung = new RecipeBuilderShapeless(BTXMod.MOD_ID);
-		brownVaseFromDung
-			.addInput(BTXItems.DUNG)
-			.addInput(BTXBlocks.VASE)
-			.create("brown_vase_from_dung", new ItemStack(BTXBlocks.VASE_PAINTED, 1, DyeColor.BROWN.blockMeta));
-
-		// Painted pieces keep their color: the pieces store it as blockMeta << 4, BTA's painted planks as blockMeta
-		for (DyeColor color : DyeColor.values()) {
-			int pieceMeta = color.blockMeta << 4;
-
-			RecipeBuilderShapeless paintedPlanksFromSidings = new RecipeBuilderShapeless(BTXMod.MOD_ID);
-			paintedPlanksFromSidings
-				.addInput(BTXBlocks.SIDING_OAK_PAINTED, pieceMeta)
-				.addInput(BTXBlocks.SIDING_OAK_PAINTED, pieceMeta)
-				.create("planks_painted_from_sidings_" + color.colorID, new ItemStack(Blocks.PLANKS_OAK_PAINTED, 1, color.blockMeta));
-
-			RecipeBuilderShapeless paintedSidingFromMouldings = new RecipeBuilderShapeless(BTXMod.MOD_ID);
-			paintedSidingFromMouldings
-				.addInput(BTXBlocks.MOULDING_OAK_PAINTED, pieceMeta)
-				.addInput(BTXBlocks.MOULDING_OAK_PAINTED, pieceMeta)
-				.create("siding_painted_from_mouldings_" + color.colorID, new ItemStack(BTXBlocks.SIDING_OAK_PAINTED, 1, pieceMeta));
-
-			RecipeBuilderShapeless paintedMouldingFromCorners = new RecipeBuilderShapeless(BTXMod.MOD_ID);
-			paintedMouldingFromCorners
-				.addInput(BTXBlocks.CORNER_OAK_PAINTED, pieceMeta)
-				.addInput(BTXBlocks.CORNER_OAK_PAINTED, pieceMeta)
-				.create("moulding_painted_from_corners_" + color.colorID, new ItemStack(BTXBlocks.MOULDING_OAK_PAINTED, 1, pieceMeta));
-		}
-
 	}
 
 	public static void modifyVanillaRecipes() {
+		// Change rope recipe to require hemp fibers
 		RecipeBuilder.ModifyWorkbench("minecraft").removeRecipe("rope");
 		RecipeBuilderShaped rope = new RecipeBuilderShaped("btx","##", "##", "##");
 		rope
 			.addInput('#', BTXItems.HEMP_FIBERS)
 			.create("rope", new ItemStack(Items.ROPE, 1));
 
+		// Change dough recipe to require flour
 		RecipeBuilder.ModifyWorkbench("minecraft").removeRecipe("dough");
 		RecipeBuilderShapeless dough = new RecipeBuilderShapeless(BTXMod.MOD_ID);
 		dough
 			.addInput(BTXItems.FLOUR)
 			.addInput("minecraft:water_buckets")
 			.create("dough", new ItemStack(Items.DOUGH, 1));
+
+		// Change crude steel recipe to require coal dust
+		RecipeBuilder.ModifyBlastFurnace("minecraft").removeRecipe("iron_ingot_and_coal_to_crude_steel");
+		RecipeBuilder.ModifyBlastFurnace("minecraft").removeRecipe("iron_ingot_and_charcoal_to_crude_steel");
+		RecipeBuilderBlastFurnace crudeSteelCooking = new RecipeBuilderBlastFurnace(BTXMod.MOD_ID);
+		crudeSteelCooking
+			.setInput(0, Items.INGOT_IRON)
+			.setInput(1, BTXItems.COAL_DUST)
+			.create("iron_ingot_and_coaldust_to_crude_steel", Items.INGOT_STEEL_CRUDE);
 	}
 
 	public static void modCustomRecipes() {
@@ -596,6 +146,8 @@ public class BTXRecipes {
 		DataLoader.loadRecipesFromFile("/assets/btx/recipes/soulforge.json");
 		DataLoader.loadRecipesFromFile("/assets/btx/recipes/saw.json");
 		SOULFORGE.register("soulforged_repair", new RecipeEntrySoulforgeRepair());
+		registerWaterWheelDyeing();
+		registerMechanicalDyeing();
 	}
 
 	public void initNamespaces() {

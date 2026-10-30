@@ -33,6 +33,10 @@ public class RecipeEntryHopper extends RecipeEntryBTX implements HasJsonAdapter 
 		return filterStack != null && matches(stack) && filter.matches(filterStack);
 	}
 
+	public RecipeSymbol getFilter() {
+		return filter;
+	}
+
 	public @Nullable ItemStack getHopperOutput() {
 		return getOutput();
 	}
@@ -47,7 +51,12 @@ public class RecipeEntryHopper extends RecipeEntryBTX implements HasJsonAdapter 
 
 	@Override
 	public boolean matchesRecipe(@NotNull SearchQuery query) {
-		return getOutput() != null && super.matchesRecipe(query);
+		return matchesStack(getOutput(), query) || matchesStack(filteredOutput, query);
+	}
+
+	@Override
+	public boolean matchesUsage(@NotNull SearchQuery query) {
+		return super.matchesUsage(query) || matchesSymbol(filter, query);
 	}
 
 	@Override

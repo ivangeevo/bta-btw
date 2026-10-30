@@ -37,6 +37,9 @@ public final class BTXBlocks {
 	public static Block<?> AXLE;
 	public static Block<?> AXLE_POWER_SOURCE;
 	public static Block<?> GEARBOX;
+	public static Block<?> AXLE_PAINTED;
+	public static Block<?> AXLE_POWER_SOURCE_PAINTED;
+	public static Block<?> GEARBOX_PAINTED;
 	public static Block<?> SIDING_OAK;
 	public static Block<BlockLogicSidingPainted> SIDING_OAK_PAINTED;
 	public static Block<BlockLogicMoulding> MOULDING_OAK;
@@ -182,6 +185,9 @@ public final class BTXBlocks {
 			Player.class, Materials.METAL));
 		DETECTOR_RAIL_STONE = registerBlock("detector_rail_stone", BlockLogicRailDetectorTiered.properties(BlockLogicRailDetectorTiered.Tier.STONE));
 		DETECTOR_RAIL_SOULFORGED_STEEL = registerBlock("detector_rail_soulforged_steel", BlockLogicRailDetectorTiered.properties(BlockLogicRailDetectorTiered.Tier.SOULFORGED_STEEL));
+		AXLE_PAINTED = registerBlock("axle_painted", BlockLogicAxlePainted.paintedProperties());
+		AXLE_POWER_SOURCE_PAINTED = registerBlock("axle_power_source_painted", BlockLogicAxlePowerSourcePainted.paintedPowerSourceProperties());
+		GEARBOX_PAINTED = registerBlock("gearbox_painted", BlockLogicGearBoxPainted.paintedProperties());
 
 		// BTW CE: Flammability.PLANKS (5, 20) and Flammability.WICKER (60, 100)
 		BlockLogicFire.setFlammable(GRATE, 5, 20);

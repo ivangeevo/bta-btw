@@ -18,6 +18,9 @@ import net.minecraft.core.block.Blocks;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.block.material.MaterialColor;
+import net.minecraft.core.block.support.FullSupport;
+import net.minecraft.core.block.support.ISupport;
+import net.minecraft.core.block.support.PartialSupport;
 import net.minecraft.core.block.tag.BlockTags;
 import net.minecraft.core.enums.EnumDropCause;
 import net.minecraft.core.item.ItemBucket;
@@ -25,6 +28,7 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.sound.BlockSounds;
 import net.minecraft.core.sound.SoundCategory;
 import net.minecraft.core.util.collection.NamespaceID;
+import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.WorldSource;
 import net.minecraft.core.world.pos.TilePos;
@@ -102,6 +106,11 @@ public class BlockLogicCement extends BlockLogic {
 	public @Nullable AABBdc getCollisionAABB(@NotNull WorldSource source, @NotNull TilePosc tilePos) {
 		double height = source.getBlockType(tilePos.up(new TilePos())) == this.block ? 1.0D : 0.5D;
 		return new AABBd(tilePos.x(), tilePos.y(), tilePos.z(), tilePos.x() + 1, tilePos.y() + height, tilePos.z() + 1);
+	}
+
+	@Override
+	public @NotNull ISupport getSupport(@NotNull World world, @NotNull TilePosc tilePos, @NotNull Side side) {
+		return side == Side.BOTTOM ? FullSupport.INSTANCE : PartialSupport.INSTANCE;
 	}
 
 	@Override

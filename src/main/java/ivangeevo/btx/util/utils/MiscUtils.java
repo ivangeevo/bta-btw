@@ -31,6 +31,16 @@ public class MiscUtils {
 		ejectStackWithRandomOffset(world, tilePos, itemStack);
 	}
 
+	public static void ejectStackAsSingleItemsWithRandomOffset(World world, TilePosc tilePos, ItemStack stack) {
+		if (stack == null) return;
+
+		for (int i = 0; i < stack.stackSize; i++) {
+			ItemStack single = stack.copy();
+			single.stackSize = 1;
+			ejectStackWithRandomOffset(world, tilePos, single);
+		}
+	}
+
 	public static void ejectItemsIndividually(World world, TilePosc tilePos, int itemId, int count, float chanceOfDrop) {
 		for (int i = 0; i < count; i++) {
 			if (world.rand.nextFloat() <= chanceOfDrop) {

@@ -18,6 +18,7 @@ import org.useless.dragonfly.models.block.StaticBlockModel;
 @Environment(EnvType.CLIENT)
 public class BlockModelGearBox<T extends BlockLogic> extends BlockModelGeneric<T> {
 	private static final String TEMPLATE = "btx:block/gearbox";
+	private static final String PAINTED_TEMPLATE = "btx:block/gearbox_painted";
 	private static final String SIDE_TEXTURE = "btx:block/gearbox/gearbox";
 	private static final String INPUT_TEXTURE = "btx:block/gearbox/gearbox_input";
 	private static final String OUTPUT_TEXTURE = "btx:block/gearbox/gearbox_output";
@@ -27,11 +28,15 @@ public class BlockModelGearBox<T extends BlockLogic> extends BlockModelGeneric<T
 	private final StaticBlockModel[][] models = new StaticBlockModel[6][64];
 
 	public BlockModelGearBox(@NotNull Block<T> block) {
-		super(block, buildData(5, 1 << 4));
+		this(block, false);
+	}
+
+	public BlockModelGearBox(@NotNull Block<T> block, boolean painted) {
+		super(block, buildData(5, 1 << 4, painted));
 		for (int inputFacing = 0; inputFacing < 6; inputFacing++) {
 			for (int mask = 0; mask < 64; mask++) {
 				if ((mask & (1 << inputFacing)) == 0) {
-					this.models[inputFacing][mask] = buildData(inputFacing, mask).asModel();
+					this.models[inputFacing][mask] = buildData(inputFacing, mask, painted).asModel();
 				}
 			}
 		}
@@ -59,9 +64,9 @@ public class BlockModelGearBox<T extends BlockLogic> extends BlockModelGeneric<T
 		return this.models[inputFacing][mask];
 	}
 
-	private static BlockModelMojangData buildData(int inputFacing, int mask) {
+	private static BlockModelMojangData buildData(int inputFacing, int mask, boolean painted) {
 		ModelBuilder builder = new ModelBuilder();
-		builder.setParent(TEMPLATE);
+		builder.setParent(painted ? PAINTED_TEMPLATE : TEMPLATE);
 
 		for (int face = 0; face < 6; face++) {
 			String texture;
@@ -74,11 +79,16 @@ public class BlockModelGearBox<T extends BlockLogic> extends BlockModelGeneric<T
 				texture = SIDE_TEXTURE;
 			}
 
-			builder.setTexture(FACE_NAMES[face], texture);
+			if (painted) {
+				builder.setTexture(FACE_NAMES[face], texture + "_paintable");
+				builder.setTexture(FACE_NAMES[face] + "_overlay", texture + "_overlay");
+			} else {
+				builder.setTexture(FACE_NAMES[face], texture);
+			}
 		}
 
 		// the id only has to be unique: models built this way never go through the file cache
-		return builder.create("btx:block/gearbox/gearbox_" + FACE_NAMES[inputFacing] + "_" + mask);
+		return builder.create("btx:block/gearbox/gearbox_" + (painted ? "painted_" : "") + FACE_NAMES[inputFacing] + "_" + mask);
 	}
 
 	private static class ModelBuilder extends BlockModelMojangData.Builder {

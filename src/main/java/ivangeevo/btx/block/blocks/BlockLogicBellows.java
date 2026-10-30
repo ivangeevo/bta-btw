@@ -4,17 +4,21 @@ import ivangeevo.btx.achievement.BTXAchievementTriggers;
 import ivangeevo.btx.achievement.BTXAchievements;
 import ivangeevo.btx.sound.BTXSoundTypes;
 import ivangeevo.btx.block.BTXBlocks;
+import ivangeevo.btx.item.BTXItemTags;
 import ivangeevo.btx.item.BTXItems;
 import ivangeevo.btx.util.utils.MechPowerUtils;
 import ivangeevo.btx.util.utils.MiscUtils;
 import ivangeevo.btx.util.utils.SoundUtils;
+import ivangeevo.btx.util.utils.SupportUtils;
 import ivangeevo.btx.util.utils.WorldUtils;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockLogic;
 import net.minecraft.core.block.BlockLogicSupplier;
+import net.minecraft.core.block.BlockLogicTrapDoor;
 import net.minecraft.core.block.Blocks;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Materials;
+import net.minecraft.core.block.support.ISupport;
 import net.minecraft.core.block.tag.BlockTags;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.EntityItem;
@@ -42,6 +46,7 @@ import java.util.Random;
 public class BlockLogicBellows extends BlockLogic implements MechanicalDevice {
 	private static final int BELLOWS_TICK_RATE = 35;
 	public static final double BELLOWS_CONTRACTED_HEIGHT = 0.6875D;
+	private static final double BLOW_ITEM_STRENGTH = 0.2D;
 
 	public BlockLogicBellows(@NotNull Block<?> block) {
 		super(block, Materials.WOOD);
@@ -75,6 +80,11 @@ public class BlockLogicBellows extends BlockLogic implements MechanicalDevice {
 	@Override
 	public @NotNull AABBdc getBoundsFromState(@NotNull WorldSource source, @NotNull TilePosc tilePos) {
 		return new AABBd(0, 0, 0, 1, isBlockMechanicalOn(source, tilePos) ? BELLOWS_CONTRACTED_HEIGHT : 1.0D, 1);
+	}
+
+	@Override
+	public @NotNull ISupport getSupport(@NotNull World world, @NotNull TilePosc tilePos, @NotNull Side side) {
+		return SupportUtils.fromBounds(this.getBoundsFromState(world, tilePos), side);
 	}
 
 	@Override
@@ -296,6 +306,55 @@ public class BlockLogicBellows extends BlockLogic implements MechanicalDevice {
 				stokeFire(world, sidePos2);
 			}
 		}
+
+		blowLightItemsInFront(world, tilePos, front);
+	}
+
+	private void blowLightItemsInFront(World world, TilePosc tilePos, Direction front) {
+		int blowRange = computeBlowRange(world, tilePos, front);
+		if (blowRange <= 0) return;
+
+		List<EntityItem> items = world.getEntitiesWithinAABB(EntityItem.class, createBlowBox(tilePos, front, blowRange));
+		for (EntityItem entityItem : items) {
+			if (entityItem.removed || entityItem.item == null) continue;
+
+			int blowDistance = BTXItemTags.getBlowDistance(entityItem.item.getItem());
+			if (blowDistance > 0 && (blowDistance >= blowRange || createBlowBox(tilePos, front, blowDistance).intersectsAABB(entityItem.bb))) {
+				entityItem.xd += front.offsetX() * BLOW_ITEM_STRENGTH;
+				entityItem.yd += front.offsetY() * BLOW_ITEM_STRENGTH;
+				entityItem.zd += front.offsetZ() * BLOW_ITEM_STRENGTH;
+			}
+		}
+	}
+
+	private AABBd createBlowBox(TilePosc tilePos, Direction front, int blowRange) {
+		int x = tilePos.x() + front.offsetX();
+		int y = tilePos.y() + front.offsetY();
+		int z = tilePos.z() + front.offsetZ();
+		int extend = blowRange - 1;
+		return new AABBd(
+			x + Math.min(0, front.offsetX() * extend), y + Math.min(0, front.offsetY() * extend), z + Math.min(0, front.offsetZ() * extend),
+			x + 1 + Math.max(0, front.offsetX() * extend), y + 1 + Math.max(0, front.offsetY() * extend), z + 1 + Math.max(0, front.offsetZ() * extend));
+	}
+
+	private int computeBlowRange(World world, TilePosc tilePos, Direction front) {
+		TilePos target = new TilePos(tilePos);
+		int blowRange = 0;
+		for (int count = 0; count < 3; count++) {
+			target.add(front);
+			if (!canBlowThroughBlock(world, target)) break;
+			blowRange++;
+		}
+		return blowRange;
+	}
+
+	private boolean canBlowThroughBlock(World world, TilePosc pos) {
+		if (world.isAirBlock(pos)) return true;
+
+		Block<?> block = world.getBlockType(pos);
+		return block == Blocks.FIRE || block == BTXBlocks.STOKED_FIRE
+			|| block.getLogic() instanceof BlockLogicTrapDoor
+			|| block.getCollisionAABB(world, pos) == null;
 	}
 
 	private void stokeFire(World world, TilePosc pos) {

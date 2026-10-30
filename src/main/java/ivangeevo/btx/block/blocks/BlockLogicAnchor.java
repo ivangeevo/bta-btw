@@ -7,11 +7,13 @@ import ivangeevo.btx.block.entity.TileEntityPulley;
 import ivangeevo.btx.entity.entities.lift.MovingAnchorEntity;
 import ivangeevo.btx.block.blocks.turntable.TurntableInteraction;
 import ivangeevo.btx.util.utils.FacingUtils;
+import ivangeevo.btx.util.utils.SupportUtils;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockLogic;
 import net.minecraft.core.block.BlockLogicSupplier;
 import net.minecraft.core.block.Blocks;
 import net.minecraft.core.block.material.Materials;
+import net.minecraft.core.block.support.ISupport;
 import net.minecraft.core.block.tag.BlockTags;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.enums.EnumBlockSoundEffectType;
@@ -59,6 +61,11 @@ public class BlockLogicAnchor extends BlockLogic implements TurntableInteraction
 	@Override
 	public @NotNull AABBdc getBoundsFromState(@NotNull WorldSource source, @NotNull TilePosc tilePos) {
 		return FacingUtils.tiltToFacingAlongY(new AABBd(0, 0, 0, 1, BASE_HEIGHT, 1), getFacing(source.getBlockData(tilePos)));
+	}
+
+	@Override
+	public @NotNull ISupport getSupport(@NotNull World world, @NotNull TilePosc tilePos, @NotNull Side side) {
+		return SupportUtils.fromBounds(this.getBoundsFromState(world, tilePos), side);
 	}
 
 	//------------- Placement -------------//

@@ -69,8 +69,16 @@ public abstract class RecipeEntryBTX extends RecipeEntryBase<RecipeSymbol, ItemS
 	}
 
 	public boolean matchesRecipe(@NotNull SearchQuery query) {
+		return matchesStack(this.getOutput(), query);
+	}
+
+	protected boolean matchesStack(ItemStack stack, @NotNull SearchQuery query) {
+		if (stack == null) {
+			return false;
+		}
+
 		if (query.query.getLeft() == SearchQuery.QueryType.NAME) {
-			return matchesName(this.getOutput(), query);
+			return matchesName(stack, query);
 		}
 
 		if (query.query.getLeft() == SearchQuery.QueryType.GROUP
@@ -78,14 +86,18 @@ public abstract class RecipeEntryBTX extends RecipeEntryBase<RecipeSymbol, ItemS
 			List<ItemStack> stacks =
 				new RecipeSymbol(query.query.getRight()).resolve();
 
-			return stacks != null && stacks.contains(this.getOutput());
+			return stacks != null && stacks.contains(stack);
 		}
 
 		return false;
 	}
 
 	public boolean matchesUsage(@NotNull SearchQuery query) {
-		List<ItemStack> inputs = this.getInput().resolve();
+		return matchesSymbol(this.getInput(), query);
+	}
+
+	protected boolean matchesSymbol(RecipeSymbol symbol, @NotNull SearchQuery query) {
+		List<ItemStack> inputs = symbol == null ? null : symbol.resolve();
 
 		if (inputs == null) {
 			return false;
@@ -131,8 +143,8 @@ public abstract class RecipeEntryBTX extends RecipeEntryBase<RecipeSymbol, ItemS
 			return name.equalsIgnoreCase(search);
 		}
 
-		return name.toLowerCase(Locale.ROOT)
+		return name
+			.toLowerCase(Locale.ROOT)
 			.contains(search.toLowerCase(Locale.ROOT));
 	}
-
 }

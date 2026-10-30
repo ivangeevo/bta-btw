@@ -16,7 +16,7 @@ import static net.minecraft.client.render.block.model.BlockModelDispatcher.loadD
 
 public class BlockModelBellows<T extends BlockLogicBellows> extends BlockModelGeneric<T> {
 
-	private static final int[] TURNS_BY_FACING = {0, 0, 0, 2, 3, 1};
+	private static final int[] TURNS_BY_FACING = {0, 0, 0, 2, 1, 3};
 
 	private final StaticBlockModel onModel;
 

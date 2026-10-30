@@ -1,7 +1,7 @@
 package ivangeevo.btx.entity.entities;
 
-import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.block.blocks.BlockLogicAxle;
+import ivangeevo.btx.block.blocks.PaintedMechanicalDevice;
 import ivangeevo.btx.util.utils.MechPowerUtils;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.util.helper.MathHelper;
@@ -46,19 +46,6 @@ public abstract class MechanicalPowerSourceEntityHorizonal extends MechanicalPow
 
 		super.remove();
 	}
-
-	/*@Override
-	public void setBounds() {
-		double halfWidth = getWidth() * 0.5;
-		double halfDepth = getDepth() * 0.5;
-
-		double halfX = alignedToX ? halfDepth : halfWidth;
-		double halfZ = alignedToX ? halfWidth : halfDepth;
-
-		double bottom = y - heightOffset + ySlideOffset;
-		bb.setMin(x - halfX, bottom, z - halfZ);
-		bb.setMax(x + halfX, bottom + getHeight(), z + halfZ);
-	}*/
 
 	@Override
 	public void setBounds() {
@@ -150,7 +137,7 @@ public abstract class MechanicalPowerSourceEntityHorizonal extends MechanicalPow
 	}
 
 	private boolean isPoweredAxle(TilePos tilePos) {
-		return world.getBlockType(tilePos) == BTXBlocks.AXLE_POWER_SOURCE;
+		return MechPowerUtils.isPowerSourceAxle(world.getBlockType(tilePos));
 	}
 
 	private BlockLogicAxle getAxleLogic(TilePos tilePos) {
@@ -171,8 +158,10 @@ public abstract class MechanicalPowerSourceEntityHorizonal extends MechanicalPow
 	private static final int POWER_SOURCE_LEVEL = 3;
 
 	private void replaceCenterAxle(TilePos pos, boolean powered, int axisAlignment) {
-		Block<?> targetBlock = powered ? BTXBlocks.AXLE_POWER_SOURCE : BTXBlocks.AXLE;
-		int data = (axisAlignment << 2) | (powered ? POWER_SOURCE_LEVEL : 0);
+		boolean painted = MechPowerUtils.isPaintedAxle(world.getBlockType(pos));
+		Block<?> targetBlock = MechPowerUtils.axleBlock(powered, painted);
+		int color = painted ? world.getBlockData(pos) & PaintedMechanicalDevice.MASK_COLOR : 0;
+		int data = color | (axisAlignment << 2) | (powered ? POWER_SOURCE_LEVEL : 0);
 		world.setBlockTypeData(pos, targetBlock, data);
 		world.notifyBlockChange(pos, targetBlock);
 	}

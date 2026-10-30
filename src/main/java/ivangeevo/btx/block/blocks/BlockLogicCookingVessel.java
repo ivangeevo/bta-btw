@@ -8,6 +8,8 @@ import ivangeevo.btx.util.utils.SoundUtils;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
+import net.minecraft.core.block.support.ISupport;
+import net.minecraft.core.block.support.PartialSupport;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.player.Player;
@@ -27,6 +29,11 @@ import java.util.Random;
 public abstract class BlockLogicCookingVessel extends BlockLogicVessel implements ItemOnTopCollision {
 	public BlockLogicCookingVessel(@NotNull Block<?> block, @NotNull Material material) {
 		super(block, material);
+	}
+
+	@Override
+	public @NotNull ISupport getSupport(@NotNull World world, @NotNull TilePosc tilePos, @NotNull Side side) {
+		return side == Side.TOP ? PartialSupport.INSTANCE : super.getSupport(world, tilePos, side);
 	}
 
 	@Override

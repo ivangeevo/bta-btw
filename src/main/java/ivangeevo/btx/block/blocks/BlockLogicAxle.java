@@ -11,6 +11,8 @@ import ivangeevo.btx.util.utils.MiscUtils;
 import net.minecraft.core.block.*;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Materials;
+import net.minecraft.core.block.support.ISupport;
+import net.minecraft.core.block.support.PartialSupport;
 import net.minecraft.core.block.tag.BlockTags;
 import net.minecraft.core.enums.EnumDropCause;
 import net.minecraft.core.item.ItemStack;
@@ -18,6 +20,7 @@ import net.minecraft.core.item.Items;
 import net.minecraft.core.sound.BlockSounds;
 import net.minecraft.core.sound.SoundCategory;
 import net.minecraft.core.util.helper.Direction;
+import net.minecraft.core.util.helper.DyeColor;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.WorldSource;
@@ -30,11 +33,14 @@ import org.joml.primitives.AABBdc;
 
 import java.util.Random;
 
-public class BlockLogicAxle extends BlockLogic implements MechanicalDevice {
+public class BlockLogicAxle extends BlockLogic implements MechanicalDevice, IPaintable {
 	protected static final double AXLE_WIDTH = 0.25;
 	protected static final double AXLE_HALF_WIDTH = (AXLE_WIDTH / 2);
 
 	public static final int TICK_RATE = 1;
+
+	public static final int MASK_POWER = 0x3;
+	public static final int MASK_AXIS = 0xC;
 
 	private static final int[][] axleFacingsForAlignment = new int[][]{{0,1}, {2, 3}, {4, 5}};
 	private static final int[][] FACING_OFFSETS = new int[][]{
@@ -67,6 +73,12 @@ public class BlockLogicAxle extends BlockLogic implements MechanicalDevice {
 	@Override
 	public boolean isCubeShaped() {
 		return false;
+	}
+
+	@Override
+	public @NotNull ISupport getSupport(@NotNull World world, @NotNull TilePosc tilePos, @NotNull Side side) {
+		boolean axleEnd = (FacingUtils.facingFromDirection(side.direction()) >> 1) == getAxisAlignment(world, tilePos);
+		return axleEnd ? PartialSupport.INSTANCE.center() : PartialSupport.INSTANCE;
 	}
 
 	@Override
@@ -139,6 +151,11 @@ public class BlockLogicAxle extends BlockLogic implements MechanicalDevice {
 	}
 
 	@Override
+	public void setColor(@NotNull World world, @NotNull TilePosc tilePos, @NotNull DyeColor color) {
+		PaintedMechanicalDevice.paint(world, tilePos, MechPowerUtils.axleBlock(MechPowerUtils.isPowerSourceAxle(this.block), true), color);
+	}
+
+	@Override
 	public boolean canOutputMechanicalPower() {
 		return false;
 	}
@@ -185,11 +202,11 @@ public class BlockLogicAxle extends BlockLogic implements MechanicalDevice {
 	}
 
 	public int getAxisAlignment(WorldSource source, TilePosc tilePos) {
-		return (source.getBlockData(tilePos) >> 2);
+		return getAxisAlignmentFromBlockData(source.getBlockData(tilePos));
 	}
 
 	public void setAxisAlignment(World world, TilePosc tilePos, int axisAlignment) {
-		int data = world.getBlockData(tilePos) & 3;
+		int data = world.getBlockData(tilePos) & ~MASK_AXIS;
 
 		data |= (axisAlignment << 2);
 
@@ -197,7 +214,7 @@ public class BlockLogicAxle extends BlockLogic implements MechanicalDevice {
 	}
 
 	public int getAxisAlignmentFromBlockData(int data) {
-		return (data >> 2);
+		return (data & MASK_AXIS) >> 2;
 	}
 
 	public void setAxisAlignmentBasedOnFacing(World world, TilePosc tilePos, int facing) {
@@ -212,7 +229,7 @@ public class BlockLogicAxle extends BlockLogic implements MechanicalDevice {
 			default -> 2;
 		};
 
-		data &= 3; // filter out any old alignment
+		data &= ~MASK_AXIS; // filter out any old alignment
 
 		data |= (axis << 2);
 
@@ -224,7 +241,7 @@ public class BlockLogicAxle extends BlockLogic implements MechanicalDevice {
 	}
 
 	public int getPowerLevelFromBlockData(int data) {
-		return data & 3;
+		return data & MASK_POWER;
 	}
 
 	public void setPowerLevelWithoutNotify(World world, TilePosc tilePos, int powerLevel) {
@@ -240,8 +257,8 @@ public class BlockLogicAxle extends BlockLogic implements MechanicalDevice {
 	}
 
 	public int setPowerLevelInBlockData(int data, int powerLevel) {
-		powerLevel &= 3;
-		data &= 12;
+		powerLevel &= MASK_POWER;
+		data &= ~MASK_POWER;
 		data |= powerLevel;
 		return data;
 	}
@@ -257,7 +274,7 @@ public class BlockLogicAxle extends BlockLogic implements MechanicalDevice {
 	}
 
 	public void breakAxle(World world, TilePosc tilePos) {
-		if (world.getBlockType(tilePos) == this.block) {
+		if (MechPowerUtils.isBlockAxle(world.getBlockType(tilePos))) {
 			dropComponentItemsOnBadBreak(world, tilePos, world.getBlockData(tilePos), 1F);
 			world.playSoundEffect(null, SoundCategory.WORLD_SOUNDS,
 				tilePos.x() + 0.5, tilePos.y() + 0.5, tilePos.z() + 0.5, BTXSoundTypes.MECHANICAL_BREAK, 0.5F, 0.6F + world.rand.nextFloat() * 0.25F);
@@ -404,11 +421,11 @@ public class BlockLogicAxle extends BlockLogic implements MechanicalDevice {
 				Block<?> neighbor = worldSource.getBlockType(targetPos);
 
 				// Keep walking through aligned plain axles.
-				if (neighbor == BTXBlocks.AXLE && getAxisAlignment(worldSource, targetPos) == axis) {
+				if (MechPowerUtils.isPlainAxle(neighbor) && getAxisAlignment(worldSource, targetPos) == axis) {
 					continue;
 				}
 
-				if (neighbor == BTXBlocks.AXLE_POWER_SOURCE && getAxisAlignment(worldSource, targetPos) == axis) {
+				if (MechPowerUtils.isPowerSourceAxle(neighbor) && getAxisAlignment(worldSource, targetPos) == axis) {
 					return true;
 				}
 
@@ -431,5 +448,4 @@ public class BlockLogicAxle extends BlockLogic implements MechanicalDevice {
 		max.set(pos.x() + 3, pos.y() + 3, pos.z() + 3);
 		world.markBlocksDirty(min, max);
 	}
-
 }

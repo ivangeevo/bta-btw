@@ -1,5 +1,6 @@
 package ivangeevo.btx.entity.entities;
 
+import ivangeevo.btx.util.PaintTints;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.renderer.GLRenderer;
 import net.minecraft.client.render.tessellator.TessellatorGeneral;
@@ -12,7 +13,8 @@ import org.joml.Matrix4f;
 public class WaterWheelEntityRenderer extends EntityRenderer<WaterWheelEntity> {
 
 	private static final String WHEEL_MODEL = "wheel";
-
+	private static final String TEXTURE = "/assets/btx/textures/entity/water_wheel.png";
+	private static final String PAINTABLE_TEXTURE = "/assets/btx/textures/entity/water_wheel_paintable.png";
 	public WaterWheelEntityRenderer() {
 		super(0.0F);
 		setModel(WHEEL_MODEL, "geometry.water_wheel", 0.0);
@@ -51,11 +53,20 @@ public class WaterWheelEntityRenderer extends EntityRenderer<WaterWheelEntity> {
 		matrix.translate(-8.0F, -8.0F, -8.0F);
 
 		TextureRegistry.worldAtlas.bind();
-		this.bindTexture("/assets/btx/textures/entity/water_wheel.png");
 
-		GLRenderer.setColor4f(1F, 1F, 1F, 1F);
+		int color = wheel.getColor();
+		if (color >= 0 && color < PaintTints.COUNT) {
+			float[] tint = PaintTints.get(color);
+			this.bindTexture(PAINTABLE_TEXTURE);
+			GLRenderer.setColor4f(tint[0], tint[1], tint[2], 1F);
+		} else {
+			this.bindTexture(TEXTURE);
+			GLRenderer.setColor4f(1F, 1F, 1F, 1F);
+		}
 
 		this.getModel(WHEEL_MODEL).render();
+
+		GLRenderer.setColor4f(1F, 1F, 1F, 1F);
 
 		GLRenderer.popFrame();
 	}

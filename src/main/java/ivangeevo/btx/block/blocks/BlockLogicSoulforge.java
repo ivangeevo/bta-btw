@@ -3,11 +3,13 @@ package ivangeevo.btx.block.blocks;
 import ivangeevo.btx.block.blocks.turntable.TurntableInteraction;
 import ivangeevo.btx.gui.BTXScreens;
 import ivangeevo.btx.util.utils.FacingUtils;
+import ivangeevo.btx.util.utils.SupportUtils;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockLogic;
 import net.minecraft.core.block.BlockLogicSupplier;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Materials;
+import net.minecraft.core.block.support.ISupport;
 import net.minecraft.core.block.tag.BlockTags;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.enums.EnumDropCause;
@@ -57,6 +59,11 @@ public class BlockLogicSoulforge extends BlockLogic implements TurntableInteract
 			return new AABBd(NARROW_MIN, 0.0D, 0.0D, NARROW_MAX, 1.0D, 1.0D);
 		}
 		return new AABBd(0.0D, 0.0D, NARROW_MIN, 1.0D, 1.0D, NARROW_MAX);
+	}
+
+	@Override
+	public @NotNull ISupport getSupport(@NotNull World world, @NotNull TilePosc tilePos, @NotNull Side side) {
+		return SupportUtils.fromBounds(this.getBoundsFromState(world, tilePos), side);
 	}
 
 	@Override

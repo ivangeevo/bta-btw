@@ -12,6 +12,7 @@ import net.minecraft.core.block.Block;
 import net.minecraft.core.data.gamerule.GameRules;
 import net.minecraft.core.entity.EntityLightning;
 import net.minecraft.core.entity.player.Player;
+import net.minecraft.core.item.ItemPaintBrush;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.Items;
 import net.minecraft.core.sound.SoundCategory;
@@ -103,6 +104,20 @@ public class WindMillEntity extends MechanicalPowerSourceEntityHorizonal {
 		ItemStack heldStack = player.getHeldItem();
 
 		if (heldStack == null ) return super.interact(player);
+
+		if (heldStack.getItem() instanceof ItemPaintBrush brush) {
+			DyeColor color = ItemPaintBrush.getColor(heldStack);
+			if (color == null) return super.interact(player);
+
+			if (!world.isClientSide) {
+				setBladeColor(currentBladeColoringIndex, color.ordinal());
+				currentBladeColoringIndex = (currentBladeColoringIndex + 1) % 4;
+			}
+
+			brush.consumePaint(heldStack, player);
+
+			return true;
+		}
 
 		boolean isDye = heldStack.itemID == Items.DYE.id;
 		boolean isDung = heldStack.itemID == BTXItems.DUNG.id ;
@@ -233,7 +248,7 @@ public class WindMillEntity extends MechanicalPowerSourceEntityHorizonal {
 
 			Block<?> targetBlock = world.getBlockType(targetPos);
 
-			if (targetBlock == BTXBlocks.AXLE_POWER_SOURCE && targetBlock.getLogic() instanceof BlockLogicAxle axle) {
+			if (MechPowerUtils.isPowerSourceAxle(targetBlock) && targetBlock.getLogic() instanceof BlockLogicAxle axle) {
 				int axleAlignment = axle.getAxisAlignment(world, targetPos);
 
 				notifyGearboxOfOverpoweredOctantChangeInDirection(targetPos, axleAlignment << 1);

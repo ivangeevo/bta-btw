@@ -150,6 +150,8 @@ public final class BTXItems {
 		BROADHEAD_ARROW = registerItem("broadhead_arrow", Item::new);
 
 		CEMENT_BUCKET_STATE = BlockLogicCement.registerBucketState();
+
+		BTXItemTags.init();
 	}
 
 	// No extra settings builder

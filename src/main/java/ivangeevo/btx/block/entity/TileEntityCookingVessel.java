@@ -28,7 +28,9 @@ import net.minecraft.core.world.pos.TilePos;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public abstract class TileEntityCookingVessel extends TileEntity implements Container {
 	protected static final int INVENTORY_SIZE = 27;
@@ -62,6 +64,8 @@ public abstract class TileEntityCookingVessel extends TileEntity implements Cont
 
 	// state variable used to communicate basic inventory info to the client
 	public short storageSlotsOccupied;
+
+	private final Map<Integer, Integer> cookedCounts = new HashMap<>();
 
 	public TileEntityCookingVessel() {
 		contents = new ItemStack[INVENTORY_SIZE];
@@ -123,6 +127,13 @@ public abstract class TileEntityCookingVessel extends TileEntity implements Cont
 			fireUnderType = -1;
 		}
 
+		cookedCounts.clear();
+		ListTag cookedList = compoundTag.getList("Cooked");
+		for (int i = 0; i < cookedList.getValue().size(); i++) {
+			CompoundTag cookedTag = (CompoundTag) cookedList.tagAt(i);
+			cookedCounts.put(cookedTag.getInteger("id"), cookedTag.getInteger("Count"));
+		}
+
 		validateInventoryStateVariables();
 	}
 
@@ -144,6 +155,39 @@ public abstract class TileEntityCookingVessel extends TileEntity implements Cont
 		compoundTag.put("Items", nbtTagList);
 		compoundTag.putBoolean("m_bContainsValidIngrediantsForState", containsValidIngredientsForState);
 		compoundTag.putInt("m_iFireUnderType", fireUnderType);
+
+		ListTag cookedList = new ListTag();
+		for (Map.Entry<Integer, Integer> entry : cookedCounts.entrySet()) {
+			CompoundTag cookedTag = new CompoundTag();
+			cookedTag.putInt("id", entry.getKey());
+			cookedTag.putInt("Count", entry.getValue());
+			cookedList.addTag(cookedTag);
+		}
+		compoundTag.put("Cooked", cookedList);
+	}
+
+	public int getCookedCount(int itemID) {
+		return cookedCounts.getOrDefault(itemID, 0);
+	}
+
+	public void onTakenByPlayer(Player player, ItemStack stack) {
+		if (stack == null) {
+			return;
+		}
+
+		int cooked = getCookedCount(stack.itemID);
+		if (cooked <= 0) {
+			return;
+		}
+
+		int remaining = cooked - stack.stackSize;
+		if (remaining > 0) {
+			cookedCounts.put(stack.itemID, remaining);
+		} else {
+			cookedCounts.remove(stack.itemID);
+		}
+
+		BTXAchievementTriggers.onCookedTaken(player, stack);
 	}
 
 	@Override
@@ -154,7 +198,7 @@ public abstract class TileEntityCookingVessel extends TileEntity implements Cont
 
 		Block<?> block = worldObj.getBlockType(tilePos);
 
-		if (block == null || !(block.getLogic() instanceof BlockLogicCookingVessel cookingBlock)) {
+		if (!(block.getLogic() instanceof BlockLogicCookingVessel cookingBlock)) {
 			// shouldn't happen
 			return;
 		}
@@ -231,6 +275,11 @@ public abstract class TileEntityCookingVessel extends TileEntity implements Cont
 		}
 
 		setChanged();
+	}
+
+	@Override
+	public void setChanged() {
+		super.setChanged();
 		onInventoryChanged();
 	}
 
@@ -391,6 +440,7 @@ public abstract class TileEntityCookingVessel extends TileEntity implements Cont
 				for (ItemStack output : outputList) {
 					ItemStack cookedStack = output.copy();
 					onCookedOutput(cookedStack);
+					cookedCounts.merge(cookedStack.itemID, cookedStack.stackSize, Integer::sum);
 
 					if (!InventoryUtils.addItemStackToInventory(this, cookedStack)) {
 						MiscUtils.ejectStackWithRandomOffset(worldObj, tilePos.up(new TilePos()), cookedStack);

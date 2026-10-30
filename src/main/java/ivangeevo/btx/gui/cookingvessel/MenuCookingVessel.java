@@ -6,6 +6,7 @@ import ivangeevo.btx.block.entity.TileEntityCookingVessel;
 import net.minecraft.core.InventoryAction;
 import net.minecraft.core.crafting.ContainerListener;
 import net.minecraft.core.entity.player.Player;
+import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.container.ContainerInventory;
 import net.minecraft.core.player.inventory.menu.MenuAbstract;
 import net.minecraft.core.player.inventory.slot.Slot;
@@ -29,7 +30,13 @@ public class MenuCookingVessel extends MenuAbstract {
 
 		for (int row = 0; row < VESSEL_ROWS; row++) {
 			for (int column = 0; column < VESSEL_COLUMNS; column++) {
-				this.addSlot(new Slot(vessel, column + row * VESSEL_COLUMNS, 8 + column * 18, 43 + row * 18));
+				this.addSlot(new Slot(vessel, column + row * VESSEL_COLUMNS, 8 + column * 18, 43 + row * 18) {
+					@Override
+					public void onTake(ItemStack stack) {
+						super.onTake(stack);
+						vessel.onTakenByPlayer(inventory.player, stack);
+					}
+				});
 			}
 		}
 

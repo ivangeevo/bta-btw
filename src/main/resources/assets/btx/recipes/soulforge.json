@@ -817,5 +817,45 @@
       "id": "btx:item/broadhead",
       "amount": 4
     }
+  },
+  {
+    "name": "btx:soulforge/detector_block",
+    "type": "btx:soulforge",
+    "pattern": [
+      "####",
+      "XTTX",
+      "#YY#",
+      "#YY#"
+    ],
+    "symbols": [
+      {
+        "symbol": "#",
+        "stack": {
+          "id": "minecraft:block/cobble_stone"
+        }
+      },
+      {
+        "symbol": "X",
+        "stack": {
+          "id": "minecraft:item/dye",
+          "meta": 4
+        }
+      },
+      {
+        "symbol": "T",
+        "stack": {
+          "id": "minecraft:block/torch_redstone_active"
+        }
+      },
+      {
+        "symbol": "Y",
+        "stack": {
+          "id": "minecraft:item/dust_redstone"
+        }
+      }
+    ],
+    "result": {
+      "id": "btx:block/detector_block"
+    }
   }
 ]

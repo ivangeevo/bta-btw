@@ -1,6 +1,5 @@
 package ivangeevo.btx.entity.entities;
 
-import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.block.blocks.BlockLogicAxle;
 import ivangeevo.btx.block.blocks.BlockLogicGearBox;
 import ivangeevo.btx.util.utils.MechPowerUtils;
@@ -282,7 +281,7 @@ public abstract class MechanicalPowerSourceEntity extends Entity implements ICol
 				&& axle.getAxisAlignment(world, pos) == axisAlignment
 				&& axle.getPowerLevel(world, pos) > 0);
 
-			if (block == BTXBlocks.GEARBOX
+			if (MechPowerUtils.isGearBox(block)
 				&& block.getLogic() instanceof BlockLogicGearBox gearBox
 				&& gearBox.isGearBoxOn(world, pos)
 				&& gearBox.canInputAxlePowerToFacing(world, pos,

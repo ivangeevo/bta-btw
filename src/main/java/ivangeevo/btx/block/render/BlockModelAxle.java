@@ -20,17 +20,25 @@ public class BlockModelAxle<T extends BlockLogic> extends BlockModelGeneric<T> {
 	private final StaticBlockModel[] on = new StaticBlockModel[3];
 
 	public BlockModelAxle(@NotNull Block<T> block) {
-		super(block, BlockModelDispatcher.loadDataModel("btx:block/axle/axle_z_off"));
+		this(block, false);
+	}
+
+	public BlockModelAxle(@NotNull Block<T> block, boolean painted) {
+		super(block, BlockModelDispatcher.loadDataModel(modelPath(painted, "z", "off")));
 
 		for (int i = 0; i < 3; i++) {
-			this.off[i] = BlockModelDispatcher.loadDataModel("btx:block/axle/axle_" + AXES[i] + "_off").asModel();
-			this.on[i] = BlockModelDispatcher.loadDataModel("btx:block/axle/axle_" + AXES[i] + "_on").asModel();
+			this.off[i] = BlockModelDispatcher.loadDataModel(modelPath(painted, AXES[i], "off")).asModel();
+			this.on[i] = BlockModelDispatcher.loadDataModel(modelPath(painted, AXES[i], "on")).asModel();
 		}
+	}
+
+	private static String modelPath(boolean painted, String axis, String state) {
+		return "btx:block/axle/axle_" + (painted ? "painted_" : "") + axis + "_" + state;
 	}
 
 	@Override
 	public @NotNull StaticBlockModel getModel(@NotNull WorldSource source, @NotNull TilePosc tilePos) {
-		int axis = Math.min(source.getBlockData(tilePos) >> 2, 2);
+		int axis = Math.min((source.getBlockData(tilePos) & BlockLogicAxle.MASK_AXIS) >> 2, 2);
 		boolean powered = this.block.getLogic() instanceof BlockLogicAxle axle && axle.clientCheckIfPowered(source, tilePos);
 		return powered ? this.on[axis] : this.off[axis];
 	}

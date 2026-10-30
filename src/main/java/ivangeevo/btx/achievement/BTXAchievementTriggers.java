@@ -22,6 +22,7 @@ public final class BTXAchievementTriggers {
 	private static final int SCAN_INTERVAL = 20;
 
 	private static final Map<Item, Achievement> OBTAIN = new HashMap<>();
+	private static final Map<Item, Achievement> COOKED = new HashMap<>();
 	private static final Map<Player, Set<Achievement>> AWARDED = new WeakHashMap<>();
 
 	private BTXAchievementTriggers() {}
@@ -32,13 +33,33 @@ public final class BTXAchievementTriggers {
 		}
 	}
 
+	static void cooked(Achievement achievement, IItemConvertible... items) {
+		for (IItemConvertible item : items) {
+			COOKED.put(item.asItem(), achievement);
+		}
+	}
+
+	public static void onCookedTaken(Player player, ItemStack stack) {
+		Achievement achievement = COOKED.get(stack.getItem());
+		if (achievement != null) {
+			award(player, achievement);
+		}
+	}
+
 	public static void award(@Nullable Player player, Achievement achievement) {
 		if (player == null || player.world.isClientSide) {
 			return;
 		}
 
-		if (AWARDED.computeIfAbsent(player, p -> new HashSet<>()).add(achievement)) {
-			player.triggerAchievement(achievement);
+		Set<Achievement> awarded = AWARDED.computeIfAbsent(player, p -> new HashSet<>());
+		if (awarded.contains(achievement)) {
+			return;
+		}
+
+		player.triggerAchievement(achievement);
+		// the trigger is dropped while the parent is locked, so only remember it once it could have stuck
+		if (achievement.parent == null || awarded.contains(achievement.parent) || player.getStat(achievement.parent) > 0) {
+			awarded.add(achievement);
 		}
 	}
 

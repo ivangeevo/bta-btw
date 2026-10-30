@@ -84,7 +84,7 @@ public class BlockLogicSidingPainted extends BlockLogicWoodPiece implements IPai
 
 	@Override
 	public int stripColorFromMetadata(int meta) {
-		return meta & MASK_COLOR; // keep facing, drop color
+		return meta & ~MASK_COLOR; // keep facing, drop color
 	}
 
 	@Override

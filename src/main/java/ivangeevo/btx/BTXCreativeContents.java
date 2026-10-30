@@ -82,6 +82,7 @@ public final class BTXCreativeContents {
 		REG.register(BTXItems.BELT, inCategory(CreativeInventoryCategory.BASICS));
 		REG.register(BTXItems.GLUE, inCategory(CreativeInventoryCategory.BASICS));
 		REG.register(BTXItems.HAFT, inCategory(CreativeInventoryCategory.BASICS));
+		REG.register(BTXItems.WICKER, inCategory(CreativeInventoryCategory.BASICS));
 
 		// Blocks
 		// TODO: The blocks we add probably should be in their own category for machines/mech devices
@@ -112,6 +113,8 @@ public final class BTXCreativeContents {
 		REG.register(BTXBlocks.AXLE, inCategory(CreativeInventoryCategory.WORKBENCHES));
 		REG.register(BTXBlocks.AXLE_POWER_SOURCE, inCategory(CreativeInventoryCategory.WORKBENCHES));
 		REG.register(BTXBlocks.GEARBOX, inCategory(CreativeInventoryCategory.WORKBENCHES));
+		REG.register(BTXBlocks.AXLE_PAINTED, inCategory(CreativeInventoryCategory.WORKBENCHES).setCustomSupplier(() -> allColors(BTXBlocks.AXLE_PAINTED)));
+		REG.register(BTXBlocks.GEARBOX_PAINTED, inCategory(CreativeInventoryCategory.WORKBENCHES).setCustomSupplier(() -> allColors(BTXBlocks.GEARBOX_PAINTED)));
 		REG.register(BTXBlocks.SIDING_OAK, inCategory(CreativeInventoryCategory.WOOD));
 		for (BTXBlocks.StonePieces pieces : BTXBlocks.STONE_PIECES) {
 			REG.register(pieces.siding(), inCategory(CreativeInventoryCategory.STONE));

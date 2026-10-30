@@ -14,6 +14,7 @@ import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockLogicRotatable;
 import net.minecraft.core.block.BlockLogicSupplier;
 import net.minecraft.core.block.Blocks;
+import net.minecraft.core.block.IPaintable;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Materials;
 import net.minecraft.core.block.tag.BlockTags;
@@ -25,6 +26,7 @@ import net.minecraft.core.item.Items;
 import net.minecraft.core.sound.BlockSounds;
 import net.minecraft.core.sound.SoundCategory;
 import net.minecraft.core.util.helper.Direction;
+import net.minecraft.core.util.helper.DyeColor;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.WorldSource;
@@ -35,7 +37,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-public class BlockLogicGearBox extends BlockLogicRotatable implements MechanicalDevice {
+public class BlockLogicGearBox extends BlockLogicRotatable implements MechanicalDevice, IPaintable {
 	public static final int TICK_RATE = 10;
 
 	private static final int TURN_ON_TICK_RATE = 10;
@@ -75,7 +77,12 @@ public class BlockLogicGearBox extends BlockLogicRotatable implements Mechanical
 			: mob.getPlacementDirection(side.opposite());
 
 		// input face points away from the player
-		world.setBlockDataNotify(tilePos, setFacingInData(0, FacingUtils.facingFromDirection(direction.opposite())));
+		world.setBlockDataNotify(tilePos, setFacingInData(world.getBlockData(tilePos), FacingUtils.facingFromDirection(direction.opposite())));
+	}
+
+	@Override
+	public void setColor(@NotNull World world, @NotNull TilePosc tilePos, @NotNull DyeColor color) {
+		PaintedMechanicalDevice.paint(world, tilePos, BTXBlocks.GEARBOX_PAINTED, color);
 	}
 
 	@Override
@@ -169,7 +176,7 @@ public class BlockLogicGearBox extends BlockLogicRotatable implements Mechanical
 	}
 
 	public static int setFacingInData(int data, int facing) {
-		return (data & 8) | (facing & 7);
+		return (data & ~7) | (facing & 7);
 	}
 
 	public void setFacing(World world, TilePosc tilePos, int facing) {
@@ -266,7 +273,7 @@ public class BlockLogicGearBox extends BlockLogicRotatable implements Mechanical
 	}
 
 	public int setGearBoxOn(int data, boolean on) {
-		data &= 7; // filter out any old on state
+		data &= ~8; // filter out any old on state
 
 		if (on) {
 			data |= 8;

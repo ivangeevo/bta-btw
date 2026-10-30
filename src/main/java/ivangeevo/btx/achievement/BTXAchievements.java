@@ -10,6 +10,7 @@ import net.minecraft.core.item.Items;
 import net.minecraft.core.util.collection.NamespaceID;
 import org.jetbrains.annotations.Nullable;
 
+import static ivangeevo.btx.achievement.BTXAchievementTriggers.cooked;
 import static ivangeevo.btx.achievement.BTXAchievementTriggers.obtain;
 
 public final class BTXAchievements {
@@ -82,7 +83,7 @@ public final class BTXAchievements {
 	public static final Achievement HELLFIRE_DUST = create("hellfire_dust", BTXItems.HELLFIRE_DUST, SOUL_FILTER, NORMAL);
 	public static final Achievement SOUL_OVERLOAD = create("soul_overload", BTXBlocks.HOPPER, SOUL_FILTER, SECRET);
 	public static final Achievement COAL_DUST = create("coal_dust", BTXItems.COAL_DUST, MILLSTONE, NORMAL);
-	public static final Achievement NETHERCOAL = create("nethercoal", Items.NETHERCOAL, HELLFIRE_DUST, NORMAL);
+	public static final Achievement COOK_NETHERCOAL = create("cook_nethercoal", Items.NETHERCOAL, HELLFIRE_DUST, NORMAL);
 	public static final Achievement CONCENTRATED_HELLFIRE = create("concentrated_hellfire", BTXItems.CONCENTRATED_HELLFIRE, HELLFIRE_DUST, NORMAL);
 	public static final Achievement HELLFIRE_BLOCK = create("hellfire_block", BTXBlocks.CONCENTRATED_HELLFIRE_BLOCK, CONCENTRATED_HELLFIRE, SPECIAL);
 
@@ -157,7 +158,8 @@ public final class BTXAchievements {
 		obtain(GROUND_NETHERRACK, BTXItems.GROUND_NETHERRACK);
 		obtain(HELLFIRE_DUST, BTXItems.HELLFIRE_DUST);
 		obtain(COAL_DUST, BTXItems.COAL_DUST);
-		obtain(NETHERCOAL, Items.NETHERCOAL);
+		cooked(COOK_NETHERCOAL, Items.NETHERCOAL);
+		cooked(RECLAIM, Items.INGOT_IRON, Items.INGOT_GOLD, Items.INGOT_STEEL);
 		obtain(CONCENTRATED_HELLFIRE, BTXItems.CONCENTRATED_HELLFIRE);
 		obtain(HELLFIRE_BLOCK, BTXBlocks.CONCENTRATED_HELLFIRE_BLOCK);
 

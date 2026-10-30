@@ -1,5 +1,8 @@
 package ivangeevo.btx;
 
+import ivangeevo.btx.api.guidebook.GuidebookBook;
+import ivangeevo.btx.api.guidebook.GuidebookIndexSection;
+import ivangeevo.btx.api.guidebook.Guidebooks;
 import ivangeevo.btx.block.BTXBlocks;
 import ivangeevo.btx.block.render.*;
 import ivangeevo.btx.entity.entities.lift.BlockLiftedByPlatformEntity;
@@ -8,6 +11,7 @@ import ivangeevo.btx.entity.entities.lift.MovingAnchorEntity;
 import ivangeevo.btx.entity.entities.lift.MovingAnchorEntityRenderer;
 import ivangeevo.btx.entity.entities.lift.MovingPlatformEntity;
 import ivangeevo.btx.entity.entities.lift.MovingPlatformEntityRenderer;
+import ivangeevo.btx.gui.guidebook.*;
 import ivangeevo.btx.particle.BTXParticles;
 import ivangeevo.btx.entity.entities.EntityBroadheadArrow;
 import ivangeevo.btx.entity.entities.EntityRendererBroadheadArrow;
@@ -16,9 +20,12 @@ import ivangeevo.btx.entity.entities.WaterWheelEntityRenderer;
 import ivangeevo.btx.entity.entities.WindMillEntity;
 import ivangeevo.btx.entity.entities.WindMillEntityRenderer;
 import ivangeevo.btx.item.BTXItems;
+import ivangeevo.btx.item.render.ItemModelWaterWheel;
+import ivangeevo.btx.recipe.BTXRecipes;
 import net.fabricmc.api.ClientModInitializer;
 import ivangeevo.btx.recipe.impl.RecipeEntryCraftingShapelessConsuming;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.guidebook.GuidebookSections;
 import net.minecraft.client.gui.guidebook.crafting.RecipePageCrafting;
 import net.minecraft.client.gui.guidebook.crafting.displays.DisplayAdapterShapeless;
 import net.minecraft.client.render.EntityRendererDispatcher;
@@ -36,6 +43,7 @@ import net.minecraft.client.render.item.model.ItemModelStandard;
 import net.minecraft.client.render.texture.stitcher.AtlasStitcher;
 import net.minecraft.client.render.texture.stitcher.TextureRegistry;
 import net.minecraft.core.item.Item;
+import net.minecraft.core.item.ItemStack;
 import turniplabs.halplibe.event.defs.ClientEvents;
 import turniplabs.halplibe.helper.TextureHelper;
 import turniplabs.halplibe.util.dependency.Key;
@@ -55,16 +63,45 @@ public class BTXModClient implements ClientModInitializer {
 			Minecraft mc = Minecraft.getMinecraft();
 			return mc.thePlayer != null && !mc.thePlayer.getGamemode().hasBlockBreakingAnimation();
 		};
+
 		BTXGlobals.LOGGER.info("Better Than [X] client initialized.");
 	}
 
 	public static void beforeClientStart() {
 		BTXModClient.registerTextures();
+		Guidebooks.register(registerModGuidebook());
 	}
 
 	public static void afterClientStart() {
 		RecipePageCrafting.recipeToDisplayAdapterMap.put(RecipeEntryCraftingShapelessConsuming.class, new DisplayAdapterShapeless());
 		BTXParticles.init();
+	}
+
+	private static GuidebookBook registerModGuidebook() {
+		return GuidebookBook.builder("btx:manual")
+			.name("btx.guidebook.book.btx")
+			.cover(cover -> cover
+				.color(0x306333)
+				.title("btx.guidebook.cover.title")
+				.subtitle("btx.guidebook.cover.subtitle")
+			)
+			.sections(s -> {
+				s.add(new GuidebookIndexSection());
+				s.add(GuidebookSections.SEARCH);
+				s.add(new GuidebookSectionMillstone());
+				s.add(new GuidebookSectionTurntable());
+				s.add(new GuidebookSectionSaw());
+				s.add(new GuidebookSectionKiln());
+				s.add(new GuidebookSectionHopper());
+				s.add(new GuidebookSectionHopperFilter());
+				s.add(new GuidebookSectionBulk("btx.guidebook.section.cauldron", new ItemStack(BTXBlocks.CAULDRON), 0x404040, 0xC06030,
+					() -> BTXRecipes.CAULDRON, () -> BTXRecipes.CAULDRON_STOKED)
+				);
+				s.add(new GuidebookSectionBulk("btx.guidebook.section.crucible", new ItemStack(BTXBlocks.CRUCIBLE), 0x5A3A2A, 0xE0A040,
+					() -> BTXRecipes.CRUCIBLE, () -> BTXRecipes.CRUCIBLE_STOKED)
+				);
+				s.add(new GuidebookSectionSoulforge());
+			}).build();
 	}
 
 	public static void initItemModels(ItemModelDispatcher dispatcher) {
@@ -75,7 +112,7 @@ public class BTXModClient implements ClientModInitializer {
 		dispatcher.addDispatch(new ItemModelStandard(BTXItems.HEMP_FIBERS).setIcon(item("hemp_fibers")));
 		dispatcher.addDispatch(new ItemModelStandard(BTXItems.SCOURED_LEATHER).setIcon(item("scoured_leather")));
 		dispatcher.addDispatch(new ItemModelStandard(BTXItems.DUNG).setIcon(item("dung")));
-		dispatcher.addDispatch(new ItemModelStandard(BTXItems.WATERWHEEL).setIcon(item("water_wheel")));
+		dispatcher.addDispatch(new ItemModelWaterWheel(BTXItems.WATERWHEEL, item("water_wheel"), item("water_wheel_paintable")));
 		dispatcher.addDispatch(new ItemModelStandard(BTXItems.SAIL).setIcon(item("sail")));
 		dispatcher.addDispatch(new ItemModelStandard(BTXItems.WINDMILL).setIcon(item("windmill")));
 		dispatcher.addDispatch(new ItemModelStandard(BTXItems.FABRIC).setIcon(item("fabric")));
@@ -123,6 +160,9 @@ public class BTXModClient implements ClientModInitializer {
 		dispatcher.addDispatch(new BlockModelAxle<>(BTXBlocks.AXLE));
 		dispatcher.addDispatch(new BlockModelAxle<>(BTXBlocks.AXLE_POWER_SOURCE));
 		dispatcher.addDispatch(new BlockModelGearBox<>(BTXBlocks.GEARBOX));
+		dispatcher.addDispatch(new BlockModelAxle<>(BTXBlocks.AXLE_PAINTED, true));
+		dispatcher.addDispatch(new BlockModelAxle<>(BTXBlocks.AXLE_POWER_SOURCE_PAINTED, true));
+		dispatcher.addDispatch(new BlockModelGearBox<>(BTXBlocks.GEARBOX_PAINTED, true));
 		dispatcher.addDispatch(new BlockModelGenericSiding<>(BTXBlocks.SIDING_OAK, loadDataModel(block("siding/siding_oak"))));
 		for (BTXBlocks.StonePieces pieces : BTXBlocks.STONE_PIECES) {
 			String sideTexture = pieces.type().equals("slate") ? "minecraft:block/slate_side" : "minecraft:block/" + pieces.type();

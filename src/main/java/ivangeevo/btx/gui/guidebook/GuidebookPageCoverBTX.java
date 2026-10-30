@@ -25,8 +25,8 @@ public class GuidebookPageCoverBTX extends GuidebookPage {
 	}
 
 	@Override
-	protected void renderBackground(TextureManager re, int x, int y) {
-		re.bindTexture(re.loadTexture(COVER_TEXTURE));
+	protected void renderBackground(TextureManager manager, int x, int y) {
+		manager.bindTexture(manager.loadTexture(COVER_TEXTURE));
 		this.drawTexturedModalRect(x, y, 0, 0, this.width, this.height);
 	}
 

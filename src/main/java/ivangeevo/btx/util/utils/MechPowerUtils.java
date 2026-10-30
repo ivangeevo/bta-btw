@@ -43,7 +43,31 @@ public final class MechPowerUtils {
 	}
 
 	public static boolean isBlockAxle(Block<?> block) {
-		return block == BTXBlocks.AXLE || block == BTXBlocks.AXLE_POWER_SOURCE;
+		return isPlainAxle(block) || isPowerSourceAxle(block);
+	}
+
+	public static boolean isPlainAxle(Block<?> block) {
+		return block == BTXBlocks.AXLE || block == BTXBlocks.AXLE_PAINTED;
+	}
+
+	public static boolean isPowerSourceAxle(Block<?> block) {
+		return block == BTXBlocks.AXLE_POWER_SOURCE || block == BTXBlocks.AXLE_POWER_SOURCE_PAINTED;
+	}
+
+	public static boolean isPaintedAxle(Block<?> block) {
+		return block == BTXBlocks.AXLE_PAINTED || block == BTXBlocks.AXLE_POWER_SOURCE_PAINTED;
+	}
+
+	public static Block<?> axleBlock(boolean powerSource, boolean painted) {
+		if (powerSource) {
+			return painted ? BTXBlocks.AXLE_POWER_SOURCE_PAINTED : BTXBlocks.AXLE_POWER_SOURCE;
+		}
+
+		return painted ? BTXBlocks.AXLE_PAINTED : BTXBlocks.AXLE;
+	}
+
+	public static boolean isGearBox(Block<?> block) {
+		return block == BTXBlocks.GEARBOX || block == BTXBlocks.GEARBOX_PAINTED;
 	}
 
 	public static boolean doesBlockHaveFacingAxleToSide(WorldSource worldSource, TilePosc tilePos, int side) {
@@ -76,7 +100,7 @@ public final class MechPowerUtils {
 	public static boolean isPoweredGearBox(WorldSource source, TilePosc tilePos) {
 		Block<?> tempBlock = source.getBlockType(tilePos);
 
-		if (tempBlock == BTXBlocks.GEARBOX) {
+		if (isGearBox(tempBlock)) {
 			if (tempBlock.getLogic() instanceof BlockLogicGearBox g) {
 				return g.isGearBoxOn(source, tilePos);
 			}

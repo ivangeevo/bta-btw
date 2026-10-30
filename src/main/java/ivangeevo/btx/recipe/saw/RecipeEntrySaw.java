@@ -127,7 +127,8 @@ public class RecipeEntrySaw extends RecipeEntrySawBase<RecipeSymbol, List<ItemSt
 		}
 
 		for (ItemStack stack : results) {
-			MiscUtils.ejectStackWithRandomOffset(world, pos, stack);
+			//MiscUtils.ejectStackWithRandomOffset(world, pos, stack);
+			MiscUtils.ejectStackAsSingleItemsWithRandomOffset(world, pos, stack);
 		}
 
 		if (this.sound != null) {

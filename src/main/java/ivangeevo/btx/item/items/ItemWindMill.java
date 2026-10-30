@@ -2,7 +2,7 @@ package ivangeevo.btx.item.items;
 
 import ivangeevo.btx.achievement.BTXAchievementTriggers;
 import ivangeevo.btx.achievement.BTXAchievements;
-import ivangeevo.btx.block.BTXBlocks;
+import ivangeevo.btx.util.utils.MechPowerUtils;
 import ivangeevo.btx.block.blocks.BlockLogicAxle;
 import ivangeevo.btx.entity.entities.WindMillEntity;
 import net.minecraft.core.block.Block;
@@ -24,7 +24,7 @@ public class ItemWindMill extends Item {
 	public boolean onUseOnBlock(@NotNull ItemStack selfStack, @NotNull World world, @Nullable Player player, @NotNull TilePosc blockPos, @NotNull Side side, double xHit, double yHit) {
 		Block<?> targetBlock = world.getBlockType(blockPos);
 
-		if (targetBlock == BTXBlocks.AXLE && targetBlock.getLogic() instanceof BlockLogicAxle axle) {
+		if (MechPowerUtils.isPlainAxle(targetBlock) && targetBlock.getLogic() instanceof BlockLogicAxle axle) {
 			int axisAlignment = axle.getAxisAlignment(world, blockPos);
 
 			if (axisAlignment != 0) {

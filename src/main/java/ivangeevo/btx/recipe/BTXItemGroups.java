@@ -15,6 +15,8 @@ public final class BTXItemGroups {
 	public static final String SIDINGS_PLANKS = "btx:sidings_planks";
 	public static final String MOULDINGS_PLANKS = "btx:mouldings_planks";
 	public static final String CORNERS_PLANKS = "btx:corners_planks";
+	public static final String AXLES = "btx:axles";
+	public static final String GEARBOXES = "btx:gearboxes";
 	public static final String SOULFORGED_TOOLS = "btx:soulforged_tools";
 	public static final String SOULFORGED_ARMOR = "btx:soulforged_armor";
 
@@ -25,6 +27,8 @@ public final class BTXItemGroups {
 		register(SIDINGS_PLANKS, withPaintedVariants(BTXBlocks.SIDING_OAK, BTXBlocks.SIDING_OAK_PAINTED));
 		register(MOULDINGS_PLANKS, withPaintedVariants(BTXBlocks.MOULDING_OAK, BTXBlocks.MOULDING_OAK_PAINTED));
 		register(CORNERS_PLANKS, withPaintedVariants(BTXBlocks.CORNER_OAK, BTXBlocks.CORNER_OAK_PAINTED));
+		register(AXLES, withPaintedVariants(BTXBlocks.AXLE, BTXBlocks.AXLE_PAINTED));
+		register(GEARBOXES, withPaintedVariants(BTXBlocks.GEARBOX, BTXBlocks.GEARBOX_PAINTED));
 		register(SOULFORGED_TOOLS, stacksOf(
 			BTXItems.SOULFORGED_STEEL_PICKAXE, BTXItems.SOULFORGED_STEEL_SHOVEL, BTXItems.SOULFORGED_STEEL_MATTOCK,
 			BTXItems.SOULFORGED_STEEL_AXE, BTXItems.SOULFORGED_STEEL_HOE, BTXItems.SOULFORGED_STEEL_SWORD,

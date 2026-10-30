@@ -2,9 +2,12 @@ package ivangeevo.btx.mixin.entity;
 
 import com.mojang.nbt.tags.CompoundTag;
 import ivangeevo.btx.entity.FeedableWolf;
+import ivangeevo.btx.item.BTXItems;
 import ivangeevo.btx.util.WolfDungHelper;
 import ivangeevo.btx.util.WolfFeedingHelper;
+import net.minecraft.core.WeightedRandomLootObject;
 import net.minecraft.core.entity.Entity;
+import net.minecraft.core.entity.animal.MobAnimal;
 import net.minecraft.core.entity.animal.MobWolf;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.world.World;
@@ -19,13 +22,30 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Mixin(MobWolf.class)
-public abstract class MobWolfMixin implements FeedableWolf {
+public abstract class MobWolfMixin extends MobAnimal implements FeedableWolf {
 	@Unique private int btx$fedCountdown = -1;
+	@Unique private final List<WeightedRandomLootObject> btx$burningMobDrops = new ArrayList<>();
 
 	@Shadow protected abstract float getSoundVolume();
+
+	private MobWolfMixin(World world) {
+		super(world);
+	}
+
+	@Inject(method = "<init>", at = @At("TAIL"))
+	private void btx$addWolfChopDrops(World world, CallbackInfo ci) {
+		this.mobDrops.add(new WeightedRandomLootObject(BTXItems.FOOD_WOLF_CHOP_RAW.getDefaultStack(), 0, 2));
+		this.btx$burningMobDrops.add(new WeightedRandomLootObject(BTXItems.FOOD_WOLF_CHOP_COOKED.getDefaultStack(), 0, 2));
+	}
+
+	@Override
+	protected List<WeightedRandomLootObject> getMobDrops() {
+		return this.remainingFireTicks > 0 ? this.btx$burningMobDrops : this.mobDrops;
+	}
 
 	@Override
 	public int btx$getFedCountdown() {

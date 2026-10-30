@@ -15,6 +15,7 @@ import ivangeevo.btx.util.utils.FacingUtils;
 import ivangeevo.btx.util.utils.MechPowerUtils;
 import ivangeevo.btx.util.utils.MiscUtils;
 import ivangeevo.btx.util.utils.SoundUtils;
+import ivangeevo.btx.util.utils.SupportUtils;
 import ivangeevo.btx.util.utils.WorldUtils;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockLogic;
@@ -22,6 +23,7 @@ import net.minecraft.core.block.BlockLogicSupplier;
 import net.minecraft.core.block.Blocks;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Materials;
+import net.minecraft.core.block.support.ISupport;
 import net.minecraft.core.block.tag.BlockTags;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.Mob;
@@ -93,6 +95,11 @@ public class BlockLogicSaw extends BlockLogic implements MechanicalDevice, Turnt
 	@Override
 	public @NotNull AABBdc getBoundsFromState(@NotNull WorldSource source, @NotNull TilePosc tilePos) {
 		return FacingUtils.tiltToFacingAlongY(new AABBd(0, 0, 0, 1, BASE_HEIGHT, 1), getFacing(source.getBlockData(tilePos)));
+	}
+
+	@Override
+	public @NotNull ISupport getSupport(@NotNull World world, @NotNull TilePosc tilePos, @NotNull Side side) {
+		return SupportUtils.fromBounds(this.getBoundsFromState(world, tilePos), side);
 	}
 
 	@Override
